@@ -18,6 +18,7 @@ public class Manager : MonoBehaviour {
         {
             instance = this;
         }
+        allInputs.Add(new KeyBoardInput());
 	}
 	
 	// Update is called once per frame

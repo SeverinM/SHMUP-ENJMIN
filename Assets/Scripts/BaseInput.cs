@@ -20,6 +20,14 @@ public abstract class BaseInput{
         Shoot
     }
 
+    protected void RaiseEvent(TypeAction tyAct, Actions acts, Vector2 values)
+    {
+        if (OnInputExecuted != null)
+        {
+            OnInputExecuted(tyAct, acts, values);
+        }
+    }
+
     public abstract void UpdateInput();
 
     public delegate void InputEvent(TypeAction tyAct, Actions acts, Vector2 values);
