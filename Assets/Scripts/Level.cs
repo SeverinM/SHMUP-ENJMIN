@@ -7,12 +7,18 @@ public class Level : Layers {
     [SerializeField]
     protected Player player;
 
+    [SerializeField]
+    GameObject prefabEnnemy;
+
     public override void OnFocusGet()
     {      
         foreach(BaseInput inp in refInput)
         {
             inp.OnInputExecuted += player.InterpretInput;
         }
+
+        GameObject gob = Instantiate(prefabEnnemy);
+        gob.GetComponent<Ennemy>().SetState(new MovementEnnemy(gob.GetComponent<Ennemy>(),Vector3.right * 10));
     }
 
     public override void OnFocusLost()
