@@ -11,7 +11,7 @@ public class Level : Layers {
     {      
         foreach(BaseInput inp in refInput)
         {
-            inp.OnInputExecuted += player.Test;
+            inp.OnInputExecuted += player.InterpretInput;
         }
     }
 
@@ -19,7 +19,7 @@ public class Level : Layers {
     {
         foreach (BaseInput inp in refInput)
         {
-            inp.OnInputExecuted -= player.Test;
+            inp.OnInputExecuted -= player.InterpretInput;
         }
     }
 

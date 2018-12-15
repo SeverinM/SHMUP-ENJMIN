@@ -4,23 +4,9 @@ using System.Collections;
 public abstract class State
 {
 
-    public void EndState()
-    {
-
-    }
-
-    public void UpdateState()
-    {
-
-    }
-
-    public void StartState()
-    {
-
-    }
-
-    public void NextState()
-    {
-
-    }
+    public abstract void EndState();
+    public abstract void UpdateState();
+    public abstract void StartState();
+    public abstract void NextState();
+    public abstract void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val);
 }
