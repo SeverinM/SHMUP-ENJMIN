@@ -22,7 +22,9 @@ public class Manager : MonoBehaviour {
             instance = this;
         }
         allInputs.Add(new KeyBoardInput());
+        allInputs.Add(new MouseInput());
         allInputs.Add(new ControllerInput());
+        
 
         AddToStack(lvl);
     }

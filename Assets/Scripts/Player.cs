@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public delegate void InterpretInput();
 
@@ -26,7 +27,7 @@ public class Player : Character
 
         actualState = new PlayerMovement(this);
     }
-    
+
     public void InterpretInput(BaseInput.TypeAction typAct, BaseInput.Actions baseInput , Vector2 value)
     {
         if (actualState != null)

@@ -4,15 +4,22 @@ using System.Collections;
 public class HookDetector : MonoBehaviour
 {
 
-    public GameObject player;
+    public GameObject playerGo;
     public GameObject hook;
 
+    private Player player;
+
+    private void Start()
+    {
+        player = playerGo.GetComponent<Player>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Hookable")
+        // Success on Hook
+        if (other.tag == "Hookable") 
         {
-            player.GetComponent<Player>().SetState(new PlayerHook(player.GetComponent<Player>(), hook));
+            player.SetState(new PlayerWinch(player, hook));
         }
     }
 }
