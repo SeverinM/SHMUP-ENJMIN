@@ -3,52 +3,53 @@ using System.Collections;
 
 public class PlayerMovementState : State
 {
-    Vector2 move;
+    private Vector2 direction;
 
     public PlayerMovementState(Character character) : base(character)
     {
-        move = new Vector2();
+        direction = new Vector2();
     }
 
     public override void EndState()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)
     {
         if(typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.RightMovement))
         {
-            Debug.Log(move);
-            move.Set(1,0);
+            direction.Set(1,0);
         }
 
         if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.LeftMovement))
         {
-            Debug.Log(move);
-            move.Set(-1, 0);
+            direction.Set(-1, 0);
         }
 
         if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.UpMovement))
         {
-            Debug.Log(move);
-            move.Set(0, 1);
+            direction.Set(0, 1);
         }
 
         if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.DownMovement))
         {
-            Debug.Log(move);
-            move.Set(0, -1);
+            direction.Set(0, -1);
+        }
+
+        if(typeAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Shoot))
+        {
+            NextState();
         }
      
-        //move.Normalize();
-        character.Move(move);
+        direction.Normalize();
+        character.Move(direction);
 
     }
 
     public override void NextState()
     {
-        throw new System.NotImplementedException();
+        character.SetState(new PlayerShootState(character));
     }
 
     public override void StartState()

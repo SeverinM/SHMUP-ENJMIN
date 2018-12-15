@@ -15,4 +15,16 @@ public class Hook : MonoBehaviour
     public float maxDistance;
     public float currentDistance;
 
+
+    public void ShootHook()
+    {
+        hook.transform.Translate(Vector3.forward * Time.deltaTime * hookTravelSpeed);
+        currentDistance = Vector3.Distance(transform.position, hook.transform.position);
+    }
+
+
+    public void ReturnHook()
+    {
+
+    }
 }

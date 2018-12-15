@@ -25,5 +25,20 @@ public class KeyBoardInput : BaseInput {
         {
             RaiseEvent(TypeAction.Pressed, Actions.DownMovement, Vector2.zero);
         }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaiseEvent(TypeAction.Down, Actions.Shoot, Vector2.zero);
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            RaiseEvent(TypeAction.Pressed, Actions.Shoot, Vector2.zero);
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            RaiseEvent(TypeAction.Up, Actions.Shoot, Vector2.zero);
+        }
     }
 }

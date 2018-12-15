@@ -19,4 +19,6 @@ public abstract class Character : MonoBehaviour {
     }
 
     public abstract void Move(Vector2 movement);
+
+
 }
