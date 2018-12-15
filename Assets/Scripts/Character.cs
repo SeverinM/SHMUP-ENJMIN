@@ -5,6 +5,9 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour {
 
+    public delegate void collDelegate(Collider coll);
+    public event collDelegate OnTriggerEnterChar;
+
     [SerializeField]
     protected float moveSpeed = 6.0f;
 
@@ -13,12 +16,41 @@ public abstract class Character : MonoBehaviour {
 
     public void SetState(State state)
     {
-        actualState.EndState();
+        if (actualState != null)
+        {
+            actualState.EndState();
+        }
         actualState = state;
-        actualState.StartState();
+
+        if (actualState != null)
+        {
+            actualState.StartState();
+        }
     }
 
-    public abstract void Move(Vector2 movement);
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (OnTriggerEnterChar != null)
+            OnTriggerEnterChar(other);
+    }
+
+    protected void Update()
+    {
+        if (actualState != null)
+        {
+            actualState.UpdateState();
+        }
+    }
+
+    public void Move(Vector3 movement)
+    {
+        transform.Translate(new Vector3(movement.x, 0, movement.z).normalized * moveSpeed * Time.deltaTime);
+    }
+
+    public virtual void Move(Vector2 movement)
+    {
+        transform.Translate(movement.x * Time.deltaTime * moveSpeed, 0, movement.y * Time.deltaTime * moveSpeed);
+    }      
 
 }

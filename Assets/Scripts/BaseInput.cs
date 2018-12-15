@@ -8,7 +8,8 @@ public abstract class BaseInput {
     {
         Down,
         Up,
-        Pressed
+        Pressed,
+        Mouse
     }
 
     public enum Actions
@@ -17,12 +18,13 @@ public abstract class BaseInput {
         RightMovement,
         UpMovement,
         DownMovement,
-        Shoot
+        Shoot,
+        Movement,
     }
 
     protected void RaiseEvent(TypeAction tyAct, Actions acts, Vector2 values)
     {
-        OnInputExecuted?.Invoke(tyAct, acts, values);
+        OnInputExecuted.Invoke(tyAct, acts, values);
     }
 
     public abstract void UpdateInput();

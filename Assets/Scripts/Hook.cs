@@ -9,9 +9,6 @@ public class Hook : MonoBehaviour
     public float hookTravelSpeed;
     public float playerTravelSpeed;
 
-    public bool fired;
-    public bool hooked;
-
     public float maxDistance;
     public float currentDistance;
 
@@ -25,6 +22,6 @@ public class Hook : MonoBehaviour
 
     public void ReturnHook()
     {
-
+        hook.transform.position = hookHolder.transform.position;
     }
 }

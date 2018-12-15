@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerShootState : State
+public class PlayerShoot : State
 {
 
     public Hook hook;
 
-    public PlayerShootState(Character character) : base(character)
+    public PlayerShoot(Character character) : base(character)
     {
         hook = character.GetComponent<Hook>();
     }
@@ -21,18 +21,19 @@ public class PlayerShootState : State
         // If player is holding
         if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.Shoot))
         {
-         
+
         }
 
         if (typeAct.Equals(BaseInput.TypeAction.Up) && acts.Equals(BaseInput.Actions.Shoot))
         {
             hook.ReturnHook();
+            NextState();
         }
     }
 
     public override void NextState()
     {
-        throw new System.NotImplementedException();
+        character.SetState(new PlayerMovement(character));
     }
 
     public override void StartState()
@@ -43,5 +44,10 @@ public class PlayerShootState : State
     public override void UpdateState()
     {
         hook.ShootHook();
+        if (hook.currentDistance >= hook.maxDistance)
+        {
+            hook.ReturnHook();
+            NextState();
+        }
     }
 }

@@ -22,6 +22,7 @@ public class Manager : MonoBehaviour {
             instance = this;
         }
         allInputs.Add(new KeyBoardInput());
+        allInputs.Add(new ControllerInput());
 
         AddToStack(lvl);
     }
@@ -43,8 +44,8 @@ public class Manager : MonoBehaviour {
 
     public void PopToStack()
     {
-        allLayers.Peek()?.OnFocusLost();
+        allLayers.Peek().OnFocusLost();
         Destroy(allLayers.Pop().gameObject);
-        allLayers.Peek()?.OnFocusGet();
+        allLayers.Peek().OnFocusGet();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public delegate void InterpretInput();
 
@@ -7,7 +8,13 @@ public class Player : Character
 {
  
     private CharacterController controller;
-    public CharacterController Controller => controller;
+    public CharacterController Controller
+    {
+        get
+        {
+            return controller;
+        }
+    }
 
     void Start()
     {
@@ -17,12 +24,7 @@ public class Player : Character
         }
         controller = transform.GetComponent<CharacterController>();
 
-        actualState = new PlayerMovementState(this);
-    }
-
-    void Update()
-    {
-        
+        actualState = new PlayerMovement(this);
     }
     
     public void InterpretInput(BaseInput.TypeAction typAct, BaseInput.Actions baseInput , Vector2 value)
@@ -31,10 +33,5 @@ public class Player : Character
         {
             actualState.InterpretInput(typAct, baseInput, value);
         }
-    }
-
-    public override void Move(Vector2 movement)
-    {
-        transform.Translate(movement.x * Time.deltaTime * moveSpeed, 0, movement.y * Time.deltaTime * moveSpeed);
     }
 }
