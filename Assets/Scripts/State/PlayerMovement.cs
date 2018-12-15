@@ -37,13 +37,14 @@ public class PlayerMovement : State
             direction.Set(0, -val.x);
         }
 
+
         if(typeAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Shoot))
         {
             NextState();
         }
 
         //Debug.Log(Time.deltaTime);
-     
+
 
         direction.Normalize();
         character.Move(direction);

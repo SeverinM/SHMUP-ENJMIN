@@ -4,6 +4,35 @@ using UnityEngine;
 
 public abstract class BaseInput {
 
+    public static Dictionary<Actions,BaseInput> lockController = new Dictionary<Actions,BaseInput>();
+
+    public static BaseInput GetLockState(Actions acts)
+    {
+        if (!lockController.ContainsKey(acts))
+        {
+            lockController[acts] = null;
+        }
+        return lockController[acts];
+    }
+
+    public static void SetLockState(Actions acts, BaseInput value)
+    {
+        lockController[acts] = value;
+    }
+
+    public static bool IsFree(Actions acts, BaseInput asker)
+    {
+        //Si le demandeur a deja le verrou ou qu'il n'y a pas de verrou
+        if (GetLockState(acts) == null || GetLockState(acts) == asker)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public enum TypeAction
     {
         Down,
