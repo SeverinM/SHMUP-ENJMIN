@@ -3,6 +3,12 @@ using System.Collections;
 
 public abstract class State
 {
+    protected Character character;
+
+    public State(Character character)
+    {
+        this.character = character;
+    }
 
     public abstract void EndState();
     public abstract void UpdateState();

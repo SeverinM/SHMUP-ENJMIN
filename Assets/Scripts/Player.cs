@@ -16,6 +16,8 @@ public class Player : Character
             gameObject.AddComponent<CharacterController>();
         }
         controller = transform.GetComponent<CharacterController>();
+
+        actualState = new PlayerMovementState(this);
     }
 
     void Update()
@@ -31,4 +33,8 @@ public class Player : Character
         }
     }
 
+    public override void Move(Vector2 movement)
+    {
+        transform.Translate(movement.x * Time.deltaTime * moveSpeed, 0, movement.y * Time.deltaTime * moveSpeed);
+    }
 }

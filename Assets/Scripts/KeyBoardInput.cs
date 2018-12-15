@@ -15,5 +15,15 @@ public class KeyBoardInput : BaseInput {
         {
             RaiseEvent(TypeAction.Pressed, Actions.RightMovement, Vector2.zero);
         }
+
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            RaiseEvent(TypeAction.Pressed, Actions.UpMovement, Vector2.zero);
+        }
+
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            RaiseEvent(TypeAction.Pressed, Actions.DownMovement, Vector2.zero);
+        }
     }
 }
