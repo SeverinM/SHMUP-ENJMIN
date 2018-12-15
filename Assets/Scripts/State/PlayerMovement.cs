@@ -43,7 +43,6 @@ public class PlayerMovement : State
             NextState();
         }
 
-
         if (typeAct.Equals(BaseInput.TypeAction.Mouse) && acts.Equals(BaseInput.Actions.Movement))
         {
 
@@ -57,6 +56,7 @@ public class PlayerMovement : State
         }
 
         direction.Normalize();
+
         character.Move(direction);
 
     }

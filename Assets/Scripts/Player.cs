@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-public delegate void InterpretInput();
-
 public class Player : Character
 {
  
