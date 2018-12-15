@@ -3,19 +3,21 @@ using System.Collections;
 
 public class PlayerWinch : State
 {
-    private GameObject hook;
+    Transform hook;
     Vector3 origin;
     float duration = 0.1f;
     float actualTime = 0;
+    Vector3 positionRelative;
 
-    public PlayerWinch(Character character, GameObject hook) : base(character)
+    public PlayerWinch(Character character, Transform hook, Vector3 pos) : base(character)
     {
-        this.hook = hook.transform.GetChild(0).gameObject;
+        this.hook = hook;
+        positionRelative = pos;
     }
 
     public override void EndState()
     {
-        Debug.Log("fin");
+        hook.transform.position = character.transform.position + positionRelative;
     }
 
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)
@@ -34,8 +36,7 @@ public class PlayerWinch : State
     }
 
     public override void UpdateState()
-    {
-        
+    {       
         Vector3 copy = hook.transform.position;
         actualTime += Time.deltaTime;
 

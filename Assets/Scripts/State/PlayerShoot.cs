@@ -4,50 +4,50 @@ using System.Collections;
 public class PlayerShoot : State
 {
 
-    public Hook hook;
+    public Transform hook;
+    Vector3 originRelative;
+    float maxDistance = 10;
+    float speedTravel = 1f;
 
     public PlayerShoot(Character character) : base(character)
     {
-        hook = character.GetComponent<Hook>();
+        hook = character.transform.GetChild(0);
     }
 
     public override void EndState()
     {
-        //Unhook
+        originRelative = hook.transform.position - character.transform.position;
+        hook.GetComponent<BoxCollider>().enabled = false;
     }
 
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)
     {
-        // If player is holding
-        if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.Shoot))
-        {
-
-        }
-
         if (typeAct.Equals(BaseInput.TypeAction.Up) && acts.Equals(BaseInput.Actions.Shoot))
         {
-            hook.ReturnHook();
-            NextState();
+            hook.transform.position = character.transform.position + originRelative;
+            character.SetState(new PlayerMovement(character));
         }
     }
 
     public override void NextState()
     {
-        character.SetState(new PlayerMovement(character));
+        character.SetState(new PlayerWinch(character, hook, originRelative));
     }
 
     public override void StartState()
     {
-        //hook
+        originRelative = hook.position - character.transform.position;
+        hook.GetComponent<BoxCollider>().enabled = true;
     }
 
     public override void UpdateState()
     {
-        hook.ShootHook();
-        if (hook.currentDistance >= hook.maxDistance)
+        hook.transform.Translate(originRelative * speedTravel,Space.World);
+        
+        if (Vector3.Distance(character.transform.position,hook.transform.position) >= maxDistance)
         {
-            hook.ReturnHook();
-            NextState();
+            hook.transform.position = hook.parent.position + originRelative;
+            character.SetState(new PlayerMovement(character));
         }
     }
 }

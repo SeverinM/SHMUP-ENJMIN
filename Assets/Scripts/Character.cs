@@ -13,6 +13,13 @@ public abstract class Character : MonoBehaviour {
 
     [SerializeField]
     protected State actualState;
+    public State ActualState
+    {
+        get
+        {
+            return actualState;
+        }
+    }
 
     public void SetState(State state)
     {
@@ -41,11 +48,6 @@ public abstract class Character : MonoBehaviour {
         {
             actualState.UpdateState();
         }
-    }
-
-    public void Move(Vector3 movement)
-    {
-        transform.Translate(new Vector3(movement.x, 0, movement.z).normalized * moveSpeed * Time.deltaTime);
     }
 
     public virtual void Move(Vector2 movement)
