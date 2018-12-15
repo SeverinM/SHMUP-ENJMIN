@@ -3,16 +3,11 @@ using System.Collections;
 
 public class HookDetector : MonoBehaviour
 {
+    [SerializeField]
+    Player player;
 
-    public GameObject playerGo;
-    public GameObject hook;
-
-    private Player player;
-
-    private void Start()
-    {
-        player = playerGo.GetComponent<Player>();
-    }
+    [SerializeField]
+    GameObject hook;
 
     private void OnTriggerEnter(Collider other)
     {
