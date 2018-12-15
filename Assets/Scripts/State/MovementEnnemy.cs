@@ -7,29 +7,28 @@ public class MovementEnnemy : State
     Transform trsf;
     Vector3 targetPosition;
     Vector3 originPosition;
+    Queue<Vector3> positions;
 
-    public MovementEnnemy(Character chara, Transform trsf, bool followTransform = true) : base(chara)
+    public MovementEnnemy(Character chara, Transform trsf) : base(chara)
     {
-        if (followTransform)
+        this.trsf = trsf;
+    }
+
+    public MovementEnnemy(Character chara,Queue<Vector3> allPos, bool loopable) : base(chara)
+    {
+        positions = allPos;
+        Vector3 vecInput = positions.Dequeue();
+        if (loopable)
         {
-            this.trsf = trsf;
+            positions.Enqueue(vecInput);
         }
-
-        targetPosition = trsf.position - character.transform.position;
+        targetPosition = character.transform.position + vecInput;
+        targetPosition = new Vector3(targetPosition.x, character.transform.position.y , targetPosition.z);
     }
 
-    public MovementEnnemy(Character chara, Vector3 position) : base(chara)
-    {
-        targetPosition = position;
-    }
+    public override void EndState(){}
 
-    public override void EndState()
-    {
-    }
-
-    public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)
-    {
-    }
+    public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val){}
 
     public override void NextState()
     {
@@ -43,7 +42,7 @@ public class MovementEnnemy : State
 
     public override void UpdateState()
     {
-        Vector3 deltaPosition = targetPosition;
+        Vector3 deltaPosition;
 
         if (trsf != null)
         {
@@ -56,13 +55,21 @@ public class MovementEnnemy : State
         }
         else
         {
-            Debug.Log(Vector3.Distance(originPosition + targetPosition, character.transform.position));
-            if (Vector3.Distance(originPosition + targetPosition, character.transform.position) < 0.1f)
+            deltaPosition = targetPosition - character.transform.position;
+            if (Vector3.Distance(targetPosition, character.transform.position) < 0.1f)
             {
-                character.SetState(null);
+                Debug.Log(positions.Count);
+                if (positions.Count > 0)
+                {
+                    character.SetState(new MovementEnnemy(character, positions, true));
+                }
+                else
+                {
+                    character.SetState(null);
+                }
             }
         }
       
-        character.Move(deltaPosition);
+        character.Move(deltaPosition.normalized);
     }
 }

@@ -18,7 +18,6 @@ public class Level : Layers {
         }
 
         GameObject gob = Instantiate(prefabEnnemy);
-        gob.GetComponent<Ennemy>().SetState(new MovementEnnemy(gob.GetComponent<Ennemy>(),Vector3.right * 10));
     }
 
     public override void OnFocusLost()

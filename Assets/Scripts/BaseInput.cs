@@ -22,7 +22,7 @@ public abstract class BaseInput {
 
     protected void RaiseEvent(TypeAction tyAct, Actions acts, Vector2 values)
     {
-        OnInputExecuted?.Invoke(tyAct, acts, values);
+        OnInputExecuted.Invoke(tyAct, acts, values);
     }
 
     public abstract void UpdateInput();

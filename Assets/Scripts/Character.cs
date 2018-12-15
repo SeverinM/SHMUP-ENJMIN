@@ -5,6 +5,9 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour {
 
+    public delegate void collDelegate(Collider coll);
+    public event collDelegate OnCollisionEnter;
+
     [SerializeField]
     protected float moveSpeed = 6.0f;
 
@@ -38,5 +41,8 @@ public abstract class Character : MonoBehaviour {
         transform.Translate(new Vector3(movement.x, 0, movement.z).normalized * moveSpeed * Time.deltaTime);
     }
 
-    public abstract void Move(Vector2 movement);
+    public virtual void Move(Vector2 movement)
+    {
+        transform.Translate(movement.x * Time.deltaTime * moveSpeed, 0, movement.y * Time.deltaTime * moveSpeed);
+    }      
 }

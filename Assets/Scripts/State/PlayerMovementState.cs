@@ -12,7 +12,6 @@ public class PlayerMovementState : State
 
     public override void EndState()
     {
-        throw new System.NotImplementedException();
     }
 
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)
@@ -58,6 +57,5 @@ public class PlayerMovementState : State
 
     public override void UpdateState()
     {
-        throw new System.NotImplementedException();
     }
 }

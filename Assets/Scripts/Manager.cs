@@ -43,8 +43,8 @@ public class Manager : MonoBehaviour {
 
     public void PopToStack()
     {
-        allLayers.Peek()?.OnFocusLost();
+        allLayers.Peek().OnFocusLost();
         Destroy(allLayers.Pop().gameObject);
-        allLayers.Peek()?.OnFocusGet();
+        allLayers.Peek().OnFocusGet();
     }
 }
