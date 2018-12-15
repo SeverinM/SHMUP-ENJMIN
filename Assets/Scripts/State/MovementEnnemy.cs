@@ -6,9 +6,9 @@ public class MovementEnnemy : State
 {
     Transform trsf;
     Vector3 targetPosition;
-    Vector3 originPosition;
     Queue<Vector3> positions;
 
+    //On peut suivre une position fixe ou en suivant un transform
     public MovementEnnemy(Character chara, Transform trsf) : base(chara)
     {
         this.trsf = trsf;
@@ -26,7 +26,11 @@ public class MovementEnnemy : State
         targetPosition = new Vector3(targetPosition.x, character.transform.position.y , targetPosition.z);
     }
 
-    public override void EndState(){}
+    public override void EndState()
+    {
+        //Fin de l'etat ,on a plus besoin de connaitre les triggers
+        character.OnTriggerEnterChar -= TriggerEnter;
+    }
 
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val){}
 
@@ -37,7 +41,16 @@ public class MovementEnnemy : State
 
     public override void StartState()
     {
-        originPosition = character.transform.position;
+        //On veut savoir si le personnage touche un certain trigger
+        character.OnTriggerEnterChar += TriggerEnter;
+    }
+
+    public void TriggerEnter(Collider coll)
+    {
+        if (coll.gameObject.tag == "FollowParent")
+        {
+            character.SetState(new MovementEnnemy(character, coll.transform.parent));
+        }
     }
 
     public override void UpdateState()
@@ -58,7 +71,6 @@ public class MovementEnnemy : State
             deltaPosition = targetPosition - character.transform.position;
             if (Vector3.Distance(targetPosition, character.transform.position) < 0.1f)
             {
-                Debug.Log(positions.Count);
                 if (positions.Count > 0)
                 {
                     character.SetState(new MovementEnnemy(character, positions, true));

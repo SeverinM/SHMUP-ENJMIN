@@ -6,7 +6,9 @@ using UnityEngine;
 public abstract class Character : MonoBehaviour {
 
     public delegate void collDelegate(Collider coll);
-    public event collDelegate OnCollisionEnter;
+    public event collDelegate OnTriggerEnterChar;
+
+    
 
     [SerializeField]
     protected float moveSpeed = 6.0f;
@@ -26,6 +28,12 @@ public abstract class Character : MonoBehaviour {
         {
             actualState.StartState();
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (OnTriggerEnterChar != null)
+            OnTriggerEnterChar(other);
     }
 
     protected void Update()

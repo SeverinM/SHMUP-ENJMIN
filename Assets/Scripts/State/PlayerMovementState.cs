@@ -18,29 +18,26 @@ public class PlayerMovementState : State
     {
         if(typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.RightMovement))
         {
-            Debug.Log(move);
-            move.Set(1,0);
+            move.Set(val.x,0);
         }
 
         if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.LeftMovement))
         {
-            Debug.Log(move);
-            move.Set(-1, 0);
+            move.Set(-val.x, 0);
         }
 
         if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.UpMovement))
         {
-            Debug.Log(move);
-            move.Set(0, 1);
+            move.Set(0, val.x);
         }
 
         if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.DownMovement))
         {
-            Debug.Log(move);
-            move.Set(0, -1);
+            move.Set(0, -val.x);
         }
+
+        Debug.Log(Time.deltaTime);
      
-        //move.Normalize();
         character.Move(move);
 
     }

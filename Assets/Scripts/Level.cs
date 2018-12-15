@@ -18,6 +18,7 @@ public class Level : Layers {
         }
 
         GameObject gob = Instantiate(prefabEnnemy);
+        gob.transform.position = new Vector3(gob.transform.position.x, player.transform.position.y, gob.transform.position.z);
     }
 
     public override void OnFocusLost()
