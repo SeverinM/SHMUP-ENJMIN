@@ -52,7 +52,7 @@ public abstract class Character : MonoBehaviour {
 
     public virtual void Move(Vector2 movement)
     {
-        transform.Translate(movement.x * Time.deltaTime * moveSpeed, 0, movement.y * Time.deltaTime * moveSpeed);
+        transform.Translate(new Vector3(movement.x * Time.deltaTime * moveSpeed, 0, movement.y * Time.deltaTime * moveSpeed), Space.World);
     }      
 
 }

@@ -5,19 +5,22 @@ public class PlayerWinch : State
 {
     Transform hook;
     Vector3 origin;
-    float duration = 0.1f;
+    float duration = 1f;
     float actualTime = 0;
     Vector3 positionRelative;
+    LineRenderer line;
 
     public PlayerWinch(Character character, Transform hook, Vector3 pos) : base(character)
     {
         this.hook = hook;
+        line = hook.GetComponent<LineRenderer>();
         positionRelative = pos;
     }
 
     public override void EndState()
     {
         hook.transform.position = character.transform.position + positionRelative;
+        line.SetPosition(0, hook.position);
     }
 
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)
@@ -42,12 +45,16 @@ public class PlayerWinch : State
 
         character.transform.position = Vector3.Lerp(origin, hook.transform.position, actualTime / duration);
 
+        line.SetPosition(0, hook.position);
+        line.SetPosition(1, character.transform.position);
+
         float distanceToHook = Vector3.Distance(character.transform.position, hook.transform.position);
         hook.transform.position = copy;
 
-        if (distanceToHook < 0.1)
+        if (distanceToHook < 0.5)
         {
             hook.transform.position = hook.transform.parent.position;
+            line.SetPosition(0, hook.position);
             NextState();
         }
     }
