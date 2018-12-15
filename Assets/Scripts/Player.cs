@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public delegate void InterpretInput();
-
 public class Player : Character
 {
  

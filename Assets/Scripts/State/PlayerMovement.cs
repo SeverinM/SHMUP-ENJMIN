@@ -43,10 +43,7 @@ public class PlayerMovement : State
             NextState();
         }
 
-        //Debug.Log(Time.deltaTime);
 
-
-        direction.Normalize();
         character.Move(direction);
 
     }

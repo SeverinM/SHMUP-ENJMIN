@@ -10,6 +10,8 @@ public class ControllerInput : BaseInput {
         float xValue = Input.GetAxis("HorizontalController");
         float yValue = Input.GetAxis("VerticalController");
 
+        #region verouillage
+
         //La voie est libre, aucun autre controlleur n'est manipulé
         if (xValue > 0 && BaseInput.IsFree(Actions.RightMovement, this) && BaseInput.IsFree(Actions.LeftMovement, this))
         {
@@ -28,16 +30,16 @@ public class ControllerInput : BaseInput {
         if (yValue < 0 && BaseInput.IsFree(Actions.UpMovement, this) && BaseInput.IsFree(Actions.DownMovement, this))
         {
             RaiseEvent(TypeAction.Pressed, Actions.DownMovement, new Vector2(Mathf.Abs(yValue), 0));
-            BaseInput.SetLockState(Actions.UpMovement, this);
-            BaseInput.SetLockState(Actions.DownMovement, this);
         }
 
         if (yValue > 0 && BaseInput.IsFree(Actions.UpMovement, this) && BaseInput.IsFree(Actions.DownMovement, this))
         {
             RaiseEvent(TypeAction.Pressed, Actions.UpMovement, new Vector2(Mathf.Abs(yValue), 0));
-            BaseInput.SetLockState(Actions.UpMovement, this);
-            BaseInput.SetLockState(Actions.DownMovement, this);
         }
+
+        #endregion deverouillage
+
+        #region deverouillage
 
         if (xValue == 0 && BaseInput.IsFree(Actions.RightMovement, this) && BaseInput.IsFree(Actions.LeftMovement, this))
         {
@@ -50,5 +52,7 @@ public class ControllerInput : BaseInput {
             BaseInput.SetLockState(Actions.RightMovement, null);
             BaseInput.SetLockState(Actions.LeftMovement, null);
         }
+
+        #endregion 
     }
 }
