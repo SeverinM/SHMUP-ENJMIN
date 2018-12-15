@@ -13,9 +13,29 @@ public abstract class Character : MonoBehaviour {
 
     public void SetState(State state)
     {
-        actualState.EndState();
+        if (actualState != null)
+        {
+            actualState.EndState();
+        }
         actualState = state;
-        actualState.StartState();
+
+        if (actualState != null)
+        {
+            actualState.StartState();
+        }
+    }
+
+    protected void Update()
+    {
+        if (actualState != null)
+        {
+            actualState.UpdateState();
+        }
+    }
+
+    public void Move(Vector3 movement)
+    {
+        transform.Translate(new Vector3(movement.x, 0, movement.z).normalized * moveSpeed * Time.deltaTime);
     }
 
     public abstract void Move(Vector2 movement);
