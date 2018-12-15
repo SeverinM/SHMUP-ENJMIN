@@ -2,23 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviour {
+public abstract class Character : MonoBehaviour {
 
-    [SerializeField] protected float moveSpeed = 6.0f;
-    [SerializeField] private State actualState;
+    [SerializeField]
+    protected float moveSpeed = 6.0f;
 
-    protected BaseInput input;
+    [SerializeField]
+    protected State actualState;
 
     public void SetState(State state)
     {
         actualState.EndState();
         actualState = state;
         actualState.StartState();
-    }
-
-
-    public void AddInput(BaseInput input)
-    {
-        this.input = input;
     }
 }

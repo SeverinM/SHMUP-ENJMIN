@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class State
+public abstract class State
 {
 
     public void EndState()

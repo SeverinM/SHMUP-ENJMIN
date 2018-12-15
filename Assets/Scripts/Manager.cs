@@ -6,9 +6,10 @@ public class Manager : MonoBehaviour {
 
     static Manager instance;
     List<BaseInput> allInputs = new List<BaseInput>();
-    Stack<Layers> allLayers;
+    Stack<Layers> allLayers = new Stack<Layers>();
 
-    [SerializeField] GameObject player;
+    [SerializeField]
+    Layers lvl;
 
 	// Use this for initialization
 	void Start () {
@@ -22,8 +23,7 @@ public class Manager : MonoBehaviour {
         }
         allInputs.Add(new KeyBoardInput());
 
-
-        player.AddInput(new KeyBoardInput());
+        AddToStack(lvl);
     }
 	
 	// Update is called once per frame
@@ -36,7 +36,6 @@ public class Manager : MonoBehaviour {
 
     public void AddToStack(Layers lay)
     {
-        allLayers.Peek()?.OnFocusLost();
         allLayers.Push(lay);
         allLayers.Peek().Init(allInputs);
         allLayers.Peek().OnFocusGet();

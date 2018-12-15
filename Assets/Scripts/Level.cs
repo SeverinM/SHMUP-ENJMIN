@@ -5,20 +5,26 @@ using UnityEngine;
 public class Level : Layers {
 
     [SerializeField]
-    UnityEngine.UI.Text test;
+    protected Player player;
 
-    Binding<int> test2;
     public override void OnFocusGet()
-    {        
+    {      
+        foreach(BaseInput inp in refInput)
+        {
+            inp.OnInputExecuted += player.Test;
+        }
     }
 
     public override void OnFocusLost()
     {
+        foreach (BaseInput inp in refInput)
+        {
+            inp.OnInputExecuted -= player.Test;
+        }
     }
 
     public void Start()
     {
-        test2 = new Binding<int>(test);
-        test2.WatchedValue = 9;
+
     }
 }

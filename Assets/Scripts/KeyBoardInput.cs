@@ -8,13 +8,11 @@ public class KeyBoardInput : BaseInput {
     {
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            Debug.Log("gauche");
             RaiseEvent(TypeAction.Pressed, Actions.LeftMovement, Vector2.zero);
         }
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            Debug.Log("droite");
             RaiseEvent(TypeAction.Pressed, Actions.RightMovement, Vector2.zero);
         }
     }
