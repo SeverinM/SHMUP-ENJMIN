@@ -30,11 +30,15 @@ public class ControllerInput : BaseInput {
         if (yValue < 0 && BaseInput.IsFree(Actions.UpMovement, this) && BaseInput.IsFree(Actions.DownMovement, this))
         {
             RaiseEvent(TypeAction.Pressed, Actions.DownMovement, new Vector2(Mathf.Abs(yValue), 0));
+            BaseInput.SetLockState(Actions.UpMovement, this);
+            BaseInput.SetLockState(Actions.DownMovement, this);
         }
 
         if (yValue > 0 && BaseInput.IsFree(Actions.UpMovement, this) && BaseInput.IsFree(Actions.DownMovement, this))
         {
             RaiseEvent(TypeAction.Pressed, Actions.UpMovement, new Vector2(Mathf.Abs(yValue), 0));
+            BaseInput.SetLockState(Actions.UpMovement, this);
+            BaseInput.SetLockState(Actions.DownMovement, this);
         }
 
         #endregion deverouillage

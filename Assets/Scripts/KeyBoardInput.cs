@@ -6,7 +6,7 @@ public class KeyBoardInput : BaseInput {
 
     public override void UpdateInput()
     {
-        if (BaseInput.IsFree(Actions.LeftMovement,this))
+        if (BaseInput.IsFree(Actions.LeftMovement,this) && BaseInput.IsFree(Actions.RightMovement, this))
         {
             if (Input.GetKey(KeyCode.LeftArrow))
             {
@@ -19,7 +19,7 @@ public class KeyBoardInput : BaseInput {
             }
         }
 
-        if (BaseInput.IsFree(Actions.RightMovement, this))
+        if (BaseInput.IsFree(Actions.RightMovement, this) && BaseInput.IsFree(Actions.LeftMovement,this))
         {
             if (Input.GetKey(KeyCode.RightArrow))
             {
@@ -32,7 +32,7 @@ public class KeyBoardInput : BaseInput {
             }
         }
 
-        if (BaseInput.IsFree(Actions.UpMovement, this))
+        if (BaseInput.IsFree(Actions.UpMovement, this) && BaseInput.IsFree(Actions.DownMovement, this))
         {
             if (Input.GetKey(KeyCode.UpArrow))
             {
@@ -45,7 +45,7 @@ public class KeyBoardInput : BaseInput {
             }
         }
 
-        if (BaseInput.IsFree(Actions.DownMovement, this))
+        if (BaseInput.IsFree(Actions.DownMovement, this) && BaseInput.IsFree(Actions.UpMovement, this))
         {
             if (Input.GetKey(KeyCode.DownArrow))
             {
