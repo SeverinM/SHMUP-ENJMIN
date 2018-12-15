@@ -35,8 +35,6 @@ public class PlayerMovementState : State
         {
             move.Set(0, -val.x);
         }
-
-        Debug.Log(Time.deltaTime);
      
         character.Move(move);
 
