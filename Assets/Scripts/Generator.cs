@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// The goal of this class is to keep the data 
+/// The goal of this class is to keep the data of the Generator
 /// </summary>
 public class Generator : Character {
 

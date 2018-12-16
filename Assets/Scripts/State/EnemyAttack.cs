@@ -3,8 +3,18 @@ using System.Collections;
 
 public class EnemyAttack : State
 {
-    public EnemyAttack(Character character) : base(character)
+    private Enemy enemy;
+
+    private float lastTime;
+    private float shoots = 0;
+
+    private GameObject player;
+
+    public EnemyAttack(Character character, GameObject player) : base(character)
     {
+        enemy = character.GetComponent<Enemy>();
+        this.player = player;
+        lastTime = Time.time;
     }
 
     public override void EndState()
@@ -19,7 +29,7 @@ public class EnemyAttack : State
 
     public override void NextState()
     {
-        base.NextState();
+        character.SetState(new MovementEnemy(character, player, player.transform, MovementEnemy.MovementState.NORMAL));
     }
 
     public override void StartState()
@@ -29,8 +39,18 @@ public class EnemyAttack : State
 
     public override void UpdateState()
     {
-        base.UpdateState();
+        // Attacks according to shootPeriod
+        if (lastTime < Time.time)
+        {
+            lastTime += enemy.shootPeriod;
+
+            enemy.Shoot();
+            shoots++;
+
+            if (shoots == enemy.shootAmount)
+            {
+                NextState();
+            }
+        }
     }
-
-
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementEnnemy : State
+public class MovementEnemy : State
 {
     public enum MovementState {
         START,
@@ -14,19 +14,24 @@ public class MovementEnnemy : State
     Transform trsf;
     Vector3 targetPosition;
     Queue<Vector3> positions;
+    GameObject player;
+    Enemy enemy;
 
     MovementState state;
 
     //On peut suivre une position fixe ou en suivant un transform
-    public MovementEnnemy(Character chara, Transform trsf, MovementState state) : base(chara)
+    public MovementEnemy(Character chara, GameObject player, Transform trsf, MovementState state) : base(chara)
     {
         this.trsf = trsf;
+        this.player = player;
+        enemy = character.GetComponent<Enemy>();
     }
 
-    public MovementEnnemy(Character chara, Queue<Vector3> allPos, MovementState state) : base(chara)
+    public MovementEnemy(Character chara, GameObject player, Queue<Vector3> allPos, MovementState state) : base(chara)
     {
         positions = allPos;
         this.state = state;
+        this.player = player;
         Vector3 vecInput = positions.Dequeue();
         if (state == MovementState.LOOP)
         {
@@ -60,7 +65,7 @@ public class MovementEnnemy : State
         {
             if (coll.gameObject.tag == "FollowParent")
             {
-                character.SetState(new MovementEnnemy(character, coll.transform.parent, MovementState.NORMAL));
+                character.SetState(new MovementEnemy(character, player, coll.transform.parent, MovementState.NORMAL));
             }
         }
 
@@ -75,9 +80,9 @@ public class MovementEnnemy : State
             deltaPosition = trsf.position - character.transform.position;
 
             // If the enemies have reached the player, they enter the Movement Attack phase
-            if (Vector3.Distance(trsf.position,character.transform.position) <= Mathf.Abs(character.transform.position.y - trsf.position.y) + 0.01f)
+            if (Vector3.Distance(trsf.position,character.transform.position) <= Mathf.Abs(character.transform.position.y - trsf.position.y) + enemy.range)
             {
-                character.SetState(new EnemyAttack(character));
+                character.SetState(new EnemyAttack(character, player));
             }
         }
         else
@@ -86,14 +91,13 @@ public class MovementEnnemy : State
             
             if (Vector3.Distance(targetPosition, character.transform.position) < 0.1f)
             {
-               
                 if (positions.Count > 0)
                 {
-                    character.SetState(new MovementEnnemy(character, positions, MovementState.LOOP));
+                    character.SetState(new MovementEnemy(character, player, positions, MovementState.NORMAL));
                 }
                 else  // After Start movement state, the enemies seek the player
                 {
-                    character.SetState(null);
+                    character.SetState(new MovementEnemy(character, player, player.transform, MovementState.NORMAL));
                 }
             }
         }

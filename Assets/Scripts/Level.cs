@@ -34,7 +34,9 @@ public class Level : Layers {
 
     public void Instanciate(GameObject character, Vector3 position)
     {
-        characters.Add(Instantiate(character, position, Quaternion.identity));
+        GameObject toAdd = Instantiate(character, position, Quaternion.identity);
+        toAdd.GetComponent<Enemy>().player = player.gameObject;
+        characters.Add(toAdd);
     }
 
     public override void OnFocusLost()

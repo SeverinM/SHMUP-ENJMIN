@@ -52,7 +52,6 @@ public abstract class Character : MonoBehaviour {
 
     public virtual void Move(Vector2 movement)
     {
-        Debug.Log(movement);
         transform.Translate(new Vector3(movement.x * Time.deltaTime * moveSpeed, 0, movement.y * Time.deltaTime * moveSpeed), Space.World);
     }
 

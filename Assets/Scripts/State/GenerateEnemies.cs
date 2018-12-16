@@ -11,6 +11,7 @@ public class GenerateEnemies : State
     {
         generator = character.GetComponent<Generator>();
         level = generator.levelObject.GetComponent<Level>();
+        lastTime = Time.time;
     }
 
     public override void EndState()
