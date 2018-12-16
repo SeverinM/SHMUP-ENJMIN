@@ -4,10 +4,12 @@ using System.Collections;
 public class PlayerMovement : State
 {
     protected Vector2 direction;
+    protected Vector3 relativePos;
 
     public PlayerMovement(Character character) : base(character)
     {
         direction = new Vector2();
+        relativePos = character.transform.GetChild(0).position - character.transform.position;
     }
 
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)
@@ -59,6 +61,11 @@ public class PlayerMovement : State
         {
             character.transform.eulerAngles = new Vector3(0, val.x, 0);
         }
+    }
+
+    public override void UpdateState()
+    {
+        character.transform.GetChild(0).forward = character.transform.forward;
     }
 
     public override void NextState()

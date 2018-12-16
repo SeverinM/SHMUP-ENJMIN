@@ -4,16 +4,24 @@ using UnityEngine;
 
 public class ControllerInput : BaseInput {
 
+    bool wasDown = false;
+    float xValue;
+    float yValue;
+
+    float sinValue;
+    float cosValue;
+
+    float trigger;
 
     public override void UpdateInput()
     {
-        float xValue = Input.GetAxis("HorizontalController");
-        float yValue = Input.GetAxis("VerticalController");
+        xValue = Input.GetAxis("HorizontalController");
+        yValue = Input.GetAxis("VerticalController");
 
-        float sinValue = Input.GetAxis("VerticalControllerRight");
-        float cosValue = Input.GetAxis("HorizontalControllerRight");
+        sinValue = Input.GetAxis("VerticalControllerRight");
+        cosValue = Input.GetAxis("HorizontalControllerRight");
 
-        float trigger = Input.GetAxis("Triggers");
+        trigger = Input.GetAxis("Triggers");
 
         #region verouillage
 
@@ -46,14 +54,16 @@ public class ControllerInput : BaseInput {
             BaseInput.SetLockState(Actions.DownMovement, this);
         }
 
-        if (trigger < 0)
+        if (trigger != 0 && !wasDown)
         {
             RaiseEvent(TypeAction.Down, Actions.Shoot, Vector2.zero);
+            wasDown = true;
         }
 
-        if (trigger == 0)
+        if (trigger == 0 && wasDown)
         {
             RaiseEvent(TypeAction.Up, Actions.Shoot, Vector2.zero);
+            wasDown = false;
         }
 
         if (sinValue * cosValue != 0)
@@ -64,7 +74,6 @@ public class ControllerInput : BaseInput {
                 value *= -1;
             }
             value += 90;
-            Debug.Log(value);
             RaiseEvent(TypeAction.Mouse, Actions.RotateAbsolute, new Vector2(value,0));
         }
 
