@@ -25,6 +25,17 @@ public class ControllerInput : BaseInput {
 
         #region verouillage
 
+        if (xValue * yValue != 0)
+        {
+            float value = Mathf.Acos(xValue) * Mathf.Rad2Deg;
+            if (yValue > 0)
+            {
+                value *= -1;
+            }
+            value += 90;
+            RaiseEvent(TypeAction.Pressed, Actions.AllMovement, new Vector2(value, 0));
+        }
+
         //La voie est libre, aucun autre controlleur n'est manipulé
         if (xValue > 0 && BaseInput.IsFree(Actions.RightMovement, this) && BaseInput.IsFree(Actions.LeftMovement, this))
         {
@@ -75,6 +86,21 @@ public class ControllerInput : BaseInput {
             }
             value += 90;
             RaiseEvent(TypeAction.Mouse, Actions.RotateAbsolute, new Vector2(value,0));
+        }
+
+        if (Input.GetKeyDown(KeyCode.Joystick1Button0))
+        {
+            RaiseEvent(TypeAction.Down, Actions.Dash, Vector2.zero);
+        }
+
+        if (Input.GetKey(KeyCode.Joystick1Button0))
+        {
+            RaiseEvent(TypeAction.Pressed, Actions.Dash, Vector2.zero);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Joystick1Button0))
+        {
+            RaiseEvent(TypeAction.Up, Actions.Dash, Vector2.zero);
         }
 
         #endregion deverouillage
