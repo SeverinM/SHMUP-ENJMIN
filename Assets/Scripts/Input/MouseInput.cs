@@ -20,6 +20,21 @@ public class MouseInput : BaseInput
             RaiseEvent(TypeAction.Up, Actions.Shoot, Vector2.zero);
         }
 
+        if (Input.GetMouseButtonDown(1))
+        {
+            RaiseEvent(TypeAction.Down, Actions.Dash, Vector2.zero);
+        }
+
+        if (Input.GetMouseButton(1))
+        {
+            RaiseEvent(TypeAction.Pressed, Actions.Dash, Vector2.zero);
+        }
+
+        if (Input.GetMouseButtonUp(1))
+        {
+            RaiseEvent(TypeAction.Up, Actions.Dash, Vector2.zero);
+        }
+
         //On envoi un event que si la souris a bougé
         if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
         {

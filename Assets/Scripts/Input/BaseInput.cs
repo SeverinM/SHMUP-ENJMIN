@@ -47,9 +47,11 @@ public abstract class BaseInput {
         RightMovement,
         UpMovement,
         DownMovement,
+        AllMovement,
         Shoot,
         Rotate,
-        RotateAbsolute
+        RotateAbsolute,
+        Dash
     }
 
     protected void RaiseEvent(TypeAction tyAct, Actions acts, Vector2 values)

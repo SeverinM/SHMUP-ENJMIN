@@ -6,6 +6,23 @@ using System;
 public class Player : Character
 {
  
+    public enum MovementMode
+    {
+        Dash,
+        Normal
+    }
+
+    [SerializeField]
+    MovementMode mode;
+
+    public MovementMode Mode
+    {
+        get
+        {
+            return mode;
+        }
+    }
+
     private CharacterController controller;
     public CharacterController Controller
     {
