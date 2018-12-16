@@ -54,6 +54,11 @@ public class PlayerMovement : State
             character.transform.rotation = Quaternion.Euler(new Vector3(0, angle, 0));
 
         }
+
+        if (typeAct.Equals(BaseInput.TypeAction.Mouse) && acts.Equals(BaseInput.Actions.RotateAbsolute))
+        {
+            character.transform.eulerAngles = new Vector3(0, val.x, 0);
+        }
     }
 
     public override void NextState()

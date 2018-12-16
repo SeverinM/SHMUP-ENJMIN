@@ -10,6 +10,11 @@ public class ControllerInput : BaseInput {
         float xValue = Input.GetAxis("HorizontalController");
         float yValue = Input.GetAxis("VerticalController");
 
+        float sinValue = Input.GetAxis("VerticalControllerRight");
+        float cosValue = Input.GetAxis("HorizontalControllerRight");
+
+        float trigger = Input.GetAxis("Triggers");
+
         #region verouillage
 
         //La voie est libre, aucun autre controlleur n'est manipulé
@@ -39,6 +44,28 @@ public class ControllerInput : BaseInput {
             RaiseEvent(TypeAction.Pressed, Actions.UpMovement, new Vector2(Mathf.Abs(yValue), 0));
             BaseInput.SetLockState(Actions.UpMovement, this);
             BaseInput.SetLockState(Actions.DownMovement, this);
+        }
+
+        if (trigger < 0)
+        {
+            RaiseEvent(TypeAction.Down, Actions.Shoot, Vector2.zero);
+        }
+
+        if (trigger == 0)
+        {
+            RaiseEvent(TypeAction.Up, Actions.Shoot, Vector2.zero);
+        }
+
+        if (sinValue * cosValue != 0)
+        {
+            float value = Mathf.Acos(cosValue) * Mathf.Rad2Deg;
+            if (sinValue < 0)
+            {
+                value *= -1;
+            }
+            value += 90;
+            Debug.Log(value);
+            RaiseEvent(TypeAction.Mouse, Actions.RotateAbsolute, new Vector2(value,0));
         }
 
         #endregion deverouillage
