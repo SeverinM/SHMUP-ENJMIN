@@ -34,7 +34,7 @@ public class PlayerShoot : State
 
     public override void NextState()
     {
-        character.SetState(new PlayerWinch(character, hook, originRelative));
+        character.SetState(new PlayerMovementDuringHook(character, hook, originRelative));
     }
 
     public override void StartState()

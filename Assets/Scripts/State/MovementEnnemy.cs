@@ -32,8 +32,6 @@ public class MovementEnnemy : State
         character.OnTriggerEnterChar -= TriggerEnter;
     }
 
-    public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val){}
-
     public override void NextState()
     {
         character.SetState(null);

@@ -308,7 +308,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 2
     widthMultiplier: 1
@@ -687,8 +687,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 639936138}
-  prefabEnnemy: {fileID: 1561519513433908, guid: 46c9216ca856d3e4d836743c1d9c8564,
-    type: 2}
+  prefabEnnemy: {fileID: 0}
 --- !u!1 &1579496660
 GameObject:
   m_ObjectHideFlags: 0

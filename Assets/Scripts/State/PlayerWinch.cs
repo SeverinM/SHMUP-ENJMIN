@@ -5,7 +5,7 @@ public class PlayerWinch : State
 {
     Transform hook;
     Vector3 origin;
-    float duration = 1f;
+    float duration = 0.5f;
     float actualTime = 0;
     Vector3 positionRelative;
     LineRenderer line;
@@ -21,11 +21,6 @@ public class PlayerWinch : State
     {
         hook.transform.position = character.transform.position + positionRelative;
         line.SetPosition(0, hook.position);
-    }
-
-    public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)
-    {
-      
     }
 
     public override void NextState()

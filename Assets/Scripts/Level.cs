@@ -17,6 +17,10 @@ public class Level : Layers {
             inp.OnInputExecuted += player.InterpretInput;
         }
 
+        if (prefabEnnemy == null)
+        {
+            return;
+        }
         GameObject gob = Instantiate(prefabEnnemy);
         gob.transform.position = new Vector3(gob.transform.position.x, player.transform.position.y, gob.transform.position.z);
     }
