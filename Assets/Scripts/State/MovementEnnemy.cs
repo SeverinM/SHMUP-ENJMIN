@@ -4,21 +4,31 @@ using UnityEngine;
 
 public class MovementEnnemy : State
 {
+    public enum MovementState {
+        START,
+        NORMAL,
+        ESCAPE,
+        LOOP
+    }
+
     Transform trsf;
     Vector3 targetPosition;
     Queue<Vector3> positions;
 
+    MovementState state;
+
     //On peut suivre une position fixe ou en suivant un transform
-    public MovementEnnemy(Character chara, Transform trsf) : base(chara)
+    public MovementEnnemy(Character chara, Transform trsf, MovementState state) : base(chara)
     {
         this.trsf = trsf;
     }
 
-    public MovementEnnemy(Character chara,Queue<Vector3> allPos, bool loopable) : base(chara)
+    public MovementEnnemy(Character chara, Queue<Vector3> allPos, MovementState state) : base(chara)
     {
         positions = allPos;
+        this.state = state;
         Vector3 vecInput = positions.Dequeue();
-        if (loopable)
+        if (state == MovementState.LOOP)
         {
             positions.Enqueue(vecInput);
         }
@@ -45,10 +55,15 @@ public class MovementEnnemy : State
 
     public void TriggerEnter(Collider coll)
     {
-        if (coll.gameObject.tag == "FollowParent")
+
+        if (!state.Equals(MovementState.START)) // If enemy is not in start phase, then you can follow the player
         {
-            character.SetState(new MovementEnnemy(character, coll.transform.parent));
+            if (coll.gameObject.tag == "FollowParent")
+            {
+                character.SetState(new MovementEnnemy(character, coll.transform.parent, MovementState.NORMAL));
+            }
         }
+
     }
 
     public override void UpdateState()
@@ -59,21 +74,24 @@ public class MovementEnnemy : State
         {
             deltaPosition = trsf.position - character.transform.position;
 
+            // If the enemies have reached the player, they enter the Movement Attack phase
             if (Vector3.Distance(trsf.position,character.transform.position) <= Mathf.Abs(character.transform.position.y - trsf.position.y) + 0.01f)
             {
-                character.SetState(null);
+                character.SetState(new EnemyAttack(character));
             }
         }
         else
         {
             deltaPosition = targetPosition - character.transform.position;
+            
             if (Vector3.Distance(targetPosition, character.transform.position) < 0.1f)
             {
+               
                 if (positions.Count > 0)
                 {
-                    character.SetState(new MovementEnnemy(character, positions, true));
+                    character.SetState(new MovementEnnemy(character, positions, MovementState.LOOP));
                 }
-                else
+                else  // After Start movement state, the enemies seek the player
                 {
                     character.SetState(null);
                 }

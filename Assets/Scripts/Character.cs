@@ -53,6 +53,11 @@ public abstract class Character : MonoBehaviour {
     public virtual void Move(Vector2 movement)
     {
         transform.Translate(new Vector3(movement.x * Time.deltaTime * moveSpeed, 0, movement.y * Time.deltaTime * moveSpeed), Space.World);
-    }      
+    }
+
+    public virtual void Move(Vector3 movement)
+    {
+        transform.Translate(new Vector3(movement.x * Time.deltaTime * moveSpeed, movement.y * Time.deltaTime * moveSpeed, movement.z * Time.deltaTime * moveSpeed), Space.World);
+    }
 
 }

@@ -110,3 +110,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   HP: 0
+  player: {fileID: 1380677440080142, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
+  movementType: 1

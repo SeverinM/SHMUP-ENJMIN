@@ -8,7 +8,9 @@ public class Level : Layers {
     protected Player player;
 
     [SerializeField]
-    GameObject prefabEnnemy;
+    List<GameObject> generators;
+
+    private List<GameObject> characters = new List<GameObject>();
 
     public override void OnFocusGet()
     {      
@@ -17,12 +19,22 @@ public class Level : Layers {
             inp.OnInputExecuted += player.InterpretInput;
         }
 
-        if (prefabEnnemy == null)
+        if (generators.Count == 0)
         {
             return;
         }
-        GameObject gob = Instantiate(prefabEnnemy);
-        gob.transform.position = new Vector3(gob.transform.position.x, player.transform.position.y, gob.transform.position.z);
+
+        // Setup all generators
+        foreach (GameObject generator in generators)
+        {
+            generator.GetComponent<Generator>().SetState(new GenerateEnemies(generator.GetComponent<Generator>()));
+        }
+       
+    }
+
+    public void Instanciate(GameObject character, Vector3 position)
+    {
+        characters.Add(Instantiate(character, position, Quaternion.identity));
     }
 
     public override void OnFocusLost()
