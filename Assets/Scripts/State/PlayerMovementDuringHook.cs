@@ -26,32 +26,16 @@ public class PlayerMovementDuringHook : PlayerMovement {
     {
         Vector3 copy = hook.transform.position;
         val /= 10;
-        if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.RightMovement))
+        if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.AllMovement))
         {
-            direction.Set(val.x, 0);
+            direction.Set(val.x, val.y);
+            character.Move(direction);
         }
 
-        if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.LeftMovement))
-        {
-            direction.Set(-val.x, 0);
-        }
-
-        if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.UpMovement))
-        {
-            direction.Set(0, val.x);
-        }
-
-        if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.DownMovement))
-        {
-            direction.Set(0, -val.x);
-        }
-
-        if(typeAct.Equals(BaseInput.TypeAction.Up) && acts.Equals(BaseInput.Actions.Shoot))
+        if (typeAct.Equals(BaseInput.TypeAction.Up) && acts.Equals(BaseInput.Actions.Shoot))
         {
             NextState();
         }
-
-        character.Move(direction);
 
         hook.GetComponent<LineRenderer>().SetPosition(1, character.transform.position);
         hook.transform.position = copy;

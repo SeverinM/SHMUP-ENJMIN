@@ -3,58 +3,50 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class KeyBoardInput : BaseInput {
+    bool wasDown = false;
+    Vector2 movements = Vector2.zero;
 
     public override void UpdateInput()
     {
-        if (BaseInput.IsFree(Actions.LeftMovement,this) && BaseInput.IsFree(Actions.RightMovement, this))
-        {
-            if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                RaiseEvent(TypeAction.Pressed, Actions.LeftMovement, new Vector2(1, 0));
-                BaseInput.SetLockState(Actions.LeftMovement, this);
-            }
-            else
-            {
-                BaseInput.SetLockState(Actions.LeftMovement, null);
-            }
-        }
-
-        if (BaseInput.IsFree(Actions.RightMovement, this) && BaseInput.IsFree(Actions.LeftMovement,this))
-        {
-            if (Input.GetKey(KeyCode.RightArrow))
-            {
-                RaiseEvent(TypeAction.Pressed, Actions.RightMovement, new Vector2(1, 0));
-                BaseInput.SetLockState(Actions.RightMovement, this);
-            }
-            else
-            {
-                BaseInput.SetLockState(Actions.RightMovement, null);
-            }
-        }
-
-        if (BaseInput.IsFree(Actions.UpMovement, this) && BaseInput.IsFree(Actions.DownMovement, this))
-        {
-            if (Input.GetKey(KeyCode.UpArrow))
-            {
-                RaiseEvent(TypeAction.Pressed, Actions.UpMovement, new Vector2(1, 0));
-                BaseInput.SetLockState(Actions.UpMovement, this);
-            }
-            else
-            {
-                BaseInput.SetLockState(Actions.UpMovement, null);
-            }
-        }
-
-        if (BaseInput.IsFree(Actions.DownMovement, this) && BaseInput.IsFree(Actions.UpMovement, this))
+        movements = Vector2.zero;
+        if ((Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow)) && BaseInput.IsFree(Actions.AllMovement,this))
         {
             if (Input.GetKey(KeyCode.DownArrow))
             {
-                RaiseEvent(TypeAction.Pressed, Actions.DownMovement, new Vector2(1, 0));
-                BaseInput.SetLockState(Actions.DownMovement, this);
+                movements += Vector2.down;
             }
-            else
+
+            if (Input.GetKey(KeyCode.UpArrow))
             {
-                BaseInput.SetLockState(Actions.DownMovement, null);
+                movements += Vector2.up;
+            }
+
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                movements += Vector2.left;
+            }
+
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                movements += Vector2.right;
+            }
+
+            RaiseEvent(TypeAction.Pressed, Actions.AllMovement, movements);
+
+            if (!wasDown)
+            {
+                wasDown = true;
+                RaiseEvent(TypeAction.Down, Actions.AllMovement, movements);
+            }
+        }
+
+        else
+        {
+            if (wasDown)
+            {
+                RaiseEvent(TypeAction.Up, Actions.AllMovement, movements);
+                wasDown = false;
+                BaseInput.SetLockState(Actions.AllMovement, null);
             }
         }
 

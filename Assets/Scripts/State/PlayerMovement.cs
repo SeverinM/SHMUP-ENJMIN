@@ -21,27 +21,9 @@ public class PlayerMovement : State
         //Mode normal
         if (mode.Equals(Player.MovementMode.Normal))
         {
-            if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.RightMovement))
+            if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.AllMovement))
             {
-                direction.Set(val.x, 0);
-                character.Move(direction);
-            }
-
-            if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.LeftMovement))
-            {
-                direction.Set(-val.x, 0);
-                character.Move(direction);
-            }
-
-            if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.UpMovement))
-            {
-                direction.Set(0, val.x);
-                character.Move(direction);
-            }
-
-            if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.DownMovement))
-            {
-                direction.Set(0, -val.x);
+                direction.Set(val.x, val.y);
                 character.Move(direction);
             }
 
@@ -60,16 +42,16 @@ public class PlayerMovement : State
                 character.transform.position += character.transform.forward * dashDistance;
             }
 
-            if (typeAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Dash))
-            {
-                character.transform.position += character.transform.forward * dashDistance;
-            }
-
             //rotation stick gauche
             if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.AllMovement))
             {
-                Debug.Log(val.x);
-                character.transform.eulerAngles = new Vector3(0, val.x, 0);
+                float value = Mathf.Acos(val.x) * Mathf.Rad2Deg;
+                if (val.y > 0)
+                {
+                    value *= -1;
+                }
+                value += 90;
+                character.transform.eulerAngles = new Vector3(0, value, 0);
             }
         }
 

@@ -43,10 +43,6 @@ public abstract class BaseInput {
 
     public enum Actions
     {
-        LeftMovement,
-        RightMovement,
-        UpMovement,
-        DownMovement,
         AllMovement,
         Shoot,
         Rotate,
