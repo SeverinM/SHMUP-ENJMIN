@@ -302,6 +302,11 @@ Prefab:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114938182685806996, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: hook
+      value: 
+      objectReference: {fileID: 777007254}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
   m_IsPrefabAsset: 0
@@ -495,6 +500,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &777007254 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4103882718358818, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+    type: 2}
+  m_PrefabInternal: {fileID: 150030490}
 --- !u!1 &784524581
 GameObject:
   m_ObjectHideFlags: 0

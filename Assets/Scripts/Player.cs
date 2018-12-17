@@ -14,7 +14,6 @@ public class Player : Character
 
     [SerializeField]
     MovementMode mode;
-
     public MovementMode Mode
     {
         get
@@ -23,36 +22,49 @@ public class Player : Character
         }
     }
 
-    private CharacterController controller;
-    public CharacterController Controller
+    [SerializeField]
+    private Transform hook;
+    public Transform Hook
     {
         get
         {
-            return controller;
+            return hook;
         }
     }
 
     void Start()
     {
-      
-
         actualState = new PlayerMovement(this);
     }
 
-    public void InterpretInput(BaseInput.TypeAction typAct, BaseInput.Actions baseInput , Vector2 value)
+    new void Update()
     {
         if (actualState != null)
         {
-            actualState.InterpretInput(typAct, baseInput, value);
+            actualState.UpdateState();
         }
+
+        if (impact.magnitude > 0.2)
+        { // if momentum > 0.2 
+
+            Move(impact * Time.deltaTime); // move character
+        }
+        // impact vanishes to zero over time
+        impact = Vector3.Lerp(impact, Vector3.zero, 5 * Time.deltaTime);
     }
+
 
     void OnCollisionEnter(Collision collision)
     {
         // On bullet
-
         Impact(collision.relativeVelocity * hitForce);
-        
+    }
+
+    public void Impact(Vector3 force)
+    {
+        Vector3 dir = force.normalized;
+        dir.y = 0.5f;
+        impact += dir.normalized * force.magnitude / mass;
     }
 
 }

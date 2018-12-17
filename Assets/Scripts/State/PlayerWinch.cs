@@ -45,10 +45,11 @@ public class PlayerWinch : State
         float distanceToHook = Vector3.Distance(character.transform.position, hook.transform.position);
         hook.transform.position = copy;
 
-        if (distanceToHook < 0.5)
+        if (distanceToHook < positionRelative.magnitude)
         {
             hook.transform.localPosition = positionRelative;
             line.SetPosition(0, hook.position);
+            line.SetPosition(1, hook.position);
             NextState();
         }
     }

@@ -7,12 +7,12 @@ public class PlayerShoot : State
     public Transform hook;
     Vector3 originRelative;
     float maxDistance = 10;
-    float speedTravel = 1f;
+    float speedTravel = 0.7f;
     LineRenderer line;
 
-    public PlayerShoot(Character character) : base(character)
+    public PlayerShoot(Character character, Transform hook) : base(character)
     {
-        hook = character.transform.GetChild(0);
+        this.hook = hook;
         line = hook.GetComponent<LineRenderer>();
     }
 
@@ -55,6 +55,7 @@ public class PlayerShoot : State
             hook.transform.localPosition = originRelative;
 
             line.SetPosition(0, hook.transform.position);
+            line.SetPosition(1, hook.transform.position);
             character.SetState(new PlayerMovement(character));
         }
     }
