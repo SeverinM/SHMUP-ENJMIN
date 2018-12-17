@@ -12,6 +12,11 @@ public abstract class Character : MonoBehaviour {
     protected float moveSpeed = 6.0f;
 
     [SerializeField]
+    protected float mass = 3.0f;                
+    protected float hitForce = 2.5f;            
+    protected Vector3 impact = Vector3.zero; 
+
+    [SerializeField]
     protected State actualState;
     public State ActualState
     {
@@ -67,5 +72,4 @@ public abstract class Character : MonoBehaviour {
     {
         transform.Translate(new Vector3(movement.x * Time.deltaTime * moveSpeed, movement.y * Time.deltaTime * moveSpeed, movement.z * Time.deltaTime * moveSpeed), Space.World);
     }
-
 }

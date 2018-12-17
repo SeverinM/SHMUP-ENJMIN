@@ -4,10 +4,23 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
 
+    [SerializeField]
     private float speed = 6f;
+    private int lastTime;
 
-	void Update () {
-        transform.Translate(transform.forward * Time.deltaTime * speed);
+    [SerializeField]
+    private int lasting = 256;
+
+    void Update () {
+
+        if (lastTime < lasting)
+        {
+            lastTime++;
+            transform.Translate(transform.forward * Time.deltaTime * speed);
+        } else
+        {
+            Destroy(this.gameObject);
+        }
 
     }
 }

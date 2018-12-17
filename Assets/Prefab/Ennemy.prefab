@@ -110,5 +110,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   HP: 0
+  range: 2
+  shootPeriod: 2
+  shootAmount: 3
+  maxBullets: 5
+  shootRadius: 1
   player: {fileID: 1380677440080142, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
+  bulletPrefab: {fileID: 1282062362704492, guid: 119f19512e8adaa4a976ceeddba29da5,
+    type: 2}
   movementType: 1
