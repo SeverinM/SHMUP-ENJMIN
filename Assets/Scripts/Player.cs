@@ -34,11 +34,7 @@ public class Player : Character
 
     void Start()
     {
-        if (!GetComponent<CharacterController>())
-        {
-            gameObject.AddComponent<CharacterController>();
-        }
-        controller = transform.GetComponent<CharacterController>();
+      
 
         actualState = new PlayerMovement(this);
     }
@@ -50,4 +46,13 @@ public class Player : Character
             actualState.InterpretInput(typAct, baseInput, value);
         }
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        // On bullet
+
+        Impact(collision.relativeVelocity * hitForce);
+        
+    }
+
 }
