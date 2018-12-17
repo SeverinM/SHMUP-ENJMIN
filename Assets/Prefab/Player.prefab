@@ -273,6 +273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 6
   mode: 1
+  hook: {fileID: 4103882718358818}
 --- !u!120 &120035746370447866
 LineRenderer:
   m_ObjectHideFlags: 1
