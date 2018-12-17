@@ -50,6 +50,14 @@ public abstract class Character : MonoBehaviour {
         }
     }
 
+    public void InterpretInput(BaseInput.TypeAction typAct, BaseInput.Actions baseInput, Vector2 value)
+    {
+        if (actualState != null)
+        {
+            actualState.InterpretInput(typAct, baseInput, value);
+        }
+    }
+
     public virtual void Move(Vector2 movement)
     {
         transform.Translate(new Vector3(movement.x * Time.deltaTime * moveSpeed, 0, movement.y * Time.deltaTime * moveSpeed), Space.World);

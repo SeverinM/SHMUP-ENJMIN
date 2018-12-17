@@ -14,7 +14,6 @@ public class Player : Character
 
     [SerializeField]
     MovementMode mode;
-
     public MovementMode Mode
     {
         get
@@ -32,6 +31,16 @@ public class Player : Character
         }
     }
 
+    [SerializeField]
+    private Transform hook;
+    public Transform Hook
+    {
+        get
+        {
+            return hook;
+        }
+    }
+
     void Start()
     {
         if (!GetComponent<CharacterController>())
@@ -41,13 +50,5 @@ public class Player : Character
         controller = transform.GetComponent<CharacterController>();
 
         actualState = new PlayerMovement(this);
-    }
-
-    public void InterpretInput(BaseInput.TypeAction typAct, BaseInput.Actions baseInput , Vector2 value)
-    {
-        if (actualState != null)
-        {
-            actualState.InterpretInput(typAct, baseInput, value);
-        }
     }
 }

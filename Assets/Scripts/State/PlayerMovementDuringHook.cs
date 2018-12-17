@@ -11,6 +11,7 @@ public class PlayerMovementDuringHook : PlayerMovement {
     {
         originRelative = origin;
         this.hook = hook;
+        hook.parent = null;
     }
 
     public override void NextState()
@@ -20,7 +21,12 @@ public class PlayerMovementDuringHook : PlayerMovement {
 
     public override void UpdateState()
     {
-        
+        character.transform.forward = (hook.transform.position - character.transform.position).normalized;
+    }
+
+    public override void EndState()
+    {
+        hook.parent = character.transform;
     }
 
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)

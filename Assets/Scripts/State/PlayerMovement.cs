@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+/// <summary>
+/// Etat initial du joueur , il peut se deplacer librement et orienter son perso comme il le souhaite
+/// C'est le seul etat etant exclusif au joueur
+/// </summary>
 public class PlayerMovement : State
 {
     protected Vector2 direction;
@@ -13,9 +18,12 @@ public class PlayerMovement : State
     public PlayerMovement(Character character) : base(character)
     {
         direction = new Vector2();
+
+        //Plante si ce n'est pas un player , attention
         mode = ((Player)character).Mode;
-        hook = character.transform.GetChild(0);
+        hook = ((Player)character).Hook;
         origin = hook.localPosition;
+        hook.forward = character.transform.forward;
     }
 
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)
@@ -23,6 +31,7 @@ public class PlayerMovement : State
         //Mode normal
         if (mode.Equals(Player.MovementMode.Normal))
         {
+            //Un mouvement quelconque (manette / souris) est detecté
             if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.AllMovement))
             {
                 direction.Set(val.x, val.y);
@@ -82,6 +91,6 @@ public class PlayerMovement : State
 
     public override void NextState()
     {
-        character.SetState(new PlayerShoot(character));
+        character.SetState(new PlayerShoot(character, hook));
     }
 }
