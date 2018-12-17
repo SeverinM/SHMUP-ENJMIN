@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{E06A2CD0-61B1-42C0-A69C-2BD0EDAD8A7B}" SchemaVersion="89">
+	<SoundBanks>
+		<WorkUnit Name="Default Work Unit" ID="{E06A2CD0-61B1-42C0-A69C-2BD0EDAD8A7B}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundBank Name="Main" ID="{31F03C1C-6820-444E-AE3F-2A5DA6578A97}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Enemy_Shoot" ID="{7F255C94-784B-4951-BEA9-0650C30F8619}" WorkUnitID="{00E13D6F-B3EF-4994-9977-EC9C76DA7E7C}" Filter="7" Origin="Manual"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+			</ChildrenList>
+		</WorkUnit>
+	</SoundBanks>
+</WwiseDocument>
