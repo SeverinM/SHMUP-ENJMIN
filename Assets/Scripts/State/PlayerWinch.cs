@@ -19,7 +19,6 @@ public class PlayerWinch : State
 
     public override void EndState()
     {
-        hook.transform.position = character.transform.position + positionRelative;
         line.SetPosition(0, hook.position);
     }
 
@@ -48,7 +47,7 @@ public class PlayerWinch : State
 
         if (distanceToHook < 0.5)
         {
-            hook.transform.position = hook.transform.parent.position;
+            hook.transform.localPosition = positionRelative;
             line.SetPosition(0, hook.position);
             NextState();
         }

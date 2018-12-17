@@ -18,7 +18,6 @@ public class PlayerShoot : State
 
     public override void EndState()
     {
-        originRelative = hook.transform.position - character.transform.position;
         hook.GetComponent<BoxCollider>().enabled = false;
     }
 
@@ -26,8 +25,9 @@ public class PlayerShoot : State
     {
         if (typeAct.Equals(BaseInput.TypeAction.Up) && acts.Equals(BaseInput.Actions.Shoot))
         {
-            hook.transform.position = character.transform.position + originRelative;
+            hook.transform.localPosition = originRelative;
             line.SetPosition(0, hook.transform.position);
+            line.SetPosition(1, hook.transform.position);
             character.SetState(new PlayerMovement(character));
         }
     }
@@ -39,7 +39,7 @@ public class PlayerShoot : State
 
     public override void StartState()
     {
-        originRelative = hook.position - character.transform.position;
+        originRelative = hook.transform.localPosition;
         hook.GetComponent<BoxCollider>().enabled = true;
     }
 
@@ -52,7 +52,8 @@ public class PlayerShoot : State
         
         if (Vector3.Distance(character.transform.position,hook.transform.position) >= maxDistance)
         {
-            hook.transform.position = hook.parent.position + originRelative;
+            hook.transform.localPosition = originRelative;
+
             line.SetPosition(0, hook.transform.position);
             character.SetState(new PlayerMovement(character));
         }

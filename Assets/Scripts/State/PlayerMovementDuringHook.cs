@@ -20,6 +20,7 @@ public class PlayerMovementDuringHook : PlayerMovement {
 
     public override void UpdateState()
     {
+        
     }
 
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)
