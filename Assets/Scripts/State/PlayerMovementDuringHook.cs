@@ -10,18 +10,20 @@ public class PlayerMovementDuringHook : PlayerMovement {
     //La positon du grappin relativement a son père
     Vector3 originRelative;
     Transform hook;
+    Context cont;
 
-    public PlayerMovementDuringHook(Character chara,Transform hook, Vector3 origin) : base(chara)
+    public PlayerMovementDuringHook(Character chara,Context ctx) : base(chara,ctx)
     {
-        originRelative = origin;
-        this.hook = hook;
+        cont = ctx;
+        originRelative = ctx.ValuesOrDefault<Vector3>("Origin", Vector3.forward);
+        hook = ctx.ValuesOrDefault<Transform>("Hook", character.transform);
         //Le hook perd temporairement son statut d'enfant juste pour cet etat
         hook.parent = null;
     }
 
     public override void NextState()
     {
-        character.SetState(new PlayerWinch(character, hook, originRelative));
+        character.SetState(new PlayerWinch(character,cont));
     }
 
     public override void UpdateState()

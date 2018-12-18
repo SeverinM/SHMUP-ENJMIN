@@ -44,7 +44,11 @@ public class Player : Character
 
     void Start()
     {
-        actualState = new PlayerMovement(this);
+        Context ctx = new Context();
+        ctx.SetInDictionary("Mode", mode);
+        ctx.SetInDictionary("Hook", hook);
+        ctx.SetInDictionary("Shield", shield);
+        actualState = new PlayerMovement(this, ctx);
     }
 
     new void Update()

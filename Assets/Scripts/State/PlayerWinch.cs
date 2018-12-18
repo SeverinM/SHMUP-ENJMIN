@@ -9,9 +9,8 @@ public class PlayerWinch : State
     //Position du vaisseau AVANT d'etre tracté
     Vector3 origin;
 
-    //En combien de temps le vaisseau va rejoindre le hook 
-    float duration = 0.5f;
-    float actualTime = 0;
+    //Vitesse de traversé du hook
+    float speedTravel = 10;
 
     //La position du hook relative au vaisseau avant qu'il soit tiré
     Vector3 positionRelative;
@@ -19,12 +18,16 @@ public class PlayerWinch : State
     //Ligne creant le lien entre vaisseau et hook
     LineRenderer line;
 
-    public PlayerWinch(Character character, Transform hook, Vector3 pos) : base(character)
+    Context cont;
+    Vector3 copy;
+
+    public PlayerWinch(Character character,Context ctx) : base(character)
     {
-        this.hook = hook;
-        shield = ((Player)character).Shield;
+        cont = ctx;
+        hook = ctx.ValuesOrDefault<Transform>("Hook", character.transform);
+        shield = ctx.ValuesOrDefault<Transform>("Shield", character.transform);
         line = hook.GetComponent<LineRenderer>();
-        positionRelative = pos;
+        positionRelative = ctx.ValuesOrDefault<Vector3>("Origin", Vector3.forward);
     }
 
     public override void EndState()
@@ -35,7 +38,7 @@ public class PlayerWinch : State
 
     public override void NextState()
     {
-        character.SetState(new PlayerMovement(character));
+        character.SetState(new PlayerMovement(character,cont));
     }
 
     public override void StartState()
@@ -46,10 +49,9 @@ public class PlayerWinch : State
 
     public override void UpdateState()
     {       
-        Vector3 copy = hook.transform.position;
-        actualTime += Time.deltaTime * Constants.TimeScalePlayer;
+        copy = hook.transform.position;
 
-        character.transform.position = Vector3.Lerp(origin, hook.transform.position, actualTime / duration);
+        character.transform.position += character.transform.forward * Time.deltaTime * Constants.TimeScalePlayer * speedTravel;
 
         line.SetPosition(0, hook.position);
         line.SetPosition(1, character.transform.position);

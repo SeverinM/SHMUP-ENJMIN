@@ -1,5 +1,40 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
+
+/// <summary>
+/// Classe permettant de passer des données entre chaque etat
+/// </summary>
+public class Context
+{
+    Dictionary<string, object> genericValues = new Dictionary<string, object>();
+
+    public T ValuesOrDefault<T>(string key, T defaultValue)
+    {
+        if (!genericValues.ContainsKey(key))
+        {
+            return defaultValue;
+        }
+        else
+        {
+            T value = (T)genericValues[key];
+            if (value != null)
+            {
+                return value;
+            }
+            else
+            {
+                return defaultValue;
+            }
+        }
+    }
+
+    public void SetInDictionary(string key, object value)
+    {
+        genericValues[key] = value;
+    }
+}
 
 /// <summary>
 /// Classe de base de tous les etats, il est possible de passer des parametres personnalisés entre etats via les constructeurs
