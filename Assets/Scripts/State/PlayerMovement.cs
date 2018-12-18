@@ -3,7 +3,7 @@ using System.Collections;
 
 
 /// <summary>
-/// Etat initial du joueur , il peut se deplacer librement et orienter son perso comme il le souhaite
+/// Etat "Idle" du joueur , il peut se deplacer librement et orienter son perso comme il le souhaite
 /// C'est le seul etat etant exclusif au joueur
 /// </summary>
 public class PlayerMovement : State
@@ -83,6 +83,8 @@ public class PlayerMovement : State
         }
     }
 
+    //TODO : trouver meilleur solution
+    //On force le hook a conserver la meme position et rotation locale pour eviter que ce soit desaxé
     public override void UpdateState()
     {
         hook.forward = character.transform.forward;

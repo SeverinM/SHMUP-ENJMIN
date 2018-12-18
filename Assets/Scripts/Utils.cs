@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// Classe statique contenant plusieurs methode utiles accessibles partout
+/// </summary>
 public static class Utils {
 
     static bool isFading = false;
     static Fade fading;
 
+    /// <summary>
+    /// Cherche un gameobject dans la scene contenant un component , s'il n'y en a pas le créer a la volée
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
     public static T FindOrDefault<T>() where T : Component
     {
         T output;

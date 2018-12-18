@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Classe generique permettant de modifier un UI Texte dés que la valeur observé est modifié , la methode ToString() doit etre redefinit
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public class Binding<T>{
 
     Text text;

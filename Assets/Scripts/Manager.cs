@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Classe singleton et indestructibles ayant pour but de tenir des references d'autres objets et de gerer les layers
+/// </summary>
 public class Manager : MonoBehaviour {
 
     static Manager instance;

@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Cet etat a lieu lorsque le joueur lance le hook mais qu'il n'a pas encore touché quelque chose ou que la distance max n'a pas encore été atteinte
+/// C'est le seul etat où le hook a une existence physique
+/// </summary>
 public class PlayerShoot : State
 {
-
     public Transform hook;
     Vector3 originRelative;
     float maxDistance = 10;

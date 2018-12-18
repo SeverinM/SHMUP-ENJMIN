@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Input gérés par la souris
+/// </summary>
 public class MouseInput : BaseInput
 {
     public override void UpdateInput()
