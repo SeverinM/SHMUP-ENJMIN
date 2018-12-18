@@ -7,6 +7,7 @@ TagManager:
   - FollowParent
   - Hook
   - Hookable
+  - Shield
   layers:
   - Default
   - TransparentFX

@@ -34,13 +34,29 @@ public class Enemy : Character {
         {
             case EnemyMovementType.FOLLOW_GAME_OBJECT:
                 FollowGameObject();
-
                 break;
             case EnemyMovementType.FOLLOW_PATH:
                 FollowPath();
                 break;
         }
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Shield")
+        {
+            StartCoroutine(Freeze(0.1f));
+        }
+    }
+
+    IEnumerator Freeze(float duration = 1)
+    {
+        GetComponent<MeshRenderer>().enabled = false;
+        Constants.TimeScalePlayer = 0;
+        yield return new WaitForSeconds(duration);
+        Constants.TimeScalePlayer = 1;
+        Destroy(gameObject);
     }
 
     private void FollowPath()

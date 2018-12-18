@@ -4,6 +4,7 @@ using System.Collections;
 public class PlayerWinch : State
 {
     Transform hook;
+    Transform shield;
     
     //Position du vaisseau AVANT d'etre tracté
     Vector3 origin;
@@ -21,6 +22,7 @@ public class PlayerWinch : State
     public PlayerWinch(Character character, Transform hook, Vector3 pos) : base(character)
     {
         this.hook = hook;
+        shield = ((Player)character).Shield;
         line = hook.GetComponent<LineRenderer>();
         positionRelative = pos;
     }
@@ -28,6 +30,7 @@ public class PlayerWinch : State
     public override void EndState()
     {
         line.SetPosition(0, hook.position);
+        shield.GetComponent<BoxCollider>().enabled = false;
     }
 
     public override void NextState()
@@ -38,12 +41,13 @@ public class PlayerWinch : State
     public override void StartState()
     {
         origin = character.transform.position;
+        shield.GetComponent<BoxCollider>().enabled = true;
     }
 
     public override void UpdateState()
     {       
         Vector3 copy = hook.transform.position;
-        actualTime += Time.deltaTime;
+        actualTime += Time.deltaTime * Constants.TimeScalePlayer;
 
         character.transform.position = Vector3.Lerp(origin, hook.transform.position, actualTime / duration);
 

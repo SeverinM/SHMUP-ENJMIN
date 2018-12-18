@@ -13,6 +13,16 @@ public class Player : Character
     }
 
     [SerializeField]
+    Transform shield;
+    public Transform Shield
+    {
+        get
+        {
+            return shield;
+        }
+    }
+
+    [SerializeField]
     MovementMode mode;
     public MovementMode Mode
     {
