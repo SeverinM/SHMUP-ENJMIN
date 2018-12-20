@@ -1,0 +1,6 @@
+Event	ID	Name			Wwise Object Path	Notes
+	1050776119	Enemy_Shoot			\Default Work Unit\Enemy_Shoot	
+
+Source plug-ins	ID	Name	Type		Wwise Object Path	Notes
+	39703727	Wwise Sine	Wwise Sine		\Actor-Mixer Hierarchy\Default Work Unit\Enemy_Shoot\Wwise Sine	
+

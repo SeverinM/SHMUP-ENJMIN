@@ -38,3 +38,8 @@ sysinfo.txt
 
 # Crashlytics generated file
 Assets/StreamingAssets/crashlytics-build.properties
+
+
+# Wwise
+/SHMUP-ENJMIN_WwiseProject/Originals/SFX/*.akd
+/SHMUP-ENJMIN_WwiseProject/.cache/
