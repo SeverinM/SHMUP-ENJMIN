@@ -10,7 +10,7 @@ public class PlayerWinch : State
     Vector3 origin;
 
     //Vitesse de traversé du hook
-    float speedTravel = 10;
+    float speedTravel;
 
     //La position du hook relative au vaisseau avant qu'il soit tiré
     Vector3 positionRelative;
@@ -28,6 +28,7 @@ public class PlayerWinch : State
         shield = ctx.ValuesOrDefault<Transform>("Shield", character.transform);
         line = hook.GetComponent<LineRenderer>();
         positionRelative = ctx.ValuesOrDefault<Vector3>("Origin", Vector3.forward);
+        speedTravel = ctx.ValuesOrDefault<float>("SpeedWinch", 10);
     }
 
     public override void EndState()

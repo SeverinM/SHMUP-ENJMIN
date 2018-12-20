@@ -9,8 +9,8 @@ public class PlayerShoot : State
 {
     public Transform hook;
     Vector3 originRelative;
-    float maxDistance = 10;
-    float speedTravel = 0.7f;
+    float maxDistance;
+    float speedTravel;
     LineRenderer line;
     Context cont;
 
@@ -18,6 +18,8 @@ public class PlayerShoot : State
     {
         cont = ctx;
         hook = ctx.ValuesOrDefault<Transform>("Hook", character.transform);
+        speedTravel = ctx.ValuesOrDefault<float>("SpeedHook", 0.7f);
+        maxDistance = ctx.ValuesOrDefault<float>("RangeHook", 10);
         line = hook.GetComponent<LineRenderer>();
     }
 

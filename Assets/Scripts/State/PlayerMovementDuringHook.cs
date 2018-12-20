@@ -11,12 +11,15 @@ public class PlayerMovementDuringHook : PlayerMovement {
     Vector3 originRelative = Vector3.zero;
     Transform hook;
     Context cont;
+    float coeff;
 
     public PlayerMovementDuringHook(Character chara,Context ctx) : base(chara,ctx)
     {
         cont = ctx;
         originRelative = ctx.ValuesOrDefault<Vector3>("Origin", Vector3.forward);
         hook = ctx.ValuesOrDefault<Transform>("Hook", character.transform);
+        coeff = ctx.ValuesOrDefault<float>("CoeffHook", 0.1f);
+
         //Le hook perd temporairement son statut d'enfant juste pour cet etat
         hook.parent = null;
     }
@@ -41,7 +44,7 @@ public class PlayerMovementDuringHook : PlayerMovement {
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)
     {
         //Le joueur va beaucoup moins vite que dans PlayerMouvement
-        val /= 10;
+        val *= coeff;
         if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.AllMovement))
         {
             direction.Set(val.x, val.y);

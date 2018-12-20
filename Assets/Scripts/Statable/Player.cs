@@ -5,23 +5,7 @@ using System;
 
 public class Player : Character
 {
- 
-    public enum MovementMode
-    {
-        Dash,
-        Normal
-    }
-
-    [SerializeField]
-    Transform shield;
-    public Transform Shield
-    {
-        get
-        {
-            return shield;
-        }
-    }
-
+    [Header("Debug")]
     [SerializeField]
     MovementMode mode;
     public MovementMode Mode
@@ -29,6 +13,47 @@ public class Player : Character
         get
         {
             return mode;
+        }
+    }
+
+    public enum MovementMode
+    {
+        Dash,
+        Normal
+    }
+
+    [Header("Mouvement")]
+    [SerializeField]
+    [Tooltip("Longueur d'un dash")]
+    float distanceDash = 2;
+
+    [Header("Tir du grappin")]
+    [SerializeField]
+    [Tooltip("A quel vitesse progresse le grappin")]
+    float hookSpeed = 0.7f;
+
+    [SerializeField]
+    [Tooltip("Portée du hook")]
+    float rangeHook = 10;
+
+    [Header("Hook / Winch")]
+    [Tooltip("Vitesse du pull / winch")]
+    [SerializeField]
+    float speedPull = 10;
+
+    [Header("Mouvement durant le hook")]
+    [Tooltip("A quel point la vitesse est reduite par rapport a la vitesse normale ? (exemple : 0.1 signifie 10 fois moins vite)")]
+    [SerializeField]
+    float coeffHook = 0.1f;
+
+    [Header("Auto references (pas toucher... normalement)")]
+    [SerializeField]
+    Transform shield;
+    public Transform Shield
+    {
+        get
+        {
+            return shield;
         }
     }
 
@@ -48,6 +73,11 @@ public class Player : Character
         ctx.SetInDictionary("Mode", mode);
         ctx.SetInDictionary("Hook", hook);
         ctx.SetInDictionary("Shield", shield);
+        ctx.SetInDictionary("SpeedWinch", speedPull);
+        ctx.SetInDictionary("SpeedHook", hookSpeed);
+        ctx.SetInDictionary("RangeDash", distanceDash);
+        ctx.SetInDictionary("CoeffHook", coeffHook);
+        ctx.SetInDictionary("RangeDash", rangeHook);
         actualState = new PlayerMovement(this, ctx);
     }
 
@@ -76,7 +106,7 @@ public class Player : Character
                 Destroy(other.gameObject);
             }
             Life--;
-            if (Life == 0)
+            if (Life <= 0)
             {
                 Destroy(gameObject);
             }
@@ -92,5 +122,10 @@ public class Player : Character
         Vector3 dir = force.normalized;
         dir.y = 0.5f;
         impact += dir.normalized * force.magnitude / mass;
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log("Pouf plus de joueur");
     }
 }

@@ -14,7 +14,7 @@ public class PlayerMovement : State
     Vector3 origin;
     Context cont;
 
-    protected float dashDistance = 2f;
+    protected float dashDistance;
 
     public PlayerMovement(Character character, Context ctx) : base(character)
     {
@@ -24,6 +24,7 @@ public class PlayerMovement : State
         hook = ctx.ValuesOrDefault<Transform>("Hook", character.transform);
         origin = hook.localPosition;
         hook.forward = character.transform.forward;
+        dashDistance = ctx.ValuesOrDefault<float>("RangeDash", 10);
     }
 
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)
@@ -63,6 +64,8 @@ public class PlayerMovement : State
                     value *= -1;
                 }
                 value += 90;
+
+                //Rotation ET dash
                 character.transform.eulerAngles = new Vector3(0, value, 0);
                 character.transform.position += character.transform.forward * dashDistance;
             }

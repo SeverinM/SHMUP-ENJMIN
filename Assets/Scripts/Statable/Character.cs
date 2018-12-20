@@ -11,6 +11,8 @@ public abstract class Character : MonoBehaviour {
     public delegate void collDelegate(Collider coll);
     public event collDelegate OnTriggerEnterChar;
 
+    [Header("Herité de Character")]
+    [Tooltip("A quel vitesse le personnage peut se deplacer ?")]
     [SerializeField]
     //Speed of the character while moving
     protected float moveSpeed = 6.0f;
@@ -21,9 +23,11 @@ public abstract class Character : MonoBehaviour {
     protected Vector3 impact = Vector3.zero;
 
     [SerializeField]
+    [Tooltip("Material de substitution pendant que le personnage est en recovery (ATTENTION : peut bugger s'il y a plusieurs materials)")]
     Material recoveryMat;
 
     [SerializeField]
+    [Tooltip("Nombre de point de vie du personnage , un nombre negatif equivaut a 1")]
     protected int life = 3;
     public int Life
     {
