@@ -46,7 +46,6 @@ public class Player : Character
 
         if (impact.magnitude > 0.2)
         { // if momentum > 0.2 
-
             Move(impact * Time.deltaTime); // move character
         }
         // impact vanishes to zero over time
@@ -57,7 +56,11 @@ public class Player : Character
     void OnCollisionEnter(Collision collision)
     {
         // On bullet
-        Impact(collision.relativeVelocity * hitForce);
+        if (collision.gameObject.name.Contains("Bullet"))
+        {
+            Impact(collision.relativeVelocity * hitForce);
+            Destroy(collision.gameObject);
+        }
     }
 
     public void Impact(Vector3 force)

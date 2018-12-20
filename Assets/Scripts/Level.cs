@@ -36,6 +36,7 @@ public class Level : Layers {
     {
         GameObject toAdd = Instantiate(character, position, Quaternion.identity);
         toAdd.GetComponent<Enemy>().player = player.gameObject;
+        toAdd.GetComponent<Enemy>().characters = characters;
         characters.Add(toAdd);
     }
 

@@ -8,7 +8,8 @@ public class Enemy : Character {
     public enum EnemyMovementType
     {
         FOLLOW_GAME_OBJECT,
-        FOLLOW_PATH
+        FOLLOW_PATH,
+        FOLLOW_RANDOM_PATH
     }
 
     [SerializeField]
@@ -27,6 +28,7 @@ public class Enemy : Character {
 
     [SerializeField]
     private EnemyMovementType movementType;
+    internal List<GameObject> characters;
 
     private void Start()
     {
@@ -50,7 +52,12 @@ public class Enemy : Character {
         allPos.Enqueue(new Vector3(-2, 0, -2));
         allPos.Enqueue(new Vector3(2, 0, -2));
 
-        SetState(new MovementEnemy(this, player, allPos, MovementEnemy.MovementState.START));
+        SetState(new MovementEnemy(this, characters, player, allPos, MovementEnemy.MovementState.START));
+    }
+
+    private void FollowRandomPath()
+    {
+        SetState(new MovementEnemy(this, characters, player, MovementEnemy.MovementState.RANDOM_LOOP));
     }
 
     public void Shoot()
@@ -70,6 +77,6 @@ public class Enemy : Character {
 
     private void FollowGameObject()
     {
-        SetState(new MovementEnemy(this, player, player.transform, MovementEnemy.MovementState.START));
+        SetState(new MovementEnemy(this, characters, player, player.transform, MovementEnemy.MovementState.START));
     }
 }
