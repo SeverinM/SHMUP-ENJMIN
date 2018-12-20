@@ -14,7 +14,6 @@ public class Player : Character
 
     [SerializeField]
     Transform shield;
-
     public Transform Shield
     {
         get
@@ -60,21 +59,31 @@ public class Player : Character
         }
 
         if (impact.magnitude > 0.2)
-        { // if momentum > 0.2 
+        { 
             Move(impact * Time.deltaTime); // move character
         }
         // impact vanishes to zero over time
         impact = Vector3.Lerp(impact, Vector3.zero, 5 * Time.deltaTime);
     }
 
-
-    void OnCollisionEnter(Collision collision)
+    protected override void OnTriggerEnter(Collider other)
     {
-        // On bullet
-        if (collision.gameObject.name.Contains("Bullet"))
+        base.OnTriggerEnter(other);
+        if (other.gameObject.tag == "Ennemy" || other.gameObject.tag == "Bullet")
         {
-            Impact(collision.relativeVelocity * hitForce);
-            Destroy(collision.gameObject);
+            if (other.gameObject.tag == "Bullet")
+            {
+                Destroy(other.gameObject);
+            }
+            Life--;
+            if (Life == 0)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                StartRecovery(1);
+            }
         }
     }
 
@@ -84,5 +93,4 @@ public class Player : Character
         dir.y = 0.5f;
         impact += dir.normalized * force.magnitude / mass;
     }
-
 }

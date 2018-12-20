@@ -44,23 +44,31 @@ public class Enemy : Character {
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void StartFreeze()
     {
-        if (other.tag == "Shield")
-        {
-            StartCoroutine(Freeze(0.1f));
-        }
+        StartCoroutine(Freeze(0.1f));
     }
 
+    /// <summary>
+    /// L'ennemi a subit des degats
+    /// </summary>
+    /// <param name="duration"></param>
+    /// <returns></returns>
     IEnumerator Freeze(float duration = 1)
     {
-        GetComponent<MeshRenderer>().enabled = false;
-        Constants.TimeScalePlayer = 0;
-        yield return new WaitForSeconds(duration);
-        Constants.TimeScalePlayer = 1;
-        if (characters.Contains(gameObject))
+        Life -= 1;
+        if (Life > 0)
         {
-            characters.Remove(gameObject);
+            StartRecovery(duration * 10);
+        }
+
+        else
+        {
+            GetComponent<Collider>().enabled = false;
+            GetComponent<MeshRenderer>().enabled = false;
+            Constants.TimeScalePlayer = 0;
+            yield return new WaitForSeconds(duration);
+            Constants.TimeScalePlayer = 1;
             Destroy(gameObject);
         }
     }

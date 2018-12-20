@@ -8,7 +8,7 @@ using UnityEngine;
 public class PlayerMovementDuringHook : PlayerMovement {
 
     //La positon du grappin relativement a son père
-    Vector3 originRelative;
+    Vector3 originRelative = Vector3.zero;
     Transform hook;
     Context cont;
 

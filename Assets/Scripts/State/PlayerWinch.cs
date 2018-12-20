@@ -33,7 +33,7 @@ public class PlayerWinch : State
     public override void EndState()
     {
         line.SetPosition(0, hook.position);
-        shield.GetComponent<BoxCollider>().enabled = false;
+        shield.GetComponent<Shield>().IsWinching = false;
     }
 
     public override void NextState()
@@ -44,7 +44,7 @@ public class PlayerWinch : State
     public override void StartState()
     {
         origin = character.transform.position;
-        shield.GetComponent<BoxCollider>().enabled = true;
+        shield.GetComponent<Shield>().IsWinching = true;
     }
 
     public override void UpdateState()

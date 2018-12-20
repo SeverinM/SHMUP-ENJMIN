@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 54001193847671162}
   m_Layer: 0
   m_Name: Ennemy
-  m_TagString: Untagged
+  m_TagString: Ennemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1561519513433908}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.41, y: 4.15, z: 4.24}
+  m_LocalPosition: {x: 4.3, y: 0, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -126,6 +126,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   mass: 3
+  recoveryMat: {fileID: 2100000, guid: 3615e864792955a4a912eda2c4bbddf0, type: 2}
+  life: 3
   HP: 0
   range: 2
   shootPeriod: 2
