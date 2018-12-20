@@ -2,17 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Input gérés par la manette
+/// </summary>
 public class ControllerInput : BaseInput {
 
     bool wasDown = false;
+    //Le joystick gauche n'est pas touché ?
     bool neutral = true;
 
+    //Valeurs x / y du joystick gauche
     float xValue;
     float yValue;
 
+    //Valeurs x / y du joystick droit
     float sinValue;
     float cosValue;
 
+    //Valeur d'appui des deux gachettes , uniquement gauche enfoncé = -1 , uniquement droite enfoncé = 1 , aucune enfoncé ou les deux enfoncés = 0
     float trigger;
 
     public override void UpdateInput()

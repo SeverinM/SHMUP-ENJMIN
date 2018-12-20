@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Cette classe contient un groupe de gameobject et peut etre vu comme un ensemble de "couche" , il est possible de configurer le comportement selon si la couche est en premier plan ou non
+/// </summary>
 public abstract class Layers : MonoBehaviour {
 
     protected List<BaseInput> refInput = new List<BaseInput>();

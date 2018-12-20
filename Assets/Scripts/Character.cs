@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Un objet character PEUT avoir des etats , agissant comme une machine d'etat
+/// </summary>
 public abstract class Character : MonoBehaviour {
 
     public delegate void collDelegate(Collider coll);

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
@@ -10,6 +10,17 @@ public class Player : Character
     {
         Dash,
         Normal
+    }
+
+    [SerializeField]
+    Transform shield;
+
+    public Transform Shield
+    {
+        get
+        {
+            return shield;
+        }
     }
 
     [SerializeField]
@@ -34,7 +45,11 @@ public class Player : Character
 
     void Start()
     {
-        actualState = new PlayerMovement(this);
+        Context ctx = new Context();
+        ctx.SetInDictionary("Mode", mode);
+        ctx.SetInDictionary("Hook", hook);
+        ctx.SetInDictionary("Shield", shield);
+        actualState = new PlayerMovement(this, ctx);
     }
 
     new void Update()

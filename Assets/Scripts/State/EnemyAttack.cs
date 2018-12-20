@@ -2,6 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// Each enemy can shoot the player according to a shoot period
+/// </summary>
 public class EnemyAttack : State
 {
     private Enemy enemy;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class Constants{
 
-    static float timeScalePlayer;
+    static float timeScalePlayer = 1;
     public static float TimeScalePlayer
     {
         get
@@ -18,7 +18,7 @@ public static class Constants{
         }
     }
 
-    static float timeScaleEnnemies;
+    static float timeScaleEnnemies = 1;
     public static float TimeScaleEnnemies
     {
         get

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Input gérés par le clavier
+/// </summary>
 public class KeyBoardInput : BaseInput {
     bool wasDown = false;
     Vector2 movements = Vector2.zero;

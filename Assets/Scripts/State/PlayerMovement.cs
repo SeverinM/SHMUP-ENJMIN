@@ -3,7 +3,7 @@ using System.Collections;
 
 
 /// <summary>
-/// Etat initial du joueur , il peut se deplacer librement et orienter son perso comme il le souhaite
+/// Etat "Idle" du joueur , il peut se deplacer librement et orienter son perso comme il le souhaite
 /// C'est le seul etat etant exclusif au joueur
 /// </summary>
 public class PlayerMovement : State
@@ -12,16 +12,16 @@ public class PlayerMovement : State
     Player.MovementMode mode;
     Transform hook;
     Vector3 origin;
+    Context cont;
 
     protected float dashDistance = 2f;
 
-    public PlayerMovement(Character character) : base(character)
+    public PlayerMovement(Character character, Context ctx) : base(character)
     {
+        cont = ctx;
         direction = new Vector2();
-
-        //Plante si ce n'est pas un player , attention
-        mode = ((Player)character).Mode;
-        hook = ((Player)character).Hook;
+        mode = ctx.ValuesOrDefault<Player.MovementMode>("Mode", Player.MovementMode.Normal);
+        hook = ctx.ValuesOrDefault<Transform>("Hook", character.transform);
         origin = hook.localPosition;
         hook.forward = character.transform.forward;
     }
@@ -83,6 +83,8 @@ public class PlayerMovement : State
         }
     }
 
+    //TODO : trouver meilleur solution
+    //On force le hook a conserver la meme position et rotation locale pour eviter que ce soit desaxé
     public override void UpdateState()
     {
         hook.forward = character.transform.forward;
@@ -91,6 +93,6 @@ public class PlayerMovement : State
 
     public override void NextState()
     {
-        character.SetState(new PlayerShoot(character, hook));
+        character.SetState(new PlayerShoot(character, cont));
     }
 }

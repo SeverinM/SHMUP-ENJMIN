@@ -72,7 +72,6 @@ public class MovementEnemy : State
 
     public void TriggerEnter(Collider coll)
     {
-
         if (!state.Equals(MovementState.START)) // If enemy is not in start phase, then you can follow the player
         {
             if (coll.gameObject.tag == "FollowParent")
@@ -80,7 +79,6 @@ public class MovementEnemy : State
                 character.SetState(new MovementEnemy(character, characters, player, coll.transform.parent, MovementState.NORMAL));
             }
         }
-
     }
 
     public override void UpdateState()
