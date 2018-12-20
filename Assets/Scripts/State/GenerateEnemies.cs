@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// The generators will Instanciate ennemies in the level according to a period
+/// </summary>
 public class GenerateEnemies : State
 {
     private Generator generator;
@@ -36,20 +39,15 @@ public class GenerateEnemies : State
 
     public override void UpdateState()
     {
-        // Generate enemies according to the time period
-        if (lastTime < Time.time)
+        if (lastTime < Time.time) // Generate enemies according to the time period
         {
             lastTime += generator.period;
 
             if (generator.waves > 0 || generator.waves == -1)
             {
-
                 level.Instanciate(generator.enemyPrefab, character.transform.position);
-
                 generator.waves--;
             }
-
         }
-
     }
 }

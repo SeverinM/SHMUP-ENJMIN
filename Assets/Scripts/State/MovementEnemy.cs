@@ -8,7 +8,8 @@ public class MovementEnemy : State
         START,
         NORMAL,
         ESCAPE,
-        LOOP
+        LOOP,
+        RANDOM_LOOP
     }
 
     Transform trsf;
@@ -16,22 +17,33 @@ public class MovementEnemy : State
     Queue<Vector3> positions;
     GameObject player;
     Enemy enemy;
+    List<GameObject> characters;
 
     MovementState state;
 
     //On peut suivre une position fixe ou en suivant un transform
-    public MovementEnemy(Character chara, GameObject player, Transform trsf, MovementState state) : base(chara)
+    public MovementEnemy(Character chara, List<GameObject> characters, GameObject player, Transform trsf, MovementState state) : base(chara)
     {
         this.trsf = trsf;
         this.player = player;
         enemy = character.GetComponent<Enemy>();
+        this.characters = characters;
     }
 
-    public MovementEnemy(Character chara, GameObject player, Queue<Vector3> allPos, MovementState state) : base(chara)
+    // Random movement position
+    public MovementEnemy(Character chara, List<GameObject> characters, GameObject player, MovementState state) : base(chara)
+    {
+        this.player = player;
+        enemy = character.GetComponent<Enemy>();
+        this.characters = characters;
+    }
+
+    public MovementEnemy(Character chara, List<GameObject> characters, GameObject player, Queue<Vector3> allPos, MovementState state) : base(chara)
     {
         positions = allPos;
         this.state = state;
         this.player = player;
+        this.characters = characters;
         Vector3 vecInput = positions.Dequeue();
         if (state == MovementState.LOOP)
         {
@@ -60,20 +72,20 @@ public class MovementEnemy : State
 
     public void TriggerEnter(Collider coll)
     {
-
         if (!state.Equals(MovementState.START)) // If enemy is not in start phase, then you can follow the player
         {
             if (coll.gameObject.tag == "FollowParent")
             {
-                character.SetState(new MovementEnemy(character, player, coll.transform.parent, MovementState.NORMAL));
+                character.SetState(new MovementEnemy(character, characters, player, coll.transform.parent, MovementState.NORMAL));
             }
         }
-
     }
 
     public override void UpdateState()
     {
         Vector3 deltaPosition;
+
+        Separate();
 
         if (trsf != null)
         {
@@ -82,7 +94,7 @@ public class MovementEnemy : State
             // If the enemies have reached the player, they enter the Movement Attack phase
             if (Vector3.Distance(trsf.position,character.transform.position) <= Mathf.Abs(character.transform.position.y - trsf.position.y) + enemy.range)
             {
-                character.SetState(new EnemyAttack(character, player));
+                character.SetState(new EnemyAttack(character, characters, player));
             }
         }
         else
@@ -93,15 +105,49 @@ public class MovementEnemy : State
             {
                 if (positions.Count > 0)
                 {
-                    character.SetState(new MovementEnemy(character, player, positions, MovementState.NORMAL));
+                    character.SetState(new MovementEnemy(character, characters, player, positions, MovementState.NORMAL));
                 }
                 else  // After Start movement state, the enemies seek the player
                 {
-                    character.SetState(new MovementEnemy(character, player, player.transform, MovementState.NORMAL));
+                    character.SetState(new MovementEnemy(character, characters, player, player.transform, MovementState.NORMAL));
                 }
             }
         }
       
         character.Move(deltaPosition.normalized);
+    }
+
+    void Separate()
+    {
+        float desiredseparation = 3;
+        Vector3 sum = new Vector3();
+        int count = 0;
+
+        if (characters != null)
+        {
+            foreach (GameObject other in characters)
+            {
+                float d = Vector3.Distance(character.transform.position, other.transform.position);
+                if ((d > 0) && (d < desiredseparation))
+                {
+                    Vector3 diff = character.transform.position - other.transform.position;
+                    diff.Normalize();
+                    diff /= d;
+                    sum += diff;
+                    count++;
+
+                }
+            }
+
+            if (count > 0)
+            {
+                sum /= count;
+                sum.Normalize();
+                sum *= 5f;
+                Vector3 steer = sum - character.GetComponent<Rigidbody>().velocity;
+                // steer.limit(maxforce);
+                character.GetComponent<Rigidbody>().AddForce(steer);
+            }
+        }
     }
 }

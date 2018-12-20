@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
+/// <summary>
+/// Each enemy can shoot the player according to a shoot period
+/// </summary>
 public class EnemyAttack : State
 {
     private Enemy enemy;
@@ -9,14 +13,16 @@ public class EnemyAttack : State
     private float shoots = 0;
 
     private GameObject player;
+    private List<GameObject> characters;
 
-    public EnemyAttack(Character character, GameObject player) : base(character)
+    public EnemyAttack(Character character, List<GameObject> characters, GameObject player) : base(character)
     {
         enemy = character.GetComponent<Enemy>();
         this.player = player;
         lastTime = Time.time;
+        this.characters = characters;
     }
-
+    
     public override void EndState()
     {
         base.EndState();
@@ -29,7 +35,7 @@ public class EnemyAttack : State
 
     public override void NextState()
     {
-        character.SetState(new MovementEnemy(character, player, player.transform, MovementEnemy.MovementState.NORMAL));
+        character.SetState(new MovementEnemy(character, characters, player, player.transform, MovementEnemy.MovementState.NORMAL));
     }
 
     public override void StartState()

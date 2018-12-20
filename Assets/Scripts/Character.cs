@@ -16,7 +16,7 @@ public abstract class Character : MonoBehaviour {
 
     [SerializeField]
     protected float mass = 3.0f;                
-    protected float hitForce = 2.5f;            
+    protected float hitForce = 25.5f;            
     protected Vector3 impact = Vector3.zero; 
 
     [SerializeField]
