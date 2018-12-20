@@ -32,6 +32,9 @@ public class ControllerInput : BaseInput {
 
         trigger = Input.GetAxis("Triggers");
 
+        xValue = Mathf.Clamp(xValue, -0.999f, 0.9999f);
+        yValue = Mathf.Clamp(yValue, -0.999F, 0.9999f);
+
         if ((xValue != 0 || yValue != 0) && BaseInput.IsFree(Actions.AllMovement,this))
         {
             if (neutral)
@@ -46,10 +49,10 @@ public class ControllerInput : BaseInput {
 
         else
         {
-            if (!neutral && BaseInput.IsFree(Actions.AllMovement, this))
+            if (!neutral && BaseInput.IsFree(Actions.AllMovement, this)) 
             {
                 neutral = true;
-                RaiseEvent(TypeAction.Up, Actions.AllMovement, Vector2.zero);
+                RaiseEvent(TypeAction.Up, Actions.AllMovement, new Vector2(xValue, yValue));
                 BaseInput.SetLockState(Actions.AllMovement, null);
             }
         }

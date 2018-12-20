@@ -54,8 +54,9 @@ public class PlayerMovement : State
             }
 
             //rotation stick gauche
-            if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.AllMovement))
+            if (typeAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.AllMovement))
             {
+                val.Normalize();
                 float value = Mathf.Acos(val.x) * Mathf.Rad2Deg;
                 if (val.y > 0)
                 {
@@ -63,6 +64,7 @@ public class PlayerMovement : State
                 }
                 value += 90;
                 character.transform.eulerAngles = new Vector3(0, value, 0);
+                character.transform.position += character.transform.forward * dashDistance;
             }
         }
 
