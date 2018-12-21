@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 65437895645053864}
   - component: {fileID: 114938182685806996}
   - component: {fileID: 54933741693269850}
-  - component: {fileID: 114093496735508838}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -367,17 +366,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114093496735508838
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1380677440080142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9e68d82a59cd4c459a4825b8a66b115, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114131631155788512
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -416,8 +404,13 @@ MonoBehaviour:
   mass: 3
   recoveryMat: {fileID: 2100000, guid: 3615e864792955a4a912eda2c4bbddf0, type: 2}
   life: 3
-  shield: {fileID: 4181975481634658}
   mode: 1
+  distanceDash: 2
+  hookSpeed: 0.7
+  rangeHook: 10
+  speedPull: 10
+  coeffHook: 0.1
+  shield: {fileID: 4181975481634658}
   hook: {fileID: 4103882718358818}
 --- !u!120 &120035746370447866
 LineRenderer:

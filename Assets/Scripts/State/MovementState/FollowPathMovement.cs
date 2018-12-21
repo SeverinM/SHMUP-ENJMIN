@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 /// <summary>
-/// Allows a character to follow a path of points
+/// Permet à un personnage de suivre un chemin , un etat correspond a un seul chemin , pour en faire plusieurs il faut donc repasser dans cet etat
 /// </summary>
 public class FollowPathMovement : State
 {
@@ -20,11 +20,14 @@ public class FollowPathMovement : State
     {
         positions = allPos;
         Vector3 vecInput = positions.Dequeue();
+        //Si on loop on replace à la fin de la queue
         if (loop)
         {
             positions.Enqueue(vecInput);
         }
         targetPosition = character.transform.position + vecInput;
+
+        //On l'aligne sur l'axe y par rapport au joueur 
         targetPosition = new Vector3(targetPosition.x, character.transform.position.y, targetPosition.z);
         this.loop = loop;
         this.level = level;
