@@ -82,4 +82,6 @@ public abstract class State
     /// <param name="acts">Quel action ? </param>
     /// <param name="val">Quel valeur ?  (utilisé uniquement dans certains cas comme la souris ou les joystick)</param>
     public virtual void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val) { }
+
+
 }

@@ -13,14 +13,16 @@ public class EnemyAttack : State
     private float shoots = 0;
 
     private GameObject player;
-    private List<GameObject> characters;
 
-    public EnemyAttack(Character character, List<GameObject> characters, GameObject player) : base(character)
+    private Level level;
+
+    public EnemyAttack(Character character, Level level, GameObject player) : base(character)
     {
         enemy = character.GetComponent<Enemy>();
         this.player = player;
+        this.level = level;
+
         lastTime = Time.time;
-        this.characters = characters;
     }
     
     public override void EndState()
@@ -35,7 +37,7 @@ public class EnemyAttack : State
 
     public override void NextState()
     {
-        character.SetState(new MovementEnemy(character, characters, player, player.transform, MovementEnemy.MovementState.NORMAL));
+        
     }
 
     public override void StartState()
@@ -53,7 +55,8 @@ public class EnemyAttack : State
             enemy.Shoot();
             shoots++;
 
-            if (shoots == enemy.shootAmount)
+            Debug.Log(shoots);
+            if (shoots >= enemy.shootAmount)
             {
                 NextState();
             }

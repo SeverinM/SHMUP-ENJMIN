@@ -19,8 +19,7 @@ public class Bullet : MonoBehaviour {
             transform.Translate(transform.forward * Time.deltaTime * speed);
         } else
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
-
     }
 }

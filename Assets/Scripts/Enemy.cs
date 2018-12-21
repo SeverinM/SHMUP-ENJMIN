@@ -22,13 +22,14 @@ public class Enemy : Character {
     public float shootRadius = 1f;
 
     public GameObject player;
+    public Level level;
 
     [SerializeField]
     private GameObject bulletPrefab;
 
     [SerializeField]
     private EnemyMovementType movementType;
-    internal List<GameObject> characters;
+
 
     private void Start()
     {
@@ -40,6 +41,9 @@ public class Enemy : Character {
             case EnemyMovementType.FOLLOW_PATH:
                 FollowPath();
                 break;
+            case EnemyMovementType.FOLLOW_RANDOM_PATH:
+                FollowRandomPath();
+                break;
         }
 
     }
@@ -50,6 +54,11 @@ public class Enemy : Character {
         {
             StartCoroutine(Freeze(0.1f));
         }
+
+        if (other.tag == "Hook")
+        {
+            SetState(null);
+        }
     }
 
     IEnumerator Freeze(float duration = 1)
@@ -58,11 +67,7 @@ public class Enemy : Character {
         Constants.TimeScalePlayer = 0;
         yield return new WaitForSeconds(duration);
         Constants.TimeScalePlayer = 1;
-        if (characters.Contains(gameObject))
-        {
-            characters.Remove(gameObject);
-            Destroy(gameObject);
-        }
+        level.Remove(gameObject);
     }
 
     private void FollowPath()
@@ -72,12 +77,12 @@ public class Enemy : Character {
         allPos.Enqueue(new Vector3(-2, 0, -2));
         allPos.Enqueue(new Vector3(2, 0, -2));
 
-        SetState(new MovementEnemy(this, characters, player, allPos, MovementEnemy.MovementState.START));
+        SetState(new FollowPathMovement(this, level, allPos, false));
     }
 
     private void FollowRandomPath()
     {
-        SetState(new MovementEnemy(this, characters, player, MovementEnemy.MovementState.RANDOM_LOOP));
+        SetState(new MovementEnemy(this, level, player.transform));
     }
 
     public void Shoot()
@@ -91,12 +96,11 @@ public class Enemy : Character {
 
             angle = angle + ((2 * Mathf.PI) / maxBullets);
             Instantiate(bulletPrefab, new Vector3(x, 0, y), Quaternion.AngleAxis( angle * Mathf.Rad2Deg, new Vector3(0,1,0)));
-
         }
     }
 
     private void FollowGameObject()
     {
-        SetState(new MovementEnemy(this, characters, player, player.transform, MovementEnemy.MovementState.START));
+        SetState(new MovementEnemy(this, level, player.transform));
     }
 }

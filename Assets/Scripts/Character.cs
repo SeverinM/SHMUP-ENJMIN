@@ -43,7 +43,6 @@ public abstract class Character : MonoBehaviour {
         }
     }
 
-
     private void OnTriggerEnter(Collider other)
     {
         if (OnTriggerEnterChar != null)
@@ -53,7 +52,7 @@ public abstract class Character : MonoBehaviour {
     protected void Update()
     {
         if (actualState != null)
-        {
+        { 
             actualState.UpdateState();
         }
     }

@@ -10,7 +10,10 @@ public class Level : Layers {
     [SerializeField]
     List<GameObject> generators;
 
-    private List<GameObject> characters = new List<GameObject>();
+    public List<GameObject> characters = new List<GameObject>();
+
+    internal Vector2 maxBounds = new Vector2(8,8);
+    internal Vector2 minBounds = new Vector2(-8,-8);
 
     public override void OnFocusGet()
     {      
@@ -42,8 +45,8 @@ public class Level : Layers {
     public void Instanciate(GameObject character, Vector3 position)
     {
         GameObject toAdd = Instantiate(character, position, Quaternion.identity);
+        toAdd.GetComponent<Enemy>().level = this;
         toAdd.GetComponent<Enemy>().player = player.gameObject;
-        toAdd.GetComponent<Enemy>().characters = characters;
         characters.Add(toAdd);
     }
 
