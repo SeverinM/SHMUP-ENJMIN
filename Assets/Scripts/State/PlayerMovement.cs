@@ -12,19 +12,17 @@ public class PlayerMovement : State
     Player.MovementMode mode;
     Transform hook;
     Vector3 origin;
-    Context cont;
 
     protected float dashDistance;
 
-    public PlayerMovement(Character character, Context ctx) : base(character)
+    public PlayerMovement(Character character) : base(character)
     {
-        cont = ctx;
         direction = new Vector2();
-        mode = ctx.ValuesOrDefault<Player.MovementMode>("Mode", Player.MovementMode.Normal);
-        hook = ctx.ValuesOrDefault<Transform>("Hook", character.transform);
+        mode = character.Context.ValuesOrDefault<Player.MovementMode>("Mode", Player.MovementMode.Normal);
+        hook = character.Context.ValuesOrDefault<Transform>("Hook", character.transform);
         origin = hook.localPosition;
         hook.forward = character.transform.forward;
-        dashDistance = ctx.ValuesOrDefault<float>("RangeDash", 10);
+        dashDistance = character.Context.ValuesOrDefault<float>("RangeDash", 10);
     }
 
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)
@@ -99,6 +97,6 @@ public class PlayerMovement : State
 
     public override void NextState()
     {
-        character.SetState(new PlayerShoot(character, cont));
+        character.SetState(new PlayerShoot(character));
     }
 }

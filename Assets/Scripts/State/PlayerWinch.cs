@@ -5,6 +5,7 @@ public class PlayerWinch : State
 {
     Transform hook;
     Transform shield;
+    Transform target;
     
     //Position du vaisseau AVANT d'etre tracté
     Vector3 origin;
@@ -17,29 +18,36 @@ public class PlayerWinch : State
 
     //Ligne creant le lien entre vaisseau et hook
     LineRenderer line;
-
-    Context cont;
     Vector3 copy;
 
-    public PlayerWinch(Character character,Context ctx) : base(character)
+    public enum HookMode
     {
-        cont = ctx;
-        hook = ctx.ValuesOrDefault<Transform>("Hook", character.transform);
-        shield = ctx.ValuesOrDefault<Transform>("Shield", character.transform);
+        Pull,
+        Winch
+    }
+    HookMode currentMode;
+
+    public PlayerWinch(Character character) : base(character)
+    {
+        hook = character.Context.ValuesOrDefault<Transform>("Hook", character.transform);
+        shield = character.Context.ValuesOrDefault<Transform>("Shield", character.transform);
         line = hook.GetComponent<LineRenderer>();
-        positionRelative = ctx.ValuesOrDefault<Vector3>("Origin", Vector3.forward);
-        speedTravel = ctx.ValuesOrDefault<float>("SpeedWinch", 10);
+        positionRelative = character.Context.ValuesOrDefault<Vector3>("Origin", Vector3.forward);
+        speedTravel = character.Context.ValuesOrDefault<float>("SpeedWinch", 10);
+        currentMode = character.Context.ValuesOrDefault<HookMode>("HookMode", HookMode.Winch);
+        target = character.Context.ValuesOrDefault<Transform>("Target", target);
     }
 
     public override void EndState()
     {
         line.SetPosition(0, hook.position);
         shield.GetComponent<Shield>().IsWinching = false;
+        character.Context.Remove("Target");
     }
 
     public override void NextState()
     {
-        character.SetState(new PlayerMovement(character,cont));
+        character.SetState(new PlayerMovement(character));
     }
 
     public override void StartState()
@@ -49,16 +57,24 @@ public class PlayerWinch : State
     }
 
     public override void UpdateState()
-    {       
-        copy = hook.transform.position;
+    {
+        if (currentMode == HookMode.Winch)
+        {
+            copy = hook.transform.position;
+            character.transform.position += character.transform.forward * Time.deltaTime * character.GetScale() * speedTravel;
+            hook.transform.position = copy;
+        }
 
-        character.transform.position += character.transform.forward * Time.deltaTime * character.GetScale() * speedTravel;
+        if (currentMode == HookMode.Pull)
+        {
+            target.transform.position -= character.transform.forward * Time.deltaTime * character.GetScale() * speedTravel;
+            hook.transform.position -= character.transform.forward * Time.deltaTime * character.GetScale() * speedTravel;
+        }
 
         line.SetPosition(0, hook.position);
         line.SetPosition(1, character.transform.position);
 
         float distanceToHook = Vector3.Distance(character.transform.position, hook.transform.position);
-        hook.transform.position = copy;
 
         //Si la distance hook / vaisseau est inferieur a celle d'origine retourner a l'etat Idle
         if (distanceToHook <= positionRelative.magnitude)

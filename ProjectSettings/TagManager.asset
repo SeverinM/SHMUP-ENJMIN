@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Ennemy
   - Bullet
+  - FollowParent
+  - Shield
+  - Hook
+  - Pullable
+  - Winchable
   layers:
   - Default
   - TransparentFX

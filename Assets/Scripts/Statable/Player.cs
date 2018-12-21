@@ -69,16 +69,15 @@ public class Player : Character
 
     void Start()
     {
-        Context ctx = new Context();
-        ctx.SetInDictionary("Mode", mode);
-        ctx.SetInDictionary("Hook", hook);
-        ctx.SetInDictionary("Shield", shield);
-        ctx.SetInDictionary("SpeedWinch", speedPull);
-        ctx.SetInDictionary("SpeedHook", hookSpeed);
-        ctx.SetInDictionary("RangeDash", distanceDash);
-        ctx.SetInDictionary("CoeffHook", coeffHook);
-        ctx.SetInDictionary("RangeDash", rangeHook);
-        actualState = new PlayerMovement(this, ctx);
+        context.SetInDictionary("Mode", mode);
+        context.SetInDictionary("Hook", hook);
+        context.SetInDictionary("Shield", shield);
+        context.SetInDictionary("SpeedWinch", speedPull);
+        context.SetInDictionary("SpeedHook", hookSpeed);
+        context.SetInDictionary("RangeDash", distanceDash);
+        context.SetInDictionary("CoeffHook", coeffHook);
+        context.SetInDictionary("RangeDash", rangeHook);
+        actualState = new PlayerMovement(this);
     }
 
     new void Update()
@@ -99,7 +98,8 @@ public class Player : Character
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-        if (other.gameObject.tag == "Ennemy" || other.gameObject.tag == "Bullet")
+        //Le joueur s'est fait touché par un ennemi
+        if (other.GetComponent<Enemy>() != null || other.gameObject.tag == "Bullet")
         {
             if (other.gameObject.tag == "Bullet")
             {

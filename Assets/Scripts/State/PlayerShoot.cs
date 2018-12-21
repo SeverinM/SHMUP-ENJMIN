@@ -12,14 +12,12 @@ public class PlayerShoot : State
     float maxDistance;
     float speedTravel;
     LineRenderer line;
-    Context cont;
 
-    public PlayerShoot(Character character,Context ctx) : base(character)
+    public PlayerShoot(Character character) : base(character)
     {
-        cont = ctx;
-        hook = ctx.ValuesOrDefault<Transform>("Hook", character.transform);
-        speedTravel = ctx.ValuesOrDefault<float>("SpeedHook", 0.7f);
-        maxDistance = ctx.ValuesOrDefault<float>("RangeHook", 10);
+        hook = character.Context.ValuesOrDefault<Transform>("Hook", character.transform);
+        speedTravel = character.Context.ValuesOrDefault<float>("SpeedHook", 0.7f);
+        maxDistance = character.Context.ValuesOrDefault<float>("RangeHook", 10);
         line = hook.GetComponent<LineRenderer>();
     }
 
@@ -35,14 +33,14 @@ public class PlayerShoot : State
             hook.transform.localPosition = originRelative;
             line.SetPosition(0, hook.transform.position);
             line.SetPosition(1, hook.transform.position);
-            character.SetState(new PlayerMovement(character, cont));
+            character.SetState(new PlayerMovement(character));
         }
     }
 
     public override void NextState()
     {
-        cont.SetInDictionary("Origin", originRelative);
-        character.SetState(new PlayerMovementDuringHook(character,cont));
+        character.Context.SetInDictionary("Origin", originRelative);
+        character.SetState(new PlayerMovementDuringHook(character));
     }
 
     public override void StartState()
@@ -64,7 +62,7 @@ public class PlayerShoot : State
 
             line.SetPosition(0, hook.transform.position);
             line.SetPosition(1, hook.transform.position);
-            character.SetState(new PlayerMovement(character,cont));
+            character.SetState(new PlayerMovement(character));
         }
     }
 }

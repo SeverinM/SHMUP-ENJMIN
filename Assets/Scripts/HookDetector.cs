@@ -11,9 +11,18 @@ public class HookDetector : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Success on Hook
-        if (other.tag == "Hookable") 
+        if (other.tag == "Pullable") 
         {
             GetComponent<LineRenderer>().SetPosition(0, transform.position);
+            player.Context.SetInDictionary("HookMode", PlayerWinch.HookMode.Pull);
+            player.Context.SetInDictionary("Target", other.transform);
+            player.ActualState.NextState();
+        }
+
+        if (other.tag == "Winchable")
+        {
+            GetComponent<LineRenderer>().SetPosition(0, transform.position);
+            player.Context.SetInDictionary("HookMode", PlayerWinch.HookMode.Winch);
             player.ActualState.NextState();
         }
     }

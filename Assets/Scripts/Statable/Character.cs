@@ -26,6 +26,15 @@ public abstract class Character : MonoBehaviour {
     [Tooltip("Material de substitution pendant que le personnage est en recovery (ATTENTION : peut bugger s'il y a plusieurs materials)")]
     Material recoveryMat;
 
+    protected Context context = new Context();
+    public Context Context
+    {
+        get
+        {
+            return context;
+        }
+    }
+
     [SerializeField]
     [Tooltip("Nombre de point de vie du personnage , un nombre negatif equivaut a 1")]
     protected int life = 3;

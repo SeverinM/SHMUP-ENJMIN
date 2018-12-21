@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 4020040}
   m_Layer: 0
   m_Name: Obstacle
-  m_TagString: Hookable
+  m_TagString: Winchable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -448,7 +448,7 @@ GameObject:
   - component: {fileID: 784524586}
   m_Layer: 0
   m_Name: Obstacle (1)
-  m_TagString: Hookable
+  m_TagString: Pullable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -765,7 +765,7 @@ GameObject:
   - component: {fileID: 1579496665}
   m_Layer: 0
   m_Name: Obstacle (2)
-  m_TagString: Hookable
+  m_TagString: Pullable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
