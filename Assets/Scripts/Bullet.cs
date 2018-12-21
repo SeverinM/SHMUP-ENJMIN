@@ -16,7 +16,6 @@ public class Bullet : MonoBehaviour {
         if (lastTime < lasting)
         {
             lastTime++;
-            transform.Translate(transform.forward * Time.deltaTime * speed);
         } else
         {
             Destroy(gameObject);

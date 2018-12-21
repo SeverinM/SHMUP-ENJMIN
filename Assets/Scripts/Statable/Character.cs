@@ -38,6 +38,12 @@ public abstract class Character : MonoBehaviour {
     [SerializeField]
     [Tooltip("Nombre de point de vie du personnage , un nombre negatif equivaut a 1")]
     protected int life = 3;
+
+    internal void Rotate(GameObject player)
+    {
+        transform.LookAt(player.transform);
+    }
+
     public int Life
     {
         get

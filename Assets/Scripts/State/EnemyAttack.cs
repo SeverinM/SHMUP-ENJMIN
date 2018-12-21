@@ -12,14 +12,11 @@ public class EnemyAttack : State
     private float lastTime;
     private float shoots = 0;
 
-    private GameObject player;
-
     private Level level;
 
-    public EnemyAttack(Character character, Level level, GameObject player) : base(character)
+    public EnemyAttack(Character character, Level level) : base(character)
     {
         enemy = character.GetComponent<Enemy>();
-        this.player = player;
         this.level = level;
 
         lastTime = Time.time;
@@ -52,6 +49,7 @@ public class EnemyAttack : State
         {
             lastTime += enemy.shootPeriod;
 
+            enemy.Rotate(level.Player);
             enemy.Shoot();
             shoots++;
 

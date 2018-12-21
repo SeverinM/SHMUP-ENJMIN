@@ -21,6 +21,7 @@ public class EnemyMovement : State
     {
         this.trsf = trsf;
         this.level = level;
+        this.player = level.Player;
         enemy = character.GetComponent<Enemy>();
     }
 
@@ -36,11 +37,12 @@ public class EnemyMovement : State
         // If the enemies have reached the player, they enter the Movement Attack phase
         if (Vector3.Distance(trsf.position, character.transform.position) <= Mathf.Abs(character.transform.position.y - trsf.position.y) + enemy.range)
         {
-            character.SetState(new EnemyAttack(character, level, player));
+            character.SetState(new EnemyAttack(character, level));
         }
 
         Separate(level.characters);
 
+        character.Rotate(level.Player);
         character.Move(deltaPosition.normalized);
     }
 

@@ -7,6 +7,9 @@ public class Level : Layers {
     [SerializeField]
     protected Player player;
 
+    public GameObject Player;
+
+
     [SerializeField]
     List<GameObject> generators;
 
@@ -46,7 +49,7 @@ public class Level : Layers {
     {
         GameObject toAdd = Instantiate(character, position, Quaternion.identity);
         toAdd.GetComponent<Enemy>().level = this;
-        toAdd.GetComponent<Enemy>().player = player.gameObject;
+        toAdd.GetComponent<Enemy>().player = Player;
         characters.Add(toAdd);
     }
 
