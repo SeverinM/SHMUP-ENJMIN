@@ -36,11 +36,12 @@ public class PlayerMovement : State
             if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.AllMovement))
             {
                 direction.Set(val.x, val.y);
+                direction *= character.GetScale();
                 character.Move(direction);
             }
 
             //rotation stick droit
-            if (typeAct.Equals(BaseInput.TypeAction.Mouse) && acts.Equals(BaseInput.Actions.RotateAbsolute))
+            if (typeAct.Equals(BaseInput.TypeAction.Mouse) && acts.Equals(BaseInput.Actions.RotateAbsolute) && character.GetScale() > 0)
             {
                 character.transform.eulerAngles = new Vector3(0, val.x, 0);
             }
@@ -49,13 +50,13 @@ public class PlayerMovement : State
         //Mode dash
         if (mode.Equals(Player.MovementMode.Dash))
         {
-            if (typeAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Dash))
+            if (typeAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Dash) && character.GetScale() > 0)
             {
                 character.transform.position += character.transform.forward * dashDistance;
             }
 
             //rotation stick gauche
-            if (typeAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.AllMovement))
+            if (typeAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.AllMovement) && character.GetScale() > 0)
             {
                 val.Normalize();
                 float value = Mathf.Acos(val.x) * Mathf.Rad2Deg;
@@ -76,7 +77,7 @@ public class PlayerMovement : State
             NextState();
         }
 
-        if (typeAct.Equals(BaseInput.TypeAction.Mouse) && acts.Equals(BaseInput.Actions.Rotate))
+        if (typeAct.Equals(BaseInput.TypeAction.Mouse) && acts.Equals(BaseInput.Actions.Rotate) && character.GetScale() > 0)
         {
             Vector3 objectPos = Camera.main.WorldToScreenPoint(character.transform.position);
             Vector2 mousePos = new Vector2();

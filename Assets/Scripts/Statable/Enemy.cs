@@ -107,4 +107,9 @@ public class Enemy : Character {
     {
         SetState(new MovementEnemy(this, characters, player, player.transform, MovementEnemy.MovementState.START));
     }
+
+    public override float GetScale()
+    {
+        return Constants.TimeScaleEnnemies;
+    }
 }

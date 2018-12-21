@@ -14,5 +14,10 @@ public class Generator : Character {
     public float period = 1f;             // Period of time to generate enemy
     public float radiusSize = 4f;         // Period of time to generate enemy
 
+    public override float GetScale()
+    {
+        return 1;
+    }
+
 
 }

@@ -44,7 +44,7 @@ public class PlayerMovementDuringHook : PlayerMovement {
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)
     {
         //Le joueur va beaucoup moins vite que dans PlayerMouvement
-        val *= coeff;
+        val *= (coeff * character.GetScale());
         if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.AllMovement))
         {
             direction.Set(val.x, val.y);

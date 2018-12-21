@@ -52,7 +52,7 @@ public class PlayerWinch : State
     {       
         copy = hook.transform.position;
 
-        character.transform.position += character.transform.forward * Time.deltaTime * Constants.TimeScalePlayer * speedTravel;
+        character.transform.position += character.transform.forward * Time.deltaTime * character.GetScale() * speedTravel;
 
         line.SetPosition(0, hook.position);
         line.SetPosition(1, character.transform.position);

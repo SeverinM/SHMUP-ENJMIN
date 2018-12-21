@@ -128,4 +128,9 @@ public class Player : Character
     {
         Debug.Log("Pouf plus de joueur");
     }
+
+    public override float GetScale()
+    {
+        return Constants.TimeScalePlayer;
+    }
 }

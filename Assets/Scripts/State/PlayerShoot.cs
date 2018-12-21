@@ -53,7 +53,7 @@ public class PlayerShoot : State
 
     public override void UpdateState()
     {
-        hook.transform.Translate(hook.forward * speedTravel, Space.World);
+        hook.transform.Translate(hook.forward * speedTravel * character.GetScale(), Space.World);
         
         line.SetPosition(0, hook.transform.position);
         line.SetPosition(1, character.transform.position);

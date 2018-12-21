@@ -104,6 +104,12 @@ public abstract class Character : MonoBehaviour {
     }
 
     /// <summary>
+    /// Chaque sous-classe a son propre timeScale , utilisez de preference un attribut facilement accessible
+    /// </summary>
+    /// <returns></returns>
+    public abstract float GetScale();
+
+    /// <summary>
     /// Pendant un cours instant , change l'aspect du personnage et desactive sa physique
     /// </summary>
     /// <param name="duration"></param>
