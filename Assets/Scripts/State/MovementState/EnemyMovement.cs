@@ -46,6 +46,7 @@ public class EnemyMovement : State
         character.Move(deltaPosition.normalized);
     }
 
+    //Permet de separer les ennemies entre eux pour eviter qu'ils se marchent dessu
     void Separate(List<GameObject> characters)
     {
         float desiredseparation = 3f;

@@ -60,6 +60,7 @@ public class WanderMovement : State
 
     public void TriggerEnter(Collider coll)
     {
+        //L'ennemi est proche du joueur, il va donc commencer a le poursuivre
         if (coll.gameObject.tag == "FollowParent")
         {
             character.SetState(new EnemyMovement(character, level, coll.transform.parent));

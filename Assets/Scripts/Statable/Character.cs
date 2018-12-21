@@ -26,6 +26,9 @@ public abstract class Character : MonoBehaviour {
     [Tooltip("Material de substitution pendant que le personnage est en recovery (ATTENTION : peut bugger s'il y a plusieurs materials)")]
     Material recoveryMat;
 
+    /// <summary>
+    /// Sert a conserver des informations generiques entre les etats quand leur nombre devient important
+    /// </summary>
     protected Context context = new Context();
     public Context Context
     {
