@@ -8,22 +8,23 @@ using UnityEngine;
 public class PlayerMovementDuringHook : PlayerMovement {
 
     //La positon du grappin relativement a son père
-    Vector3 originRelative;
+    Vector3 originRelative = Vector3.zero;
     Transform hook;
-    Context cont;
+    float coeff;
 
-    public PlayerMovementDuringHook(Character chara,Context ctx) : base(chara,ctx)
+    public PlayerMovementDuringHook(Character chara) : base(chara)
     {
-        cont = ctx;
-        originRelative = ctx.ValuesOrDefault<Vector3>("Origin", Vector3.forward);
-        hook = ctx.ValuesOrDefault<Transform>("Hook", character.transform);
+        originRelative = character.Context.ValuesOrDefault<Vector3>("Origin", Vector3.forward);
+        hook = character.Context.ValuesOrDefault<Transform>("Hook", character.transform);
+        coeff = character.Context.ValuesOrDefault<float>("CoeffHook", 0.1f);
+
         //Le hook perd temporairement son statut d'enfant juste pour cet etat
         hook.parent = null;
     }
 
     public override void NextState()
     {
-        character.SetState(new PlayerWinch(character,cont));
+        character.SetState(new PlayerWinch(character));
     }
 
     public override void UpdateState()
@@ -41,7 +42,7 @@ public class PlayerMovementDuringHook : PlayerMovement {
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)
     {
         //Le joueur va beaucoup moins vite que dans PlayerMouvement
-        val /= 10;
+        val *= (coeff * character.GetScale());
         if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.AllMovement))
         {
             direction.Set(val.x, val.y);

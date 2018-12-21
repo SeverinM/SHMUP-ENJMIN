@@ -48,26 +48,33 @@ public class Enemy : Character {
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void StartFreeze()
     {
-        if (other.tag == "Shield")
-        {
-            StartCoroutine(Freeze(0.1f));
-        }
-
-        if (other.tag == "Hook")
-        {
-            SetState(null);
-        }
+        StartCoroutine(Freeze(0.1f));
     }
 
+    /// <summary>
+    /// L'ennemi a subit des degats
+    /// </summary>
+    /// <param name="duration"></param>
+    /// <returns></returns>
     IEnumerator Freeze(float duration = 1)
     {
-        GetComponent<MeshRenderer>().enabled = false;
-        Constants.TimeScalePlayer = 0;
-        yield return new WaitForSeconds(duration);
-        Constants.TimeScalePlayer = 1;
-        level.Remove(gameObject);
+        Life -= 1;
+        if (Life > 0)
+        {
+            StartRecovery(duration * 10);
+        }
+
+        else
+        {
+            GetComponent<Collider>().enabled = false;
+            GetComponent<MeshRenderer>().enabled = false;
+            Constants.TimeScalePlayer = 0;
+            yield return new WaitForSeconds(duration);
+            Constants.TimeScalePlayer = 1;
+            Destroy(gameObject);
+        }
     }
 
     private void FollowPath()
@@ -82,7 +89,7 @@ public class Enemy : Character {
 
     private void FollowRandomPath()
     {
-        SetState(new MovementEnemy(this, level, player.transform));
+        SetState(new EnemyMovement(this, level, player.transform));
     }
 
     public void Shoot()
@@ -101,6 +108,11 @@ public class Enemy : Character {
 
     private void FollowGameObject()
     {
-        SetState(new MovementEnemy(this, level, player.transform));
+        SetState(new EnemyMovement(this, level, player.transform));
+    }
+
+    public override float GetScale()
+    {
+        return Constants.TimeScaleEnnemies;
     }
 }

@@ -37,7 +37,7 @@ public class EnemyAttack : State
 
     public override void NextState()
     {
-        
+        character.SetState(new WanderMovement(character, level));
     }
 
     public override void StartState()
@@ -55,8 +55,7 @@ public class EnemyAttack : State
             enemy.Shoot();
             shoots++;
 
-            Debug.Log(shoots);
-            if (shoots >= enemy.shootAmount)
+            if (shoots == enemy.shootAmount)
             {
                 NextState();
             }

@@ -2,6 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// Allows a character to follow a path of points
+/// </summary>
 public class FollowPathMovement : State
 {
     Queue<Vector3> positions;
@@ -27,11 +30,6 @@ public class FollowPathMovement : State
         this.level = level;
     }
 
-    public override void EndState()
-    {
-        character.OnTriggerEnterChar -= TriggerEnter;
-    }
-
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)
     {
         base.InterpretInput(typeAct, acts, val);
@@ -40,20 +38,6 @@ public class FollowPathMovement : State
     public override void NextState()
     {
         base.NextState();
-    }
-
-    public override void StartState()
-    {
-        //On veut savoir si le personnage touche un certain trigger
-        character.OnTriggerEnterChar += TriggerEnter;
-    }
-
-    public void TriggerEnter(Collider coll)
-    {
-        if (coll.gameObject.tag == "FollowParent")
-        {
-            character.SetState(new MovementEnemy(character, level, coll.transform.parent));
-        }
     }
 
     public override void UpdateState()

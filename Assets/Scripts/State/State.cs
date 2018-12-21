@@ -34,6 +34,11 @@ public class Context
     {
         genericValues[key] = value;
     }
+
+    public void Remove(string key)
+    {
+        genericValues.Remove(key);
+    }
 }
 
 /// <summary>

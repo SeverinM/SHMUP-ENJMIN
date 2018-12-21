@@ -2,6 +2,10 @@
 using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Will choose a random location for the character to go to
+/// If the player is nearby, it will instead start another State to follow the player
+/// </summary>
 public class WanderMovement : State
 {
     private Level level;
@@ -18,7 +22,7 @@ public class WanderMovement : State
 
         NextPosition();
        
-        movement = new MovementEnemy(character, level, nextPosition.transform);
+        movement = new EnemyMovement(character, level, nextPosition.transform);
     }
 
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)
@@ -34,7 +38,6 @@ public class WanderMovement : State
     public override void UpdateState()
     {
         movement.UpdateState();
-
         
     }
 
@@ -59,7 +62,7 @@ public class WanderMovement : State
     {
         if (coll.gameObject.tag == "FollowParent")
         {
-            character.SetState(new MovementEnemy(character, level, coll.transform.parent));
+            character.SetState(new EnemyMovement(character, level, coll.transform.parent));
         }
     }
 

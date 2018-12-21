@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 4020040}
   m_Layer: 0
   m_Name: Obstacle
-  m_TagString: Hookable
+  m_TagString: Winchable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -423,10 +423,16 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114938182685806996, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
         type: 2}
-      propertyPath: mode
-      value: 0
+      propertyPath: distanceDash
+      value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114938182685806996, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: mode
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114093496735508838, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &784524581
@@ -442,7 +448,7 @@ GameObject:
   - component: {fileID: 784524586}
   m_Layer: 0
   m_Name: Obstacle (1)
-  m_TagString: Hookable
+  m_TagString: Pullable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -759,7 +765,7 @@ GameObject:
   - component: {fileID: 1579496665}
   m_Layer: 0
   m_Name: Obstacle (2)
-  m_TagString: Hookable
+  m_TagString: Pullable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -12,8 +12,8 @@ public class Level : Layers {
 
     public List<GameObject> characters = new List<GameObject>();
 
-    internal Vector2 maxBounds = new Vector2(8,8);
-    internal Vector2 minBounds = new Vector2(-8,-8);
+    internal Vector2 maxBounds = new Vector2(-8,8);
+    internal Vector2 minBounds = new Vector2(-8,8);
 
     public override void OnFocusGet()
     {      

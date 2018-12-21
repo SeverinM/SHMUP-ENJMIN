@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 65437895645053864}
   - component: {fileID: 114938182685806996}
   - component: {fileID: 54933741693269850}
+  - component: {fileID: 114093496735508838}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -60,6 +61,7 @@ GameObject:
   - component: {fileID: 23480497602211058}
   - component: {fileID: 65593104869491292}
   - component: {fileID: 54193871254873504}
+  - component: {fileID: 114131631155788512}
   m_Layer: 0
   m_Name: Shield
   m_TagString: Shield
@@ -349,10 +351,10 @@ BoxCollider:
   m_GameObject: {fileID: 1548920099261898}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 91.9182, y: 29.174507, z: 160.22095}
-  m_Center: {x: 0, y: -33.554058, z: 1.9129491}
+  m_Size: {x: 91.91821, y: 40.292618, z: 160.22095}
+  m_Center: {x: 0, y: -39.113087, z: 1.91295}
 --- !u!65 &65688702874340814
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -365,6 +367,28 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114093496735508838
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1380677440080142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9e68d82a59cd4c459a4825b8a66b115, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114131631155788512
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1548920099261898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9e68d82a59cd4c459a4825b8a66b115, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114680068698736828
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -390,6 +414,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 6
   mass: 3
+  recoveryMat: {fileID: 2100000, guid: 3615e864792955a4a912eda2c4bbddf0, type: 2}
+  life: 3
   shield: {fileID: 4181975481634658}
   mode: 1
   hook: {fileID: 4103882718358818}
