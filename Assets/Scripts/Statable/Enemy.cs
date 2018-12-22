@@ -107,18 +107,24 @@ public class Enemy : Character {
         switch (enemyType)
         {
             case EnemyType.BOB:
+                //Tir simple en face de lui
                 clone = Instantiate(bulletPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation).GetComponent<Rigidbody>();
                 clone.velocity = transform.TransformDirection(Vector3.forward * shootSpeed);
                 break;
             case EnemyType.JIM:
-                float x = 0, y = 0, angle = 0;
+                float x = 0, y = 0;
 
+                //L'angle du premier projectile est aleatoire
+                float angle = UnityEngine.Random.Range(0, 2 * Mathf.PI);
+
+                //Tir en rayon a angle uniforme
                 for (int i = 0; i < maxBullets; i++)
                 {
                     x = (shootRadius * Mathf.Cos(angle)) + transform.position.x;
                     y = (shootRadius * Mathf.Sin(angle)) + transform.position.z;
 
-                    angle = angle + ((2 * Mathf.PI) / maxBullets);
+                    angle += ((2 * Mathf.PI) / maxBullets);
+                    angle = angle % (2 * Mathf.PI);
                     clone = Instantiate(bulletPrefab, new Vector3(x, 0, y), Quaternion.AngleAxis(angle * Mathf.Rad2Deg, new Vector3(0, 1, 0))).GetComponent<Rigidbody>();
                     Vector3 direction = Quaternion.Euler(0, angle, 0) * clone.transform.forward;
                     clone.velocity = transform.TransformDirection(direction * shootSpeed);

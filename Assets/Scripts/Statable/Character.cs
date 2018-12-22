@@ -10,6 +10,7 @@ public abstract class Character : MonoBehaviour {
 
     public delegate void collDelegate(Collider coll);
     public event collDelegate OnTriggerEnterChar;
+    public event collDelegate OnTriggerExitChar;
 
     [Header("Herité de Character")]
     [Tooltip("A quel vitesse le personnage peut se deplacer ?")]
@@ -84,10 +85,17 @@ public abstract class Character : MonoBehaviour {
         }
     }
 
+    //On ne fait qu'envoyer un event , c'est le state qui decide comment gerer cet evenement
     protected virtual void OnTriggerEnter(Collider other)
     {
         if (OnTriggerEnterChar != null)
             OnTriggerEnterChar(other);
+    }
+
+    protected virtual void OnTriggerExit(Collider other)
+    {
+        if (OnTriggerExitChar != null)
+            OnTriggerExitChar(other);
     }
 
     protected void Update()

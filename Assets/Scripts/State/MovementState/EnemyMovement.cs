@@ -46,6 +46,24 @@ public class EnemyMovement : State
         character.Move(deltaPosition.normalized);
     }
 
+    public override void StartState()
+    {
+        character.OnTriggerExitChar += TriggerExit;
+    }
+
+    public override void EndState()
+    {
+        character.OnTriggerExitChar -= TriggerExit;
+    }
+
+    public void TriggerExit(Collider coll)
+    {
+        if (coll.tag == "FollowParent")
+        {
+            character.SetState(new FollowPathMovement(character, level, new Queue<Vector3>(), false, 1));
+        }
+    }
+
     //Permet de separer les ennemies entre eux pour eviter qu'ils se marchent dessu
     void Separate(List<GameObject> characters)
     {

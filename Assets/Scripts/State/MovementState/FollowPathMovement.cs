@@ -52,6 +52,7 @@ public class FollowPathMovement : State
         targetPosition = new Vector3(targetPosition.x, character.transform.position.y, targetPosition.z);
         this.loop = loop;
         this.level = level;
+        character.transform.forward = vecInput;
     }
 
     public override void StartState()
@@ -98,6 +99,6 @@ public class FollowPathMovement : State
                 character.SetState(new FollowPathMovement(character, level, positions, loop, 1));
             }
         }
-        character.Move(deltaPosition.normalized);
+        character.Move(deltaPosition.normalized * character.GetScale());
     }
 }
