@@ -95,26 +95,28 @@ public class Player : Character
         impact = Vector3.Lerp(impact, Vector3.zero, 5 * Time.deltaTime);
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
+        {
+            Impact(collision.relativeVelocity * hitForce);
+            Destroy(collision.gameObject);
+        }
+        Life--;
+        
+        if (Life <= 0)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            StartRecovery(1);
+        }
+    }
+
     protected override void OnTriggerEnter(Collider other)
     {
-        base.OnTriggerEnter(other);
-        //Le joueur s'est fait touché par un ennemi
-        if (other.GetComponent<Enemy>() != null || other.gameObject.tag == "Bullet")
-        {
-            if (other.gameObject.tag == "Bullet")
-            {
-                Destroy(other.gameObject);
-            }
-            Life--;
-            if (Life <= 0)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                StartRecovery(1);
-            }
-        }
+        // RigidBody
     }
 
     public void Impact(Vector3 force)

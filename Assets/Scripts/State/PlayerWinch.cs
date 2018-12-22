@@ -67,7 +67,8 @@ public class PlayerWinch : State
 
         if (currentMode == HookMode.Pull)
         {
-            target.transform.position -= character.transform.forward * Time.deltaTime * character.GetScale() * speedTravel;
+            // Pull the parent because we set a pullable tag to a child
+            target.parent.transform.position -= character.transform.forward * Time.deltaTime * character.GetScale() * speedTravel;
             hook.transform.position -= character.transform.forward * Time.deltaTime * character.GetScale() * speedTravel;
         }
 

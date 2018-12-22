@@ -35,7 +35,7 @@ public class EnemyMovement : State
         deltaPosition = trsf.position - character.transform.position;
 
         // If the enemies have reached the player, they enter the Movement Attack phase
-        if (Vector3.Distance(trsf.position, character.transform.position) <= Mathf.Abs(character.transform.position.y - trsf.position.y) + enemy.range)
+        if (Vector3.Distance(trsf.position, character.transform.position) <= Mathf.Abs(character.transform.position.y - trsf.position.y) + enemy.attackRange)
         {
             character.SetState(new EnemyAttack(character, level));
         }
