@@ -22,7 +22,7 @@ public class Enemy : Character {
     [SerializeField]
     protected int HP = 0;
 
-    public float range = 2.0f;
+    public float attackRange = 8.0f;
     public float shootPeriod = 2.0f;
     public int shootAmount = 3;
     public float shootSpeed = 8;
