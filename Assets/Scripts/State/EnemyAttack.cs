@@ -34,7 +34,8 @@ public class EnemyAttack : State
 
     public override void NextState()
     {
-        character.SetState(new WanderMovement(character, level));
+        //Wander 
+        character.SetState(new FollowPathMovement(character, level, new Queue<Vector3>(), true, 1));
     }
 
     public override void StartState()

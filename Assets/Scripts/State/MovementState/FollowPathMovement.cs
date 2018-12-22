@@ -16,21 +16,61 @@ public class FollowPathMovement : State
 
     private bool loop;
 
-    public FollowPathMovement(Character character, Level level, Queue<Vector3> allPos, bool loop) : base(character)
+    public FollowPathMovement(Character character, Level level, Queue<Vector3> allPos, bool loop, float noiseCoeff = 0) : base(character)
     {
         positions = allPos;
-        Vector3 vecInput = positions.Dequeue();
-        //Si on loop on replace à la fin de la queue
-        if (loop)
+        //Position relative a l'ennemi
+        Vector3 vecInput;
+        if (positions.Count > 0)
         {
-            positions.Enqueue(vecInput);
+            vecInput = positions.Dequeue();
+            //La position revient en debut de queue
+            if (loop)
+            {
+                positions.Enqueue(vecInput);
+            }
         }
+        else
+        {
+            vecInput = Vector3.zero;
+        }
+
+        Vector3 randomValue;
+        if (level != null)
+        {
+            randomValue = new Vector3(Random.Range(level.minBounds.x, level.maxBounds.y), 0, Random.Range(level.maxBounds.x, level.maxBounds.y));
+        }
+        else
+        {
+            randomValue = new Vector3(Random.Range(-2,2), 0, Random.Range(-2, 2));
+        }
+        
+        vecInput += (randomValue * noiseCoeff);
         targetPosition = character.transform.position + vecInput;
 
         //On l'aligne sur l'axe y par rapport au joueur 
         targetPosition = new Vector3(targetPosition.x, character.transform.position.y, targetPosition.z);
         this.loop = loop;
         this.level = level;
+    }
+
+    public override void StartState()
+    {
+        character.OnTriggerEnterChar += TriggerEnter;
+    }
+
+    public override void EndState()
+    {
+        character.OnTriggerEnterChar -= TriggerEnter;
+    }
+
+    public void TriggerEnter(Collider coll)
+    {
+        //L'ennemi est rentré dans la zone proche du joueur , il va commencer a le poursuivre
+        if (coll.tag == "FollowParent")
+        {
+            character.SetState(new EnemyMovement(character, level, coll.transform.parent));
+        }
     }
 
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)
@@ -51,14 +91,13 @@ public class FollowPathMovement : State
         {
             if (positions.Count > 0)
             {
-                character.SetState(new FollowPathMovement(character, level, positions, loop));
+                character.SetState(new FollowPathMovement(character, level, positions, loop, 0));
             }
             else 
             {
-                character.SetState(new WanderMovement(character, level));
+                character.SetState(new FollowPathMovement(character, level, positions, loop, 1));
             }
         }
-
         character.Move(deltaPosition.normalized);
     }
 }
