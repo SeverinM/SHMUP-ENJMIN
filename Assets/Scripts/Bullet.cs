@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
 
-    [SerializeField]
-    private float speed = 6f;
     private int lastTime;
 
     [SerializeField]

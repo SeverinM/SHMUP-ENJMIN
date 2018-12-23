@@ -46,6 +46,11 @@ public class Player : Character
     [SerializeField]
     float coeffHook = 0.1f;
 
+    [Header("Bullet")]
+    [SerializeField]
+    [Tooltip("Déceleration lors d'un impact de bullet")]
+    float impactDeceleration = 5f;
+
     [Header("Auto references (pas toucher... normalement)")]
     [SerializeField]
     Transform shield;
@@ -90,9 +95,12 @@ public class Player : Character
         if (impact.magnitude > 0.2)
         { 
             Move(impact * Time.deltaTime); // move character
-        }
+        } 
+
         // impact vanishes to zero over time
-        impact = Vector3.Lerp(impact, Vector3.zero, 5 * Time.deltaTime);
+        impact = Vector3.Lerp(impact, Vector3.zero, impactDeceleration * Time.deltaTime);
+
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -101,16 +109,20 @@ public class Player : Character
         {
             Impact(collision.relativeVelocity * hitForce);
             Destroy(collision.gameObject);
-        }
-        Life--;
-        
-        if (Life <= 0)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            StartRecovery(1);
+
+            if (!protection.activeInHierarchy)
+            {
+                Life--;
+
+                if (Life <= 0)
+                {
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    StartRecovery(recoveryDuration);
+                }
+            }
         }
     }
 

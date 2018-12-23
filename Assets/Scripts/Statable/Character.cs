@@ -22,10 +22,11 @@ public abstract class Character : MonoBehaviour {
     protected float mass = 3.0f;                
     protected float hitForce = 25.5f;            
     protected Vector3 impact = Vector3.zero;
+    protected float recoveryDuration = 1f;
 
     [SerializeField]
     [Tooltip("Material de substitution pendant que le personnage est en recovery (ATTENTION : peut bugger s'il y a plusieurs materials)")]
-    Material recoveryMat;
+    internal Material recoveryMat;
 
     /// <summary>
     /// Sert a conserver des informations generiques entre les etats quand leur nombre devient important
@@ -41,14 +42,18 @@ public abstract class Character : MonoBehaviour {
 
     [SerializeField]
     [Tooltip("Nombre de point de vie du personnage , un nombre negatif equivaut a 1")]
-    protected int life = 3;
+    protected float life = 3;
+
+    [SerializeField]
+    [Header("Sci-fi magnetic protection")]
+    internal GameObject protection;
 
     internal void Rotate(GameObject player)
     {
         transform.LookAt(player.transform);
     }
 
-    public int Life
+    public float Life
     {
         get
         {
@@ -126,7 +131,7 @@ public abstract class Character : MonoBehaviour {
 
     public void StartRecovery(float duration)
     {
-        StartCoroutine(Recovery(duration));
+        SetState(new PlayerRecovery(this, duration));
     }
 
     /// <summary>
@@ -135,22 +140,5 @@ public abstract class Character : MonoBehaviour {
     /// <returns></returns>
     public abstract float GetScale();
 
-    /// <summary>
-    /// Pendant un cours instant , change l'aspect du personnage et desactive sa physique
-    /// </summary>
-    /// <param name="duration"></param>
-    /// <returns></returns>
-    protected IEnumerator Recovery(float duration)
-    {
-        Collider physic = GetComponent<Collider>();
-        Material copy = GetComponent<MeshRenderer>().material;
-        if (recoveryMat != null)
-        {
-            GetComponent<MeshRenderer>().material = recoveryMat;
-        }
-        physic.enabled = false;
-        yield return new WaitForSeconds(duration);
-        physic.enabled = true;
-        GetComponent<MeshRenderer>().material = copy;
-    }
+
 }

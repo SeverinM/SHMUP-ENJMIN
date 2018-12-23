@@ -10,7 +10,6 @@ public class EnemyMovement : State
     Transform trsf;
     Vector3 targetPosition;
 
-    GameObject player;
     Enemy enemy;
 
     Level level;
@@ -21,7 +20,6 @@ public class EnemyMovement : State
     {
         this.trsf = trsf;
         this.level = level;
-        this.player = level.Player;
         enemy = character.GetComponent<Enemy>();
     }
 
