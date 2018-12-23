@@ -72,6 +72,11 @@ public class FollowPathMovement : State
         {
             character.SetState(new EnemyMovement(character, level, coll.transform.parent));
         }
+
+        if (coll.tag == "Hook")
+        {
+            character.SetState(new FreezeMovement(character, character.ActualState, level));
+        }
     }
 
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)

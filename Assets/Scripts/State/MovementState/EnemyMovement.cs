@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Allows a character to move towards a Transform (an obstacle, an enemy or the player)
+/// Permet à un joueur de se déplacer vers une Transform (un obstacle, un enemy ou le joueur)
 /// </summary>
 public class EnemyMovement : State
 {
@@ -32,7 +32,7 @@ public class EnemyMovement : State
     {
         deltaPosition = trsf.position - character.transform.position;
 
-        // If the enemies have reached the player, they enter the Movement Attack phase
+        // Si les ennemis ont atteint le joueur, ils rentrent dasn une phase d'attaque
         if (Vector3.Distance(trsf.position, character.transform.position) <= Mathf.Abs(character.transform.position.y - trsf.position.y) + enemy.attackRange)
         {
             character.SetState(new EnemyAttack(character, level));
@@ -62,7 +62,7 @@ public class EnemyMovement : State
         }
     }
 
-    //Permet de separer les ennemies entre eux pour eviter qu'ils se marchent dessu
+    //Permet de separer les ennemies entre eux pour eviter qu'ils se marchent dessus
     void Separate(List<GameObject> characters)
     {
         float desiredseparation = 3f;

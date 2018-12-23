@@ -23,6 +23,7 @@ public abstract class Character : MonoBehaviour {
     protected float hitForce = 25.5f;            
     protected Vector3 impact = Vector3.zero;
     protected float recoveryDuration = 1f;
+    protected float freezeDuration = 1f;
 
     [SerializeField]
     [Tooltip("Material de substitution pendant que le personnage est en recovery (ATTENTION : peut bugger s'il y a plusieurs materials)")]
@@ -131,7 +132,7 @@ public abstract class Character : MonoBehaviour {
 
     public void StartRecovery(float duration)
     {
-        SetState(new PlayerRecovery(this, duration));
+        SetState(new CharacterRecovery(this, actualState, duration));
     }
 
     /// <summary>
