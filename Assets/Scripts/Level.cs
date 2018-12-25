@@ -7,7 +7,13 @@ public class Level : Layers {
     [SerializeField]
     protected Player player;
 
-    public GameObject Player;
+    public GameObject Player
+    {
+        get
+        {
+            return player.gameObject;
+        }
+    }
 
 
     [SerializeField]
