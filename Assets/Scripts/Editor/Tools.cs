@@ -15,6 +15,7 @@ public struct WaveElement
 {
     public Enemy.EnemyType enn;
     public float spawnAfter;
+    public bool selected;
 }
 
 public class Tools : EditorWindow {
@@ -29,14 +30,6 @@ public class Tools : EditorWindow {
     public List<Vector3> allPositions;
     Level lvl;
 
-    public enum TypeObjet
-    {
-        Ennemy,
-        Generator
-    }
-
-    TypeObjet currentSelection = TypeObjet.Ennemy;
-
 	[MenuItem("Outils GD/Ennemies et spawner")]
     static void Init()
     {
@@ -47,34 +40,43 @@ public class Tools : EditorWindow {
         }
     }
 
+    int selectedNumber()
+    {
+        int output = 0;
+        //Un ennemi est selectionné ?
+        if (allWaves == null)
+        {
+            return output;
+        }
+        foreach(Wave wv in allWaves)
+        {
+            foreach(WaveElement we in wv.allEnnemies)
+            {
+                if (we.selected)
+                {
+                    output++;
+                }
+            }
+        }
+        return output;
+    }
+
     private void OnGUI()
     {
-        currentSelection = (TypeObjet)EditorGUILayout.EnumPopup("", currentSelection);
-
-        if (currentSelection == TypeObjet.Ennemy)
+        if (obj == null)
         {
-            Ennemy();
+            obj = new SerializedObject(this);
         }
-        else
-        {
-            Generator();
-        }
-    }
 
-    private void OnDestroy()
-    {
-        instance = null;
-    }
-
-    void Ennemy()
-    {
+        //Waypoints
         EditorGUILayout.LabelField("Parcours a prendre");
         obj = new SerializedObject(this);
+        //Liste des waypoints
         ser = obj.FindProperty("allPositions");
         for (int i = 0; i < ser.arraySize; i++)
         {
             EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.PropertyField(ser.GetArrayElementAtIndex(i),new GUIContent(""));
+            EditorGUILayout.PropertyField(ser.GetArrayElementAtIndex(i), new GUIContent(""));
             if (i > 0 && GUILayout.Button("Up"))
             {
                 ser.MoveArrayElement(i, i - 1);
@@ -86,24 +88,27 @@ public class Tools : EditorWindow {
 
             Vector3 value = ser.GetArrayElementAtIndex(i).vector3Value;
             ser.GetArrayElementAtIndex(i).vector3Value = new Vector3(Mathf.Clamp(value.x, -1, 1), 0, Mathf.Clamp(value.z, -1, 1));
-            
+
             EditorGUILayout.EndHorizontal();
         }
         if (GUILayout.Button("Ajouter"))
         {
             ser.InsertArrayElementAtIndex(0);
         }
-        obj.ApplyModifiedProperties();
-        Vector3 positionScreen = Vector3.zero;
+        EditorGUI.BeginDisabledGroup(selectedNumber() == 0);
+        if (GUILayout.Button("Appliquer"))
+        {
+            Debug.Log("kop");
+        }
+        EditorGUI.EndDisabledGroup();
+
         float distance = 10;
+        //distance camera / level pour l'affichage du plan
         if (Selection.GetFiltered<Level>(SelectionMode.Unfiltered).Length > 0)
         {
             distance = Vector3.Distance(Selection.GetFiltered<Level>(SelectionMode.Unfiltered)[0].transform.position, Camera.main.transform.position);
         }
-    }
 
-    void Generator()
-    {
         //Liste des waves
         serWaves = obj.FindProperty("allWaves");
         //Toutes les vagues
@@ -123,7 +128,8 @@ public class Tools : EditorWindow {
             {
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("enn"), new GUIContent("L'ennemi "));
-                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("spawnAfter"),new GUIContent("Apparait apres (s)"));
+                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("spawnAfter"), new GUIContent("Apparait apres (s)"));
+                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("selected"), new GUIContent(""));
                 EditorGUILayout.EndHorizontal();
 
                 if ((j == serRel.arraySize - 1) && GUILayout.Button("Ajouter (ennemie vague)"))
@@ -159,6 +165,11 @@ public class Tools : EditorWindow {
         obj.ApplyModifiedProperties();
     }
 
+    private void OnDestroy()
+    {
+        instance = null;
+    }
+
     [DrawGizmo(GizmoType.Selected)]
     static void Draw(Level lvl, GizmoType type)
     {
@@ -183,7 +194,6 @@ public class Tools : EditorWindow {
                 {
                     value = (float)i / (ser.arraySize - 1);
                     Gizmos.color = Color.Lerp(Color.green, Color.red, value);
-                    Debug.Log(i + " / " + (ser.arraySize - 1) + " = "  + value);
                     Vector3 position = ser.GetArrayElementAtIndex(i).vector3Value;
                     Vector3 xAxis = rightBottom - leftBottom;
                     Vector3 yAxis = leftTop - leftBottom;
