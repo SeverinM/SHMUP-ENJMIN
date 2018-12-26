@@ -3,11 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+[System.Serializable]
+public struct Wave
+{
+    public List<WaveElement> allEnnemies;
+    public float delay;
+}
+
+[System.Serializable]
+public struct WaveElement
+{
+    public Enemy.EnemyType enn;
+    public float spawnAfter;
+}
+
 public class Tools : EditorWindow {
     static float radius = 1;
     static Tools instance;
     static SerializedProperty ser;
     static SerializedObject obj;
+
+    public List<Wave> allWaves;
+    SerializedProperty serWaves;
 
     public List<Vector3> allPositions;
     Level lvl;
@@ -87,7 +104,59 @@ public class Tools : EditorWindow {
 
     void Generator()
     {
-        EditorGUILayout.LabelField("Generateur");
+        //Liste des waves
+        serWaves = obj.FindProperty("allWaves");
+        //Toutes les vagues
+        for (int i = 0; i < serWaves.arraySize; i++)
+        {
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.Label("Vague numero " + i);
+            EditorGUILayout.PropertyField(serWaves.GetArrayElementAtIndex(i).FindPropertyRelative("delay"), new GUIContent("Commence apres (s)"));
+            EditorGUILayout.EndHorizontal();
+            SerializedProperty serRel = serWaves.GetArrayElementAtIndex(i).FindPropertyRelative("allEnnemies");
+
+            //Debut de l'indentation
+            EditorGUI.indentLevel = 1;
+
+            //Tous les ennemis d'une vague
+            for (int j = 0; j < serRel.arraySize; j++)
+            {
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("enn"), new GUIContent("L'ennemi "));
+                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("spawnAfter"),new GUIContent("Apparait apres (s)"));
+                EditorGUILayout.EndHorizontal();
+
+                if ((j == serRel.arraySize - 1) && GUILayout.Button("Ajouter (ennemie vague)"))
+                {
+                    serRel.InsertArrayElementAtIndex(serRel.arraySize);
+                }
+
+                if (j == serRel.arraySize - 1 && GUILayout.Button("Supprimer (ennemie vague)"))
+                {
+                    serRel.DeleteArrayElementAtIndex(serRel.arraySize - 1);
+                }
+            }
+
+            //Fin de l'indentation
+            EditorGUI.indentLevel = 0;
+
+            //Aucun ennemi dans la vague
+            if (serRel.arraySize == 0 && GUILayout.Button("Ajouter (ennemie vague)"))
+            {
+                serRel.InsertArrayElementAtIndex(serRel.arraySize);
+            }
+            EditorGUILayout.Space();
+        }
+
+        if (GUILayout.Button("Ajouter (vague)"))
+        {
+            serWaves.InsertArrayElementAtIndex(serWaves.arraySize);
+        }
+        if (serWaves.arraySize > 0 && GUILayout.Button("Supprimer (vague)"))
+        {
+            serWaves.DeleteArrayElementAtIndex(serWaves.arraySize - 1);
+        }
+        obj.ApplyModifiedProperties();
     }
 
     [DrawGizmo(GizmoType.Selected)]
