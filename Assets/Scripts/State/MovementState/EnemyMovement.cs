@@ -58,7 +58,7 @@ public class EnemyMovement : State
     {
         if (coll.tag == "FollowParent")
         {
-            character.SetState(new FollowPathMovement(character, level, new Queue<Vector3>(), false, 1));
+            character.SetState(null);
         }
     }
 

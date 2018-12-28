@@ -39,7 +39,8 @@ public class Level : Layers {
         // Setup all generators
         foreach (GameObject generator in generators)
         {
-            generator.GetComponent<Generator>().SetState(new GenerateEnemies(generator.GetComponent<Generator>()));
+            //Le generateur lit ses propres vagues
+            generator.GetComponent<Generator>().SetState(new GenerateEnemies(generator.GetComponent<Generator>(), generator.GetComponent<Generator>().AllWaves));
         }
 
     }
@@ -51,12 +52,13 @@ public class Level : Layers {
     /// </summary>
     /// <param name="character"></param>
     /// <param name="position"></param>
-    public void Instanciate(GameObject character, Vector3 position)
+    public GameObject Instanciate(GameObject character, Vector3 position)
     {
         GameObject toAdd = Instantiate(character, position, Quaternion.identity);
         toAdd.GetComponent<Enemy>().level = this;
         toAdd.GetComponent<Enemy>().player = Player;
         characters.Add(toAdd);
+        return toAdd;
     }
 
     /// <summary>

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// The generators will Instanciate ennemies in the level according to a period
@@ -8,13 +9,17 @@ public class GenerateEnemies : State
 {
     private Generator generator;
     private Level level;
-    private float lastTime;
+    float timeSinceBegin = 0;
+    Wave currentWave;
+    List<Wave> wavesLeft;
 
-    public GenerateEnemies(Character character) : base(character)
+    public GenerateEnemies(Character character, List<Wave> remainingWaves) : base(character)
     {
         generator = character.GetComponent<Generator>();
         level = generator.levelObject.GetComponent<Level>();
-        lastTime = Time.time;
+        currentWave = remainingWaves[remainingWaves.Count - 1];
+        remainingWaves.Remove(currentWave);
+        wavesLeft = remainingWaves;
     }
 
     public override void EndState()
@@ -39,15 +44,23 @@ public class GenerateEnemies : State
 
     public override void UpdateState()
     {
-        if (lastTime < Time.time) // Generate enemies according to the time period
+        timeSinceBegin += Time.deltaTime;
+        foreach(WaveElement waveElt in currentWave.allEnnemies)
         {
-            lastTime += generator.period;
-
-            if (generator.waves > 0 || generator.waves == -1)
+            //Si le delai est depassé on crée l'ennemi et on le supprime
+            if (waveElt.spawnAfter < timeSinceBegin)
             {
-                level.Instanciate(generator.enemyPrefab, character.transform.position);
-                generator.waves--;
+                GameObject instanciated = level.Instanciate(generator.enemyPrefab, character.transform.position);
+                instanciated.GetComponent<Enemy>().enemyType = waveElt.enn;
+                //!!!!
+                currentWave.allEnnemies.Remove(waveElt);
             }
+        }
+
+        //Plus d'ennemi a spawn , on peut passer au suivant
+        if (currentWave.allEnnemies.Count == 0 && wavesLeft.Count > 0)
+        {
+            character.SetState(new GenerateEnemies(character, wavesLeft));
         }
     }
 }

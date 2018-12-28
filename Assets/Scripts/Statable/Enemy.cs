@@ -2,6 +2,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+
+[System.Serializable]
+public struct Waypoints
+{
+    public bool loop;
+    public List<WaypointElement> allWaypoints;
+}
+
+[System.Serializable]
+public struct WaypointElement
+{
+    public Vector3 targetPosition;
+    public float speed;
+}
 
 public class Enemy : Character {
 
@@ -29,6 +44,8 @@ public class Enemy : Character {
     public int maxBullets = 5;
     public float shootRadius = 1f;
 
+    public Waypoints Waypoints { get; set; }
+
     public GameObject player;
     public Level level;
 
@@ -39,7 +56,7 @@ public class Enemy : Character {
     private EnemyMovementType movementType;
 
     [SerializeField]
-    private EnemyType enemyType;
+    public EnemyType enemyType;
 
     private void Start()
     {
@@ -88,12 +105,9 @@ public class Enemy : Character {
 
     private void FollowPath()
     {
-        Queue<Vector3> allPos = new Queue<Vector3>();
-        allPos.Enqueue(new Vector3(0, 0, -5));
-        allPos.Enqueue(new Vector3(-2, 0, -2));
-        allPos.Enqueue(new Vector3(2, 0, -2));
-
-        SetState(new FollowPathMovement(this, level, allPos, false));
+        //Toutes les positions globales
+        Queue<WaypointElement> allPos = new Queue<WaypointElement>(Waypoints.allWaypoints);
+        SetState(new FollowPathMovement(this, level, allPos, Waypoints.loop));
     }
 
     private void FollowRandomPath()

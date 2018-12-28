@@ -3,6 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public struct Wave
+{
+    public List<WaveElement> allEnnemies;
+    public float delay;
+}
+
+[System.Serializable]
+public struct WaveElement
+{
+    public Enemy.EnemyType enn;
+    public float spawnAfter;
+    public Waypoints Waypoints { get; set; }
+    //Cet attribut est utilisé uniquement dans l'outil
+    [HideInInspector]
+    public bool selected;
+}
 /// <summary>
 /// Un objet character PEUT avoir des etats , agissant comme une machine d'etat
 /// </summary>

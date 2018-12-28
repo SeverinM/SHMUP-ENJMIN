@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -127,15 +127,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4741676917561938, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -8.05
       objectReference: {fileID: 0}
     - target: {fileID: 4741676917561938, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 3.23
       objectReference: {fileID: 0}
     - target: {fileID: 4741676917561938, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -5.02
       objectReference: {fileID: 0}
     - target: {fileID: 4741676917561938, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
       propertyPath: m_LocalRotation.x
@@ -389,10 +389,23 @@ MonoBehaviour:
   enemyPrefab: {fileID: 1561519513433908, guid: 46c9216ca856d3e4d836743c1d9c8564,
     type: 2}
   levelObject: {fileID: 1502083408}
-  maxEnemies: 16
-  waves: 3
-  period: 1
-  radiusSize: 4
+  allWaves:
+  - allEnnemies:
+    - enn: 1
+      spawnAfter: 1
+      selected: 0
+    - enn: 2
+      spawnAfter: 0.4
+      selected: 0
+    delay: 0
+  - allEnnemies:
+    - enn: 0
+      spawnAfter: 0
+      selected: 0
+    - enn: 0
+      spawnAfter: 0
+      selected: 0
+    delay: 0
 --- !u!54 &786555244
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -446,10 +459,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 1663835522049710, guid: ae66e2c413491d642bb19e18f4749421,
     type: 2}
   levelObject: {fileID: 1502083408}
-  maxEnemies: 16
-  waves: 1
-  period: 1
-  radiusSize: 4
+  allWaves: []
 --- !u!65 &891332480
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -697,11 +707,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!1 &1198194201 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1380677440080142, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
-    type: 2}
-  m_PrefabInternal: {fileID: 150030490}
 --- !u!1 &1354260794
 GameObject:
   m_ObjectHideFlags: 0
@@ -779,13 +784,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1354260794}
-  m_LocalRotation: {x: 0.67559016, y: 0, z: 0, w: 0.7372774}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 25, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 85, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &1354260798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -889,7 +894,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 150030491}
-  Player: {fileID: 1198194201}
   generators:
   - {fileID: 786555238}
   - {fileID: 2145518207}
@@ -1010,10 +1014,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 1796657138515930, guid: 02c41df092ae0a142b8866396d0a138e,
     type: 2}
   levelObject: {fileID: 1502083408}
-  maxEnemies: 16
-  waves: 1
-  period: 0.5
-  radiusSize: 4
+  allWaves: []
 --- !u!65 &2145518209
 BoxCollider:
   m_ObjectHideFlags: 0

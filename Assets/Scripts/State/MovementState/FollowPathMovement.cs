@@ -7,8 +7,9 @@ using System.Collections.Generic;
 /// </summary>
 public class FollowPathMovement : State
 {
-    Queue<Vector3> positions;
+    Queue<WaypointElement> positions;
     Vector3 targetPosition;
+    WaypointElement currentWaypoint;
 
     private Vector3 deltaPosition;
 
@@ -16,24 +17,12 @@ public class FollowPathMovement : State
 
     private bool loop;
 
-    public FollowPathMovement(Character character, Level level, Queue<Vector3> allPos, bool loop, float noiseCoeff = 0) : base(character)
+    public FollowPathMovement(Character character, Level level, Queue<WaypointElement> allPos, bool loop, float noiseCoeff = 0) : base(character)
     {
         positions = allPos;
         //Position relative a l'ennemi
-        Vector3 vecInput;
-        if (positions.Count > 0)
-        {
-            vecInput = positions.Dequeue();
-            //La position revient en debut de queue
-            if (loop)
-            {
-                positions.Enqueue(vecInput);
-            }
-        }
-        else
-        {
-            vecInput = Vector3.zero;
-        }
+        currentWaypoint = allPos.Dequeue();
+        targetPosition = currentWaypoint.targetPosition;
 
         Vector3 randomValue;
         if (level != null)
@@ -45,14 +34,13 @@ public class FollowPathMovement : State
             randomValue = new Vector3(Random.Range(-2,2), 0, Random.Range(-2, 2));
         }
         
-        vecInput += (randomValue * noiseCoeff);
-        targetPosition = character.transform.position + vecInput;
+        targetPosition += (randomValue * noiseCoeff);
 
         //On l'aligne sur l'axe y par rapport au joueur 
         targetPosition = new Vector3(targetPosition.x, character.transform.position.y, targetPosition.z);
         this.loop = loop;
         this.level = level;
-        character.transform.forward = vecInput;
+        character.transform.forward = targetPosition - character.transform.position;
     }
 
     public override void StartState()
@@ -94,10 +82,18 @@ public class FollowPathMovement : State
             {
                 character.SetState(new FollowPathMovement(character, level, positions, loop, 0));
             }
-            else 
+            else
             {
-                character.SetState(new FollowPathMovement(character, level, positions, loop, 1));
+                if (loop && (Enemy)character != null)
+                {
+                    character.SetState(new FollowPathMovement(character, level, new Queue<WaypointElement>(((Enemy)character).Waypoints.allWaypoints), ((Enemy)character).Waypoints.loop));
+                }
+                else
+                {
+                    character.SetState(null);
+                }
             }
+            
         }
         character.Move(deltaPosition.normalized * character.GetScale());
     }

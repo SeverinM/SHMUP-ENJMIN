@@ -2,33 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-
-[System.Serializable]
-public struct Wave
-{
-    public List<WaveElement> allEnnemies;
-    public float delay;
-}
-
-[System.Serializable]
-public struct WaveElement
-{
-    public Enemy.EnemyType enn;
-    public float spawnAfter;
-    public bool selected;
-}
+using System.Linq;
 
 public class Tools : EditorWindow {
     static float radius = 1;
     static Tools instance;
     static SerializedProperty ser;
     static SerializedObject obj;
+    static Level staticLvl;
 
     public List<Wave> allWaves;
     SerializedProperty serWaves;
+    public Waypoints waypoints;
 
-    public List<Vector3> allPositions;
-    Level lvl;
+    //Position absolu des waypoints actuels
+    static List<Vector3> positionsAbsolutes;
+    Generator currentGen;
 
 	[MenuItem("Outils GD/Ennemies et spawner")]
     static void Init()
@@ -68,37 +57,56 @@ public class Tools : EditorWindow {
             obj = new SerializedObject(this);
         }
 
+        staticLvl = (Level)EditorGUILayout.ObjectField(staticLvl, typeof(Level));
+        currentGen = (Generator)EditorGUILayout.ObjectField(currentGen, typeof(Generator));
         //Waypoints
-        EditorGUILayout.LabelField("Parcours a prendre");
         obj = new SerializedObject(this);
         //Liste des waypoints
-        ser = obj.FindProperty("allPositions");
-        for (int i = 0; i < ser.arraySize; i++)
+        ser = obj.FindProperty("waypoints");
+        SerializedProperty listWaypoints = ser.FindPropertyRelative("allWaypoints");
+
+        EditorGUILayout.PropertyField(ser.FindPropertyRelative("loop"));
+        for (int i = 0; i < listWaypoints.arraySize; i++)
         {
             EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.PropertyField(ser.GetArrayElementAtIndex(i), new GUIContent(""));
+            EditorGUILayout.PropertyField(listWaypoints.GetArrayElementAtIndex(i).FindPropertyRelative("targetPosition"), new GUIContent(""));
+            EditorGUILayout.PropertyField(listWaypoints.GetArrayElementAtIndex(i).FindPropertyRelative("speed"), new GUIContent(""));
             if (i > 0 && GUILayout.Button("Up"))
             {
-                ser.MoveArrayElement(i, i - 1);
+                listWaypoints.MoveArrayElement(i, i - 1);
             }
-            if (i < ser.arraySize - 1 && GUILayout.Button("Down"))
+            if (i < listWaypoints.arraySize - 1 && GUILayout.Button("Down"))
             {
-                ser.MoveArrayElement(i, i + 1);
+                listWaypoints.MoveArrayElement(i, i + 1);
             }
 
-            Vector3 value = ser.GetArrayElementAtIndex(i).vector3Value;
-            ser.GetArrayElementAtIndex(i).vector3Value = new Vector3(Mathf.Clamp(value.x, -1, 1), 0, Mathf.Clamp(value.z, -1, 1));
+            Vector3 value = listWaypoints.GetArrayElementAtIndex(i).FindPropertyRelative("targetPosition").vector3Value;
+            //Tous les waypoints sont entre -1 et 1
+            listWaypoints.GetArrayElementAtIndex(i).FindPropertyRelative("targetPosition").vector3Value = new Vector3(Mathf.Clamp(value.x, -1, 1), 0, Mathf.Clamp(value.z, -1, 1));
 
             EditorGUILayout.EndHorizontal();
         }
         if (GUILayout.Button("Ajouter"))
         {
-            ser.InsertArrayElementAtIndex(0);
+            listWaypoints.InsertArrayElementAtIndex(0);
         }
         EditorGUI.BeginDisabledGroup(selectedNumber() == 0);
+        List<WaveElement> allElem = new List<WaveElement>();
         if (GUILayout.Button("Appliquer"))
         {
-            Debug.Log("kop");
+            foreach(Wave wv in allWaves)
+            {
+                foreach(WaveElement we in wv.allEnnemies.Where(x => x.selected))
+                {
+                    allElem.Add(we);
+                }
+            }
+
+            for (int i = 0; i < allElem.Count; i++)
+            {
+                WaveElement elem = allElem[i];
+                elem.Waypoints = waypoints;
+            }
         }
         EditorGUI.EndDisabledGroup();
 
@@ -131,29 +139,25 @@ public class Tools : EditorWindow {
                 EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("spawnAfter"), new GUIContent("Apparait apres (s)"));
                 EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("selected"), new GUIContent(""));
                 EditorGUILayout.EndHorizontal();
-
-                if ((j == serRel.arraySize - 1) && GUILayout.Button("Ajouter (ennemie vague)"))
-                {
-                    serRel.InsertArrayElementAtIndex(serRel.arraySize);
-                }
-
-                if (j == serRel.arraySize - 1 && GUILayout.Button("Supprimer (ennemie vague)"))
-                {
-                    serRel.DeleteArrayElementAtIndex(serRel.arraySize - 1);
-                }
             }
 
             //Fin de l'indentation
             EditorGUI.indentLevel = 0;
-
-            //Aucun ennemi dans la vague
-            if (serRel.arraySize == 0 && GUILayout.Button("Ajouter (ennemie vague)"))
+            EditorGUILayout.BeginHorizontal();
+            if (GUILayout.Button("Ajouter (ennemie vague)"))
             {
                 serRel.InsertArrayElementAtIndex(serRel.arraySize);
             }
+
+            if (GUILayout.Button("Supprimer (ennemie vague)"))
+            {
+                serRel.DeleteArrayElementAtIndex(serRel.arraySize - 1);
+            }
+            EditorGUILayout.EndHorizontal();
             EditorGUILayout.Space();
         }
 
+        EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("Ajouter (vague)"))
         {
             serWaves.InsertArrayElementAtIndex(serWaves.arraySize);
@@ -162,6 +166,14 @@ public class Tools : EditorWindow {
         {
             serWaves.DeleteArrayElementAtIndex(serWaves.arraySize - 1);
         }
+        EditorGUILayout.EndHorizontal();
+        EditorGUI.BeginDisabledGroup(currentGen == null);
+        if (GUILayout.Button("Appliquer au spawner"))
+        {
+            currentGen.AllWaves = allWaves;
+        }
+        EditorGUI.EndDisabledGroup();
+
         obj.ApplyModifiedProperties();
     }
 
@@ -170,47 +182,48 @@ public class Tools : EditorWindow {
         instance = null;
     }
 
-    [DrawGizmo(GizmoType.Selected)]
+    [DrawGizmo(GizmoType.NotInSelectionHierarchy | GizmoType.Selected)]
     static void Draw(Level lvl, GizmoType type)
     {
-        if (instance != null)
+        if (instance != null && lvl == staticLvl)
         {
+            if (positionsAbsolutes != null)
+                positionsAbsolutes.Clear();
+
+            //Distance par rapport a la camera
             float coeff = Vector3.Distance(lvl.transform.position, Camera.main.transform.position);
+            //Recuperation des quatres coins
             Vector3 leftBottom = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, coeff));
             Vector3 leftTop = Camera.main.ScreenToWorldPoint(new Vector3(0, Camera.main.pixelHeight, coeff));
             Vector3 rightBottom = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, 0, coeff));
             Vector3 rightTop = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight, coeff));
             Vector3 pos = lvl.transform.position;
-            leftBottom = new Vector3(leftBottom.x, 0, leftBottom.z);
-            leftTop = new Vector3(leftTop.x, 0, leftTop.z);
-            rightBottom = new Vector3(rightBottom.x, 0, rightBottom.z);
-            rightTop = new Vector3(rightTop.x, 0, rightTop.z);
             Vector3 previousPosition = Vector3.zero;
             float value;
 
-            try
+            SerializedProperty allWaypoints = ser.FindPropertyRelative("allWaypoints");
+            for (int i = 0; i < allWaypoints.arraySize; i++)
             {
-                for (int i = 0; i < ser.arraySize; i++)
+                value = (float)i / (allWaypoints.arraySize - 1);
+                Gizmos.color = Color.Lerp(Color.green, Color.red, value);
+                Vector3 position = allWaypoints.GetArrayElementAtIndex(i).FindPropertyRelative("targetPosition").vector3Value;
+                Vector3 xAxis = rightBottom - leftBottom;
+                Vector3 yAxis = leftTop - leftBottom;
+                Vector3 finalPosition = leftBottom + (xAxis * position.x) + (yAxis * position.z);
+                finalPosition = new Vector3(finalPosition.x, lvl.transform.position.y, finalPosition.z);
+                if (positionsAbsolutes != null)
+                    positionsAbsolutes.Add(finalPosition);
+
+                Gizmos.color = Color.red;
+                Gizmos.DrawSphere(finalPosition, 1);
+                Debug.Log(finalPosition);
+                if (i > 0)
                 {
-                    value = (float)i / (ser.arraySize - 1);
-                    Gizmos.color = Color.Lerp(Color.green, Color.red, value);
-                    Vector3 position = ser.GetArrayElementAtIndex(i).vector3Value;
-                    Vector3 xAxis = rightBottom - leftBottom;
-                    Vector3 yAxis = leftTop - leftBottom;
-                    Vector3 finalPosition = leftBottom + (xAxis * position.x) + (yAxis * position.z);
-                    finalPosition = new Vector3(finalPosition.x, lvl.transform.position.y, finalPosition.z);
-                    Gizmos.DrawSphere(finalPosition, 0.2f);
-                    if (i > 0)
-                    {
-                        Gizmos.DrawLine(previousPosition, finalPosition);
-                    }
-                    previousPosition = finalPosition;
-                }               
-            }
-            catch
-            {
-                Debug.LogWarning("Ce message n'est censé etre affiché qu'une fois , sinon c'est un bug");
-            }
+                    Gizmos.DrawLine(previousPosition, finalPosition);
+                }
+                //A chaque fois , dessine par rapport au precedent waypoint
+                previousPosition = finalPosition;
+            }               
             Gizmos.color = Color.white;
 
             //On trace un plan sur la scene
