@@ -7,7 +7,6 @@ using UnityEngine;
 /// </summary>
 public class Generator : Character {
 
-    public GameObject enemyPrefab;        // Instantiable enemy
     public GameObject levelObject;        // Level
     [HideInInspector]
     public List<Wave> allWaves = new List<Wave>();

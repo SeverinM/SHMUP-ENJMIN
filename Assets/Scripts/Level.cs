@@ -7,6 +7,15 @@ public class Level : Layers {
     [SerializeField]
     protected Player player;
 
+    [SerializeField]
+    protected GameObject JimPrefab;
+
+    [SerializeField]
+    protected GameObject MikePrefab;
+
+    [SerializeField]
+    protected GameObject BobPrefab;
+
     public GameObject Player
     {
         get
@@ -55,8 +64,25 @@ public class Level : Layers {
     /// </summary>
     /// <param name="character"></param>
     /// <param name="position"></param>
-    public GameObject Instanciate(GameObject character, Vector3 position)
+    public GameObject Instanciate(Enemy.EnemyType type, Vector3 position)
     {
+        GameObject character;
+        switch (type)
+        {
+            case Enemy.EnemyType.BOB:
+                character = BobPrefab;
+                break;
+            case Enemy.EnemyType.JIM:
+                character = JimPrefab;
+                break;
+            case Enemy.EnemyType.MIKE:
+                character = MikePrefab;
+                break;
+            default:
+                character = BobPrefab;
+                break;
+        }
+
         GameObject toAdd = Instantiate(character, position, Quaternion.identity);
         toAdd.GetComponent<Enemy>().level = this;
         toAdd.GetComponent<Enemy>().player = Player;

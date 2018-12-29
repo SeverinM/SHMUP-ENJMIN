@@ -386,8 +386,6 @@ MonoBehaviour:
   recoveryMat: {fileID: 0}
   life: 3
   protection: {fileID: 0}
-  enemyPrefab: {fileID: 1561519513433908, guid: 46c9216ca856d3e4d836743c1d9c8564,
-    type: 2}
   levelObject: {fileID: 1502083408}
   allWaves:
   - allEnnemies:
@@ -396,13 +394,24 @@ MonoBehaviour:
       Waypoints:
         loop: 1
         allWaypoints:
-        - targetPosition: {x: -7.871154, y: 3.5988712, z: 12.455876}
-          speed: 2
         - targetPosition: {x: -7.871153, y: 3.5988736, z: -2.3711758}
           speed: 2
-        - targetPosition: {x: -0.0000009536743, y: 3.5988731, z: 0.09999943}
+        - targetPosition: {x: -7.871154, y: 3.5988712, z: 12.455876}
           speed: 2
-        - targetPosition: {x: 19.677881, y: 3.598875, z: -12.2558775}
+        - targetPosition: {x: -19.677881, y: 3.5988736, z: -2.3711758}
+          speed: 2
+      selected: 1
+      spawned: 0
+    - enn: 1
+      spawnAfter: 2
+      Waypoints:
+        loop: 1
+        allWaypoints:
+        - targetPosition: {x: -7.871153, y: 3.5988736, z: -2.3711758}
+          speed: 2
+        - targetPosition: {x: -7.871154, y: 3.5988712, z: 12.455876}
+          speed: 2
+        - targetPosition: {x: -19.677881, y: 3.5988736, z: -2.3711758}
           speed: 2
       selected: 1
       spawned: 0
@@ -457,8 +466,6 @@ MonoBehaviour:
   recoveryMat: {fileID: 0}
   life: 3
   protection: {fileID: 0}
-  enemyPrefab: {fileID: 1663835522049710, guid: ae66e2c413491d642bb19e18f4749421,
-    type: 2}
   levelObject: {fileID: 1502083408}
   allWaves: []
 --- !u!65 &891332480
@@ -895,6 +902,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 150030491}
+  JimPrefab: {fileID: 1796657138515930, guid: 02c41df092ae0a142b8866396d0a138e, type: 2}
+  MikePrefab: {fileID: 1663835522049710, guid: ae66e2c413491d642bb19e18f4749421, type: 2}
+  BobPrefab: {fileID: 1561519513433908, guid: 46c9216ca856d3e4d836743c1d9c8564, type: 2}
   generators:
   - {fileID: 786555238}
   - {fileID: 2145518207}
@@ -1012,8 +1022,6 @@ MonoBehaviour:
   recoveryMat: {fileID: 0}
   life: 3
   protection: {fileID: 0}
-  enemyPrefab: {fileID: 1796657138515930, guid: 02c41df092ae0a142b8866396d0a138e,
-    type: 2}
   levelObject: {fileID: 1502083408}
   allWaves: []
 --- !u!65 &2145518209

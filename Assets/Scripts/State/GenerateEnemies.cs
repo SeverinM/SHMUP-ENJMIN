@@ -51,7 +51,7 @@ public class GenerateEnemies : State
         {
             if (x.spawnAfter < timeSinceBegin && !x.spawned)
             {
-                GameObject instanciated = level.Instanciate(generator.enemyPrefab, character.transform.position);
+                GameObject instanciated = level.Instanciate(x.enn, character.transform.position);
                 instanciated.GetComponent<Enemy>().enemyType = x.enn;
                 instanciated.GetComponent<Enemy>().SetWaypointsAndApply(x.Waypoints);
                 Debug.Log(x.Waypoints.allWaypoints);
