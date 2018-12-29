@@ -82,15 +82,16 @@ public class Tools : EditorWindow {
             //Tous les waypoints sont entre -1 et 1
             listWaypoints.GetArrayElementAtIndex(i).FindPropertyRelative("targetPosition").vector3Value = new Vector3(Mathf.Clamp(value.x, -1, 1), 0, Mathf.Clamp(value.z, -1, 1));
 
+            if (GUILayout.Button("Supprimer"))
+            {
+                listWaypoints.DeleteArrayElementAtIndex(i);
+            }
+
             EditorGUILayout.EndHorizontal();
         }
         if (GUILayout.Button("Ajouter"))
         {
             listWaypoints.InsertArrayElementAtIndex(0);
-        }
-        if (listWaypoints.arraySize > 0 && GUILayout.Button("Supprimer"))
-        {
-            listWaypoints.DeleteArrayElementAtIndex(listWaypoints.arraySize - 1);       
         }
 
         EditorGUI.BeginDisabledGroup(selectedNumber() == 0);
