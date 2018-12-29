@@ -7,7 +7,7 @@ using System.Collections;
 /// </summary>
 /// <param name="duration"></param>
 /// <returns></returns>
-public class PlayerRecovery : State
+public class CharacterRecovery : State
 {
     private float duration;
     Material orignal;
@@ -15,11 +15,11 @@ public class PlayerRecovery : State
 
     private float lastTime;
 
-    public PlayerRecovery(Character character, float duration) : base(character)
+    public CharacterRecovery(Character character, State movement, float duration) : base(character)
     {
         this.duration = duration;
         orignal = character.GetComponent<MeshRenderer>().material;
-        movement = new PlayerMovement(character);
+        this.movement = movement;
     }
 
     public override void EndState()
