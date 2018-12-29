@@ -128,10 +128,12 @@ MonoBehaviour:
   mass: 3
   recoveryMat: {fileID: 2100000, guid: 3615e864792955a4a912eda2c4bbddf0, type: 2}
   life: 3
+  protection: {fileID: 0}
   HP: 0
-  range: 2
+  attackRange: 2
   shootPeriod: 2
   shootAmount: 3
+  shootSpeed: 8
   maxBullets: 5
   shootRadius: 1
   player: {fileID: 1380677440080142, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
@@ -139,3 +141,4 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1282062362704492, guid: 119f19512e8adaa4a976ceeddba29da5,
     type: 2}
   movementType: 1
+  enemyType: 0

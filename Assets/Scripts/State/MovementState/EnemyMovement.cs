@@ -16,8 +16,11 @@ public class EnemyMovement : State
 
     Vector3 deltaPosition;
 
-    public EnemyMovement(Character chara, Level level, Transform trsf) : base(chara)
+    Queue<WaypointElement> allElems;
+
+    public EnemyMovement(Character chara, Level level, Transform trsf, Queue<WaypointElement> elt) : base(chara)
     {
+        allElems = elt;
         this.trsf = trsf;
         this.level = level;
         enemy = character.GetComponent<Enemy>();
@@ -32,10 +35,10 @@ public class EnemyMovement : State
     {
         deltaPosition = trsf.position - character.transform.position;
 
-        // If the enemies have reached the player, they enter the Movement Attack phase
+        // Le joueur est assez pret , commencer l'attaque
         if (Vector3.Distance(trsf.position, character.transform.position) <= Mathf.Abs(character.transform.position.y - trsf.position.y) + enemy.attackRange)
         {
-            character.SetState(new EnemyAttack(character, level));
+            character.SetState(new EnemyAttack(character, level, allElems));
         }
 
         Separate(level.characters);
@@ -58,7 +61,7 @@ public class EnemyMovement : State
     {
         if (coll.tag == "FollowParent")
         {
-            character.SetState(null);
+            character.SetState(new FollowPathMovement(character, level, allElems, ((Enemy)character).Waypoints.loop));
         }
     }
 

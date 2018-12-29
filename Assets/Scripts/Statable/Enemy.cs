@@ -153,7 +153,7 @@ public class Enemy : Character {
 
     private void FollowRandomPath()
     {
-        SetState(new EnemyMovement(this, level, player.transform));
+        SetState(new EnemyMovement(this, level, player.transform, new Queue<WaypointElement>()));
     }
 
     public void Shoot()
@@ -194,7 +194,7 @@ public class Enemy : Character {
 
     private void FollowGameObject()
     {
-        SetState(new EnemyMovement(this, level, player.transform));
+        SetState(new EnemyMovement(this, level, player.transform, new Queue<WaypointElement>()));
     }
 
     public override float GetScale()

@@ -19,10 +19,17 @@ public class FollowPathMovement : State
 
     public FollowPathMovement(Character character, Level level, Queue<WaypointElement> allPos, bool loop, float noiseCoeff = 0) : base(character)
     {
+        character.Context.Remove("Target");
         positions = allPos;
-        //Position relative a l'ennemi
-        currentWaypoint = allPos.Dequeue();
-        targetPosition = currentWaypoint.targetPosition;
+        if (allPos.Count > 0)
+        {
+            currentWaypoint = allPos.Peek();
+            targetPosition = currentWaypoint.targetPosition;
+        }
+        else
+        {
+            targetPosition = character.transform.position + new Vector3(1, 0, 1);
+        }
 
         Vector3 randomValue;
         if (level != null)
@@ -58,7 +65,8 @@ public class FollowPathMovement : State
         //L'ennemi est rentré dans la zone proche du joueur , il va commencer a le poursuivre
         if (coll.tag == "FollowParent")
         {
-            character.SetState(new EnemyMovement(character, level, coll.transform.parent));
+            character.Context.SetInDictionary("Target", coll.transform.parent);
+            character.SetState(new EnemyMovement(character, level, coll.transform.parent,positions));
         }
     }
 
@@ -80,6 +88,8 @@ public class FollowPathMovement : State
         {
             if (positions.Count > 0)
             {
+                //Le mouvement est consideré comme accompli , on le retire
+                positions.Dequeue();
                 character.SetState(new FollowPathMovement(character, level, positions, loop, 0));
             }
             else
@@ -95,6 +105,6 @@ public class FollowPathMovement : State
             }
             
         }
-        character.Move(deltaPosition.normalized * currentWaypoint.speed);
+        character.Move(deltaPosition.normalized * (currentWaypoint != null ? currentWaypoint.speed : 1));
     }
 }
