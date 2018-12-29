@@ -5,17 +5,37 @@ using UnityEngine;
 using System.Linq;
 
 [System.Serializable]
-public struct Waypoints
+public class Waypoints
 {
     public bool loop;
     public List<WaypointElement> allWaypoints;
+
+    public Waypoints Clone()
+    {
+        Waypoints wp = new Waypoints();
+        wp.loop = loop;
+        wp.allWaypoints = new List<WaypointElement>();
+        foreach(WaypointElement we in allWaypoints)
+        {
+            wp.allWaypoints.Add(we.Clone());
+        }
+        return wp;
+    }
 }
 
 [System.Serializable]
-public struct WaypointElement
+public class WaypointElement
 {
     public Vector3 targetPosition;
     public float speed;
+
+    public WaypointElement Clone()
+    {
+        WaypointElement output = new WaypointElement();
+        output.targetPosition = targetPosition;
+        output.speed = speed;
+        return output;
+    }
 }
 
 public class Enemy : Character {
@@ -44,7 +64,19 @@ public class Enemy : Character {
     public int maxBullets = 5;
     public float shootRadius = 1f;
 
-    public Waypoints Waypoints { get; set; }
+    Waypoints waypoints;
+    public Waypoints Waypoints
+    {
+        get
+        {
+            return waypoints;
+        }
+
+        set
+        {
+            waypoints = value;
+        }
+    }
 
     public GameObject player;
     public Level level;
@@ -79,6 +111,12 @@ public class Enemy : Character {
         StartCoroutine(Freeze(0.1f));
     }
 
+    public void SetWaypointsAndApply(Waypoints value)
+    {
+        Waypoints = value;
+        FollowPath();
+    }
+
     /// <summary>
     /// L'ennemi a subit des degats
     /// </summary>
@@ -106,8 +144,11 @@ public class Enemy : Character {
     private void FollowPath()
     {
         //Toutes les positions globales
-        Queue<WaypointElement> allPos = new Queue<WaypointElement>(Waypoints.allWaypoints);
-        SetState(new FollowPathMovement(this, level, allPos, Waypoints.loop));
+        if (Waypoints.allWaypoints != null)
+        {
+            Queue<WaypointElement> allPos = new Queue<WaypointElement>(Waypoints.allWaypoints);
+            SetState(new FollowPathMovement(this, level, allPos, Waypoints.loop));
+        }
     }
 
     private void FollowRandomPath()

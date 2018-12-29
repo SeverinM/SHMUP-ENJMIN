@@ -40,7 +40,10 @@ public class Level : Layers {
         foreach (GameObject generator in generators)
         {
             //Le generateur lit ses propres vagues
-            generator.GetComponent<Generator>().SetState(new GenerateEnemies(generator.GetComponent<Generator>(), generator.GetComponent<Generator>().AllWaves));
+            if (generator.GetComponent<Generator>().AllWaves.Count > 0)
+            {
+                generator.GetComponent<Generator>().SetState(new GenerateEnemies(generator.GetComponent<Generator>(), generator.GetComponent<Generator>().AllWaves));
+            }
         }
 
     }

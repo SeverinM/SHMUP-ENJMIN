@@ -4,21 +4,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public struct Wave
+public class Wave
 {
     public List<WaveElement> allEnnemies;
     public float delay;
 }
 
 [System.Serializable]
-public struct WaveElement
+public class WaveElement
 {
     public Enemy.EnemyType enn;
     public float spawnAfter;
-    public Waypoints Waypoints { get; set; }
+    public Waypoints Waypoints;
     //Cet attribut est utilisé uniquement dans l'outil
     [HideInInspector]
     public bool selected;
+    [HideInInspector]
+    public bool spawned;
+
+    public void End()
+    {
+        spawned = true;
+    }
 }
 /// <summary>
 /// Un objet character PEUT avoir des etats , agissant comme une machine d'etat

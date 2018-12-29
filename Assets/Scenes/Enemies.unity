@@ -368,7 +368,7 @@ Transform:
   m_LocalScale: {x: 4, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 1547554374}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &786555243
 MonoBehaviour:
@@ -391,20 +391,21 @@ MonoBehaviour:
   levelObject: {fileID: 1502083408}
   allWaves:
   - allEnnemies:
-    - enn: 1
-      spawnAfter: 1
-      selected: 0
-    - enn: 2
-      spawnAfter: 0.4
-      selected: 0
-    delay: 0
-  - allEnnemies:
     - enn: 0
       spawnAfter: 0
-      selected: 0
-    - enn: 0
-      spawnAfter: 0
-      selected: 0
+      Waypoints:
+        loop: 1
+        allWaypoints:
+        - targetPosition: {x: -7.871154, y: 3.5988712, z: 12.455876}
+          speed: 2
+        - targetPosition: {x: -7.871153, y: 3.5988736, z: -2.3711758}
+          speed: 2
+        - targetPosition: {x: -0.0000009536743, y: 3.5988731, z: 0.09999943}
+          speed: 2
+        - targetPosition: {x: 19.677881, y: 3.598875, z: -12.2558775}
+          speed: 2
+      selected: 1
+      spawned: 0
     delay: 0
 --- !u!54 &786555244
 Rigidbody:
@@ -439,7 +440,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &891332479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -924,8 +925,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 786555242}
   - {fileID: 2145518212}
+  - {fileID: 786555242}
   - {fileID: 891332483}
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -994,7 +995,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2145518208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1080,5 +1081,5 @@ Transform:
   m_LocalScale: {x: 4, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 1547554374}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

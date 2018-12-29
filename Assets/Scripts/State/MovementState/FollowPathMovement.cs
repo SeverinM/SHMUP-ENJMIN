@@ -95,6 +95,6 @@ public class FollowPathMovement : State
             }
             
         }
-        character.Move(deltaPosition.normalized * character.GetScale());
+        character.Move(deltaPosition.normalized * currentWaypoint.speed);
     }
 }

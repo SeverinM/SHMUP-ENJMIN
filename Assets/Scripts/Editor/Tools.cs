@@ -15,8 +15,6 @@ public class Tools : EditorWindow {
     SerializedProperty serWaves;
     public Waypoints waypoints;
 
-    //Position absolu des waypoints actuels
-    static List<Vector3> positionsAbsolutes;
     Generator currentGen;
 
 	[MenuItem("Outils GD/Ennemies et spawner")]
@@ -70,7 +68,7 @@ public class Tools : EditorWindow {
         {
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.PropertyField(listWaypoints.GetArrayElementAtIndex(i).FindPropertyRelative("targetPosition"), new GUIContent(""));
-            EditorGUILayout.PropertyField(listWaypoints.GetArrayElementAtIndex(i).FindPropertyRelative("speed"), new GUIContent(""));
+            EditorGUILayout.PropertyField(listWaypoints.GetArrayElementAtIndex(i).FindPropertyRelative("speed"), new GUIContent("Vitesse"));
             if (i > 0 && GUILayout.Button("Up"))
             {
                 listWaypoints.MoveArrayElement(i, i - 1);
@@ -90,6 +88,11 @@ public class Tools : EditorWindow {
         {
             listWaypoints.InsertArrayElementAtIndex(0);
         }
+        if (listWaypoints.arraySize > 0 && GUILayout.Button("Supprimer"))
+        {
+            listWaypoints.DeleteArrayElementAtIndex(listWaypoints.arraySize - 1);       
+        }
+
         EditorGUI.BeginDisabledGroup(selectedNumber() == 0);
         List<WaveElement> allElem = new List<WaveElement>();
         if (GUILayout.Button("Appliquer"))
@@ -102,13 +105,19 @@ public class Tools : EditorWindow {
                 }
             }
 
+            //Applique les waypoints a tous les ennemies concernés
             for (int i = 0; i < allElem.Count; i++)
             {
                 WaveElement elem = allElem[i];
-                elem.Waypoints = waypoints;
+                elem.Waypoints = waypoints.Clone();
+                foreach(WaypointElement wE in elem.Waypoints.allWaypoints)
+                {
+                    wE.targetPosition = Tools.GetPositionAbsolute(wE.targetPosition);
+                }
             }
         }
         EditorGUI.EndDisabledGroup();
+        GUILayout.Space(20);
 
         float distance = 10;
         //distance camera / level pour l'affichage du plan
@@ -182,14 +191,32 @@ public class Tools : EditorWindow {
         instance = null;
     }
 
+    static Vector3 GetPositionAbsolute(Vector3 input)
+    {
+        if (staticLvl == null)
+        {
+            throw new System.Exception("vous devez avoir un level de selectionné");
+        }
+
+        float coeff = Vector3.Distance(staticLvl.transform.position, Camera.main.transform.position);
+        //Recuperation des quatres coins
+        Vector3 leftBottom = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, coeff));
+        Vector3 leftTop = Camera.main.ScreenToWorldPoint(new Vector3(0, Camera.main.pixelHeight, coeff));
+        Vector3 rightBottom = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, 0, coeff));
+        Vector3 rightTop = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight, coeff));
+
+        Vector3 xAxis = rightBottom - leftBottom;
+        Vector3 yAxis = leftTop - leftBottom;
+        Vector3 finalPosition = leftBottom + (xAxis * input.x) + (yAxis * input.z);
+
+        return finalPosition;
+    }
+
     [DrawGizmo(GizmoType.NotInSelectionHierarchy | GizmoType.Selected)]
     static void Draw(Level lvl, GizmoType type)
     {
         if (instance != null && lvl == staticLvl)
         {
-            if (positionsAbsolutes != null)
-                positionsAbsolutes.Clear();
-
             //Distance par rapport a la camera
             float coeff = Vector3.Distance(lvl.transform.position, Camera.main.transform.position);
             //Recuperation des quatres coins
@@ -199,6 +226,9 @@ public class Tools : EditorWindow {
             Vector3 rightTop = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight, coeff));
             Vector3 pos = lvl.transform.position;
             Vector3 previousPosition = Vector3.zero;
+            Vector3 firstPosition = Vector3.zero;
+            Vector3 lastPosition = Vector3.zero;
+
             float value;
 
             SerializedProperty allWaypoints = ser.FindPropertyRelative("allWaypoints");
@@ -206,24 +236,34 @@ public class Tools : EditorWindow {
             {
                 value = (float)i / (allWaypoints.arraySize - 1);
                 Gizmos.color = Color.Lerp(Color.green, Color.red, value);
-                Vector3 position = allWaypoints.GetArrayElementAtIndex(i).FindPropertyRelative("targetPosition").vector3Value;
-                Vector3 xAxis = rightBottom - leftBottom;
-                Vector3 yAxis = leftTop - leftBottom;
-                Vector3 finalPosition = leftBottom + (xAxis * position.x) + (yAxis * position.z);
-                finalPosition = new Vector3(finalPosition.x, lvl.transform.position.y, finalPosition.z);
-                if (positionsAbsolutes != null)
-                    positionsAbsolutes.Add(finalPosition);
+                Vector3 finalPosition = GetPositionAbsolute(allWaypoints.GetArrayElementAtIndex(i).FindPropertyRelative("targetPosition").vector3Value);
 
-                Gizmos.color = Color.red;
+                //Gizmos.color = Color.red;
                 Gizmos.DrawSphere(finalPosition, 1);
-                Debug.Log(finalPosition);
                 if (i > 0)
                 {
                     Gizmos.DrawLine(previousPosition, finalPosition);
                 }
                 //A chaque fois , dessine par rapport au precedent waypoint
                 previousPosition = finalPosition;
-            }               
+
+                if (i == 0)
+                {
+                    firstPosition = finalPosition;
+                }
+
+                if (i == allWaypoints.arraySize - 1)
+                {
+                    lastPosition = finalPosition;
+                }
+            }
+
+            if(ser.FindPropertyRelative("loop").boolValue)
+            {
+                Gizmos.color = Color.magenta;
+                Gizmos.DrawLine(firstPosition, lastPosition);
+            }
+
             Gizmos.color = Color.white;
 
             //On trace un plan sur la scene
