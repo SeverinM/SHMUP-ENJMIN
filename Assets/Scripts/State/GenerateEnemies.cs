@@ -13,6 +13,7 @@ public class GenerateEnemies : State
     float timeSinceBegin = 0;
     Wave currentWave;
     List<Wave> wavesLeft;
+    int count;
 
     public GenerateEnemies(Character character, List<Wave> remainingWaves) : base(character)
     {
@@ -23,6 +24,7 @@ public class GenerateEnemies : State
         remainingWaves.Remove(currentWave);
         wavesLeft = remainingWaves;
         timeSinceBegin -= currentWave.delay;
+        count = currentWave.allEnnemies.Count;
     }
 
     public override void EndState()
@@ -60,14 +62,19 @@ public class GenerateEnemies : State
             if (x.spawnAfter < timeSinceBegin && !x.spawned)
             {
                 GameObject instanciated = level.Instanciate(x.enn, character.transform.position);
-                instanciated.GetComponent<Enemy>().enemyType = x.enn;
-                instanciated.GetComponent<Enemy>().SetWaypointsAndApply(x.Waypoints);
+                Enemy enn = instanciated.GetComponent<Enemy>();
+                enn.enemyType = x.enn;
+                enn.GetComponent<Enemy>().SetWaypointsAndApply(x.Waypoints);
+                enn.GetComponent<Enemy>().Destroyed += EnnemyDestroyed;
                 x.spawned = true;
             }
         });
+    }
 
-        //Plus d'ennemi a spawn , on peut passer a la vague suivante
-        if (currentWave.allEnnemies.Where(x => !x.spawned).Count() == 0)
+    void EnnemyDestroyed(Character chara)
+    {
+        count--;
+        if (count == 0)
         {
             NextState();
         }
