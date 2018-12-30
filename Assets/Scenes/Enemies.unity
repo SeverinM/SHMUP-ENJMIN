@@ -316,7 +316,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 786555238}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20, y: 0, z: 15}
+  m_LocalPosition: {x: -20, y: 3.23, z: 15}
   m_LocalScale: {x: 4, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 1547554374}
@@ -341,30 +341,15 @@ MonoBehaviour:
   levelObject: {fileID: 1502083408}
   allWaves:
   - allEnnemies:
-    - enn: 0
+    - enn: 1
       spawnAfter: 0
       Waypoints:
         loop: 1
         allWaypoints:
-        - targetPosition: {x: -7.871153, y: 3.5988736, z: -2.3711758}
-          speed: 2
-        - targetPosition: {x: -7.871154, y: 3.5988712, z: 12.455876}
-          speed: 2
-        - targetPosition: {x: -19.677881, y: 3.5988736, z: -2.3711758}
-          speed: 2
-      selected: 1
-      spawned: 0
-    - enn: 1
-      spawnAfter: 2
-      Waypoints:
-        loop: 1
-        allWaypoints:
-        - targetPosition: {x: -7.871153, y: 3.5988736, z: -2.3711758}
-          speed: 2
-        - targetPosition: {x: -7.871154, y: 3.5988712, z: 12.455876}
-          speed: 2
-        - targetPosition: {x: -19.677881, y: 3.5988736, z: -2.3711758}
-          speed: 2
+        - targetPosition: {x: -19.677883, y: 3.5988731, z: 0.09999943}
+          speed: 0.5
+        - targetPosition: {x: 19.67788, y: 3.5988731, z: 0.09999943}
+          speed: 0.5
       selected: 1
       spawned: 0
     delay: 0

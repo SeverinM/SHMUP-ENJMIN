@@ -35,7 +35,7 @@ public class PlayerWinch : State
         positionRelative = character.Context.ValuesOrDefault<Vector3>("Origin", Vector3.forward);
         speedTravel = character.Context.ValuesOrDefault<float>("SpeedWinch", 10);
         currentMode = character.Context.ValuesOrDefault<HookMode>("HookMode", HookMode.Winch);
-        target = character.Context.ValuesOrDefault<Transform>("Target", target);
+        target = character.Context.ValuesOrDefault<Transform>("Target", null);
     }
 
     public override void EndState()
@@ -84,6 +84,12 @@ public class PlayerWinch : State
             line.SetPosition(0, hook.position);
             line.SetPosition(1, hook.position);
             NextState();
+
+            //Si le pere est un ennemie , le faire passer dans l'etat suivant
+            if (target.parent.GetComponent<Enemy>() != null)
+            {
+                target.parent.GetComponent<Enemy>().ActualState.NextState();
+            }
         }
     }
 }

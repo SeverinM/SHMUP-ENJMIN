@@ -239,7 +239,6 @@ public class Tools : EditorWindow {
                 Gizmos.color = Color.Lerp(Color.green, Color.red, value);
                 Vector3 finalPosition = GetPositionAbsolute(allWaypoints.GetArrayElementAtIndex(i).FindPropertyRelative("targetPosition").vector3Value);
 
-                //Gizmos.color = Color.red;
                 Gizmos.DrawSphere(finalPosition, 1);
                 if (i > 0)
                 {

@@ -8,7 +8,7 @@ public class FreezeMovement : State
 {
 
     private float shake = 1f;
-    private float shakeAmount = 0.1f;
+    private float shakeAmount = 0.05f;
     private float decreaseFactor = 1.0f;
 
     State movement;
@@ -32,7 +32,7 @@ public class FreezeMovement : State
 
     public override void NextState()
     {
-        base.NextState();
+        character.SetState(movement);
     }
 
     public override void StartState()
@@ -47,12 +47,5 @@ public class FreezeMovement : State
             character.transform.position += Random.insideUnitSphere * shakeAmount;
             shake -= Time.deltaTime * decreaseFactor;
         }
-        else
-        {
-            // Détacher le grappin
-            level.Player.GetComponent<Player>().SetState(new PlayerMovement(level.Player.GetComponent<Player>()));
-            character.SetState(movement);
-        }
-    
     }
 }

@@ -98,6 +98,7 @@ public class FollowPathMovement : State
             }
             
         }
+        character.transform.forward = deltaPosition;
         character.Move(deltaPosition.normalized * (currentWaypoint != null ? currentWaypoint.speed : 1));
     }
 }
