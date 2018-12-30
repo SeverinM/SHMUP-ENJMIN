@@ -12,12 +12,9 @@ public class FollowPathMovement : State
     WaypointElement currentWaypoint;
 
     private Vector3 deltaPosition;
-
-    private Level level;
-
     private bool loop;
 
-    public FollowPathMovement(Character character, Level level, Queue<WaypointElement> allPos, bool loop, float noiseCoeff = 0) : base(character)
+    public FollowPathMovement(Character character, Queue<WaypointElement> allPos, bool loop, float noiseCoeff = 0) : base(character)
     {
         character.Context.Remove("Target");
         positions = allPos;
@@ -31,22 +28,13 @@ public class FollowPathMovement : State
             targetPosition = character.transform.position + new Vector3(1, 0, 1);
         }
 
-        Vector3 randomValue;
-        if (level != null)
-        {
-            randomValue = new Vector3(Random.Range(level.minBounds.x, level.maxBounds.y), 0, Random.Range(level.maxBounds.x, level.maxBounds.y));
-        }
-        else
-        {
-            randomValue = new Vector3(Random.Range(-2,2), 0, Random.Range(-2, 2));
-        }
-        
+        Vector3 randomValue = new Vector3(Random.Range(-2, 2), 0, Random.Range(-2, 2));
+
         targetPosition += (randomValue * noiseCoeff);
 
         //On l'aligne sur l'axe y par rapport au joueur 
         targetPosition = new Vector3(targetPosition.x, character.transform.position.y, targetPosition.z);
         this.loop = loop;
-        this.level = level;
         character.transform.forward = targetPosition - character.transform.position;
     }
 
@@ -66,12 +54,12 @@ public class FollowPathMovement : State
         if (coll.tag == "FollowParent")
         {
             character.Context.SetInDictionary("Target", coll.transform.parent);
-            character.SetState(new EnemyMovement(character, level, coll.transform.parent,positions));
+            character.SetState(new EnemyMovement(character, coll.transform.parent,positions));
         }
 
         if (coll.tag == "Hook")
         {
-            character.SetState(new FreezeMovement(character, character.ActualState, level));
+            character.SetState(new FreezeMovement(character, character.ActualState));
         }
     }
 
@@ -95,13 +83,13 @@ public class FollowPathMovement : State
             {
                 //Le mouvement est consideré comme accompli , on le retire
                 positions.Dequeue();
-                character.SetState(new FollowPathMovement(character, level, positions, loop, 0));
+                character.SetState(new FollowPathMovement(character, positions, loop, 0));
             }
             else
             {
                 if (loop && (Enemy)character != null)
                 {
-                    character.SetState(new FollowPathMovement(character, level, new Queue<WaypointElement>(((Enemy)character).Waypoints.allWaypoints), ((Enemy)character).Waypoints.loop));
+                    character.SetState(new FollowPathMovement(character,new Queue<WaypointElement>(((Enemy)character).Waypoints.allWaypoints), ((Enemy)character).Waypoints.loop));
                 }
                 else
                 {

@@ -57,12 +57,67 @@ public class Enemy : Character {
     [SerializeField]
     protected int HP = 0;
 
-    public float attackRange = 8.0f;
-    public float shootPeriod = 2.0f;
-    public int shootAmount = 3;
-    public float shootSpeed = 8;
-    public int maxBullets = 5;
-    public float shootRadius = 1f;
+    [SerializeField]
+    //Si la distance ennemi / joueur est inferieur a cette distance , l'ennemi va attaquer le joueur au lieu de poursuivre
+    protected float attackRange = 2.0f;
+    public float AttackRange
+    {
+        get
+        {
+            return attackRange;
+        }
+    }
+
+    [SerializeField]
+    protected float shootPeriod = 2.0f;
+    public float ShootPeriod
+    {
+        get
+        {
+            return shootPeriod;
+        }
+    }
+
+    [SerializeField]
+    protected int shootAmount = 3;
+    public int ShootAmount
+    {
+        get
+        {
+            return shootAmount;
+        }
+    }
+
+    [SerializeField]
+    //A quel vitesse les balles progressent
+    protected float shootSpeed = 8;
+    public float ShootSpeed
+    {
+        get
+        {
+            return shootSpeed;
+        }
+    }
+
+    [SerializeField]
+    protected int maxBullets = 5;
+    public float MaxBullets
+    {
+        get
+        {
+            return maxBullets;
+        }
+    }
+
+    [SerializeField]
+    protected float shootRadius = 1f;
+    public float ShootRadius
+    {
+        get
+        {
+            return shootRadius;
+        }
+    }
 
     Waypoints waypoints;
     public Waypoints Waypoints
@@ -79,7 +134,20 @@ public class Enemy : Character {
     }
 
     public GameObject player;
-    public Level level;
+
+    [SerializeField]
+    Level level;
+    public Level Level
+    {
+        get
+        {
+            return level;
+        }
+        set
+        {
+            level = value;
+        }
+    }
 
     [SerializeField]
     private GameObject bulletPrefab;
@@ -92,6 +160,7 @@ public class Enemy : Character {
 
     private void Start()
     {
+        Context.SetInDictionary("Level", level);
         switch (movementType)
         {
             case EnemyMovementType.FOLLOW_GAME_OBJECT:
@@ -106,39 +175,10 @@ public class Enemy : Character {
         }
     }
 
-    public void StartFreeze()
-    {
-        StartCoroutine(Freeze(0.1f));
-    }
-
     public void SetWaypointsAndApply(Waypoints value)
     {
         Waypoints = value;
         FollowPath();
-    }
-
-    /// <summary>
-    /// L'ennemi a subit des degats
-    /// </summary>
-    /// <param name="duration"></param>
-    /// <returns></returns>
-    IEnumerator Freeze(float duration = 1)
-    {
-        Life -= 1;
-        if (Life > 0)
-        {
-            StartRecovery(duration * 10);
-        }
-
-        else
-        {
-            GetComponent<Collider>().enabled = false;
-            GetComponent<MeshRenderer>().enabled = false;
-            Constants.TimeScalePlayer = 0;
-            yield return new WaitForSeconds(duration);
-            Constants.TimeScalePlayer = 1;
-            Destroy(gameObject);
-        }
     }
 
     private void FollowPath()
@@ -147,13 +187,13 @@ public class Enemy : Character {
         if (Waypoints.allWaypoints != null)
         {
             Queue<WaypointElement> allPos = new Queue<WaypointElement>(Waypoints.allWaypoints);
-            SetState(new FollowPathMovement(this, level, allPos, Waypoints.loop));
+            SetState(new FollowPathMovement(this,allPos, Waypoints.loop));
         }
     }
 
     private void FollowRandomPath()
     {
-        SetState(new EnemyMovement(this, level, player.transform, new Queue<WaypointElement>()));
+        SetState(new EnemyMovement(this,player.transform, new Queue<WaypointElement>()));
     }
 
     public void Shoot()
@@ -194,7 +234,7 @@ public class Enemy : Character {
 
     private void FollowGameObject()
     {
-        SetState(new EnemyMovement(this, level, player.transform, new Queue<WaypointElement>()));
+        SetState(new EnemyMovement(this,player.transform, new Queue<WaypointElement>()));
     }
 
     public override float GetScale()

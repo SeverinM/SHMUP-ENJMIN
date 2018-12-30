@@ -14,10 +14,10 @@ public class FreezeMovement : State
     State movement;
     Level level;
 
-    public FreezeMovement(Character character, State movement, Level level) : base(character)
+    public FreezeMovement(Character character, State movement) : base(character)
     {
         this.movement = movement;
-        this.level = level;
+        level = character.Context.ValuesOrDefault<Level>("Level", null);
     }
 
     public override void EndState()

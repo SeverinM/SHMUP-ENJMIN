@@ -6,9 +6,9 @@ public class PlayerWinch : State
     Transform hook;
     Transform shield;
     Transform target;
-    
+
     //Position du vaisseau AVANT d'etre tracté
-    Vector3 origin;
+    Vector3 origin = Vector3.zero;
 
     //Vitesse de traversé du hook
     float speedTravel;

@@ -84,20 +84,28 @@ public class Level : Layers {
         }
 
         GameObject toAdd = Instantiate(character, position, Quaternion.identity);
-        toAdd.GetComponent<Enemy>().level = this;
+        toAdd.GetComponent<Enemy>().Level = this;
         toAdd.GetComponent<Enemy>().player = Player;
         characters.Add(toAdd);
+
+        //On cable des evenements
+        toAdd.GetComponent<Enemy>().Destroyed += Remove;
+        toAdd.GetComponent<Enemy>().TryReachingPlayer += Level_TryReachingPlayer;
         return toAdd;
+    }
+
+    private Player Level_TryReachingPlayer()
+    {
+        return player;
     }
 
     /// <summary>
     /// Remove a character from the list so it can't be updated anymore
     /// </summary>
     /// <param name="character"></param>
-    public void Remove(GameObject character)
+    public void Remove(Character character)
     {
-        characters.Remove(character);
-        Destroy(character);
+        characters.Remove(character.gameObject);
     }
 
     public override void OnFocusLost()

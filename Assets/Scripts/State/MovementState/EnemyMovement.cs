@@ -18,11 +18,11 @@ public class EnemyMovement : State
 
     Queue<WaypointElement> allElems;
 
-    public EnemyMovement(Character chara, Level level, Transform trsf, Queue<WaypointElement> elt) : base(chara)
+    public EnemyMovement(Character chara, Transform trsf, Queue<WaypointElement> elt) : base(chara)
     {
         allElems = elt;
         this.trsf = trsf;
-        this.level = level;
+        level = character.Context.ValuesOrDefault<Level>("Level", null);
         enemy = character.GetComponent<Enemy>();
     }
 
@@ -36,14 +36,18 @@ public class EnemyMovement : State
         deltaPosition = trsf.position - character.transform.position;
 
         // Si les ennemis ont atteint le joueur, ils rentrent dasn une phase d'attaque
-        if (Vector3.Distance(trsf.position, character.transform.position) <= Mathf.Abs(character.transform.position.y - trsf.position.y) + enemy.attackRange)
+        if (Vector3.Distance(trsf.position, character.transform.position) <= Mathf.Abs(character.transform.position.y - trsf.position.y) + enemy.AttackRange)
         {
-            character.SetState(new EnemyAttack(character, level, allElems));
+            character.SetState(new EnemyAttack(character,allElems));
         }
 
         Separate(level.characters);
 
-        character.Rotate(level.Player);
+        Player plyr = character.RaiseTryReaching();
+        if (plyr != null)
+        {
+            character.Rotate(plyr.gameObject);
+        }
         character.Move(deltaPosition.normalized);
     }
 
@@ -61,7 +65,7 @@ public class EnemyMovement : State
     {
         if (coll.tag == "FollowParent")
         {
-            character.SetState(new FollowPathMovement(character, level, allElems, ((Enemy)character).Waypoints.loop));
+            character.SetState(new FollowPathMovement(character, allElems, ((Enemy)character).Waypoints.loop));
         }
     }
 
