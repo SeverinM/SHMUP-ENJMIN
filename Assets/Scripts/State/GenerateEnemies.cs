@@ -22,6 +22,7 @@ public class GenerateEnemies : State
         currentWave = remainingWaves[remainingWaves.Count - 1];
         remainingWaves.Remove(currentWave);
         wavesLeft = remainingWaves;
+        timeSinceBegin -= currentWave.delay;
     }
 
     public override void EndState()
@@ -36,7 +37,14 @@ public class GenerateEnemies : State
 
     public override void NextState()
     {
-        base.NextState();
+        if (wavesLeft.Count > 0)
+        {
+            character.SetState(new GenerateEnemies(character, wavesLeft));
+        }
+        else
+        {
+            character.SetState(null);
+        }
     }
 
     public override void StartState()
@@ -61,14 +69,7 @@ public class GenerateEnemies : State
         //Plus d'ennemi a spawn , on peut passer a la vague suivante
         if (currentWave.allEnnemies.Where(x => !x.spawned).Count() == 0)
         {
-            if (wavesLeft.Count > 0)
-            {
-                character.SetState(new GenerateEnemies(character, wavesLeft));
-            }
-            else
-            {
-                character.SetState(null);
-            }
+            NextState();
         }
     }
 }
