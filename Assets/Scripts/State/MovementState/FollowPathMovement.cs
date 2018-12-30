@@ -77,12 +77,13 @@ public class FollowPathMovement : State
     {
         deltaPosition = targetPosition - character.transform.position;
 
-        if (Vector3.Distance(targetPosition, character.transform.position) < 0.1f)
+        //Waypoint atteint ?
+        if (Vector3.Distance(targetPosition, character.transform.position) < (currentWaypoint.speed * Time.deltaTime * 4))
         {
+            positions.Dequeue();
+            //Encore des waypoints a atteindre ?
             if (positions.Count > 0)
             {
-                //Le mouvement est consideré comme accompli , on le retire
-                positions.Dequeue();
                 character.SetState(new FollowPathMovement(character, positions, loop, 0));
             }
             else
@@ -99,6 +100,6 @@ public class FollowPathMovement : State
             
         }
         character.transform.forward = deltaPosition;
-        character.Move(deltaPosition.normalized * (currentWaypoint != null ? currentWaypoint.speed : 1));
+        character.Move(deltaPosition.normalized * currentWaypoint.speed);
     }
 }

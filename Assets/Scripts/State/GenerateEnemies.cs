@@ -54,7 +54,6 @@ public class GenerateEnemies : State
                 GameObject instanciated = level.Instanciate(x.enn, character.transform.position);
                 instanciated.GetComponent<Enemy>().enemyType = x.enn;
                 instanciated.GetComponent<Enemy>().SetWaypointsAndApply(x.Waypoints);
-                Debug.Log(x.Waypoints.allWaypoints);
                 x.spawned = true;
             }
         });
