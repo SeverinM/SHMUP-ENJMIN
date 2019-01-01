@@ -55,6 +55,9 @@ public class Level : Layers
             generator.GetComponent<Generator>().SetState(new GenerateEnemies(generator.GetComponent<Generator>()));
         }
 
+        // Provisoirement
+        GameObject toAddText = Instantiate(text, canvas.transform);
+        characterTexts.Add(player.gameObject, toAddText.GetComponent<Text>());
     }
 
     public void Update()
@@ -73,7 +76,7 @@ public class Level : Layers
         foreach (KeyValuePair<GameObject, Text> value in characterTexts)
         {
             // Affichage de données depuis le GameObject
-            value.Value.text = value.Key.GetComponent<Enemy>().ActualState.ToString();
+            value.Value.text = value.Key.GetComponent<Character>().ActualState.ToString();
 
             // Position du texte au dessus d'un gameObject
             Vector3 offsetPos = new Vector3(value.Key.transform.position.x, value.Key.transform.position.y, value.Key.transform.position.z + 0.5f);

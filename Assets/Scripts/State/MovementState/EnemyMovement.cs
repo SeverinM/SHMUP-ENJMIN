@@ -68,7 +68,7 @@ public class EnemyMovement : State
     }
 
 
-    //Permet de separer les ennemies entre eux pour eviter qu'ils se marchent dessus
+    // Permet de separer les ennemies entre eux pour eviter qu'ils se marchent dessus
     void Separate(List<GameObject> characters)
     {
         float desiredseparation = 3f;

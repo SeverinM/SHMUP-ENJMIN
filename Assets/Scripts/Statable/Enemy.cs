@@ -28,6 +28,8 @@ public class Enemy : Character {
     public float shootSpeed = 8;
     public int maxBullets = 5;
     public float shootRadius = 1f;
+    public float freezeDuration = 0.1f;
+
 
     [SerializeField]
     private GameObject bulletPrefab;
@@ -56,31 +58,7 @@ public class Enemy : Character {
 
     public void StartFreeze()
     {
-        StartCoroutine(Freeze(0.1f));
-    }
-
-    /// <summary>
-    /// L'ennemi a subit des degats
-    /// </summary>
-    /// <param name="duration"></param>
-    /// <returns></returns>
-    IEnumerator Freeze(float duration = 1)
-    {
-        Life -= 1;
-        if (Life > 0)
-        {
-            StartRecovery(duration * 10);
-        }
-
-        else
-        {
-            GetComponent<Collider>().enabled = false;
-            GetComponent<MeshRenderer>().enabled = false;
-            Constants.TimeScalePlayer = 0;
-            yield return new WaitForSeconds(duration);
-            Constants.TimeScalePlayer = 1;
-            level.Remove(gameObject);
-        }
+        SetState(new FreezeMovement(this, freezeDuration));
     }
 
     private void FollowPath()
