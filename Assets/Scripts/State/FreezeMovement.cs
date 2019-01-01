@@ -16,7 +16,7 @@ public class FreezeMovement : State
     public override void EndState()
     {
         Constants.TimeScalePlayer = 1;
-        character.level.Remove(character.gameObject);
+        character.level.Remove(character);
     }
 
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)
