@@ -26,9 +26,8 @@ public class Shield : MonoBehaviour {
 
         if (other.gameObject.tag == "Ennemy" && isWinching)
         {
-            other.GetComponent<Enemy>().StartDelayedTask(() => { Constants.TimeScaleEnnemies = 0; Constants.TimeScalePlayer = 0; },
-                0.2f,
-                () => { Constants.TimeScaleEnnemies = 1; Constants.TimeScalePlayer = 1; });
+            other.GetComponent<Character>().Life--;
+            other.GetComponent<Character>().StartRecovery(1);
         }
     }
 }

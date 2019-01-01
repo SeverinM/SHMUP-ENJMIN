@@ -127,7 +127,7 @@ public class Player : Character
         // Quand le joueur se fait toucher par un rigidBody
         
         //En suspens pour le moment
-        /*if (collision.gameObject.tag == "Bullet")
+        if (collision.gameObject.tag == "Bullet")
         {
             Impact(collision.relativeVelocity * hitForce);
             Destroy(collision.gameObject);
@@ -138,14 +138,14 @@ public class Player : Character
 
                 if (Life <= 0)
                 {
-                    level.Remove(gameObject);
+                    Destroy(gameObject);
                 }
                 else
                 {
                     StartRecovery(recoveryDuration);
                 }
             }
-        }*/
+        }
     }
 
     // Le joueur se voit propulsé dans la direction opposée à un impact reçu

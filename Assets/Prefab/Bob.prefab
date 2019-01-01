@@ -376,7 +376,7 @@ MonoBehaviour:
   moveSpeed: 5
   mass: 3
   recoveryMat: {fileID: 2100000, guid: 3615e864792955a4a912eda2c4bbddf0, type: 2}
-  life: 3
+  life: 1
   protection: {fileID: 0}
   level: {fileID: 0}
   HP: 0
