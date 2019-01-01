@@ -196,6 +196,7 @@ public class Enemy : Character {
         SetState(new EnemyMovement(this,player.transform, new Queue<WaypointElement>()));
     }
 
+    //Chaque ennemi agit differemment selon son type
     public void Shoot()
     {
         Rigidbody clone;

@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Dans cet etat , le joueur est en train de tracter ou d'etre tracté
+/// </summary>
 public class PlayerWinch : State
 {
     Transform hook;
@@ -35,14 +38,14 @@ public class PlayerWinch : State
         positionRelative = character.Context.ValuesOrDefault<Vector3>("Origin", Vector3.forward);
         speedTravel = character.Context.ValuesOrDefault<float>("SpeedWinch", 10);
         currentMode = character.Context.ValuesOrDefault<HookMode>("HookMode", HookMode.Winch);
-        target = character.Context.ValuesOrDefault<Transform>("Target", null);
+        target = character.Context.ValuesOrDefault<Transform>("TargetHook", null);
     }
 
     public override void EndState()
     {
         line.SetPosition(0, hook.position);
         shield.GetComponent<Shield>().IsWinching = false;
-        character.Context.Remove("Target");
+        character.Context.Remove("TargetHook");
     }
 
     public override void NextState()

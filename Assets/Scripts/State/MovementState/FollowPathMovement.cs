@@ -16,30 +16,27 @@ public class FollowPathMovement : State
 
     public FollowPathMovement(Character character, Queue<WaypointElement> allPos, bool loop, float noiseCoeff = 0) : base(character)
     {
-        character.Context.Remove("Target");
         positions = allPos;
+        //Si la queue n'est pas vide on prend la valeur cible sur le devant de la queu
         if (allPos.Count > 0)
         {
             currentWaypoint = allPos.Peek();
             targetPosition = currentWaypoint.targetPosition;
         }
+        //Dans le cas contraire la position cible et actuel sont la meme
         else
         {
-            targetPosition = character.transform.position + new Vector3(1, 0, 1);
+            targetPosition = character.transform.position;
         }
 
-        Vector3 randomValue = new Vector3(Random.Range(-2, 2), 0, Random.Range(-2, 2));
-
-        targetPosition += (randomValue * noiseCoeff);
-
-        //On l'aligne sur l'axe y par rapport au joueur 
-        targetPosition = new Vector3(targetPosition.x, character.transform.position.y, targetPosition.z);
+        targetPosition += new Vector3(Random.Range(-noiseCoeff, noiseCoeff), 0, Random.Range(-noiseCoeff, noiseCoeff));
         this.loop = loop;
-        character.transform.forward = targetPosition - character.transform.position;
     }
 
     public override void StartState()
     {
+        character.Context.Remove("Target");
+        character.transform.forward = targetPosition - character.transform.position;
         character.OnTriggerEnterChar += TriggerEnter;
     }
 
@@ -78,16 +75,17 @@ public class FollowPathMovement : State
         deltaPosition = targetPosition - character.transform.position;
 
         //Waypoint atteint ?
-        if (Vector3.Distance(targetPosition, character.transform.position) < (currentWaypoint.speed * Time.deltaTime * 4))
+        if (Vector3.Distance(targetPosition, character.transform.position) < (GetSpeed() * Time.deltaTime * 4))
         {
-            positions.Dequeue();
             //Encore des waypoints a atteindre ?
             if (positions.Count > 0)
             {
-                character.SetState(new FollowPathMovement(character, positions, loop, 0));
+                positions.Dequeue();
+                character.SetState(new FollowPathMovement(character, positions, loop));
             }
             else
             {
+                //On recommence
                 if (loop && (Enemy)character != null)
                 {
                     character.SetState(new FollowPathMovement(character,new Queue<WaypointElement>(((Enemy)character).Waypoints.allWaypoints), ((Enemy)character).Waypoints.loop));
@@ -100,6 +98,18 @@ public class FollowPathMovement : State
             
         }
         character.transform.forward = deltaPosition;
-        character.Move(deltaPosition.normalized * currentWaypoint.speed);
+        character.Move(deltaPosition.normalized * GetSpeed());
+    }
+
+    float GetSpeed()
+    {
+        if (currentWaypoint != null)
+        {
+            return currentWaypoint.speed;
+        }
+        else
+        {
+            return 1;
+        }
     }
 }

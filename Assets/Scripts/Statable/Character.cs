@@ -107,7 +107,11 @@ public abstract class Character : MonoBehaviour {
 
         set
         {
-            life = Mathf.Abs(value);
+            life = value;
+            if (life <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
