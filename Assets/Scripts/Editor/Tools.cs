@@ -5,7 +5,6 @@ using UnityEditor;
 using System.Linq;
 
 public class Tools : EditorWindow {
-    static float radius = 1;
     static Tools instance;
     static SerializedProperty ser;
     static SerializedObject obj;
@@ -196,7 +195,7 @@ public class Tools : EditorWindow {
     {
         if (staticLvl == null)
         {
-            throw new System.Exception("vous devez avoir un level de selectionné");
+            throw new System.Exception("Vous devez avoir un level de selectionné");
         }
 
         float coeff = Vector3.Distance(staticLvl.transform.position, Camera.main.transform.position);
@@ -220,12 +219,6 @@ public class Tools : EditorWindow {
         {
             //Distance par rapport a la camera
             float coeff = Vector3.Distance(lvl.transform.position, Camera.main.transform.position);
-            //Recuperation des quatres coins
-            Vector3 leftBottom = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, coeff));
-            Vector3 leftTop = Camera.main.ScreenToWorldPoint(new Vector3(0, Camera.main.pixelHeight, coeff));
-            Vector3 rightBottom = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, 0, coeff));
-            Vector3 rightTop = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight, coeff));
-            Vector3 pos = lvl.transform.position;
             Vector3 previousPosition = Vector3.zero;
             Vector3 firstPosition = Vector3.zero;
             Vector3 lastPosition = Vector3.zero;
@@ -244,7 +237,7 @@ public class Tools : EditorWindow {
                 {
                     Gizmos.DrawLine(previousPosition, finalPosition);
                 }
-                //A chaque fois , dessine par rapport au precedent waypoint
+                //A chaque fois , dessine un trait avec la position precedente
                 previousPosition = finalPosition;
 
                 if (i == 0)
@@ -258,6 +251,7 @@ public class Tools : EditorWindow {
                 }
             }
 
+            //On trace un trait violet si on a choist de loop
             if(ser.FindPropertyRelative("loop").boolValue)
             {
                 Gizmos.color = Color.magenta;
@@ -267,13 +261,13 @@ public class Tools : EditorWindow {
             Gizmos.color = Color.white;
 
             //On trace un plan sur la scene
-            Gizmos.DrawLine(pos + rightTop, pos + rightBottom);
+            Gizmos.DrawLine(GetPositionAbsolute(new Vector3(1, 0, 1)), GetPositionAbsolute(new Vector3(1, 0, 0)));
             Gizmos.color = Color.red;
-            Gizmos.DrawLine(pos + rightBottom, pos + leftBottom);
+            Gizmos.DrawLine(GetPositionAbsolute(new Vector3(1, 0, 0)), GetPositionAbsolute(new Vector3(0, 0, 0)));
             Gizmos.color = Color.blue;
-            Gizmos.DrawLine(pos + leftBottom, pos + leftTop);
+            Gizmos.DrawLine(GetPositionAbsolute(new Vector3(0, 0, 0)), GetPositionAbsolute(new Vector3(0, 0, 1)));
             Gizmos.color = Color.white;
-            Gizmos.DrawLine(pos + rightTop, pos + leftTop);
+            Gizmos.DrawLine(GetPositionAbsolute(new Vector3(1, 0, 1)), GetPositionAbsolute(new Vector3(0, 0, 1)));
         }
     }
 }
