@@ -209,58 +209,75 @@ RectTransform:
 --- !u!1001 &150030490
 Prefab:
   m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4741676917561938, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -8.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 4741676917561938, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 6.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4741676917561938, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -5.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 4741676917561938, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4741676917561938, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4741676917561938, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4741676917561938, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4741676917561938, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4103882718358818, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4840222661834636, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114938182685806996, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
-        type: 2}
-      propertyPath: level
-      value: 
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
-  m_IsPrefabAsset: 0
+  m_CorrespondingSourceObject: {fileID: 114938182685806996, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1198194201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7dd465f0ca588b4e81e4cb2410b52db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 6
+  mass: 3
+  recoveryMat: {fileID: 2100000, guid: 3615e864792955a4a912eda2c4bbddf0, type: 2}
+  life: 3
+  protection: {fileID: 1972949193}
+  level: {fileID: 0}
+  mode: 1
+  distanceDash: 2
+  hookSpeed: 0.7
+  rangeHook: 10
+  speedPull: 10
+  coeffHook: 0.1
+  impactDeceleration: 5
+  shield: {fileID: 377571174}
+  hook: {fileID: 1995706490}
+--- !u!1 &333625429
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1396100625644374, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 333625430}
+  - component: {fileID: 333625431}
+  m_Layer: 0
+  m_Name: ZoneTrigger
+  m_TagString: FollowParent
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &333625430
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 4389095621119108, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 333625429}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1198194202}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &333625431
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 136024051789553022, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 333625429}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 5.35
+  m_Height: 14.32
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &376157749
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,38 +448,13 @@ MonoBehaviour:
   life: 3
   protection: {fileID: 0}
   level: {fileID: 0}
+  enemyPrefab: {fileID: 1561519513433908, guid: 46c9216ca856d3e4d836743c1d9c8564,
+    type: 2}
   levelObject: {fileID: 1502083408}
-  allWaves:
-  - allEnnemies:
-    - enn: 0
-      spawnAfter: 0
-      Waypoints:
-        loop: 1
-        allWaypoints:
-        - targetPosition: {x: -0.0000009536743, y: 2.3999977, z: 0.09999943}
-          speed: 2
-        - targetPosition: {x: -4.640327, y: 2.3999965, z: 7.9288263}
-          speed: 2
-        - targetPosition: {x: 23.201628, y: 2.3999958, z: 13.148044}
-          speed: 2
-      selected: 1
-      spawned: 0
-    delay: 0
---- !u!54 &786555244
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 786555238}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  maxEnemies: 16
+  waves: 3
+  period: 1
+  radiusSize: 4
 --- !u!1 &891332478
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,8 +491,13 @@ MonoBehaviour:
   life: 3
   protection: {fileID: 0}
   level: {fileID: 0}
+  enemyPrefab: {fileID: 1663835522049710, guid: ae66e2c413491d642bb19e18f4749421,
+    type: 2}
   levelObject: {fileID: 1502083408}
-  allWaves: []
+  maxEnemies: 16
+  waves: 1
+  period: 1
+  radiusSize: 4
 --- !u!65 &891332480
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1171,8 +1168,13 @@ MonoBehaviour:
   life: 3
   protection: {fileID: 0}
   level: {fileID: 0}
+  enemyPrefab: {fileID: 1796657138515930, guid: 02c41df092ae0a142b8866396d0a138e,
+    type: 2}
   levelObject: {fileID: 1502083408}
-  allWaves: []
+  maxEnemies: 16
+  waves: 1
+  period: 0.5
+  radiusSize: 4
 --- !u!65 &2145518209
 BoxCollider:
   m_ObjectHideFlags: 0

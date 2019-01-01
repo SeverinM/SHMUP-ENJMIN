@@ -68,6 +68,7 @@ public class Enemy : Character {
         }
     }
 
+
     [SerializeField]
     protected float shootPeriod = 2.0f;
     public float ShootPeriod
