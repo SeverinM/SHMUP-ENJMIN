@@ -173,7 +173,7 @@ public class Player : Character
         hook.forward = transform.forward;
     }
 
-    public void AttatchHook(Transform transform)
+    public void AttachHook(Transform transform)
     {
         target = transform;
     }

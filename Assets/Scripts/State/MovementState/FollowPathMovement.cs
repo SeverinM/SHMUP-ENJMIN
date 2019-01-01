@@ -100,7 +100,7 @@ public class FollowPathMovement : State
             
         }
         character.transform.forward = deltaPosition;
-        character.Move(deltaPosition.normalized * GetSpeed());
+        character.Move(deltaPosition.normalized);
     }
 
     float GetSpeed()

@@ -11,15 +11,22 @@ public class PlayerMovementDuringHook : PlayerMovement {
     Vector3 originRelative = Vector3.zero;
     Transform hook;
     float coeff;
+    Player plr;
 
     public PlayerMovementDuringHook(Character chara) : base(chara)
     {
         originRelative = character.Context.ValuesOrDefault<Vector3>("Origin", Vector3.forward);
         hook = character.Context.ValuesOrDefault<Transform>("Hook", character.transform);
         coeff = character.Context.ValuesOrDefault<float>("CoeffHook", 0.1f);
+        plr = (Player)chara;
 
         //Le hook perd temporairement son statut d'enfant juste pour cet etat
         hook.parent = null;
+    }
+
+    public override void StartState()
+    {
+        plr.Target.parent.GetComponent<Character>().PersonalScale = 0;
     }
 
     public override void NextState()

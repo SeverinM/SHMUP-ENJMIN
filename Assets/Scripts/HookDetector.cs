@@ -14,14 +14,14 @@ public class HookDetector : MonoBehaviour
         if (other.tag == "Pullable") 
         {
             player.Context.SetInDictionary("HookMode", PlayerWinch.HookMode.Pull);
-            player.AttatchHook(other.transform);
+            player.AttachHook(other.transform);
             player.ActualState.NextState();
         }
 
         if (other.tag == "Winchable")
         {
             player.Context.SetInDictionary("HookMode", PlayerWinch.HookMode.Winch);
-            player.Context.SetInDictionary("TargetHook", other.transform);
+            player.AttachHook(other.transform);
             player.ActualState.NextState();
         }
     }

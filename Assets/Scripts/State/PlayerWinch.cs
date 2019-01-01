@@ -35,6 +35,7 @@ public class PlayerWinch : State
     public override void EndState()
     {
         shield.GetComponent<Shield>().IsWinching = false;
+        player.Target.parent.GetComponent<Character>().PersonalScale = 1;
     }
 
     public override void NextState()
@@ -73,9 +74,9 @@ public class PlayerWinch : State
             NextState();
 
             //Si le pere est un ennemie , le faire passer dans l'etat suivant
-            if (((Player)character).Target.parent.GetComponent<Enemy>() != null)
+            if (player.Target.parent.GetComponent<Enemy>() != null)
             {
-                ((Player)character).Target.parent.GetComponent<Enemy>().ActualState.NextState();
+                player.Target.parent.GetComponent<Enemy>().ActualState.NextState();
             }
         }
     }

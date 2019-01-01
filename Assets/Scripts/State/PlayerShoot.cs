@@ -46,7 +46,7 @@ public class PlayerShoot : State
     public override void UpdateState()
     {
         player.Hook.transform.Translate(player.Hook.forward * speedTravel * character.GetScale(), Space.World);
-        player.AttatchHook(character.transform);
+        //player.AttachHook(character.transform);
         
         if (Vector3.Distance(character.transform.position, player.Hook.transform.position) >= maxDistance)
         {
