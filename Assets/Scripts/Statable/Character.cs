@@ -88,9 +88,11 @@ public abstract class Character : MonoBehaviour {
     [Tooltip("Nombre de point de vie du personnage , un nombre negatif equivaut a 1")]
     protected float life = 3;
 
+    internal GameObject protection;
+
     [SerializeField]
     [Header("Sci-fi magnetic protection")]
-    internal GameObject protection;
+    internal GameObject protectionPrefab;
 
     public Level level;
 

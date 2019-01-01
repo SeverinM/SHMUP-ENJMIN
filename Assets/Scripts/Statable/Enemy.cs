@@ -160,6 +160,8 @@ public class Enemy : Character {
                 FollowRandomPath();
                 break;
         }
+
+        protection = Instantiate(protectionPrefab, transform);
     }
 
     public void SetWaypointsAndApply(Waypoints value)

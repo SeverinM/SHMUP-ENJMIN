@@ -75,8 +75,8 @@ public class Level : Layers
         }
 
         // Provisoirement
-        GameObject toAddText = Instantiate(text, canvas.transform);
-        characterTexts.Add(player.gameObject, toAddText.GetComponent<Text>());
+        // GameObject toAddText = Instantiate(text, canvas.transform);
+        // characterTexts.Add(player.gameObject, toAddText.GetComponent<Text>());
     }
 
     public void Update()

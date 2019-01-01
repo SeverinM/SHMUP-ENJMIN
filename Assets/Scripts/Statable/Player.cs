@@ -100,6 +100,8 @@ public class Player : Character
         origin = hook.transform.localPosition;
         ResetHook();
 
+        protection = Instantiate(protectionPrefab, transform);
+
         actualState = new PlayerMovement(this);
     }
 
