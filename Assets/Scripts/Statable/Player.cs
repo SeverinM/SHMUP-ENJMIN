@@ -72,6 +72,12 @@ public class Player : Character
         }
     }
 
+    internal LineRenderer line;
+
+    internal Transform target;
+
+    internal Vector3 origin;
+
     void Start()
     {
         context.SetInDictionary("Mode", mode);
@@ -82,6 +88,12 @@ public class Player : Character
         context.SetInDictionary("RangeDash", distanceDash);
         context.SetInDictionary("CoeffHook", coeffHook);
         context.SetInDictionary("RangeDash", rangeHook);
+
+        line = hook.GetComponent<LineRenderer>();
+
+        origin = hook.transform.position;
+        ResetHook();
+
         actualState = new PlayerMovement(this);
     }
 
@@ -100,11 +112,13 @@ public class Player : Character
         // impact vanishes to zero over time
         impact = Vector3.Lerp(impact, Vector3.zero, impactDeceleration * Time.deltaTime);
 
-
+        line.SetPosition(0, transform.position);
+        line.SetPosition(1, hook.transform.position);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        // Quand le joueur se fait toucher par un rigidBody
         if (collision.gameObject.tag == "Bullet")
         {
             Impact(collision.relativeVelocity * hitForce);
@@ -116,7 +130,7 @@ public class Player : Character
 
                 if (Life <= 0)
                 {
-                    Destroy(gameObject);
+                    level.Remove(gameObject);
                 }
                 else
                 {
@@ -126,15 +140,11 @@ public class Player : Character
         }
     }
 
-    protected override void OnTriggerEnter(Collider other)
-    {
-        // RigidBody
-    }
-
+    // Le joueur se voit propulsé dans la direction opposée à un impact reçu
     public void Impact(Vector3 force)
     {
         Vector3 dir = force.normalized;
-        dir.y = 0.5f;
+        dir.y = 0.5f; // En hauteur
         impact += dir.normalized * force.magnitude / mass;
     }
 
@@ -146,5 +156,16 @@ public class Player : Character
     public override float GetScale()
     {
         return Constants.TimeScalePlayer;
+    }
+
+    public void ResetHook()
+    {
+        hook.transform.localPosition = origin;
+        target = hook.transform;
+    }
+
+    public void AttatchHook(Transform transform)
+    {
+        target = transform;
     }
 }

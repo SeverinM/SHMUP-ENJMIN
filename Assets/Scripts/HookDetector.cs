@@ -13,15 +13,15 @@ public class HookDetector : MonoBehaviour
         // Success on Hook
         if (other.tag == "Pullable") 
         {
-            GetComponent<LineRenderer>().SetPosition(0, transform.position);
+            //GetComponent<LineRenderer>().SetPosition(0, transform.position);
             player.Context.SetInDictionary("HookMode", PlayerWinch.HookMode.Pull);
-            player.Context.SetInDictionary("Target", other.transform);
+            player.AttatchHook(other.transform);
             player.ActualState.NextState();
         }
 
         if (other.tag == "Winchable")
         {
-            GetComponent<LineRenderer>().SetPosition(0, transform.position);
+            //GetComponent<LineRenderer>().SetPosition(0, transform.position);
             player.Context.SetInDictionary("HookMode", PlayerWinch.HookMode.Winch);
             player.ActualState.NextState();
         }

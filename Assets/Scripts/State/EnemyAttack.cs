@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 /// <summary>
-/// Each enemy can shoot the player according to a shoot period
+/// Chaque ennemi tire sur le joueur selon une période de temps
 /// </summary>
 public class EnemyAttack : State
 {
@@ -34,7 +34,7 @@ public class EnemyAttack : State
 
     public override void NextState()
     {
-        //Wander 
+        // Déambulation
         character.SetState(new FollowPathMovement(character, level, new Queue<Vector3>(), true, 1));
     }
 
@@ -45,7 +45,7 @@ public class EnemyAttack : State
 
     public override void UpdateState()
     {
-        // Attacks according to shootPeriod
+        // Lance une attaque selon la periode
         if (lastTime < Time.time)
         {
             lastTime += enemy.shootPeriod;

@@ -32,7 +32,7 @@ public class EnemyMovement : State
     {
         deltaPosition = trsf.position - character.transform.position;
 
-        // Si les ennemis ont atteint le joueur, ils rentrent dasn une phase d'attaque
+        // Si les ennemis ont atteint le joueur, ils rentrent dans une phase d'attaque
         if (Vector3.Distance(trsf.position, character.transform.position) <= Mathf.Abs(character.transform.position.y - trsf.position.y) + enemy.attackRange)
         {
             character.SetState(new EnemyAttack(character, level));
@@ -57,10 +57,16 @@ public class EnemyMovement : State
     public void TriggerExit(Collider coll)
     {
         if (coll.tag == "FollowParent")
-        {
+        { 
             character.SetState(new FollowPathMovement(character, level, new Queue<Vector3>(), false, 1));
         }
+
+        if(coll.tag == "Hook")
+        {
+            enemy.StartFreeze();
+        }
     }
+
 
     //Permet de separer les ennemies entre eux pour eviter qu'ils se marchent dessus
     void Separate(List<GameObject> characters)

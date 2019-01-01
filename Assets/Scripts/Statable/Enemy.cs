@@ -29,9 +29,6 @@ public class Enemy : Character {
     public int maxBullets = 5;
     public float shootRadius = 1f;
 
-    public GameObject player;
-    public Level level;
-
     [SerializeField]
     private GameObject bulletPrefab;
 
@@ -82,7 +79,7 @@ public class Enemy : Character {
             Constants.TimeScalePlayer = 0;
             yield return new WaitForSeconds(duration);
             Constants.TimeScalePlayer = 1;
-            Destroy(gameObject);
+            level.Remove(gameObject);
         }
     }
 
@@ -98,7 +95,7 @@ public class Enemy : Character {
 
     private void FollowRandomPath()
     {
-        SetState(new EnemyMovement(this, level, player.transform));
+        SetState(new EnemyMovement(this, level, level.Player.transform));
     }
 
     public void Shoot()
@@ -139,7 +136,7 @@ public class Enemy : Character {
 
     private void FollowGameObject()
     {
-        SetState(new EnemyMovement(this, level, player.transform));
+        SetState(new EnemyMovement(this, level, level.Player.transform));
     }
 
     public override float GetScale()

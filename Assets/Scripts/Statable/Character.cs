@@ -15,7 +15,6 @@ public abstract class Character : MonoBehaviour {
     [Header("Herité de Character")]
     [Tooltip("A quel vitesse le personnage peut se deplacer ?")]
     [SerializeField]
-    //Speed of the character while moving
     protected float moveSpeed = 6.0f;
 
     [SerializeField]
@@ -48,6 +47,8 @@ public abstract class Character : MonoBehaviour {
     [SerializeField]
     [Header("Sci-fi magnetic protection")]
     internal GameObject protection;
+
+    public Level level;
 
     internal void Rotate(GameObject player)
     {

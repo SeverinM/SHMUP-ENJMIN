@@ -16,15 +16,17 @@ public class FollowPathMovement : State
 
     private bool loop;
 
+    private Enemy enemy;
+
     public FollowPathMovement(Character character, Level level, Queue<Vector3> allPos, bool loop, float noiseCoeff = 0) : base(character)
     {
         positions = allPos;
-        //Position relative a l'ennemi
+        // Position relative a l'ennemi
         Vector3 vecInput;
         if (positions.Count > 0)
         {
             vecInput = positions.Dequeue();
-            //La position revient en debut de queue
+            // La position revient en debut de queue
             if (loop)
             {
                 positions.Enqueue(vecInput);
@@ -35,6 +37,7 @@ public class FollowPathMovement : State
             vecInput = Vector3.zero;
         }
 
+        // Choisir une valeur aléatoire de déplacement
         Vector3 randomValue;
         if (level != null)
         {
@@ -48,10 +51,11 @@ public class FollowPathMovement : State
         vecInput += (randomValue * noiseCoeff);
         targetPosition = character.transform.position + vecInput;
 
-        //On l'aligne sur l'axe y par rapport au joueur 
+        // On l'aligne sur l'axe y par rapport au joueur 
         targetPosition = new Vector3(targetPosition.x, character.transform.position.y, targetPosition.z);
         this.loop = loop;
         this.level = level;
+        enemy = character.GetComponent<Enemy>();
         character.transform.forward = vecInput;
     }
 
@@ -75,9 +79,11 @@ public class FollowPathMovement : State
 
         if (coll.tag == "Hook")
         {
-            character.SetState(new FreezeMovement(character, character.ActualState, level));
+            enemy.StartFreeze();
         }
+
     }
+
 
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)
     {

@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Level : Layers {
+public class Level : Layers
+{
 
     [SerializeField]
     protected Player player;
@@ -13,14 +15,31 @@ public class Level : Layers {
     [SerializeField]
     List<GameObject> generators;
 
-    public List<GameObject> characters = new List<GameObject>();
+    [SerializeField]
+    GameObject canvas;
 
-    internal Vector2 maxBounds = new Vector2(-8,8);
-    internal Vector2 minBounds = new Vector2(-8,8);
+
+    [SerializeField]
+    GameObject text;
+
+
+    Dictionary<GameObject, Text> characterTexts = new Dictionary<GameObject, Text>();
+
+
+    public List<GameObject> characters = new List<GameObject>();
+    public List<GameObject> charactersToRemove = new List<GameObject>();
+
+    internal Vector2 maxBounds = new Vector2(-8, 8);
+    internal Vector2 minBounds = new Vector2(-8, 8);
+
 
     public override void OnFocusGet()
-    {      
-        foreach(BaseInput inp in refInput)
+    {
+        // Set level in order for player to remove himself
+        player.level = this;
+
+        // Faire en sorte que tous les inputs notifient le joueur
+        foreach (BaseInput inp in refInput)
         {
             inp.OnInputExecuted += player.InterpretInput;
         }
@@ -30,7 +49,7 @@ public class Level : Layers {
             return;
         }
 
-        // Setup all generators
+        // Mettre en route tous les générateurs en leur attribuant un état
         foreach (GameObject generator in generators)
         {
             generator.GetComponent<Generator>().SetState(new GenerateEnemies(generator.GetComponent<Generator>()));
@@ -38,29 +57,61 @@ public class Level : Layers {
 
     }
 
+    public void Update()
+    {
+        foreach (GameObject character in charactersToRemove)
+        {
+            characterTexts.Remove(character);
+            characters.Remove(character);
+            Destroy(character);
+        }
+
+    }
+
+    public void LateUpdate()
+    {
+        foreach (KeyValuePair<GameObject, Text> value in characterTexts)
+        {
+            // Affichage de données depuis le GameObject
+            value.Value.text = value.Key.GetComponent<Enemy>().ActualState.ToString();
+
+            // Position du texte au dessus d'un gameObject
+            Vector3 offsetPos = new Vector3(value.Key.transform.position.x, value.Key.transform.position.y, value.Key.transform.position.z + 0.5f);
+
+            // Calcul de la position à l'écran 
+            Vector2 canvasPos;
+            Vector2 screenPoint = Camera.main.WorldToScreenPoint(offsetPos);
+
+            // Convertir la position à l'écran vers l'espace du canvas 
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.GetComponent<RectTransform>(), screenPoint, null, out canvasPos);
+
+            value.Value.transform.localPosition = canvasPos;
+        }
+    }
+
     /// <summary>
-    /// Add a Character to the level
-    /// The character will know about the other characters in the level
-    /// At the moment it's used for enemies to avoid walkin over each other
+    /// Ajouter un Personnage au niveau
+    /// Cela permet au niveau de connaitre tous les ennemis instanciés
     /// </summary>
     /// <param name="character"></param>
     /// <param name="position"></param>
     public void Instanciate(GameObject character, Vector3 position)
     {
+        // Instantier un personnage
         GameObject toAdd = Instantiate(character, position, Quaternion.identity);
         toAdd.GetComponent<Enemy>().level = this;
-        toAdd.GetComponent<Enemy>().player = Player;
         characters.Add(toAdd);
+        GameObject toAddText = Instantiate(text, canvas.transform);
+        characterTexts.Add(toAdd, toAddText.GetComponent<Text>());
     }
 
     /// <summary>
-    /// Remove a character from the list so it can't be updated anymore
+    /// Retirer un personnage de la liste
     /// </summary>
     /// <param name="character"></param>
     public void Remove(GameObject character)
     {
-        characters.Remove(character);
-        Destroy(character);
+        charactersToRemove.Add(character);
     }
 
     public override void OnFocusLost()

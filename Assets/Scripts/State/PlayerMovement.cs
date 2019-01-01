@@ -10,8 +10,6 @@ public class PlayerMovement : State
 {
     protected Vector2 direction;
     Player.MovementMode mode;
-    Transform hook;
-    Vector3 origin;
 
     protected float dashDistance;
 
@@ -19,9 +17,6 @@ public class PlayerMovement : State
     {
         direction = new Vector2();
         mode = character.Context.ValuesOrDefault<Player.MovementMode>("Mode", Player.MovementMode.Normal);
-        hook = character.Context.ValuesOrDefault<Transform>("Hook", character.transform);
-        origin = hook.localPosition;
-        hook.forward = character.transform.forward;
         dashDistance = character.Context.ValuesOrDefault<float>("RangeDash", 10);
     }
 
@@ -87,12 +82,9 @@ public class PlayerMovement : State
         }
     }
 
-    //TODO : trouver meilleur solution
-    //On force le hook a conserver la meme position et rotation locale pour eviter que ce soit desaxé
     public override void UpdateState()
     {
-        hook.forward = character.transform.forward;
-        hook.localPosition = origin;
+
     }
 
     public override void NextState()
