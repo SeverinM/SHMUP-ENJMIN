@@ -40,6 +40,7 @@ public class PlayerWinch : State
 
     public override void NextState()
     {
+        // Quand on a atteint notre cible, alors on repasse à l'état normal du joueur
         character.SetState(new PlayerMovement(character));
     }
 
@@ -62,7 +63,7 @@ public class PlayerWinch : State
         if (currentMode == HookMode.Pull)
         {
             // Puisque l'on est en collision avec l'enfant, on va tirer tout l'ensemble, donc le parent
-            player.target.parent.transform.position -= character.transform.forward * Time.deltaTime * character.GetScale() * speedTravel;
+            player.Target.parent.transform.position -= character.transform.forward * Time.deltaTime * character.GetScale() * speedTravel;
             player.Hook.transform.position -= character.transform.forward * Time.deltaTime * character.GetScale() * speedTravel;
         }
 

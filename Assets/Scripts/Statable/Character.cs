@@ -113,7 +113,8 @@ public abstract class Character : MonoBehaviour {
             life = value;
             if (life <= 0)
             {
-                Destroy(gameObject);
+                // On demande au niveau de retirer le character du niveau
+                level.Remove(this);
             }
         }
     }
@@ -214,6 +215,10 @@ public abstract class Character : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Retourne un joueur dont des valeurs ont été changées 
+    /// </summary>
+    /// <returns></returns>
     public Player RaiseTryReaching()
     {
         Player output = null;

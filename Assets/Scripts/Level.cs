@@ -50,7 +50,6 @@ public class Level : Layers
 
     public override void OnFocusGet()
     {
-        // Set level in order for player to remove himself
         player.level = this;
 
         // Faire en sorte que tous les inputs notifient le joueur
@@ -75,8 +74,8 @@ public class Level : Layers
         }
 
         // Provisoirement
-        // GameObject toAddText = Instantiate(text, canvas.transform);
-        // characterTexts.Add(player.gameObject, toAddText.GetComponent<Text>());
+        GameObject toAddText = Instantiate(text, canvas.transform);
+        characterTexts.Add(player.gameObject, toAddText.GetComponent<Text>());
     }
 
     public void Update()
@@ -87,6 +86,7 @@ public class Level : Layers
             characters.Remove(character);
             Destroy(character);
         }
+        charactersToRemove.Clear();
 
     }
 
@@ -112,12 +112,12 @@ public class Level : Layers
     }
 
     /// <summary>
-    /// Ajouter un Personnage au niveau
-    /// Cela permet au niveau de connaitre tous les ennemis instanciés
+    /// Ajouter un Ennemi dans le niveau
+    /// Cela permet au niveau de connaitre d'avoir une liste des ennemis instanciés
     /// </summary>
     /// <param name="character"></param>
     /// <param name="position"></param>
-    public GameObject Instanciate(Enemy.EnemyType type, Vector3 position)
+    public GameObject AddEnemy(Enemy.EnemyType type, Vector3 position)
     {
         GameObject character;
         switch (type)
@@ -139,7 +139,7 @@ public class Level : Layers
                 break;
         }
 
-        // Instantier un personnage
+        // Instantier un ennemi
         GameObject toAdd = Instantiate(character, position, Quaternion.identity);
         toAdd.GetComponent<Enemy>().level = this;
         characters.Add(toAdd);
@@ -157,9 +157,9 @@ public class Level : Layers
     }
 
     /// <summary>
-    /// Retirer un personnage de la liste
+    /// Retirer un personnage du niveau
     /// </summary>
-    /// <param name="character"></param>
+    /// <param name="character">Le personnage à retirer</param>
     public void Remove(Character character)
     {
         charactersToRemove.Add(character.gameObject);

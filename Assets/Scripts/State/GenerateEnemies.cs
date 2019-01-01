@@ -57,15 +57,17 @@ public class GenerateEnemies : State
     public override void UpdateState()
     {
         timeSinceBegin += Time.deltaTime;
+        // Pour chaque ennemi de la vague courrante
         currentWave.allEnnemies.ForEach(x =>
         {
+            // Si l'enemi courrant doit spawn et n'a pas encore spawné
             if (x.spawnAfter < timeSinceBegin && !x.spawned)
             {
-                GameObject instanciated = level.Instanciate(x.enn, character.transform.position);
+                GameObject instanciated = level.AddEnemy(x.enn, character.transform.position);
                 Enemy enn = instanciated.GetComponent<Enemy>();
                 enn.enemyType = x.enn;
-                enn.GetComponent<Enemy>().SetWaypointsAndApply(x.Waypoints);
-                enn.GetComponent<Enemy>().Destroyed += EnnemyDestroyed;
+                enn.GetComponent<Enemy>().SetWaypointsAndApply(x.Waypoints); // On attribue les waypoints
+                enn.GetComponent<Enemy>().Destroyed += EnnemyDestroyed; // Quand le joueur est détruit, il notifie GenerateEnemies
                 x.spawned = true;
             }
         });
@@ -74,6 +76,7 @@ public class GenerateEnemies : State
     void EnnemyDestroyed(Character chara)
     {
         count--;
+        // Si tous les énnemis on été détruits, on passe à l'état suivant
         if (count == 0)
         {
             NextState();
