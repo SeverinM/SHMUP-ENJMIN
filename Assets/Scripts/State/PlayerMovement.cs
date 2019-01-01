@@ -84,7 +84,7 @@ public class PlayerMovement : State
 
     public override void UpdateState()
     {
-
+        ((Player)character).ResetHook();
     }
 
     public override void NextState()

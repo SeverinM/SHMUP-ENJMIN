@@ -73,9 +73,9 @@ public class PlayerWinch : State
             NextState();
 
             //Si le pere est un ennemie , le faire passer dans l'etat suivant
-            if (target.parent.GetComponent<Enemy>() != null)
+            if (((Player)character).Target.parent.GetComponent<Enemy>() != null)
             {
-                target.parent.GetComponent<Enemy>().ActualState.NextState();
+                ((Player)character).Target.parent.GetComponent<Enemy>().ActualState.NextState();
             }
         }
     }

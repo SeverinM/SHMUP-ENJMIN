@@ -75,6 +75,13 @@ public class Player : Character
     internal LineRenderer line;
 
     internal Transform target;
+    public Transform Target
+    {
+        get
+        {
+            return target;
+        }
+    }
 
     internal Vector3 origin;
 
@@ -90,8 +97,7 @@ public class Player : Character
         context.SetInDictionary("RangeDash", rangeHook);
 
         line = hook.GetComponent<LineRenderer>();
-
-        origin = hook.transform.position;
+        origin = hook.transform.localPosition;
         ResetHook();
 
         actualState = new PlayerMovement(this);
@@ -119,7 +125,9 @@ public class Player : Character
     private void OnCollisionEnter(Collision collision)
     {
         // Quand le joueur se fait toucher par un rigidBody
-        if (collision.gameObject.tag == "Bullet")
+        
+        //En suspens pour le moment
+        /*if (collision.gameObject.tag == "Bullet")
         {
             Impact(collision.relativeVelocity * hitForce);
             Destroy(collision.gameObject);
@@ -137,7 +145,7 @@ public class Player : Character
                     StartRecovery(recoveryDuration);
                 }
             }
-        }
+        }*/
     }
 
     // Le joueur se voit propulsé dans la direction opposée à un impact reçu
@@ -162,6 +170,7 @@ public class Player : Character
     {
         hook.transform.localPosition = origin;
         target = hook.transform;
+        hook.forward = transform.forward;
     }
 
     public void AttatchHook(Transform transform)

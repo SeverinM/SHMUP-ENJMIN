@@ -136,20 +136,6 @@ public class Enemy : Character {
     public GameObject player;
 
     [SerializeField]
-    Level level;
-    public Level Level
-    {
-        get
-        {
-            return level;
-        }
-        set
-        {
-            level = value;
-        }
-    }
-
-    [SerializeField]
     private GameObject bulletPrefab;
 
     [SerializeField]

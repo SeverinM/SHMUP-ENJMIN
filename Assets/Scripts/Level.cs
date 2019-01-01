@@ -116,12 +116,36 @@ public class Level : Layers
     /// <param name="position"></param>
     public GameObject Instanciate(Enemy.EnemyType type, Vector3 position)
     {
+        GameObject character;
+        switch (type)
+        {
+            case Enemy.EnemyType.BOB:
+                character = BobPrefab;
+                break;
+
+            case Enemy.EnemyType.JIM:
+                character = JimPrefab;
+                break;
+
+            case Enemy.EnemyType.MIKE:
+                character = MikePrefab;
+                break;
+
+            default:
+                character = BobPrefab;
+                break;
+        }
+
         // Instantier un personnage
         GameObject toAdd = Instantiate(character, position, Quaternion.identity);
         toAdd.GetComponent<Enemy>().level = this;
         characters.Add(toAdd);
-        GameObject toAddText = Instantiate(text, canvas.transform);
-        characterTexts.Add(toAdd, toAddText.GetComponent<Text>());
+        if(text != null)
+        {
+            GameObject toAddText = Instantiate(text, canvas.transform);
+            characterTexts.Add(toAdd, toAddText.GetComponent<Text>());
+        }      
+        return toAdd;
     }
 
     private Player Level_TryReachingPlayer()
@@ -135,7 +159,7 @@ public class Level : Layers
     /// <param name="character"></param>
     public void Remove(Character character)
     {
-        charactersToRemove.Add(character);
+        charactersToRemove.Add(character.gameObject);
     }
 
     public override void OnFocusLost()

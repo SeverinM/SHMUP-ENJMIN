@@ -50,13 +50,13 @@ public class FollowPathMovement : State
         //L'ennemi est rentré dans la zone proche du joueur , il va commencer a le poursuivre
         if (coll.tag == "FollowParent")
         {
-            character.Context.SetInDictionary("Target", coll.transform.parent);
-            character.SetState(new EnemyMovement(character, coll.transform.parent,positions));
+            character.Context.SetInDictionary("Target", coll.transform);
+            character.SetState(new EnemyMovement(character, coll.transform,positions));
         }
 
         if (coll.tag == "Hook")
         {
-            character.SetState(new FreezeMovement(character, character.ActualState));
+            character.PersonalScale = 0;
         }
 
     }

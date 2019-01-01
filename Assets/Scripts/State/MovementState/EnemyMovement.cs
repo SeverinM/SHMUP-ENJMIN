@@ -49,6 +49,7 @@ public class EnemyMovement : State
             character.Rotate(plyr.gameObject);
         }
         character.Move(deltaPosition.normalized);
+        character.transform.forward = deltaPosition;
     }
 
     public override void StartState()
@@ -66,11 +67,6 @@ public class EnemyMovement : State
         if (coll.tag == "FollowParent")
         {
             character.SetState(new FollowPathMovement(character, allElems, ((Enemy)character).Waypoints.loop));
-        }
-
-        if(coll.tag == "Hook")
-        {
-            enemy.StartFreeze();
         }
     }
 
