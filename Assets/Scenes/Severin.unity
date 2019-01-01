@@ -182,7 +182,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4741676917561938, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 115.8
+      value: 114.8
       objectReference: {fileID: 0}
     - target: {fileID: 4741676917561938, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
       propertyPath: m_LocalPosition.z
@@ -640,45 +640,19 @@ MonoBehaviour:
   allWaves:
   - allEnnemies:
     - enn: 0
-      spawnAfter: 1
+      spawnAfter: 0
       Waypoints:
         loop: 1
         allWaypoints:
-        - targetPosition: {x: -168.57948, y: 114.843956, z: 142.87334}
-          speed: 5
-        - targetPosition: {x: -119.834366, y: 114.843956, z: 142.87334}
+        - targetPosition: {x: -180.76576, y: 114.843956, z: 129.16678}
           speed: 2
-        - targetPosition: {x: -174.67262, y: 114.84395, z: 163.43317}
-          speed: 1
-      selected: 0
-      spawned: 0
-    - enn: 0
-      spawnAfter: 3
-      Waypoints:
-        loop: 1
-        allWaypoints:
-        - targetPosition: {x: -168.57948, y: 114.843956, z: 142.87334}
-          speed: 5
-        - targetPosition: {x: -119.834366, y: 114.843956, z: 142.87334}
+        - targetPosition: {x: -180.76576, y: 114.843956, z: 129.16678}
           speed: 2
-        - targetPosition: {x: -174.67262, y: 114.84395, z: 163.43317}
-          speed: 1
-      selected: 0
-      spawned: 0
-    delay: 2
-  - allEnnemies:
-    - enn: 0
-      spawnAfter: 1
-      Waypoints:
-        loop: 1
-        allWaypoints:
-        - targetPosition: {x: -119.834366, y: 114.843956, z: 129.16678}
-          speed: 2
-        - targetPosition: {x: -180.76576, y: 114.84395, z: 163.43317}
+        - targetPosition: {x: -168.57948, y: 114.84395, z: 149.72661}
           speed: 2
       selected: 1
       spawned: 0
-    delay: 4
+    delay: 0
 --- !u!4 &1935535043
 Transform:
   m_ObjectHideFlags: 0
@@ -686,7 +660,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1935535041}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -159.60248, y: 115.8, z: 147.88}
+  m_LocalPosition: {x: -159.60248, y: 114.8, z: 147.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
