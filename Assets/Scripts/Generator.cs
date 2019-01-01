@@ -7,17 +7,25 @@ using UnityEngine;
 /// </summary>
 public class Generator : Character {
 
-    public GameObject enemyPrefab;        // Instantiable enemy
     public GameObject levelObject;        // Level
-    public int maxEnemies = 16;           // Max ennemies on the scene
-    public int waves = 4;                 // Waves
-    public float period = 1f;             // Period of time to generate enemy
-    public float radiusSize = 4f;         // Period of time to generate enemy
+    [HideInInspector]
+    public List<Wave> allWaves = new List<Wave>();
+
+    public List<Wave> AllWaves
+    {
+        get
+        {
+            return allWaves;
+        }
+        //On relance le generation d'ennemi si cette valeur est modifié
+        set
+        {
+            allWaves = value;
+        }
+    }
 
     public override float GetScale()
     {
         return 1;
     }
-
-
 }

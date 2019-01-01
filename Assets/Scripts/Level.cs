@@ -9,7 +9,22 @@ public class Level : Layers
     [SerializeField]
     protected Player player;
 
-    public GameObject Player;
+    [SerializeField]
+    protected GameObject JimPrefab;
+
+    [SerializeField]
+    protected GameObject MikePrefab;
+
+    [SerializeField]
+    protected GameObject BobPrefab;
+
+    public GameObject Player
+    {
+        get
+        {
+            return player.gameObject;
+        }
+    }
 
 
     [SerializeField]
@@ -52,7 +67,11 @@ public class Level : Layers
         // Mettre en route tous les générateurs en leur attribuant un état
         foreach (GameObject generator in generators)
         {
-            generator.GetComponent<Generator>().SetState(new GenerateEnemies(generator.GetComponent<Generator>()));
+            //Le generateur lit ses propres vagues
+            if (generator.GetComponent<Generator>().AllWaves.Count > 0)
+            {
+                generator.GetComponent<Generator>().SetState(new GenerateEnemies(generator.GetComponent<Generator>(), generator.GetComponent<Generator>().AllWaves));
+            }
         }
 
     }
@@ -95,7 +114,7 @@ public class Level : Layers
     /// </summary>
     /// <param name="character"></param>
     /// <param name="position"></param>
-    public void Instanciate(GameObject character, Vector3 position)
+    public GameObject Instanciate(Enemy.EnemyType type, Vector3 position)
     {
         // Instantier un personnage
         GameObject toAdd = Instantiate(character, position, Quaternion.identity);
@@ -105,11 +124,16 @@ public class Level : Layers
         characterTexts.Add(toAdd, toAddText.GetComponent<Text>());
     }
 
+    private Player Level_TryReachingPlayer()
+    {
+        return player;
+    }
+
     /// <summary>
     /// Retirer un personnage de la liste
     /// </summary>
     /// <param name="character"></param>
-    public void Remove(GameObject character)
+    public void Remove(Character character)
     {
         charactersToRemove.Add(character);
     }

@@ -11,14 +11,14 @@ public class EnemyAttack : State
 
     private float lastTime;
     private float shoots = 0;
+    Transform target;
+    Queue<WaypointElement> elements;
 
-    private Level level;
-
-    public EnemyAttack(Character character, Level level) : base(character)
+    public EnemyAttack(Character character, Queue<WaypointElement> elt) : base(character)
     {
         enemy = character.GetComponent<Enemy>();
-        this.level = level;
-
+        elements = elt;
+        target = character.Context.ValuesOrDefault<Transform>("Target", null);
         lastTime = Time.time;
     }
     
@@ -34,8 +34,7 @@ public class EnemyAttack : State
 
     public override void NextState()
     {
-        // Déambulation
-        character.SetState(new FollowPathMovement(character, level, new Queue<Vector3>(), true, 1));
+        character.SetState(new EnemyMovement(character, target, elements));
     }
 
     public override void StartState()
@@ -48,13 +47,18 @@ public class EnemyAttack : State
         // Lance une attaque selon la periode
         if (lastTime < Time.time)
         {
-            lastTime += enemy.shootPeriod;
+            lastTime += enemy.ShootPeriod;
 
-            enemy.Rotate(level.Player);
+            Player plyr = character.RaiseTryReaching();
+            if (plyr != null)
+            {
+                enemy.Rotate(plyr.gameObject);
+            }
+
             enemy.Shoot();
             shoots++;
 
-            if (shoots == enemy.shootAmount)
+            if (shoots == enemy.ShootAmount)
             {
                 NextState();
             }

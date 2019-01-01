@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>
 /// The generators will Instanciate ennemies in the level according to a period
@@ -8,13 +10,21 @@ public class GenerateEnemies : State
 {
     private Generator generator;
     private Level level;
-    private float lastTime;
+    float timeSinceBegin = 0;
+    Wave currentWave;
+    List<Wave> wavesLeft;
+    int count;
 
-    public GenerateEnemies(Character character) : base(character)
+    public GenerateEnemies(Character character, List<Wave> remainingWaves) : base(character)
     {
+        //On enleve la vague du haut
         generator = character.GetComponent<Generator>();
         level = generator.levelObject.GetComponent<Level>();
-        lastTime = Time.time;
+        currentWave = remainingWaves[remainingWaves.Count - 1];
+        remainingWaves.Remove(currentWave);
+        wavesLeft = remainingWaves;
+        timeSinceBegin -= currentWave.delay;
+        count = currentWave.allEnnemies.Count;
     }
 
     public override void EndState()
@@ -29,7 +39,14 @@ public class GenerateEnemies : State
 
     public override void NextState()
     {
-        base.NextState();
+        if (wavesLeft.Count > 0)
+        {
+            character.SetState(new GenerateEnemies(character, wavesLeft));
+        }
+        else
+        {
+            character.SetState(null);
+        }
     }
 
     public override void StartState()
@@ -39,15 +56,27 @@ public class GenerateEnemies : State
 
     public override void UpdateState()
     {
-        if (lastTime < Time.time) // Generate enemies according to the time period
+        timeSinceBegin += Time.deltaTime;
+        currentWave.allEnnemies.ForEach(x =>
         {
-            lastTime += generator.period;
-
-            if (generator.waves > 0 || generator.waves == -1)
+            if (x.spawnAfter < timeSinceBegin && !x.spawned)
             {
-                level.Instanciate(generator.enemyPrefab, character.transform.position);
-                generator.waves--;
+                GameObject instanciated = level.Instanciate(x.enn, character.transform.position);
+                Enemy enn = instanciated.GetComponent<Enemy>();
+                enn.enemyType = x.enn;
+                enn.GetComponent<Enemy>().SetWaypointsAndApply(x.Waypoints);
+                enn.GetComponent<Enemy>().Destroyed += EnnemyDestroyed;
+                x.spawned = true;
             }
+        });
+    }
+
+    void EnnemyDestroyed(Character chara)
+    {
+        count--;
+        if (count == 0)
+        {
+            NextState();
         }
     }
 }

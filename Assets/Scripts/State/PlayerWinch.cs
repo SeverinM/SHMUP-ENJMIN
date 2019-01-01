@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Dans cet etat , le joueur est en train de tracter ou d'etre tracté
+/// </summary>
 public class PlayerWinch : State
 {
     private Player player;
@@ -68,6 +71,12 @@ public class PlayerWinch : State
         if (distanceToHook <= hookRadius)
         {
             NextState();
+
+            //Si le pere est un ennemie , le faire passer dans l'etat suivant
+            if (target.parent.GetComponent<Enemy>() != null)
+            {
+                target.parent.GetComponent<Enemy>().ActualState.NextState();
+            }
         }
     }
 }

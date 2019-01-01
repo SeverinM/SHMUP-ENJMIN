@@ -360,10 +360,10 @@ MonoBehaviour:
   moveSpeed: 5
   mass: 3
   recoveryMat: {fileID: 2100000, guid: 3615e864792955a4a912eda2c4bbddf0, type: 2}
-  life: 1
-  protection: {fileID: 1687016201881812}
+  life: 3
+  protection: {fileID: 0}
   HP: 0
-  attackRange: 8
+  attackRange: 2
   shootPeriod: 0.5
   shootAmount: 3
   shootSpeed: 8

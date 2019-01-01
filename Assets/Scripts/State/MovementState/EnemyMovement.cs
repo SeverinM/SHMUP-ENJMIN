@@ -16,10 +16,13 @@ public class EnemyMovement : State
 
     Vector3 deltaPosition;
 
-    public EnemyMovement(Character chara, Level level, Transform trsf) : base(chara)
+    Queue<WaypointElement> allElems;
+
+    public EnemyMovement(Character chara, Transform trsf, Queue<WaypointElement> elt) : base(chara)
     {
+        allElems = elt;
         this.trsf = trsf;
-        this.level = level;
+        level = character.Context.ValuesOrDefault<Level>("Level", null);
         enemy = character.GetComponent<Enemy>();
     }
 
@@ -32,15 +35,19 @@ public class EnemyMovement : State
     {
         deltaPosition = trsf.position - character.transform.position;
 
-        // Si les ennemis ont atteint le joueur, ils rentrent dans une phase d'attaque
-        if (Vector3.Distance(trsf.position, character.transform.position) <= Mathf.Abs(character.transform.position.y - trsf.position.y) + enemy.attackRange)
+        // Si les ennemis ont atteint le joueur, ils rentrent dasn une phase d'attaque
+        if (Vector3.Distance(trsf.position, character.transform.position) <= Mathf.Abs(character.transform.position.y - trsf.position.y) + enemy.AttackRange)
         {
-            character.SetState(new EnemyAttack(character, level));
+            character.SetState(new EnemyAttack(character,allElems));
         }
 
-        Separate(level.characters);
+        Separate();
 
-        character.Rotate(level.Player);
+        Player plyr = character.RaiseTryReaching();
+        if (plyr != null)
+        {
+            character.Rotate(plyr.gameObject);
+        }
         character.Move(deltaPosition.normalized);
     }
 
@@ -57,8 +64,8 @@ public class EnemyMovement : State
     public void TriggerExit(Collider coll)
     {
         if (coll.tag == "FollowParent")
-        { 
-            character.SetState(new FollowPathMovement(character, level, new Queue<Vector3>(), false, 1));
+        {
+            character.SetState(new FollowPathMovement(character, allElems, ((Enemy)character).Waypoints.loop));
         }
 
         if(coll.tag == "Hook")
@@ -69,40 +76,42 @@ public class EnemyMovement : State
 
 
     //Permet de separer les ennemies entre eux pour eviter qu'ils se marchent dessus
-    void Separate(List<GameObject> characters)
+    void Separate()
     {
         float desiredseparation = 3f;
+        List<GameObject> characters = new List<GameObject>();
+        foreach (RaycastHit hit in Physics.SphereCastAll(character.transform.position, desiredseparation, Vector3.zero))
+        {
+            if (hit.collider.GetComponent<Enemy>() != null)
+            {
+                characters.Add(hit.collider.gameObject);
+            }
+        }
+
         float maxForce = 2f;
         Vector3 sum = new Vector3();
         int count = 0;
 
-        if (characters != null)
+        foreach (GameObject other in characters)
         {
-            foreach (GameObject other in characters)
-            {
-                if (other.Equals(this)) break;
+            if (other.Equals(this)) break;
 
-                float d = Vector3.Distance(character.transform.position, other.transform.position);
-                if ((d > 0) && (d < desiredseparation))
-                {
-                    Vector3 diff = character.transform.position - other.transform.position;
-                    diff.Normalize();
-                    diff /= d;
-                    sum += diff;
-                    count++;
+            float d = Vector3.Distance(character.transform.position, other.transform.position);
+            Vector3 diff = character.transform.position - other.transform.position;
+            diff.Normalize();
+            diff /= d;
+            sum += diff;
+            count++;
+        }
 
-                }
-            }
-
-            if (count > 0)
-            {
-                sum /= count;
-                sum.Normalize();
-                sum *= 5f;
-                Vector3 steer = sum - character.GetComponent<Rigidbody>().velocity;
-                Vector3.ClampMagnitude(steer, maxForce);
-                character.GetComponent<Rigidbody>().AddForce(steer);
-            }
+        if (count > 0)
+        {
+            sum /= count;
+            sum.Normalize();
+            sum *= 5f;
+            Vector3 steer = sum - character.GetComponent<Rigidbody>().velocity;
+            Vector3.ClampMagnitude(steer, maxForce);
+            character.GetComponent<Rigidbody>().AddForce(steer);
         }
     }
 }

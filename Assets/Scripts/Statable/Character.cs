@@ -2,7 +2,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
+[System.Serializable]
+public class Wave
+{
+    public List<WaveElement> allEnnemies;
+    public float delay;
+}
+
+[System.Serializable]
+public class WaveElement
+{
+    public Enemy.EnemyType enn;
+    public float spawnAfter;
+    public Waypoints Waypoints;
+    //Cet attribut est utilisé uniquement dans l'outil
+    [HideInInspector]
+    public bool selected;
+    [HideInInspector]
+    public bool spawned;
+
+    public void End()
+    {
+        spawned = true;
+    }
+}
 /// <summary>
 /// Un objet character PEUT avoir des etats , agissant comme une machine d'etat
 /// </summary>
@@ -11,6 +36,12 @@ public abstract class Character : MonoBehaviour {
     public delegate void collDelegate(Collider coll);
     public event collDelegate OnTriggerEnterChar;
     public event collDelegate OnTriggerExitChar;
+
+    public delegate void voidParam(Character chara);
+    public event voidParam Destroyed;
+
+    public delegate Player PlayerDelagate();
+    public event PlayerDelagate TryReachingPlayer;
 
     [Header("Herité de Character")]
     [Tooltip("A quel vitesse le personnage peut se deplacer ?")]
@@ -21,8 +52,21 @@ public abstract class Character : MonoBehaviour {
     protected float mass = 3.0f;                
     protected float hitForce = 25.5f;            
     protected Vector3 impact = Vector3.zero;
+    //Combien de temps le joueur est invincible une fois touché ?
     protected float recoveryDuration = 1f;
     protected float freezeDuration = 1f;
+    protected float personalScale = 1f;
+    public float PersonalScale
+    {
+        get
+        {
+            return personalScale;
+        }
+        set
+        {
+            personalScale = Mathf.Abs(value);
+        }
+    }
 
     [SerializeField]
     [Tooltip("Material de substitution pendant que le personnage est en recovery (ATTENTION : peut bugger s'il y a plusieurs materials)")]
@@ -64,7 +108,11 @@ public abstract class Character : MonoBehaviour {
 
         set
         {
-            life = Mathf.Abs(value);
+            life = value;
+            if (life <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -123,17 +171,31 @@ public abstract class Character : MonoBehaviour {
 
     public virtual void Move(Vector2 movement)
     {
-        transform.Translate(new Vector3(movement.x * Time.deltaTime * moveSpeed, 0, movement.y * Time.deltaTime * moveSpeed), Space.World);
+        transform.Translate(new Vector3(movement.x * Time.deltaTime * moveSpeed * PersonalScale * GetScale(), 0, movement.y * Time.deltaTime * moveSpeed * PersonalScale * GetScale()), Space.World);
     }
 
     public virtual void Move(Vector3 movement)
     {
-        transform.Translate(new Vector3(movement.x * Time.deltaTime * moveSpeed, movement.y * Time.deltaTime * moveSpeed, movement.z * Time.deltaTime * moveSpeed), Space.World);
+        transform.Translate(movement * Time.deltaTime * moveSpeed * PersonalScale * GetScale(), Space.World);
     }
 
     public void StartRecovery(float duration)
     {
         SetState(new CharacterRecovery(this, actualState, duration));
+    }
+
+    //Coroutine generique permettant d'effectuer une action en decalé
+    public void StartDelayedTask(UnityAction before , float duration, UnityAction after)
+    {
+        duration = Mathf.Max(Mathf.Abs(duration), 0.1f);
+        StartCoroutine(DelayedActionCoroutine(before, duration, after));
+    }
+
+    IEnumerator DelayedActionCoroutine(UnityAction before , float duration , UnityAction after)
+    {
+        before();
+        yield return new WaitForSeconds(duration);
+        after();
     }
 
     /// <summary>
@@ -142,5 +204,21 @@ public abstract class Character : MonoBehaviour {
     /// <returns></returns>
     public abstract float GetScale();
 
+    public void OnDestroy()
+    {
+        if (Destroyed != null)
+        {
+            Destroyed(this);
+        }
+    }
 
+    public Player RaiseTryReaching()
+    {
+        Player output = null;
+        if (TryReachingPlayer != null)
+        {
+            output = TryReachingPlayer();
+        }
+        return output;
+    }
 }

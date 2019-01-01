@@ -23,6 +23,7 @@ public class HookDetector : MonoBehaviour
         {
             //GetComponent<LineRenderer>().SetPosition(0, transform.position);
             player.Context.SetInDictionary("HookMode", PlayerWinch.HookMode.Winch);
+            player.Context.SetInDictionary("TargetHook", other.transform);
             player.ActualState.NextState();
         }
     }

@@ -7,60 +7,36 @@ using System.Collections.Generic;
 /// </summary>
 public class FollowPathMovement : State
 {
-    Queue<Vector3> positions;
+    Queue<WaypointElement> positions;
     Vector3 targetPosition;
+    WaypointElement currentWaypoint;
 
     private Vector3 deltaPosition;
-
-    private Level level;
-
     private bool loop;
 
-    private Enemy enemy;
-
-    public FollowPathMovement(Character character, Level level, Queue<Vector3> allPos, bool loop, float noiseCoeff = 0) : base(character)
+    public FollowPathMovement(Character character, Queue<WaypointElement> allPos, bool loop, float noiseCoeff = 0) : base(character)
     {
         positions = allPos;
-        // Position relative a l'ennemi
-        Vector3 vecInput;
-        if (positions.Count > 0)
+        //Si la queue n'est pas vide on prend la valeur cible sur le devant de la queu
+        if (allPos.Count > 0)
         {
-            vecInput = positions.Dequeue();
-            // La position revient en debut de queue
-            if (loop)
-            {
-                positions.Enqueue(vecInput);
-            }
+            currentWaypoint = allPos.Peek();
+            targetPosition = currentWaypoint.targetPosition;
         }
+        //Dans le cas contraire la position cible et actuel sont la meme
         else
         {
-            vecInput = Vector3.zero;
+            targetPosition = character.transform.position;
         }
 
-        // Choisir une valeur aléatoire de déplacement
-        Vector3 randomValue;
-        if (level != null)
-        {
-            randomValue = new Vector3(Random.Range(level.minBounds.x, level.maxBounds.y), 0, Random.Range(level.maxBounds.x, level.maxBounds.y));
-        }
-        else
-        {
-            randomValue = new Vector3(Random.Range(-2,2), 0, Random.Range(-2, 2));
-        }
-        
-        vecInput += (randomValue * noiseCoeff);
-        targetPosition = character.transform.position + vecInput;
-
-        // On l'aligne sur l'axe y par rapport au joueur 
-        targetPosition = new Vector3(targetPosition.x, character.transform.position.y, targetPosition.z);
+        targetPosition += new Vector3(Random.Range(-noiseCoeff, noiseCoeff), 0, Random.Range(-noiseCoeff, noiseCoeff));
         this.loop = loop;
-        this.level = level;
-        enemy = character.GetComponent<Enemy>();
-        character.transform.forward = vecInput;
     }
 
     public override void StartState()
     {
+        character.Context.Remove("Target");
+        character.transform.forward = targetPosition - character.transform.position;
         character.OnTriggerEnterChar += TriggerEnter;
     }
 
@@ -74,12 +50,13 @@ public class FollowPathMovement : State
         //L'ennemi est rentré dans la zone proche du joueur , il va commencer a le poursuivre
         if (coll.tag == "FollowParent")
         {
-            character.SetState(new EnemyMovement(character, level, coll.transform.parent));
+            character.Context.SetInDictionary("Target", coll.transform.parent);
+            character.SetState(new EnemyMovement(character, coll.transform.parent,positions));
         }
 
         if (coll.tag == "Hook")
         {
-            enemy.StartFreeze();
+            character.SetState(new FreezeMovement(character, character.ActualState));
         }
 
     }
@@ -99,17 +76,42 @@ public class FollowPathMovement : State
     {
         deltaPosition = targetPosition - character.transform.position;
 
-        if (Vector3.Distance(targetPosition, character.transform.position) < 0.1f)
+        //Waypoint atteint ?
+        if (Vector3.Distance(targetPosition, character.transform.position) < (GetSpeed() * Time.deltaTime * 4))
         {
+            //Encore des waypoints a atteindre ?
             if (positions.Count > 0)
             {
-                character.SetState(new FollowPathMovement(character, level, positions, loop, 0));
+                positions.Dequeue();
+                character.SetState(new FollowPathMovement(character, positions, loop));
             }
-            else 
+            else
             {
-                character.SetState(new FollowPathMovement(character, level, positions, loop, 1));
+                //On recommence
+                if (loop && (Enemy)character != null)
+                {
+                    character.SetState(new FollowPathMovement(character,new Queue<WaypointElement>(((Enemy)character).Waypoints.allWaypoints), ((Enemy)character).Waypoints.loop));
+                }
+                else
+                {
+                    character.SetState(null);
+                }
             }
+            
         }
-        character.Move(deltaPosition.normalized * character.GetScale());
+        character.transform.forward = deltaPosition;
+        character.Move(deltaPosition.normalized * GetSpeed());
+    }
+
+    float GetSpeed()
+    {
+        if (currentWaypoint != null)
+        {
+            return currentWaypoint.speed;
+        }
+        else
+        {
+            return 1;
+        }
     }
 }

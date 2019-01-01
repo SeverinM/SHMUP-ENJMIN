@@ -376,7 +376,7 @@ MonoBehaviour:
   life: 3
   protection: {fileID: 1345005655757278}
   HP: 0
-  attackRange: 8
+  attackRange: 2
   shootPeriod: 2
   shootAmount: 3
   shootSpeed: 8
