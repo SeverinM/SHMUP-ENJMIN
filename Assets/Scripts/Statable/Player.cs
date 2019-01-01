@@ -158,11 +158,6 @@ public class Player : Character
         impact += dir.normalized * force.magnitude / mass;
     }
 
-    private void OnDestroy()
-    {
-        Debug.Log("Pouf plus de joueur");
-    }
-
     public override float GetScale()
     {
         return Constants.TimeScalePlayer;

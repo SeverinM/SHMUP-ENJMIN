@@ -55,10 +55,9 @@ public class CharacterRecovery : State
     public override void UpdateState()
     {        
         movement.UpdateState();
-
         lastTime += Time.deltaTime;
 
-        if(lastTime > duration)
+        if (lastTime > duration)
         {
             NextState();
         }

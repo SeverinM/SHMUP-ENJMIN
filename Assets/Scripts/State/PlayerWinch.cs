@@ -66,7 +66,10 @@ public class PlayerWinch : State
         if (currentMode == HookMode.Pull)
         {
             // Puisque l'on est en collision avec l'enfant, on va tirer tout l'ensemble, donc le parent
-            player.Target.parent.transform.position -= character.transform.forward * Time.deltaTime * character.GetScale() * speedTravel;
+            if (player.Target)
+            {
+                player.Target.parent.transform.position -= character.transform.forward * Time.deltaTime * character.GetScale() * character.PersonalScale * speedTravel;
+            }
             player.Hook.transform.position -= character.transform.forward * Time.deltaTime * character.GetScale() * speedTravel;
         }
 
@@ -76,12 +79,6 @@ public class PlayerWinch : State
         if (distanceToHook <= hookRadius)
         {
             NextState();
-
-            //Si le pere est un ennemie , le faire passer dans l'etat suivant
-            if (player.Target != null)
-            {
-                player.Target.parent.GetComponent<Enemy>().ActualState.NextState();
-            }
         }
     }
 }

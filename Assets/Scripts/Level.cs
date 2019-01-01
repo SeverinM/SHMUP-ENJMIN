@@ -47,10 +47,11 @@ public class Level : Layers
     internal Vector2 maxBounds = new Vector2(-8, 8);
     internal Vector2 minBounds = new Vector2(-8, 8);
 
-
+    //Un peu l'equivalent du start
     public override void OnFocusGet()
     {
         player.level = this;
+        player.Destroyed += PlayerDied;
 
         // Faire en sorte que tous les inputs notifient le joueur
         foreach (BaseInput inp in refInput)
@@ -171,6 +172,11 @@ public class Level : Layers
         {
             inp.OnInputExecuted -= player.InterpretInput;
         }
+    }
+
+    public void PlayerDied(Character chara)
+    {
+        Debug.Log("Le joueur est mort");
     }
 
 }
