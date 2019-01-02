@@ -194,7 +194,8 @@ public class Enemy : Character {
             case EnemyType.BOB:
                 //Tir simple en face de lui
                 clone = Instantiate(bulletPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation).GetComponent<Rigidbody>();
-                clone.velocity = transform.TransformDirection(Vector3.forward * shootSpeed);
+                clone.velocity = transform.forward * shootSpeed;
+                Debug.Log(clone.velocity.magnitude);
                 break;
             case EnemyType.JIM:
                 float x = 0, y = 0;
