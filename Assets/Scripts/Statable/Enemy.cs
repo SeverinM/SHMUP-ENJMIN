@@ -112,6 +112,7 @@ public class Enemy : Character {
 
     [SerializeField]
     protected float shootRadius = 1f;
+
     public float ShootRadius
     {
         get
@@ -134,13 +135,11 @@ public class Enemy : Character {
         }
     }
 
-    public GameObject player;
-
     [SerializeField]
     private GameObject bulletPrefab;
 
     [SerializeField]
-    private EnemyMovementType movementType;
+    internal EnemyMovementType movementType;
 
     [SerializeField]
     public EnemyType enemyType;
@@ -151,7 +150,7 @@ public class Enemy : Character {
         switch (movementType)
         {
             case EnemyMovementType.FOLLOW_GAME_OBJECT:
-                FollowGameObject();
+                FollowCharacter();
                 break;
             case EnemyMovementType.FOLLOW_PATH:
                 FollowPath();
@@ -176,13 +175,13 @@ public class Enemy : Character {
         if (Waypoints.allWaypoints != null)
         {
             Queue<WaypointElement> allPos = new Queue<WaypointElement>(Waypoints.allWaypoints);
-            SetState(new FollowPathMovement(this,allPos, Waypoints.loop));
+            SetState(new FollowPathMovement(this, allPos, Waypoints.loop));
         }
     }
 
     private void FollowRandomPath()
     {
-        SetState(new EnemyMovement(this,player.transform, new Queue<WaypointElement>()));
+        SetState(new EnemyMovement(this, new Queue<WaypointElement>()));
     }
 
     //Chaque ennemi agit differemment selon son type
@@ -223,9 +222,9 @@ public class Enemy : Character {
 
     }
 
-    private void FollowGameObject()
+    private void FollowCharacter()
     {
-        SetState(new EnemyMovement(this,player.transform, new Queue<WaypointElement>()));
+        SetState(new EnemyMovement(this, new Queue<WaypointElement>()));
     }
 
     public override float GetScale()

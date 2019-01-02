@@ -35,7 +35,6 @@ public class FollowPathMovement : State
 
     public override void StartState()
     {
-        character.Context.Remove("Target");
         character.transform.forward = targetPosition - character.transform.position;
         character.OnTriggerEnterChar += TriggerEnter;
     }
@@ -50,8 +49,8 @@ public class FollowPathMovement : State
         //L'ennemi est rentré dans la zone proche du joueur , il va commencer a le poursuivre
         if (coll.tag == "FollowParent")
         {
-            character.Context.SetInDictionary("Target", coll.transform);
-            character.SetState(new EnemyMovement(character, coll.transform,positions));
+            character.SetState(new EnemyMovement(character, positions));
+            character.SetLeader(coll.gameObject);
         }
 
         if (coll.tag == "Hook")

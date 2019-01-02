@@ -7,7 +7,6 @@ using UnityEngine;
 /// </summary>
 public class EnemyMovement : State
 {
-    Transform trsf;
     Vector3 targetPosition;
 
     Enemy enemy;
@@ -18,10 +17,9 @@ public class EnemyMovement : State
 
     Queue<WaypointElement> allElems;
 
-    public EnemyMovement(Character chara, Transform trsf, Queue<WaypointElement> elt) : base(chara)
+    public EnemyMovement(Character chara, Queue<WaypointElement> elt) : base(chara)
     {
         allElems = elt;
-        this.trsf = trsf;
         level = character.Context.ValuesOrDefault<Level>("Level", null);
         enemy = character.GetComponent<Enemy>();
     }
@@ -33,10 +31,10 @@ public class EnemyMovement : State
 
     public override void UpdateState()
     {
-        deltaPosition = trsf.position - character.transform.position;
+        deltaPosition = enemy.leader.transform.position - character.transform.position;
 
         // Si les ennemis ont atteint le joueur, ils rentrent dasn une phase d'attaque
-        if (Vector3.Distance(trsf.position, character.transform.position) <= Mathf.Abs(character.transform.position.y - trsf.position.y) + enemy.AttackRange)
+        if (Vector3.Distance(enemy.leader.transform.position, character.transform.position) <= Mathf.Abs(character.transform.position.y - enemy.leader.transform.position.y) + enemy.AttackRange)
         {
             character.SetState(new EnemyAttack(character,allElems));
         }

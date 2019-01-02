@@ -15,6 +15,8 @@ public class GenerateEnemies : State
     List<Wave> wavesLeft;
     int count;
 
+    GameObject leader;
+
     public GenerateEnemies(Character character, List<Wave> remainingWaves) : base(character)
     {
         //On enleve la vague du haut
@@ -67,7 +69,16 @@ public class GenerateEnemies : State
                 GameObject instanciated = level.AddEnemy(x.enn, character.transform.position);
                 Enemy enn = instanciated.GetComponent<Enemy>();
                 enn.enemyType = x.enn;
+                enn.movementType = x.enMov;
                 enn.GetComponent<Enemy>().SetWaypointsAndApply(x.Waypoints); // On attribue les waypoints
+                if (x.isLeader)
+                {
+                    leader = instanciated;
+                }
+                if (leader != null)
+                {
+                    enn.GetComponent<Enemy>().SetLeader(leader); // On attribue un leadder si il existe
+                }
                 enn.GetComponent<Enemy>().Destroyed += EnnemyDestroyed; // Quand le joueur est détruit, il notifie GenerateEnemies
                 x.spawned = true;
             }

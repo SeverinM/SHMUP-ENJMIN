@@ -15,13 +15,17 @@ public class Wave
 public class WaveElement
 {
     public Enemy.EnemyType enn;
+    public Enemy.EnemyMovementType enMov;
     public float spawnAfter;
     public Waypoints Waypoints;
+
     //Cet attribut est utilisé uniquement dans l'outil
     [HideInInspector]
     public bool selected;
     [HideInInspector]
     public bool spawned;
+
+    public bool isLeader;
 
     public void End()
     {
@@ -95,6 +99,13 @@ public abstract class Character : MonoBehaviour {
     internal GameObject protectionPrefab;
 
     public Level level;
+
+    public GameObject leader;
+
+    internal void SetLeader(GameObject leader)
+    {
+        this.leader = leader;
+    }
 
     internal void Rotate(GameObject player)
     {

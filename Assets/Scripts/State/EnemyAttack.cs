@@ -11,14 +11,12 @@ public class EnemyAttack : State
 
     private float lastTime;
     private float shoots = 0;
-    Transform target;
     Queue<WaypointElement> elements;
 
     public EnemyAttack(Character character, Queue<WaypointElement> elt) : base(character)
     {
         enemy = character.GetComponent<Enemy>();
         elements = elt;
-        target = character.Context.ValuesOrDefault<Transform>("Target", null);
         lastTime = Time.time;
     }
     
@@ -34,7 +32,7 @@ public class EnemyAttack : State
 
     public override void NextState()
     {
-        character.SetState(new EnemyMovement(character, target, elements));
+        character.SetState(new EnemyMovement(character, elements));
     }
 
     public override void StartState()

@@ -10,7 +10,10 @@ public class Tools : EditorWindow {
     static SerializedObject obj;
     static Level staticLvl;
 
+    // Liste de toutes les vagues à lancer
     public List<Wave> allWaves;
+
+    // Liste des vagues sérializés dans l'UI
     SerializedProperty serWaves;
     public Waypoints waypoints;
 
@@ -146,7 +149,9 @@ public class Tools : EditorWindow {
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("enn"), new GUIContent("L'ennemi "));
                 EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("spawnAfter"), new GUIContent("Apparait apres (s)"));
-                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("selected"), new GUIContent(""));
+                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("selected"), new GUIContent(" "));
+                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("isLeader"), new GUIContent("Leader"));
+                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("enMov"), new GUIContent("Type de Mouvement"));
                 EditorGUILayout.EndHorizontal();
             }
 
