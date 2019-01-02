@@ -11,6 +11,9 @@ public class Generator : Character {
     [HideInInspector]
     public List<Wave> allWaves = new List<Wave>();
 
+    public delegate void noParam();
+    public event noParam EveryoneDied;
+
     public List<Wave> AllWaves
     {
         get
@@ -27,5 +30,13 @@ public class Generator : Character {
     public override float GetScale()
     {
         return 1;
+    }
+
+    public void RaiseEveryoneDied()
+    {
+        if (EveryoneDied != null)
+        {
+            EveryoneDied();
+        }
     }
 }

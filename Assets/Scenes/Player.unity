@@ -702,7 +702,10 @@ MonoBehaviour:
   MikePrefab: {fileID: 0}
   BobPrefab: {fileID: 0}
   generators: []
+  canvas: {fileID: 0}
+  text: {fileID: 0}
   characters: []
+  charactersToRemove: []
 --- !u!1 &1579496660
 GameObject:
   m_ObjectHideFlags: 0

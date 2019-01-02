@@ -45,6 +45,7 @@ public class GenerateEnemies : State
         }
         else
         {
+            generator.RaiseEveryoneDied();
             character.SetState(null);
         }
     }

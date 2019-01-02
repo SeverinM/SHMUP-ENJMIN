@@ -37,17 +37,14 @@ public class Level : Layers
     [SerializeField]
     GameObject text;
 
+    int countGenerator = 0;
 
     Dictionary<GameObject, Text> characterTexts = new Dictionary<GameObject, Text>();
-
 
     public List<GameObject> characters = new List<GameObject>();
     public List<GameObject> charactersToRemove = new List<GameObject>();
 
-    internal Vector2 maxBounds = new Vector2(-8, 8);
-    internal Vector2 minBounds = new Vector2(-8, 8);
-
-    //Un peu l'equivalent du start
+    //Appellé quand le layer est au dessus de la stack
     public override void OnFocusGet()
     {
         player.level = this;
@@ -65,6 +62,7 @@ public class Level : Layers
         }
 
         // Mettre en route tous les générateurs en leur attribuant un état
+        countGenerator = generators.Count;
         foreach (GameObject generator in generators)
         {
             //Le generateur lit ses propres vagues
@@ -72,6 +70,7 @@ public class Level : Layers
             {
                 generator.GetComponent<Generator>().SetState(new GenerateEnemies(generator.GetComponent<Generator>(), generator.GetComponent<Generator>().AllWaves));
             }
+            generator.GetComponent<Generator>().EveryoneDied += GeneratorDone;
         }
 
         // Provisoirement
@@ -172,6 +171,11 @@ public class Level : Layers
         {
             inp.OnInputExecuted -= player.InterpretInput;
         }
+    }
+
+    public void GeneratorDone()
+    {
+        Debug.Log("Ce generateur a finit");
     }
 
     public void PlayerDied(Character chara)

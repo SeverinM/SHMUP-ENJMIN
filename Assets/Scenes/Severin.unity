@@ -644,15 +644,56 @@ MonoBehaviour:
       Waypoints:
         loop: 1
         allWaypoints:
-        - targetPosition: {x: -180.76576, y: 114.843956, z: 129.16678}
+        - targetPosition: {x: -168.57948, y: 114.843956, z: 136.02005}
+          speed: 4
+        - targetPosition: {x: -180.76576, y: 114.84395, z: 163.43317}
           speed: 2
-        - targetPosition: {x: -180.76576, y: 114.843956, z: 129.16678}
+        - targetPosition: {x: -119.834366, y: 114.843956, z: 136.02005}
+          speed: 3
+      selected: 1
+      spawned: 0
+    - enn: 0
+      spawnAfter: 3
+      Waypoints:
+        loop: 1
+        allWaypoints:
+        - targetPosition: {x: -168.57948, y: 114.843956, z: 136.02005}
+          speed: 4
+        - targetPosition: {x: -180.76576, y: 114.84395, z: 163.43317}
           speed: 2
-        - targetPosition: {x: -168.57948, y: 114.84395, z: 149.72661}
-          speed: 2
+        - targetPosition: {x: -119.834366, y: 114.843956, z: 136.02005}
+          speed: 3
       selected: 1
       spawned: 0
     delay: 0
+  - allEnnemies:
+    - enn: 0
+      spawnAfter: 0
+      Waypoints:
+        loop: 1
+        allWaypoints:
+        - targetPosition: {x: -168.57948, y: 114.843956, z: 136.02005}
+          speed: 4
+        - targetPosition: {x: -180.76576, y: 114.84395, z: 163.43317}
+          speed: 2
+        - targetPosition: {x: -119.834366, y: 114.843956, z: 136.02005}
+          speed: 3
+      selected: 1
+      spawned: 0
+    - enn: 0
+      spawnAfter: 0
+      Waypoints:
+        loop: 1
+        allWaypoints:
+        - targetPosition: {x: -168.57948, y: 114.843956, z: 136.02005}
+          speed: 4
+        - targetPosition: {x: -180.76576, y: 114.84395, z: 163.43317}
+          speed: 2
+        - targetPosition: {x: -119.834366, y: 114.843956, z: 136.02005}
+          speed: 3
+      selected: 1
+      spawned: 0
+    delay: 10
 --- !u!4 &1935535043
 Transform:
   m_ObjectHideFlags: 0
