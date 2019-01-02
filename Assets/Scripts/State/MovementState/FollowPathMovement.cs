@@ -75,6 +75,8 @@ public class FollowPathMovement : State
     {
         deltaPosition = targetPosition - character.transform.position;
 
+        character.Separate();
+
         //Waypoint atteint ?
         if (Vector3.Distance(targetPosition, character.transform.position) < (GetSpeed() * Time.deltaTime * 4))
         {

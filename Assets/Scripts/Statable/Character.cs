@@ -239,4 +239,44 @@ public abstract class Character : MonoBehaviour {
         }
         return output;
     }
+
+    //Permet de separer les ennemies entre eux pour eviter qu'ils se marchent dessus
+    public void Separate()
+    {
+        float desiredseparation = 6f;
+        List<GameObject> characters = new List<GameObject>();
+        foreach (RaycastHit hit in Physics.SphereCastAll(transform.position, desiredseparation, Vector3.zero))
+        {
+            if (hit.collider.GetComponent<Enemy>() != null)
+            {
+                characters.Add(hit.collider.gameObject);
+            }
+        }
+
+        float maxForce = 2f;
+        Vector3 sum = new Vector3();
+        int count = 0;
+
+        foreach (GameObject other in characters)
+        {
+            if (other.Equals(this)) break;
+
+            float d = Vector3.Distance(transform.position, other.transform.position);
+            Vector3 diff = transform.position - other.transform.position;
+            diff.Normalize();
+            diff /= d;
+            sum += diff;
+            count++;
+        }
+
+        if (count > 0)
+        {
+            sum /= count;
+            sum.Normalize();
+            sum *= 5f;
+            Vector3 steer = sum - GetComponent<Rigidbody>().velocity;
+            Vector3.ClampMagnitude(steer, maxForce);
+            GetComponent<Rigidbody>().AddForce(steer);
+        }
+    }
 }

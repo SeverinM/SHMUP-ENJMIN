@@ -121,7 +121,7 @@ public class Player : Character
         impact = Vector3.Lerp(impact, Vector3.zero, impactDeceleration * Time.deltaTime);
 
         line.SetPosition(0, transform.position);
-        line.SetPosition(1, hook.transform.position);
+        line.SetPosition(1, target.position);
     }
 
     private void OnCollisionEnter(Collision collision)
