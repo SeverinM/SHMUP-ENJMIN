@@ -16,7 +16,25 @@ public class FollowPathMovement : State
 
     public FollowPathMovement(Character character, Queue<WaypointElement> allPos, bool loop, float noiseCoeff = 0) : base(character)
     {
+        // Random Path if no path has been defined
+        if(allPos == null)
+        {
+            allPos = new Queue<WaypointElement>();
+            int movements = Random.Range(1, 4);
+            for(int i = 0; i< movements; i++)
+            {
+                WaypointElement wE = new WaypointElement();
+                Vector3 pos = new Vector3(Random.Range(-1f,1f), 0, Random.Range(-1f, 1f));
+                wE.speed = Random.Range(0.2f, 2f);
+                wE.targetPosition = pos;
+                allPos.Enqueue(wE);
+            }
+
+        }
+
         positions = allPos;
+
+
         //Si la queue n'est pas vide on prend la valeur cible sur le devant de la queu
         if (allPos.Count > 0)
         {

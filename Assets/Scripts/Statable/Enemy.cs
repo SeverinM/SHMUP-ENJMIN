@@ -169,6 +169,9 @@ public class Enemy : Character {
         FollowPath();
     }
 
+    /// <summary>
+    /// Le personnage suit un chemin défini par un GD/Ergonome de qualité
+    /// </summary>
     public void FollowPath()
     {
         //Toutes les positions globales
@@ -183,6 +186,14 @@ public class Enemy : Character {
     /// Le personnage suit des positions choisies aléatoirement
     /// </summary>
     public void FollowRandomPath()
+    {
+        SetState(new EnemyMovement(this, new Queue<WaypointElement>()));
+    }
+
+    /// <summary>
+    /// Le personnage suit un autre personnage
+    /// </summary>
+    private void FollowCharacter()
     {
         SetState(new EnemyMovement(this, new Queue<WaypointElement>()));
     }
@@ -223,11 +234,6 @@ public class Enemy : Character {
                 break;
         }
 
-    }
-
-    private void FollowCharacter()
-    {
-        SetState(new EnemyMovement(this, new Queue<WaypointElement>()));
     }
 
     public override float GetScale()

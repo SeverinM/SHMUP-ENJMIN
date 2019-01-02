@@ -44,6 +44,7 @@ public class PlayerWinch : State
     public override void NextState()
     {
         // Quand on a atteint notre cible, alors on repasse à l'état normal du joueur
+        player.ResetHook();
         character.SetState(new PlayerMovement(character));
     }
 

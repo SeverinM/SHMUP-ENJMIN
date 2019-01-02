@@ -36,6 +36,7 @@ public class PlayerMovementDuringHook : PlayerMovement {
     {
         //Le vaisseau fera toujours face au hook
         character.transform.forward = (plr.target.position - character.transform.position).normalized;
+        plr.Hook.transform.position = plr.Target.transform.position;
     }
 
     public override void EndState()

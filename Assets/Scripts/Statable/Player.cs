@@ -163,13 +163,29 @@ public class Player : Character
         return Constants.TimeScalePlayer;
     }
 
-    public void ResetHook()
+    /// <summary>
+    /// Mettre a jour la position du hook
+    /// </summary>
+    public void UpdateHook()
     {
         hook.transform.localPosition = origin;
         target = hook.transform;
         hook.forward = transform.forward;
     }
 
+    /// <summary>
+    /// Reinitialiser la position du hook
+    /// </summary>
+    public void ResetHook()
+    {
+        hook.transform.localPosition = origin;
+        target = hook.transform;
+    }
+
+    /// <summary>
+    /// Definir l'entitée a laquelle Hook est attaché
+    /// </summary>
+    /// <param name="transform"></param>
     public void AttachHook(Transform transform)
     {
         target = transform;

@@ -20,6 +20,11 @@ public class CharacterRecovery : State
         this.duration = duration;
         orignal = character.GetComponent<MeshRenderer>().material;
         this.movement = movement;
+
+        if(movement == null)
+        {
+            movement = new FollowPathMovement(character, null, true);
+        }
     }
 
     public override void EndState()
