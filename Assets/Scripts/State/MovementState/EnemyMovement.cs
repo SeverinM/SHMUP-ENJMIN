@@ -31,6 +31,12 @@ public class EnemyMovement : State
 
     public override void UpdateState()
     {
+        // Si le leader à été détruit, alors on se déplace aléatoirement
+        if(enemy.leader == null)
+        {
+            enemy.FollowRandomPath();
+        }
+
         deltaPosition = enemy.leader.transform.position - character.transform.position;
 
         // Si les ennemis ont atteint le joueur, ils rentrent dasn une phase d'attaque

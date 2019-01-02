@@ -169,7 +169,7 @@ public class Enemy : Character {
         FollowPath();
     }
 
-    private void FollowPath()
+    public void FollowPath()
     {
         //Toutes les positions globales
         if (Waypoints.allWaypoints != null)
@@ -179,7 +179,10 @@ public class Enemy : Character {
         }
     }
 
-    private void FollowRandomPath()
+    /// <summary>
+    /// Le personnage suit des positions choisies aléatoirement
+    /// </summary>
+    public void FollowRandomPath()
     {
         SetState(new EnemyMovement(this, new Queue<WaypointElement>()));
     }
