@@ -36,7 +36,9 @@ public class FollowPathMovement : State
 
     public override void StartState()
     {
-        character.transform.forward = targetPosition - character.transform.position;
+        if (targetPosition - character.transform.position != Vector3.zero)
+            character.transform.forward = targetPosition - character.transform.position;
+
         character.OnTriggerEnterChar += TriggerEnter;
     }
 
@@ -101,7 +103,9 @@ public class FollowPathMovement : State
             }    
         }
 
-        character.transform.forward = deltaPosition;
+        if (deltaPosition != Vector3.zero)
+            character.transform.forward = deltaPosition;
+
         character.Move(deltaPosition.normalized);
     }
 

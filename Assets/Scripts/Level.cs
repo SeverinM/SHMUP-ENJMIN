@@ -114,9 +114,13 @@ public class Level : Layers
     {
         foreach (KeyValuePair<GameObject, Text> value in characterTexts)
         {
-            // Affichage de données depuis le GameObject
-            if(value.Key.GetComponent<Character>().ActualState != null)
-            value.Value.text = value.Key.GetComponent<Character>().ActualState.ToString();
+            if (value.Key != null)
+            {
+                // Affichage de données depuis le GameObject
+                if (value.Key.GetComponent<Character>().ActualState != null)
+                {
+                    value.Value.text = value.Key.GetComponent<Character>().ActualState.ToString();
+                }
 
                 // Position du texte au dessus d'un gameObject
                 Vector3 offsetPos = new Vector3(value.Key.transform.position.x, value.Key.transform.position.y, value.Key.transform.position.z + 0.5f);

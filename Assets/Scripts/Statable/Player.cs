@@ -123,7 +123,11 @@ public class Player : Character
 
         // Definir la position de la ligne uniquement que si il y a un target
         line.SetPosition(0, transform.position);
-        line.SetPosition(1, target.position);
+
+        if (target != null)
+            line.SetPosition(1, target.position);
+        else
+            line.SetPosition(1, transform.position);
     }
 
     private void OnCollisionEnter(Collision collision)
