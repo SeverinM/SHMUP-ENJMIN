@@ -112,14 +112,16 @@ public class Player : Character
             actualState.UpdateState();
         }
 
+        // Déplacer le personnage lors d'un impact de rigidBody
         if (impact.magnitude > 0.2)
         { 
-            Move(impact * Time.deltaTime); // move character
+            Move(impact * Time.deltaTime);
         } 
 
-        // impact vanishes to zero over time
+        // Impact tend vers zero
         impact = Vector3.Lerp(impact, Vector3.zero, impactDeceleration * Time.deltaTime);
 
+        // Definir la position de la ligne uniquement que si il y a un target
         line.SetPosition(0, transform.position);
         line.SetPosition(1, target.position);
     }

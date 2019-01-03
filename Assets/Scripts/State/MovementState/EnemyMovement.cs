@@ -11,8 +11,6 @@ public class EnemyMovement : State
 
     Enemy enemy;
 
-    Level level;
-
     Vector3 deltaPosition;
 
     Queue<WaypointElement> allElems;
@@ -20,8 +18,7 @@ public class EnemyMovement : State
     public EnemyMovement(Character chara, Queue<WaypointElement> elt) : base(chara)
     {
         allElems = elt;
-        level = character.Context.ValuesOrDefault<Level>("Level", null);
-        enemy = character.GetComponent<Enemy>();
+        enemy = (Enemy)character;
     }
 
     public override void NextState()
@@ -32,7 +29,7 @@ public class EnemyMovement : State
     public override void UpdateState()
     {
         // Si le leader à été détruit, alors on se déplace aléatoirement
-        if(enemy.leader == null)
+        if (enemy.leader == null)
         {
             enemy.FollowRandomPath();
         }

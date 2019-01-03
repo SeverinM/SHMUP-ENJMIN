@@ -9,22 +9,16 @@ using System.Collections;
 /// <returns></returns>
 public class CharacterRecovery : State
 {
+    // Duration the player last in this state
     private float duration;
-    Material orignal;
-    State movement;
-
     private float lastTime;
 
-    public CharacterRecovery(Character character, State movement, float duration) : base(character)
+    Material orignal;
+
+    public CharacterRecovery(Character character, float duration) : base(character)
     {
         this.duration = duration;
         orignal = character.GetComponent<MeshRenderer>().material;
-        this.movement = movement;
-
-        if(movement == null)
-        {
-            movement = new FollowPathMovement(character, null, true);
-        }
     }
 
     public override void EndState()
@@ -34,14 +28,9 @@ public class CharacterRecovery : State
         character.GetComponent<Collider>().enabled = true;
     }
 
-    public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)
-    {
-        movement.InterpretInput(typeAct, acts, val);
-    }
-
     public override void NextState()
     {
-        character.SetState(movement);
+        ((Enemy)character).FollowRandomPath();
     }
 
     public override void StartState()
@@ -53,13 +42,10 @@ public class CharacterRecovery : State
 
         character.GetComponent<Collider>().enabled = false;
         character.protection.SetActive(true);
-
-        movement.StartState();
     }
 
     public override void UpdateState()
     {        
-        movement.UpdateState();
         lastTime += Time.deltaTime;
 
         if (lastTime > duration)

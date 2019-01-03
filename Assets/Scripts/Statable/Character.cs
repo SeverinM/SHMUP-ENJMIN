@@ -195,7 +195,7 @@ public abstract class Character : MonoBehaviour {
 
     public void StartRecovery(float duration)
     {
-        SetState(new CharacterRecovery(this, actualState, duration));
+        SetState(new CharacterRecovery(this, duration));
     }
 
     //Coroutine generique permettant d'effectuer une action en decalé

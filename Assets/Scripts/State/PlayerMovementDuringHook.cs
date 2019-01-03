@@ -8,23 +8,20 @@ using UnityEngine;
 public class PlayerMovementDuringHook : PlayerMovement {
 
     //La positon du grappin relativement a son père
-    Vector3 originRelative = Vector3.zero;
     Transform hook;
     float coeff;
-    Player plr;
+    Player player;
     
 
     public PlayerMovementDuringHook(Character chara) : base(chara)
     {
-        originRelative = character.Context.ValuesOrDefault<Vector3>("Origin", Vector3.forward);
         coeff = character.Context.ValuesOrDefault<float>("CoeffHook", 0.1f);
-        plr = (Player)chara;
-
+        player = (Player)chara;
     }
 
     public override void StartState()
     {
-        plr.Target.parent.GetComponent<Character>().PersonalScale = 0;
+        player.Target.parent.GetComponent<Character>().PersonalScale = 0;
     }
 
     public override void NextState()
@@ -35,8 +32,8 @@ public class PlayerMovementDuringHook : PlayerMovement {
     public override void UpdateState()
     {
         //Le vaisseau fera toujours face au hook
-        character.transform.forward = (plr.target.position - character.transform.position).normalized;
-        plr.Hook.transform.position = plr.Target.transform.position;
+        character.transform.forward = (player.target.position - character.transform.position).normalized;
+        player.Hook.transform.position = player.Target.transform.position;
     }
 
     public override void EndState()
