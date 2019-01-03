@@ -55,9 +55,6 @@ public class Enemy : Character {
     }
 
     [SerializeField]
-    protected int HP = 0;
-
-    [SerializeField]
     //Si la distance ennemi / joueur est inferieur a cette distance , l'ennemi va attaquer le joueur au lieu de poursuivre
     protected float attackRange = 2.0f;
     public float AttackRange
@@ -146,7 +143,6 @@ public class Enemy : Character {
 
     private void Start()
     {
-        Context.SetInDictionary("Level", level);
         switch (movementType)
         {
             case EnemyMovementType.FOLLOW_GAME_OBJECT:
@@ -197,7 +193,6 @@ public class Enemy : Character {
                 //Tir simple en face de lui
                 clone = Instantiate(bulletPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation).GetComponent<Rigidbody>();
                 clone.velocity = transform.forward * shootSpeed;
-                Debug.Log(clone.velocity.magnitude);
                 break;
             case EnemyType.JIM:
                 float x = 0, y = 0;

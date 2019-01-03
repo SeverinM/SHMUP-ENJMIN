@@ -90,7 +90,25 @@ public abstract class Character : MonoBehaviour {
 
     [SerializeField]
     [Tooltip("Nombre de point de vie du personnage , un nombre negatif equivaut a 1")]
-    protected float life = 3;
+    protected int life = 3;
+
+    Binding<int> watchedLife;
+    public int Life
+    {
+        get
+        {
+            return watchedLife.WatchedValue;
+        }
+
+        set
+        {
+            watchedLife.WatchedValue = value;
+            if (watchedLife.WatchedValue <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
 
     internal GameObject protection;
 
@@ -98,9 +116,20 @@ public abstract class Character : MonoBehaviour {
     [Header("Sci-fi magnetic protection")]
     internal GameObject protectionPrefab;
 
-    public Level level;
-
     public GameObject leader;
+
+    void Awake()
+    {
+        watchedLife = new Binding<int>(0, null);
+    }
+
+    //Appellé a chaque fois que la vie du joueur change
+    public void SetOnLifeChanged(Action<int> newAction)
+    {
+        watchedLife.ValueChanged = newAction;
+        //Reactualise avec la valeur actuelle
+        Life = life;
+    }
 
     internal void SetLeader(GameObject leader)
     {
@@ -110,24 +139,6 @@ public abstract class Character : MonoBehaviour {
     internal void Rotate(GameObject player)
     {
         transform.LookAt(player.transform);
-    }
-
-    public float Life
-    {
-        get
-        {
-            return life;
-        }
-
-        set
-        {
-            life = value;
-            if (life <= 0)
-            {
-                // On demande au niveau de retirer le character du niveau
-                level.Remove(this);
-            }
-        }
     }
 
     [SerializeField]
@@ -196,20 +207,6 @@ public abstract class Character : MonoBehaviour {
     public void StartRecovery(float duration)
     {
         SetState(new CharacterRecovery(this, actualState, duration));
-    }
-
-    //Coroutine generique permettant d'effectuer une action en decalé
-    public void StartDelayedTask(UnityAction before , float duration, UnityAction after)
-    {
-        duration = Mathf.Max(Mathf.Abs(duration), 0.1f);
-        StartCoroutine(DelayedActionCoroutine(before, duration, after));
-    }
-
-    IEnumerator DelayedActionCoroutine(UnityAction before , float duration , UnityAction after)
-    {
-        before();
-        yield return new WaitForSeconds(duration);
-        after();
     }
 
     /// <summary>

@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 /// <summary>
-/// Classe generique permettant de modifier un UI Texte dés que la valeur observé est modifié , la methode ToString() doit etre redefinit
+/// Classe effectuant une action dés qu'une valeur est modifé
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public class Binding<T>{
-
-    Text text;
+public class Binding<T> {
+    public Action<T> ValueChanged;
 
     T watchedVal;
     public T WatchedValue
@@ -21,20 +21,17 @@ public class Binding<T>{
 
         set
         {
+            if (ValueChanged != null && !value.Equals(watchedVal))
+            {
+                ValueChanged(value);
+            }
             watchedVal = value;
-            if (text != null)
-            {
-                text.text = watchedVal.ToString();
-            }
-            else
-            {
-                Debug.LogWarning("Un objet binding n'a pas de cible");
-            }
         }
     }
 
-    public Binding(Text firstText)
+    public Binding(T initialValue, Action<T> action)
     {
-        text = firstText;
+        ValueChanged = action;
+        WatchedValue = initialValue;
     }
 }

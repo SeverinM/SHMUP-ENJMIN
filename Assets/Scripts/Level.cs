@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class Level : Layers
 {
@@ -26,13 +27,17 @@ public class Level : Layers
         }
     }
 
+    [SerializeField]
+    Text textUI;
+
+    [SerializeField]
+    Text Count;
 
     [SerializeField]
     List<GameObject> generators;
 
     [SerializeField]
     GameObject canvas;
-
 
     [SerializeField]
     GameObject text;
@@ -43,12 +48,25 @@ public class Level : Layers
 
     public List<GameObject> characters = new List<GameObject>();
     public List<GameObject> charactersToRemove = new List<GameObject>();
+    public Binding<int> watchNbSpawn = new Binding<int>(0, null);
 
     //Appellé quand le layer est au dessus de la stack
     public override void OnFocusGet()
     {
-        player.level = this;
         player.Destroyed += PlayerDied;
+
+        //Mise en place des data bindings;
+        player.SetOnLifeChanged((x) =>
+        {
+            if (textUI != null)
+                textUI.text = "Nombre de vie : " + x.ToString();
+        });
+
+        watchNbSpawn.ValueChanged = (x) =>
+        {
+            if (Count != null)
+                Count.text = "Nombre d'ennemies encore a spawn : " + x.ToString();
+        };
 
         // Faire en sorte que tous les inputs notifient le joueur
         foreach (BaseInput inp in refInput)
@@ -80,6 +98,7 @@ public class Level : Layers
 
     public void Update()
     {
+        //???
         foreach (GameObject character in charactersToRemove)
         {
             characterTexts.Remove(character);
@@ -87,27 +106,30 @@ public class Level : Layers
             Destroy(character);
         }
         charactersToRemove.Clear();
-
+        watchNbSpawn.WatchedValue = generators.Select(x => x.GetComponent<Generator>().EnnemiesLeftToSpawn).Sum();
     }
 
     public void LateUpdate()
     {
         foreach (KeyValuePair<GameObject, Text> value in characterTexts)
         {
-            // Affichage de données depuis le GameObject
-            value.Value.text = value.Key.GetComponent<Character>().ActualState.ToString();
+            if (value.Key != null)
+            {
+                // Affichage de données depuis le GameObject
+                value.Value.text = value.Key.GetComponent<Character>().ActualState.ToString();
 
-            // Position du texte au dessus d'un gameObject
-            Vector3 offsetPos = new Vector3(value.Key.transform.position.x, value.Key.transform.position.y, value.Key.transform.position.z + 0.5f);
+                // Position du texte au dessus d'un gameObject
+                Vector3 offsetPos = new Vector3(value.Key.transform.position.x, value.Key.transform.position.y, value.Key.transform.position.z + 0.5f);
 
-            // Calcul de la position à l'écran 
-            Vector2 canvasPos;
-            Vector2 screenPoint = Camera.main.WorldToScreenPoint(offsetPos);
+                // Calcul de la position à l'écran 
+                Vector2 canvasPos;
+                Vector2 screenPoint = Camera.main.WorldToScreenPoint(offsetPos);
 
-            // Convertir la position à l'écran vers l'espace du canvas 
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.GetComponent<RectTransform>(), screenPoint, null, out canvasPos);
+                // Convertir la position à l'écran vers l'espace du canvas 
+                RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.GetComponent<RectTransform>(), screenPoint, null, out canvasPos);
 
-            value.Value.transform.localPosition = canvasPos;
+                value.Value.transform.localPosition = canvasPos;
+            }
         }
     }
 
@@ -141,7 +163,6 @@ public class Level : Layers
 
         // Instantier un ennemi
         GameObject toAdd = Instantiate(character, position, Quaternion.identity);
-        toAdd.GetComponent<Enemy>().level = this;
         characters.Add(toAdd);
         if(text != null)
         {
