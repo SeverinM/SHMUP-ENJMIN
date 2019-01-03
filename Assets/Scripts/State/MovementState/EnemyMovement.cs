@@ -11,8 +11,6 @@ public class EnemyMovement : State
 
     Enemy enemy;
 
-    Level level;
-
     Vector3 deltaPosition;
 
     Queue<WaypointElement> allElems;
@@ -20,8 +18,7 @@ public class EnemyMovement : State
     public EnemyMovement(Character chara, Queue<WaypointElement> elt) : base(chara)
     {
         allElems = elt;
-        level = character.Context.ValuesOrDefault<Level>("Level", null);
-        enemy = character.GetComponent<Enemy>();
+        enemy = (Enemy)character;
     }
 
     public override void NextState()
@@ -32,7 +29,7 @@ public class EnemyMovement : State
     public override void UpdateState()
     {
         // Si le leader à été détruit, alors on se déplace aléatoirement
-        if(enemy.leader == null)
+        if (enemy.leader == null)
         {
             enemy.FollowRandomPath();
         }
@@ -45,7 +42,7 @@ public class EnemyMovement : State
             character.SetState(new EnemyAttack(character,allElems));
         }
 
-        Separate();
+        character.Separate();
 
         Player plyr = character.RaiseTryReaching();
         if (plyr != null)
@@ -74,44 +71,4 @@ public class EnemyMovement : State
         }
     }
 
-
-    //Permet de separer les ennemies entre eux pour eviter qu'ils se marchent dessus
-    void Separate()
-    {
-        float desiredseparation = 3f;
-        List<GameObject> characters = new List<GameObject>();
-        foreach (RaycastHit hit in Physics.SphereCastAll(character.transform.position, desiredseparation, Vector3.zero))
-        {
-            if (hit.collider.GetComponent<Enemy>() != null)
-            {
-                characters.Add(hit.collider.gameObject);
-            }
-        }
-
-        float maxForce = 2f;
-        Vector3 sum = new Vector3();
-        int count = 0;
-
-        foreach (GameObject other in characters)
-        {
-            if (other.Equals(this)) break;
-
-            float d = Vector3.Distance(character.transform.position, other.transform.position);
-            Vector3 diff = character.transform.position - other.transform.position;
-            diff.Normalize();
-            diff /= d;
-            sum += diff;
-            count++;
-        }
-
-        if (count > 0)
-        {
-            sum /= count;
-            sum.Normalize();
-            sum *= 5f;
-            Vector3 steer = sum - character.GetComponent<Rigidbody>().velocity;
-            Vector3.ClampMagnitude(steer, maxForce);
-            character.GetComponent<Rigidbody>().AddForce(steer);
-        }
-    }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Random = UnityEngine.Random;
 
 [System.Serializable]
 public class Waypoints
@@ -15,7 +16,7 @@ public class Waypoints
         Waypoints wp = new Waypoints();
         wp.loop = loop;
         wp.allWaypoints = new List<WaypointElement>();
-        foreach(WaypointElement we in allWaypoints)
+        foreach (WaypointElement we in allWaypoints)
         {
             wp.allWaypoints.Add(we.Clone());
         }
@@ -38,7 +39,8 @@ public class WaypointElement
     }
 }
 
-public class Enemy : Character {
+public class Enemy : Character
+{
 
     public enum EnemyMovementType
     {
@@ -154,6 +156,9 @@ public class Enemy : Character {
             case EnemyMovementType.FOLLOW_RANDOM_PATH:
                 FollowRandomPath();
                 break;
+            default:
+                FollowRandomPath();
+                break;
         }
 
         protection = Instantiate(protectionPrefab, transform);
@@ -165,6 +170,9 @@ public class Enemy : Character {
         FollowPath();
     }
 
+    /// <summary>
+    /// Le personnage suit un chemin défini par un GD/Ergonome de qualité
+    /// </summary>
     public void FollowPath()
     {
         //Toutes les positions globales
@@ -179,6 +187,26 @@ public class Enemy : Character {
     /// Le personnage suit des positions choisies aléatoirement
     /// </summary>
     public void FollowRandomPath()
+    {
+        int movements = Random.Range(2, 5);
+
+        for (int i = 0; i < movements; i++)
+        {
+            WaypointElement wE = new WaypointElement();
+            Vector3 pos = new Vector3(Random.Range(-16f, 16f), 0, Random.Range(-16f, 16f));
+            wE.speed = 1f;
+            wE.targetPosition = pos;
+            Waypoints.allWaypoints.Add(wE);
+        }
+
+        Queue<WaypointElement> allPos = new Queue<WaypointElement>(Waypoints.allWaypoints);
+        SetState(new FollowPathMovement(this, allPos, true));
+    }
+
+    /// <summary>
+    /// Le personnage suit un autre personnage
+    /// </summary>
+    private void FollowCharacter()
     {
         SetState(new EnemyMovement(this, new Queue<WaypointElement>()));
     }
@@ -218,11 +246,6 @@ public class Enemy : Character {
                 break;
         }
 
-    }
-
-    private void FollowCharacter()
-    {
-        SetState(new EnemyMovement(this, new Queue<WaypointElement>()));
     }
 
     public override float GetScale()

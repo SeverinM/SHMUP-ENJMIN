@@ -17,6 +17,7 @@ public class FollowPathMovement : State
     public FollowPathMovement(Character character, Queue<WaypointElement> allPos, bool loop, float noiseCoeff = 0) : base(character)
     {
         positions = allPos;
+
         //Si la queue n'est pas vide on prend la valeur cible sur le devant de la queu
         if (allPos.Count > 0)
         {
@@ -49,8 +50,8 @@ public class FollowPathMovement : State
         //L'ennemi est rentré dans la zone proche du joueur , il va commencer a le poursuivre
         if (coll.tag == "FollowParent")
         {
-            character.SetState(new EnemyMovement(character, positions));
             character.SetLeader(coll.gameObject);
+            character.SetState(new EnemyMovement(character, positions));
         }
 
         if (coll.tag == "Hook")
@@ -75,6 +76,8 @@ public class FollowPathMovement : State
     {
         deltaPosition = targetPosition - character.transform.position;
 
+        character.Separate();
+
         //Waypoint atteint ?
         if (Vector3.Distance(targetPosition, character.transform.position) < (GetSpeed() * Time.deltaTime * 4))
         {
@@ -95,9 +98,9 @@ public class FollowPathMovement : State
                 {
                     character.SetState(null);
                 }
-            }
-            
+            }    
         }
+
         character.transform.forward = deltaPosition;
         character.Move(deltaPosition.normalized);
     }

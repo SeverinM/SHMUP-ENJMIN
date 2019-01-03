@@ -84,11 +84,16 @@ public class PlayerMovement : State
 
     public override void UpdateState()
     {
-        ((Player)character).ResetHook();
+        ((Player)character).UpdateHook();
     }
 
     public override void NextState()
     {
         character.SetState(new PlayerShoot(character));
+    }
+
+    public override void StartState()
+    {
+        ((Player)character).ResetHook();
     }
 }

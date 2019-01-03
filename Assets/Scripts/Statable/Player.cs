@@ -112,16 +112,18 @@ public class Player : Character
             actualState.UpdateState();
         }
 
+        // Déplacer le personnage lors d'un impact de rigidBody
         if (impact.magnitude > 0.2)
         { 
-            Move(impact * Time.deltaTime); // move character
+            Move(impact * Time.deltaTime);
         } 
 
-        // impact vanishes to zero over time
+        // Impact tend vers zero
         impact = Vector3.Lerp(impact, Vector3.zero, impactDeceleration * Time.deltaTime);
 
+        // Definir la position de la ligne uniquement que si il y a un target
         line.SetPosition(0, transform.position);
-        line.SetPosition(1, hook.transform.position);
+        line.SetPosition(1, target.position);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -163,13 +165,29 @@ public class Player : Character
         return Constants.TimeScalePlayer;
     }
 
-    public void ResetHook()
+    /// <summary>
+    /// Mettre a jour la position du hook
+    /// </summary>
+    public void UpdateHook()
     {
         hook.transform.localPosition = origin;
         target = hook.transform;
         hook.forward = transform.forward;
     }
 
+    /// <summary>
+    /// Reinitialiser la position du hook
+    /// </summary>
+    public void ResetHook()
+    {
+        hook.transform.localPosition = origin;
+        target = hook.transform;
+    }
+
+    /// <summary>
+    /// Definir l'entitée a laquelle Hook est attaché
+    /// </summary>
+    /// <param name="transform"></param>
     public void AttachHook(Transform transform)
     {
         target = transform;

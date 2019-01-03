@@ -8,25 +8,20 @@ using UnityEngine;
 public class PlayerMovementDuringHook : PlayerMovement {
 
     //La positon du grappin relativement a son père
-    Vector3 originRelative = Vector3.zero;
     Transform hook;
     float coeff;
-    Player plr;
+    Player player;
+    
 
     public PlayerMovementDuringHook(Character chara) : base(chara)
     {
-        originRelative = character.Context.ValuesOrDefault<Vector3>("Origin", Vector3.forward);
-        hook = character.Context.ValuesOrDefault<Transform>("Hook", character.transform);
         coeff = character.Context.ValuesOrDefault<float>("CoeffHook", 0.1f);
-        plr = (Player)chara;
-
-        //Le hook perd temporairement son statut d'enfant juste pour cet etat
-        hook.parent = null;
+        player = (Player)chara;
     }
 
     public override void StartState()
     {
-        plr.Target.parent.GetComponent<Character>().PersonalScale = 0;
+        player.Target.parent.GetComponent<Character>().PersonalScale = 0;
     }
 
     public override void NextState()
@@ -37,13 +32,13 @@ public class PlayerMovementDuringHook : PlayerMovement {
     public override void UpdateState()
     {
         //Le vaisseau fera toujours face au hook
-        character.transform.forward = (hook.transform.position - character.transform.position).normalized;
+        character.transform.forward = (player.target.position - character.transform.position).normalized;
+        player.Hook.transform.position = player.Target.transform.position;
     }
 
     public override void EndState()
     {
-        //Reconstitution de la relation pere / enfant
-        hook.parent = character.transform;
+       
     }
 
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)
@@ -61,8 +56,5 @@ public class PlayerMovementDuringHook : PlayerMovement {
             //Bouton relaché , on passe au winch
             NextState();
         }
-
-        //On actualise la position de la ligne reliant le hook et le vaisseau
-        hook.GetComponent<LineRenderer>().SetPosition(1, character.transform.position);
     }
 }
