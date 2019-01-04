@@ -166,9 +166,18 @@ public class Tools : EditorWindow {
                 GUILayout.FlexibleSpace();
                 EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("enMov"), new GUIContent("Type Mvmt"));
                 GUILayout.FlexibleSpace();
-                EditorGUIUtility.labelWidth = 1;
-                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("selected"), new GUIContent(" "));
+                EditorGUIUtility.labelWidth = 30;
+                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("selected"), new GUIContent(""));
                 GUILayout.FlexibleSpace();
+
+                if (GUILayout.Button("Lire WP"))
+                {
+                    foreach(WaypointElement wE in allWaves[i].allEnnemies[j].Waypoints.allWaypoints)
+                    {
+                        wE.targetPosition = GetPositionRelative(wE.targetPosition);
+                    }
+                    waypoints = allWaves[i].allEnnemies[j].Waypoints;
+                }
 
                 if (GUILayout.Button("Suppr."))
                 {
@@ -238,7 +247,21 @@ public class Tools : EditorWindow {
         return finalPosition;
     }
 
-    [DrawGizmo(GizmoType.NotInSelectionHierarchy | GizmoType.Selected)]
+    //Inverse de getPositionAbsolute
+    public Vector3 GetPositionRelative(Vector3 input)
+    {
+        float coeff = Vector3.Distance(staticLvl.transform.position, Camera.main.transform.position);
+        Vector3 leftBottom = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, coeff));
+        Vector3 leftTop = Camera.main.ScreenToWorldPoint(new Vector3(0, Camera.main.pixelHeight, coeff));
+        Vector3 rightBottom = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, 0, coeff));
+        Vector3 rightTop = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight, coeff));
+
+        float XRelative = Mathf.Abs(leftBottom.x - input.x) / Mathf.Abs(leftBottom.x - rightBottom.x);
+        float ZRelative = Mathf.Abs(leftBottom.z - input.z) / Mathf.Abs(leftBottom.z - leftTop.z);
+        return new Vector3(XRelative, 0, ZRelative);
+    }
+
+    [DrawGizmo(GizmoType.NotInSelectionHierarchy | GizmoType.Selected | GizmoType.NonSelected)]
     static void Draw(Level lvl, GizmoType type)
     {
         if (instance != null && lvl == staticLvl)
