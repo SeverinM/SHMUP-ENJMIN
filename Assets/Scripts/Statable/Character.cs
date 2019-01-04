@@ -51,6 +51,13 @@ public abstract class Character : MonoBehaviour {
     [Tooltip("A quel vitesse le personnage peut se deplacer ?")]
     [SerializeField]
     protected float moveSpeed = 6.0f;
+    public float MoveSpeed
+    {
+        get
+        {
+            return moveSpeed;
+        }
+    }
 
     [SerializeField]
     protected float mass = 3.0f;                
@@ -124,7 +131,20 @@ public abstract class Character : MonoBehaviour {
 
     public Level level;
 
-    public GameObject leader;
+    GameObject leader;
+    public GameObject Leader
+    {
+        get
+        {
+            return leader;
+        }
+        set
+        {
+            leader = value;
+            if (leader != null)
+                SetState(new EnemyMovement(this, leader.transform, new Queue<WaypointElement>(), true));
+        }
+    }
 
     void Awake()
     {
@@ -141,7 +161,7 @@ public abstract class Character : MonoBehaviour {
 
     internal void SetLeader(GameObject leader)
     {
-        this.leader = leader;
+        Leader = leader;
     }
 
     internal void Rotate(GameObject player)
@@ -238,20 +258,6 @@ public abstract class Character : MonoBehaviour {
         {
             Destroyed(this);
         }
-    }
-
-    /// <summary>
-    /// Retourne un joueur dont des valeurs ont été changées 
-    /// </summary>
-    /// <returns></returns>
-    public Player RaiseTryReaching()
-    {
-        Player output = null;
-        if (TryReachingPlayer != null)
-        {
-            output = TryReachingPlayer();
-        }
-        return output;
     }
 
     //Permet de separer les ennemies entre eux pour eviter qu'ils se marchent dessus

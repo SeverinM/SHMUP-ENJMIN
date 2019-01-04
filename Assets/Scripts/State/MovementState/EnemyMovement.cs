@@ -8,17 +8,18 @@ using UnityEngine;
 public class EnemyMovement : State
 {
     Vector3 targetPosition;
-
     Enemy enemy;
-
+    Transform target;
     Vector3 deltaPosition;
-
     Queue<WaypointElement> allElems;
+    bool followLeader;
 
-    public EnemyMovement(Character chara, Queue<WaypointElement> elt) : base(chara)
+    public EnemyMovement(Character chara, Transform tar, Queue<WaypointElement> elt, bool followLeader = false) : base(chara)
     {
         allElems = elt;
         enemy = (Enemy)character;
+        target = tar;
+        this.followLeader = followLeader;
     }
 
     public override void NextState()
@@ -28,30 +29,34 @@ public class EnemyMovement : State
 
     public override void UpdateState()
     {
-        // Si le leader à été détruit, alors on se déplace aléatoirement
-        if (enemy.leader == null)
+        // Si la cible à été détruit, alors on se déplace aléatoirement
+        if (target == null)
         {
             enemy.FollowRandomPath();
             return;
         }
 
-        deltaPosition = enemy.leader.transform.position - character.transform.position;
-
-        // Si les ennemis ont atteint le joueur, ils rentrent dans une phase d'attaque
-        if (Vector3.Distance(enemy.leader.transform.position, character.transform.position) <= Mathf.Abs(character.transform.position.y - enemy.leader.transform.position.y) + enemy.AttackRange)
-        {
-            character.SetState(new EnemyAttack(character,allElems));
-        }
+        deltaPosition = target.transform.position - character.transform.position;
 
         character.Separate();
 
-        Player plyr = character.RaiseTryReaching();
-        if (plyr != null)
+        if (!followLeader)
         {
-            character.Rotate(plyr.gameObject);
+            character.transform.LookAt(target.transform);
+            // L'ennemie est proche du joueur
+            if (Vector3.Distance(target.transform.position, character.transform.position) <= enemy.AttackRange)
+            {
+                character.SetState(new EnemyAttack(character, allElems, target.transform));
+            }
         }
+        //La vitesse du personnage est de plus en plus lente au fur et a mesure qu'il s'approche de son leader pour eviter de lui rentrer dedans
+        else
+        {
+            character.PersonalScale = Mathf.Clamp(Vector3.Distance(target.transform.position, character.transform.position) / enemy.MoveSpeed, 0, 1);
+            character.transform.forward = deltaPosition;
+        }
+
         character.Move(deltaPosition.normalized);
-        character.transform.forward = deltaPosition;
     }
 
     public override void StartState()
@@ -66,7 +71,8 @@ public class EnemyMovement : State
 
     public void TriggerExit(Collider coll)
     {
-        if (coll.tag == "FollowParent")
+        //Quitter la zone du joueur n'a de sens que si l'ennemi poursuivait le joueur
+        if (!followLeader && coll.tag == "FollowParent")
         {
             character.SetState(new FollowPathMovement(character, allElems, ((Enemy)character).Waypoints.loop));
         }
