@@ -11,6 +11,7 @@ TagManager:
   - Hook
   - Pullable
   - Winchable
+  - Barrier
   layers:
   - Default
   - TransparentFX

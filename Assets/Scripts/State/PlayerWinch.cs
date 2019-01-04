@@ -8,7 +8,7 @@ public class PlayerWinch : State
 {
     private Player player;
 
-    Transform shield;
+    Transform barrier;
     
     //Vitesse de traversé du hook
     float speedTravel;
@@ -27,14 +27,14 @@ public class PlayerWinch : State
     public PlayerWinch(Character character) : base(character)
     {
         player = character.GetComponent<Player>();
-        shield = character.Context.ValuesOrDefault<Transform>("Shield", character.transform);
+        barrier = character.Context.ValuesOrDefault<Transform>("Barrier", character.transform);
         speedTravel = character.Context.ValuesOrDefault<float>("SpeedWinch", 10);
         currentMode = character.Context.ValuesOrDefault<HookMode>("HookMode", HookMode.Winch);
     }
 
     public override void EndState()
     {
-        shield.GetComponent<Shield>().IsWinching = false;
+        barrier.GetComponent<Barrier>().IsWinching = false;
         if (player.Target != null)
         {
             player.Target.parent.GetComponent<Character>().PersonalScale = 1;
@@ -49,7 +49,7 @@ public class PlayerWinch : State
 
     public override void StartState()
     {
-        shield.GetComponent<Shield>().IsWinching = true;
+        barrier.GetComponent<Barrier>().IsWinching = true;
     }
 
     public override void UpdateState()

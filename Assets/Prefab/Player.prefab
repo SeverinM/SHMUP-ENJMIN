@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 54938321024312278}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,8 +83,8 @@ GameObject:
   - component: {fileID: 54193871254873504}
   - component: {fileID: 114131631155788512}
   m_Layer: 0
-  m_Name: Shield
-  m_TagString: Shield
+  m_Name: Barrier
+  m_TagString: Barrier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -122,7 +122,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1380677440080142}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.83, y: 2.4, z: 2.31}
+  m_LocalPosition: {x: 0.83, y: 0, z: 2.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4181975481634658}
@@ -406,6 +406,7 @@ MonoBehaviour:
   life: 3
   protectionPrefab: {fileID: 1999096423012838, guid: 7ab713d6b58d82142a6ef567773e3e05,
     type: 2}
+  impactDeceleration: 5
   level: {fileID: 0}
   mode: 1
   distanceDash: 2
@@ -413,8 +414,7 @@ MonoBehaviour:
   rangeHook: 10
   speedPull: 10
   coeffHook: 0.1
-  impactDeceleration: 5
-  shield: {fileID: 4181975481634658}
+  barrier: {fileID: 4181975481634658}
   hook: {fileID: 4840222661834636}
 --- !u!120 &120035746370447866
 LineRenderer:

@@ -36,7 +36,7 @@ public class FreezeMovement : State
         {
             character.StartRecovery(duration * 10);
         }
-
+        
         character.GetComponent<Collider>().enabled = false;
         character.GetComponent<MeshRenderer>().enabled = false;
         Constants.TimeScalePlayer = 0;

@@ -167,7 +167,7 @@ public class Tools : EditorWindow {
                 EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("enMov"), new GUIContent("Type Mvmt"));
                 GUILayout.FlexibleSpace();
                 EditorGUIUtility.labelWidth = 30;
-                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("selected"), new GUIContent(""));
+                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("selected"), GUIContent.none);
                 GUILayout.FlexibleSpace();
 
                 if (GUILayout.Button("Lire WP"))
