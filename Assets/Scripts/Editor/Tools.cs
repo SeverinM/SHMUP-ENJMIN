@@ -155,13 +155,22 @@ public class Tools : EditorWindow {
             for (int j = 0; j < serRel.arraySize; j++)
             {
                 EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("enn"), new GUIContent("L'ennemi "));
-                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("spawnAfter"), new GUIContent("Apparait apres (s)"));
+                GUILayout.FlexibleSpace();
+                EditorGUIUtility.labelWidth = 80;
+                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("enn"), new GUIContent("L'ennemi "), GUILayout.MaxWidth(120));
+                EditorGUIUtility.labelWidth = 100;
+                GUILayout.FlexibleSpace();
+                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("spawnAfter"), new GUIContent("Apparait apres (s)"), GUILayout.MaxWidth(150));
+                GUILayout.FlexibleSpace();
                 EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("followPlayer"), new GUIContent("Suit le Joueur"));
-                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("enMov"), new GUIContent("Type de Mouvement"));
+                GUILayout.FlexibleSpace();
+                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("enMov"), new GUIContent("Type Mvmt"));
+                GUILayout.FlexibleSpace();
+                EditorGUIUtility.labelWidth = 1;
                 EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("selected"), new GUIContent(" "));
+                GUILayout.FlexibleSpace();
 
-                if (GUILayout.Button("Supprimer"))
+                if (GUILayout.Button("Suppr."))
                 {
                     serRel.DeleteArrayElementAtIndex(j);
                 }
@@ -185,11 +194,14 @@ public class Tools : EditorWindow {
         {
             serWaves.InsertArrayElementAtIndex(serWaves.arraySize);
         }
+
         if (serWaves.arraySize > 0 && GUILayout.Button("Supprimer (vague)"))
         {
             serWaves.DeleteArrayElementAtIndex(serWaves.arraySize - 1);
         }
+
         EditorGUILayout.EndHorizontal();
+
         EditorGUI.BeginDisabledGroup(currentGen == null);
         if (GUILayout.Button("Appliquer au spawner"))
         {
