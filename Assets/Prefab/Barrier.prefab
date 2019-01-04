@@ -23,8 +23,8 @@ GameObject:
   - component: {fileID: 23635715737805660}
   - component: {fileID: 135977328451327970}
   m_Layer: 0
-  m_Name: Protection
-  m_TagString: Shield
+  m_Name: Barrier
+  m_TagString: Barrier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -48,12 +48,12 @@ public class Player : Character
 
     [Header("Auto references (pas toucher... normalement)")]
     [SerializeField]
-    Transform shield;
-    public Transform Shield
+    Transform barrier;
+    public Transform Barrier
     {
         get
         {
-            return shield;
+            return barrier;
         }
     }
 
@@ -84,7 +84,7 @@ public class Player : Character
     {
         context.SetInDictionary("Mode", mode);
         context.SetInDictionary("Hook", hook);
-        context.SetInDictionary("Shield", shield);
+        context.SetInDictionary("Barrier", barrier);
         context.SetInDictionary("SpeedWinch", speedPull);
         context.SetInDictionary("SpeedHook", hookSpeed);
         context.SetInDictionary("RangeDash", distanceDash);

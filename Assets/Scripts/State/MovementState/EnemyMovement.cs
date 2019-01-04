@@ -41,6 +41,11 @@ public class EnemyMovement : State
         deltaPosition = target.transform.position - character.transform.position;
 
         character.Separate();
+        //L'ennemi est freeze / en pause , il n'est pas supposé agir
+        if (character.PersonalScale == 0)
+        {
+            return;
+        }
 
         if (!followLeader)
         {

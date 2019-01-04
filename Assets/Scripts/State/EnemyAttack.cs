@@ -41,7 +41,6 @@ public class EnemyAttack : State
         }
         else
         {
-            Debug.Log("fin");
             character.SetState(new EnemyMovement(character, playerTarget, elements, false));
         }
     }

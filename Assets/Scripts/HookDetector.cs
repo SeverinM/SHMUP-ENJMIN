@@ -10,7 +10,7 @@ public class HookDetector : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Success on Hook
+        // Succés Hook
         if (other.tag == "Pullable") 
         {
             player.Context.SetInDictionary("HookMode", PlayerWinch.HookMode.Pull);
@@ -24,5 +24,13 @@ public class HookDetector : MonoBehaviour
             player.AttachHook(other.transform);
             player.ActualState.NextState();
         }
+
+        // Si le joueur touche un bouclier, remetre à zero son Hook
+        if (other.tag == "Shield")
+        {
+            Destroy(other.gameObject);
+            player.SetState(new PlayerMovement(player));
+        }
+
     }
 }

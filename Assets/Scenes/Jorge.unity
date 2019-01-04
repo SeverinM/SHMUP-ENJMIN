@@ -402,7 +402,6 @@ MonoBehaviour:
   protectionPrefab: {fileID: 0}
   impactDeceleration: 5
   level: {fileID: 0}
-  leader: {fileID: 0}
   levelObject: {fileID: 1502083408}
   allWaves:
   - allEnnemies:
@@ -418,8 +417,9 @@ MonoBehaviour:
           speed: 2
       selected: 1
       spawned: 0
-      isLeader: 0
+      followPlayer: 0
     delay: 0
+    firstIsLeader: 0
 --- !u!1 &891332478
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,7 +457,6 @@ MonoBehaviour:
   protectionPrefab: {fileID: 0}
   impactDeceleration: 5
   level: {fileID: 0}
-  leader: {fileID: 0}
   levelObject: {fileID: 1502083408}
   allWaves: []
 --- !u!65 &891332480
@@ -897,6 +896,8 @@ MonoBehaviour:
   JimPrefab: {fileID: 1796657138515930, guid: 02c41df092ae0a142b8866396d0a138e, type: 2}
   MikePrefab: {fileID: 1663835522049710, guid: ae66e2c413491d642bb19e18f4749421, type: 2}
   BobPrefab: {fileID: 1561519513433908, guid: 46c9216ca856d3e4d836743c1d9c8564, type: 2}
+  textUI: {fileID: 0}
+  Count: {fileID: 0}
   generators:
   - {fileID: 786555238}
   - {fileID: 2145518207}
@@ -1081,51 +1082,60 @@ MonoBehaviour:
   protectionPrefab: {fileID: 0}
   impactDeceleration: 5
   level: {fileID: 0}
-  leader: {fileID: 0}
   levelObject: {fileID: 1502083408}
   allWaves:
   - allEnnemies:
-    - enn: 2
+    - enn: 1
       enMov: 1
-      spawnAfter: 0
+      spawnAfter: 0.1
       Waypoints:
         loop: 0
         allWaypoints:
-        - targetPosition: {x: -34.68501, y: 0.0000019073486, z: -14.333676}
+        - targetPosition: {x: -32.330067, y: 0.0000019073486, z: -14.333676}
           speed: 0
         - targetPosition: {x: -0.0000076293945, y: -0.0000038146973, z: 14.533675}
           speed: 0
       selected: 1
       spawned: 0
-      isLeader: 1
-    - enn: 1
-      enMov: 0
-      spawnAfter: 0
-      Waypoints:
-        loop: 0
-        allWaypoints: []
-      selected: 0
-      spawned: 0
-      isLeader: 0
+      followPlayer: 0
     - enn: 0
       enMov: 0
-      spawnAfter: 0
+      spawnAfter: 0.2
       Waypoints:
         loop: 0
         allWaypoints: []
       selected: 0
       spawned: 0
-      isLeader: 0
-    - enn: 2
+      followPlayer: 0
+    - enn: 0
       enMov: 0
-      spawnAfter: 0
+      spawnAfter: 0.3
       Waypoints:
         loop: 0
         allWaypoints: []
       selected: 0
       spawned: 0
-      isLeader: 0
+      followPlayer: 1
+    - enn: 0
+      enMov: 0
+      spawnAfter: 0.4
+      Waypoints:
+        loop: 0
+        allWaypoints: []
+      selected: 0
+      spawned: 0
+      followPlayer: 0
+    - enn: 0
+      enMov: 0
+      spawnAfter: 0.5
+      Waypoints:
+        loop: 0
+        allWaypoints: []
+      selected: 0
+      spawned: 0
+      followPlayer: 0
     delay: 0
+    firstIsLeader: 1
 --- !u!65 &2145518209
 BoxCollider:
   m_ObjectHideFlags: 0

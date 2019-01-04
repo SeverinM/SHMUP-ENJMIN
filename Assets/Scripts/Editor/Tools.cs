@@ -18,6 +18,7 @@ public class Tools : EditorWindow {
     public Waypoints waypoints;
 
     Generator currentGen;
+    Generator previousGen = null;
 
 	[MenuItem("Outils GD/Ennemies et spawner")]
     static void Init()
@@ -59,6 +60,12 @@ public class Tools : EditorWindow {
 
         staticLvl = (Level)EditorGUILayout.ObjectField(staticLvl, typeof(Level));
         currentGen = (Generator)EditorGUILayout.ObjectField(currentGen, typeof(Generator));
+        if (currentGen != previousGen && currentGen != null)
+        {
+            allWaves = currentGen.allWaves;
+        }
+        previousGen = currentGen;
+
         //Waypoints
         obj = new SerializedObject(this);
         //Liste des waypoints
@@ -148,17 +155,31 @@ public class Tools : EditorWindow {
             for (int j = 0; j < serRel.arraySize; j++)
             {
                 EditorGUILayout.BeginHorizontal();
-                EditorGUIUtility.labelWidth = 80f;
-                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("enn"), new GUIContent("L'ennemi "));
-                EditorGUIUtility.labelWidth = 120f;
-                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("spawnAfter"), new GUIContent("Apparait apres (s)"));
-                EditorGUIUtility.labelWidth = 100f;
+                GUILayout.FlexibleSpace();
+                EditorGUIUtility.labelWidth = 80;
+                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("enn"), new GUIContent("L'ennemi "), GUILayout.MaxWidth(120));
+                EditorGUIUtility.labelWidth = 100;
+                GUILayout.FlexibleSpace();
+                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("spawnAfter"), new GUIContent("Apparait apres (s)"), GUILayout.MaxWidth(150));
+                GUILayout.FlexibleSpace();
                 EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("followPlayer"), new GUIContent("Suit le Joueur"));
-                EditorGUIUtility.labelWidth = 1f;
-                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("enMov"), GUIContent.none);
+                GUILayout.FlexibleSpace();
+                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("enMov"), new GUIContent("Type Mvmt"));
+                GUILayout.FlexibleSpace();
+                EditorGUIUtility.labelWidth = 30;
                 EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("selected"), GUIContent.none);
+                GUILayout.FlexibleSpace();
 
-                if (GUILayout.Button("Supprimer"))
+                if (GUILayout.Button("Lire WP"))
+                {
+                    foreach(WaypointElement wE in allWaves[i].allEnnemies[j].Waypoints.allWaypoints)
+                    {
+                        wE.targetPosition = GetPositionRelative(wE.targetPosition);
+                    }
+                    waypoints = allWaves[i].allEnnemies[j].Waypoints;
+                }
+
+                if (GUILayout.Button("Suppr."))
                 {
                     serRel.DeleteArrayElementAtIndex(j);
                 }
@@ -182,11 +203,14 @@ public class Tools : EditorWindow {
         {
             serWaves.InsertArrayElementAtIndex(serWaves.arraySize);
         }
+
         if (serWaves.arraySize > 0 && GUILayout.Button("Supprimer (vague)"))
         {
             serWaves.DeleteArrayElementAtIndex(serWaves.arraySize - 1);
         }
+
         EditorGUILayout.EndHorizontal();
+
         EditorGUI.BeginDisabledGroup(currentGen == null);
         if (GUILayout.Button("Appliquer au spawner"))
         {
@@ -223,7 +247,21 @@ public class Tools : EditorWindow {
         return finalPosition;
     }
 
-    [DrawGizmo(GizmoType.NotInSelectionHierarchy | GizmoType.Selected)]
+    //Inverse de getPositionAbsolute
+    public Vector3 GetPositionRelative(Vector3 input)
+    {
+        float coeff = Vector3.Distance(staticLvl.transform.position, Camera.main.transform.position);
+        Vector3 leftBottom = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, coeff));
+        Vector3 leftTop = Camera.main.ScreenToWorldPoint(new Vector3(0, Camera.main.pixelHeight, coeff));
+        Vector3 rightBottom = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, 0, coeff));
+        Vector3 rightTop = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight, coeff));
+
+        float XRelative = Mathf.Abs(leftBottom.x - input.x) / Mathf.Abs(leftBottom.x - rightBottom.x);
+        float ZRelative = Mathf.Abs(leftBottom.z - input.z) / Mathf.Abs(leftBottom.z - leftTop.z);
+        return new Vector3(XRelative, 0, ZRelative);
+    }
+
+    [DrawGizmo(GizmoType.NotInSelectionHierarchy | GizmoType.Selected | GizmoType.NonSelected)]
     static void Draw(Level lvl, GizmoType type)
     {
         if (instance != null && lvl == staticLvl)
