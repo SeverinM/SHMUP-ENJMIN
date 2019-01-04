@@ -189,12 +189,13 @@ public class Enemy : Character
     /// </summary>
     public void FollowRandomPath()
     {
+        Waypoints.allWaypoints.Clear();
         int movements = Random.Range(2, 5);
 
         for (int i = 0; i < movements; i++)
         {
             WaypointElement wE = new WaypointElement();
-            Vector3 pos = new Vector3(Random.Range(-16f, 16f), 0, Random.Range(-16f, 16f));
+            Vector3 pos = new Vector3(Random.Range(-16f, 16f), transform.position.y, Random.Range(-16f, 16f));
             wE.speed = 1f;
             wE.targetPosition = pos;
             Waypoints.allWaypoints.Add(wE);

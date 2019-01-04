@@ -13,10 +13,12 @@ public class FollowPathMovement : State
 
     private Vector3 deltaPosition;
     private bool loop;
+    Enemy enn;
 
-    public FollowPathMovement(Character character, Queue<WaypointElement> allPos, bool loop, float noiseCoeff = 0) : base(character)
+    public FollowPathMovement(Character character, Queue<WaypointElement> allPos, bool loop) : base(character)
     {
         positions = allPos;
+        enn = (Enemy)character;
 
         //Si la queue n'est pas vide on prend la valeur cible sur le devant de la queu
         if (allPos.Count > 0)
@@ -30,7 +32,6 @@ public class FollowPathMovement : State
             targetPosition = character.transform.position;
         }
 
-        targetPosition += new Vector3(Random.Range(-noiseCoeff, noiseCoeff), 0, Random.Range(-noiseCoeff, noiseCoeff));
         this.loop = loop;
     }
 
@@ -85,6 +86,7 @@ public class FollowPathMovement : State
             //Encore des waypoints a atteindre ?
             if (positions.Count > 0)
             {
+                Debug.Log("encore des wp");
                 positions.Dequeue();
                 character.SetState(new FollowPathMovement(character, positions, loop));
             }
@@ -97,7 +99,7 @@ public class FollowPathMovement : State
                 }
                 else
                 {
-                    character.SetState(null);
+                    enn.FollowRandomPath();
                 }
             }    
         }
