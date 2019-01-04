@@ -59,6 +59,7 @@ public abstract class Character : MonoBehaviour {
     //Combien de temps le joueur est invincible une fois touché ?
     protected float recoveryDuration = 1f;
     protected float freezeDuration = 1f;
+    internal float scaleDuration = 0.1f;
     protected float personalScale = 1f;
     public float PersonalScale
     {
@@ -97,6 +98,11 @@ public abstract class Character : MonoBehaviour {
     [SerializeField]
     [Header("Sci-fi magnetic protection")]
     internal GameObject protectionPrefab;
+
+    [Header("Bullet")]
+    [SerializeField]
+    [Tooltip("Déceleration lors d'un impact de bullet")]
+    protected float impactDeceleration = 5f;
 
     public Level level;
 
@@ -173,6 +179,15 @@ public abstract class Character : MonoBehaviour {
         { 
             actualState.UpdateState();
         }
+
+        // Déplacer le personnage lors d'un impact de rigidBody
+        if (impact.magnitude > 0.2)
+        {
+            Move(impact * Time.deltaTime);
+        }
+
+        // Impact tend vers zero
+        impact = Vector3.Lerp(impact, Vector3.zero, impactDeceleration * Time.deltaTime);
     }
 
     public void InterpretInput(BaseInput.TypeAction typAct, BaseInput.Actions baseInput, Vector2 value)
@@ -244,10 +259,11 @@ public abstract class Character : MonoBehaviour {
     public void Separate()
     {
         float desiredseparation = 6f;
+  
         List<GameObject> characters = new List<GameObject>();
-        foreach (RaycastHit hit in Physics.SphereCastAll(transform.position, desiredseparation, Vector3.zero))
+        foreach (RaycastHit hit in Physics.SphereCastAll(transform.position, desiredseparation, Vector3.forward))
         {
-            if (hit.collider.GetComponent<Enemy>() != null)
+            if (hit.collider.tag == "Ennemy")
             {
                 characters.Add(hit.collider.gameObject);
             }
@@ -258,9 +274,9 @@ public abstract class Character : MonoBehaviour {
         int count = 0;
 
         foreach (GameObject other in characters)
-        {
+        { 
             if (other.Equals(this)) break;
-
+            
             float d = Vector3.Distance(transform.position, other.transform.position);
             Vector3 diff = transform.position - other.transform.position;
             diff.Normalize();
@@ -276,7 +292,9 @@ public abstract class Character : MonoBehaviour {
             sum *= 5f;
             Vector3 steer = sum - GetComponent<Rigidbody>().velocity;
             Vector3.ClampMagnitude(steer, maxForce);
-            GetComponent<Rigidbody>().AddForce(steer);
+            // Pour non kinematic
+            //GetComponent<Rigidbody>().AddForce(steer);
+            Move(steer);
         }
     }
 }

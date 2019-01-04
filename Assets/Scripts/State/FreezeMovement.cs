@@ -8,9 +8,9 @@ public class FreezeMovement : State
 
     private float lastTime;
 
-    public FreezeMovement(Character character, float duration) : base(character)
+    public FreezeMovement(Character character) : base(character)
     {
-        this.duration = duration;
+        duration = character.scaleDuration;
     }
 
     public override void EndState()

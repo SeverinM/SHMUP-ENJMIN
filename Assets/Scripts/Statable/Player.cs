@@ -46,11 +46,6 @@ public class Player : Character
     [SerializeField]
     float coeffHook = 0.1f;
 
-    [Header("Bullet")]
-    [SerializeField]
-    [Tooltip("Déceleration lors d'un impact de bullet")]
-    float impactDeceleration = 5f;
-
     [Header("Auto references (pas toucher... normalement)")]
     [SerializeField]
     Transform shield;
@@ -114,9 +109,9 @@ public class Player : Character
 
         // Déplacer le personnage lors d'un impact de rigidBody
         if (impact.magnitude > 0.2)
-        { 
+        {
             Move(impact * Time.deltaTime);
-        } 
+        }
 
         // Impact tend vers zero
         impact = Vector3.Lerp(impact, Vector3.zero, impactDeceleration * Time.deltaTime);
