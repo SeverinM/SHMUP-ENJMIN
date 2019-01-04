@@ -32,11 +32,12 @@ public class EnemyMovement : State
         if (enemy.leader == null)
         {
             enemy.FollowRandomPath();
+            return;
         }
 
         deltaPosition = enemy.leader.transform.position - character.transform.position;
 
-        // Si les ennemis ont atteint le joueur, ils rentrent dasn une phase d'attaque
+        // Si les ennemis ont atteint le joueur, ils rentrent dans une phase d'attaque
         if (Vector3.Distance(enemy.leader.transform.position, character.transform.position) <= Mathf.Abs(character.transform.position.y - enemy.leader.transform.position.y) + enemy.AttackRange)
         {
             character.SetState(new EnemyAttack(character,allElems));

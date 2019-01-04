@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 /// <summary>
 /// The goal of this class is to keep the data of the Generator
@@ -14,13 +15,21 @@ public class Generator : Character {
     public delegate void noParam();
     public event noParam EveryoneDied;
 
+    //Combien d'ennemie reste t'il a spawn ?
+    public int EnnemiesLeftToSpawn
+    {
+        get
+        {
+            return allWaves.Select(x => x.allEnnemies).Count();
+        }
+    }
+
     public List<Wave> AllWaves
     {
         get
         {
             return allWaves;
         }
-        //On relance le generation d'ennemi si cette valeur est modifié
         set
         {
             allWaves = value;
