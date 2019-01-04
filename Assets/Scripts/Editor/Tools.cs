@@ -153,6 +153,12 @@ public class Tools : EditorWindow {
                 EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("followPlayer"), new GUIContent("Suit le Joueur"));
                 EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("enMov"), new GUIContent("Type de Mouvement"));
                 EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("selected"), new GUIContent(" "));
+
+                if (GUILayout.Button("Supprimer"))
+                {
+                    serRel.DeleteArrayElementAtIndex(j);
+                }
+
                 EditorGUILayout.EndHorizontal();
             }
 
@@ -162,11 +168,6 @@ public class Tools : EditorWindow {
             if (GUILayout.Button("Ajouter (ennemie vague)"))
             {
                 serRel.InsertArrayElementAtIndex(serRel.arraySize);
-            }
-
-            if (GUILayout.Button("Supprimer (ennemie vague)"))
-            {
-                serRel.DeleteArrayElementAtIndex(serRel.arraySize - 1);
             }
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.Space();

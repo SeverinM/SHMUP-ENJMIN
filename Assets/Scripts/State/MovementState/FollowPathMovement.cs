@@ -49,11 +49,10 @@ public class FollowPathMovement : State
 
     public void TriggerEnter(Collider coll)
     {
-        //L'ennemi est rentré dans la zone proche du joueur , il va commencer a le poursuivre
+        //L'ennemi est rentré dans la zone proche du joueur (seul les leader / ennemies seuls sont censés rentrer la dedans)
         if (coll.tag == "FollowParent")
         {
-            character.Leader = coll.gameObject;
-            character.SetState(new EnemyMovement(character, positions));
+            character.SetState(new EnemyMovement(character, coll.transform, new Queue<WaypointElement>(), false));
         }
 
         if (coll.tag == "Hook")

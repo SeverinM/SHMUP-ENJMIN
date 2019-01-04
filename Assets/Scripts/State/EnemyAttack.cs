@@ -12,12 +12,14 @@ public class EnemyAttack : State
     private float lastTime;
     private float shoots = 0;
     Queue<WaypointElement> elements;
+    Transform playerTarget;
 
-    public EnemyAttack(Character character, Queue<WaypointElement> elt) : base(character)
+    public EnemyAttack(Character character, Queue<WaypointElement> elt, Transform player) : base(character)
     {
         enemy = character.GetComponent<Enemy>();
         elements = elt;
         lastTime = Time.time;
+        playerTarget = player;
     }
     
     public override void EndState()
@@ -32,7 +34,16 @@ public class EnemyAttack : State
 
     public override void NextState()
     {
-        character.SetState(new EnemyMovement(character, elements));
+        //Il existe un leader , il continue a le suivre
+        if (character.Leader != null)
+        {
+            character.SetState(new EnemyMovement(character, character.Leader.transform, elements, true));
+        }
+        else
+        {
+            Debug.Log("fin");
+            character.SetState(new EnemyMovement(character, playerTarget, elements, false));
+        }
     }
 
     public override void StartState()
@@ -46,12 +57,7 @@ public class EnemyAttack : State
         if (lastTime < Time.time)
         {
             lastTime += enemy.ShootPeriod;
-
-            Player plyr = character.RaiseTryReaching();
-            if (plyr != null)
-            {
-                enemy.Rotate(plyr.gameObject);
-            }
+            character.transform.LookAt(playerTarget);
 
             enemy.Shoot();
             shoots++;

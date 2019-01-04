@@ -209,7 +209,8 @@ public class Enemy : Character
     /// </summary>
     private void FollowCharacter()
     {
-        SetState(new EnemyMovement(this, new Queue<WaypointElement>()));
+        if (Leader != null)
+            SetState(new EnemyMovement(this, Leader.transform, new Queue<WaypointElement>(), true));
     }
 
     //Chaque ennemi agit differemment selon son type
