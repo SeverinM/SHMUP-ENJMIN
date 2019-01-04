@@ -291,9 +291,9 @@ public abstract class Character : MonoBehaviour {
             sum *= 5f;
             Vector3 steer = sum - GetComponent<Rigidbody>().velocity;
             Vector3.ClampMagnitude(steer, maxForce);
-            // Pour non kinematic
-            //GetComponent<Rigidbody>().AddForce(steer);
-            Move(steer);
+            // Pour kinematic
+            GetComponent<Rigidbody>().AddForce(steer);
+
         }
     }
 }
