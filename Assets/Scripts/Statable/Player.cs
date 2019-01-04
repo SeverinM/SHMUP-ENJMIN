@@ -96,6 +96,7 @@ public class Player : Character
         ResetHook();
 
         protection = Instantiate(protectionPrefab, transform);
+        protection.SetActive(false);
 
         actualState = new PlayerMovement(this);
     }
@@ -135,7 +136,7 @@ public class Player : Character
             Impact(collision.relativeVelocity * hitForce);
             Destroy(collision.gameObject);
 
-            if (!protection.activeInHierarchy)
+            if (!base.protection.activeInHierarchy)
             {
                 Life--;
 

@@ -304,7 +304,6 @@ MonoBehaviour:
     type: 2}
   impactDeceleration: 5
   level: {fileID: 0}
-  leader: {fileID: 0}
   attackRange: 2
   shootPeriod: 2
   shootAmount: 3
