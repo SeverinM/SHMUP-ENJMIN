@@ -65,7 +65,7 @@ public class Level : Layers
         watchNbSpawn.ValueChanged = (x) =>
         {
             if (Count != null)
-                Count.text = "Nombre d'ennemies encore a spawn : " + x.ToString();
+                Count.text = "Nombre d'ennemies restant : " + x.ToString();
         };
 
         // Faire en sorte que tous les inputs notifient le joueur

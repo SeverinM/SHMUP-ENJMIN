@@ -79,6 +79,7 @@ public class GenerateEnemies : State
             // Si l'enemi courrant doit spawn et n'a pas encore spawné
             if (x.spawnAfter < timeSinceBegin && !x.spawned)
             {
+                generator.Count++;
                 GameObject instanciated = level.AddEnemy(x.enn, character.transform.position);
                 Enemy enn = instanciated.GetComponent<Enemy>();
                 enn.enemyType = x.enn;
@@ -94,6 +95,7 @@ public class GenerateEnemies : State
     void EnnemyDestroyed(Character chara)
     {
         count--;
+        generator.Count--;
         // Si tous les énnemis on été détruits, on passe à l'état suivant
         if (count == 0)
         {
