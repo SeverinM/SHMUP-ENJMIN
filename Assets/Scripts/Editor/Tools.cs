@@ -18,6 +18,7 @@ public class Tools : EditorWindow {
     public Waypoints waypoints;
 
     Generator currentGen;
+    Generator previousGen = null;
 
 	[MenuItem("Outils GD/Ennemies et spawner")]
     static void Init()
@@ -59,6 +60,12 @@ public class Tools : EditorWindow {
 
         staticLvl = (Level)EditorGUILayout.ObjectField(staticLvl, typeof(Level));
         currentGen = (Generator)EditorGUILayout.ObjectField(currentGen, typeof(Generator));
+        if (currentGen != previousGen && currentGen != null)
+        {
+            allWaves = currentGen.allWaves;
+        }
+        previousGen = currentGen;
+
         //Waypoints
         obj = new SerializedObject(this);
         //Liste des waypoints
