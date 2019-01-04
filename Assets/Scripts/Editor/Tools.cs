@@ -148,11 +148,15 @@ public class Tools : EditorWindow {
             for (int j = 0; j < serRel.arraySize; j++)
             {
                 EditorGUILayout.BeginHorizontal();
+                EditorGUIUtility.labelWidth = 80f;
                 EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("enn"), new GUIContent("L'ennemi "));
+                EditorGUIUtility.labelWidth = 120f;
                 EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("spawnAfter"), new GUIContent("Apparait apres (s)"));
+                EditorGUIUtility.labelWidth = 100f;
                 EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("followPlayer"), new GUIContent("Suit le Joueur"));
-                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("enMov"), new GUIContent("Type de Mouvement"));
-                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("selected"), new GUIContent(" "));
+                EditorGUIUtility.labelWidth = 1f;
+                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("enMov"), GUIContent.none);
+                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("selected"), GUIContent.none);
 
                 if (GUILayout.Button("Supprimer"))
                 {
