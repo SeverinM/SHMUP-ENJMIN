@@ -60,6 +60,19 @@ public class GenerateEnemies : State
     public override void UpdateState()
     {
         timeSinceBegin += Time.deltaTime;
+        if (currentWave.firstIsLeader)
+        {
+            WaveElement x = currentWave.allEnnemies.First();
+            leader = level.AddEnemy(x.enn, character.transform.position);
+            Enemy enn = leader.GetComponent<Enemy>();
+            enn.enemyType = x.enn;
+            enn.movementType = x.enMov;
+            enn.SetWaypointsAndApply(x.Waypoints); 
+            enn.Destroyed += EnnemyDestroyed; 
+            x.spawned = true;
+            currentWave.firstIsLeader = false;
+        }
+        
         // Pour chaque ennemi de la vague courrante
         currentWave.allEnnemies.ForEach(x =>
         {
@@ -70,16 +83,9 @@ public class GenerateEnemies : State
                 Enemy enn = instanciated.GetComponent<Enemy>();
                 enn.enemyType = x.enn;
                 enn.movementType = x.enMov;
-                enn.GetComponent<Enemy>().SetWaypointsAndApply(x.Waypoints); // On attribue les waypoints
-                if (x.isLeader)
-                {
-                    leader = instanciated;
-                }
-                if (leader != null)
-                {
-                    enn.GetComponent<Enemy>().SetLeader(leader); // On attribue un leadder si il existe
-                }
-                enn.GetComponent<Enemy>().Destroyed += EnnemyDestroyed; // Quand le joueur est détruit, il notifie GenerateEnemies
+                enn.SetWaypointsAndApply(x.Waypoints); // On attribue les waypoints
+                enn.Leader = x.followPlayer ? level.Player : leader;
+                enn.Destroyed += EnnemyDestroyed; // Quand le joueur est détruit, il notifie GenerateEnemies
                 x.spawned = true;
             }
         });

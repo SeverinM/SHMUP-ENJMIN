@@ -143,6 +143,7 @@ public class Enemy : Character
     [SerializeField]
     public EnemyType enemyType;
 
+
     private void Start()
     {
         switch (movementType)

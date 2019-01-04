@@ -52,7 +52,7 @@ public class FollowPathMovement : State
         //L'ennemi est rentré dans la zone proche du joueur , il va commencer a le poursuivre
         if (coll.tag == "FollowParent")
         {
-            character.SetLeader(coll.gameObject);
+            character.Leader = coll.gameObject;
             character.SetState(new EnemyMovement(character, positions));
         }
 

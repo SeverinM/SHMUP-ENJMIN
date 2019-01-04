@@ -29,16 +29,16 @@ public class EnemyMovement : State
     public override void UpdateState()
     {
         // Si le leader à été détruit, alors on se déplace aléatoirement
-        if (enemy.leader == null)
+        if (enemy.Leader == null)
         {
             enemy.FollowRandomPath();
             return;
         }
 
-        deltaPosition = enemy.leader.transform.position - character.transform.position;
+        deltaPosition = enemy.Leader.transform.position - character.transform.position;
 
         // Si les ennemis ont atteint le joueur, ils rentrent dans une phase d'attaque
-        if (Vector3.Distance(enemy.leader.transform.position, character.transform.position) <= Mathf.Abs(character.transform.position.y - enemy.leader.transform.position.y) + enemy.AttackRange)
+        if (Vector3.Distance(enemy.Leader.transform.position, character.transform.position) <= Mathf.Abs(character.transform.position.y - enemy.Leader.transform.position.y) + enemy.AttackRange)
         {
             character.SetState(new EnemyAttack(character,allElems));
         }

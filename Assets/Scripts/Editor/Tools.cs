@@ -136,22 +136,23 @@ public class Tools : EditorWindow {
         {
             EditorGUILayout.BeginHorizontal();
             GUILayout.Label("Vague numero " + i);
+            EditorGUILayout.PropertyField(serWaves.GetArrayElementAtIndex(i).FindPropertyRelative("firstIsLeader"), new GUIContent("Premier est Leader"));
             EditorGUILayout.PropertyField(serWaves.GetArrayElementAtIndex(i).FindPropertyRelative("delay"), new GUIContent("Commence apres (s)"));
             EditorGUILayout.EndHorizontal();
             SerializedProperty serRel = serWaves.GetArrayElementAtIndex(i).FindPropertyRelative("allEnnemies");
 
             //Debut de l'indentation
             EditorGUI.indentLevel = 1;
-
+            
             //Tous les ennemis d'une vague
             for (int j = 0; j < serRel.arraySize; j++)
             {
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("enn"), new GUIContent("L'ennemi "));
                 EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("spawnAfter"), new GUIContent("Apparait apres (s)"));
-                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("selected"), new GUIContent(" "));
-                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("isLeader"), new GUIContent("Leader"));
+                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("followPlayer"), new GUIContent("Suit le Joueur"));
                 EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("enMov"), new GUIContent("Type de Mouvement"));
+                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("selected"), new GUIContent(" "));
                 EditorGUILayout.EndHorizontal();
             }
 

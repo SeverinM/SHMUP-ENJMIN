@@ -9,6 +9,7 @@ public class Wave
 {
     public List<WaveElement> allEnnemies;
     public float delay;
+    public bool firstIsLeader;
 }
 
 [System.Serializable]
@@ -25,7 +26,7 @@ public class WaveElement
     [HideInInspector]
     public bool spawned;
 
-    public bool isLeader;
+    public bool followPlayer;
 
     public void End()
     {
@@ -124,7 +125,19 @@ public abstract class Character : MonoBehaviour {
 
     public Level level;
 
-    public GameObject leader;
+    GameObject leader;
+    public GameObject Leader
+    {
+        get
+        {
+            return leader;
+        }
+
+        set
+        {
+            leader = value;
+        }
+    }
 
     void Awake()
     {
@@ -137,11 +150,6 @@ public abstract class Character : MonoBehaviour {
         watchedLife.ValueChanged = newAction;
         //Reactualise avec la valeur actuelle
         Life = life;
-    }
-
-    internal void SetLeader(GameObject leader)
-    {
-        this.leader = leader;
     }
 
     internal void Rotate(GameObject player)
