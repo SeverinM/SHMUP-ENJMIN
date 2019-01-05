@@ -25,7 +25,6 @@ public class FollowPathMovement : State
         {
             currentWaypoint = allPos.Peek();
             targetPosition = currentWaypoint.targetPosition;
-            Debug.Log(Vector3.Distance(targetPosition, character.transform.position));
         }
         else
         {

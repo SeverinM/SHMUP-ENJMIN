@@ -193,6 +193,7 @@ public class Enemy : Character
     /// </summary>
     public void FollowRandomPath()
     {
+        int stepAngle = 10;
         waypoints.loop = false;
         Waypoints.allWaypoints.Clear();
         int movements = Random.Range(2, 5);
@@ -204,9 +205,9 @@ public class Enemy : Character
         {
             WaypointElement wE = new WaypointElement();
             //Si la direction est hors ecran on trouve une autre direction
-            for (int nbTry = 1; nbTry < 5; nbTry++)
+            for (int nbTry = 1; nbTry < stepAngle; nbTry++)
             {
-                float modifiedAngle = (CurrentAngle + (((Mathf.PI * 2) / 5) * nbTry)) % Mathf.PI * 2;
+                float modifiedAngle = (CurrentAngle + (((Mathf.PI * 2) / stepAngle) * nbTry)) % Mathf.PI * 2;
                 Vector3 direction = new Vector3(Mathf.Cos(modifiedAngle), 0, Mathf.Sin(modifiedAngle)) * 4;
                 //La nouvelle position est valide , on quitte la boucle et on applique la nouvelle position imaginaire
                 if (Utils.IsInCamera(potentialPosition + direction, Mathf.Abs(transform.position.y - Camera.main.transform.position.y)))
@@ -216,7 +217,7 @@ public class Enemy : Character
                 }
             }
 
-            wE.speed = 1f;
+            wE.speed = MoveSpeed;
             wE.targetPosition = potentialPosition;
             Waypoints.allWaypoints.Add(wE);
         }
