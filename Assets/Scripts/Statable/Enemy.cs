@@ -193,25 +193,25 @@ public class Enemy : Character
     /// </summary>
     public void FollowRandomPath()
     {
+        waypoints.loop = false;
         Waypoints.allWaypoints.Clear();
         int movements = Random.Range(2, 5);
         float CurrentAngle = Random.Range(0, Mathf.PI * 2);
+        //Projection de la position du personage apres X waypoints
+        Vector3 potentialPosition = transform.position;
 
         for (int i = 0; i < movements; i++)
         {
             WaypointElement wE = new WaypointElement();
-            Vector3 pos = new Vector3(Random.Range(-16f, 16f), transform.position.y, Random.Range(-16f, 16f));
-            Vector3 potentialPosition = Vector3.right;
-
             //Si la direction est hors ecran on trouve une autre direction
             for (int nbTry = 1; nbTry < 5; nbTry++)
             {
                 float modifiedAngle = (CurrentAngle + (((Mathf.PI * 2) / 5) * nbTry)) % Mathf.PI * 2;
                 Vector3 direction = new Vector3(Mathf.Cos(modifiedAngle), 0, Mathf.Sin(modifiedAngle)) * 4;
-                potentialPosition = transform.position + direction;
-                //La nouvelle position est valide , on quitte la boucle
-                if (Utils.IsInCamera(potentialPosition, Mathf.Abs(transform.position.y - Camera.main.transform.position.y)))
+                //La nouvelle position est valide , on quitte la boucle et on applique la nouvelle position imaginaire
+                if (Utils.IsInCamera(potentialPosition + direction, Mathf.Abs(transform.position.y - Camera.main.transform.position.y)))
                 {
+                    potentialPosition += direction;
                     break;
                 }
             }
