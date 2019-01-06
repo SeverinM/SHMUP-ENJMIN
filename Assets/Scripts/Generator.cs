@@ -39,7 +39,7 @@ public class Generator : Character {
 
     public override float GetScale()
     {
-        return 1;
+        return Constants.TimeScaleGenerators;
     }
 
     public void RaiseEveryoneDied()

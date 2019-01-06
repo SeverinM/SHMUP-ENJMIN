@@ -16,6 +16,6 @@ public class MenuHandler : MonoBehaviour {
 	
 	public void StartTransition(GameObject target)
     {
-        Utils.StartFading(0.3f, Color.black, () => { ActualGameObject.SetActive(false); target.SetActive(true); ActualGameObject = target; }, () => { });
+        Utils.StartFading(0.3f, Color.black, () => {ActualGameObject.SetActive(false); target.SetActive(true); ActualGameObject = target; }, () => {});
     }
 }

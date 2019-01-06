@@ -59,7 +59,7 @@ public class GenerateEnemies : State
 
     public override void UpdateState()
     {
-        timeSinceBegin += Time.deltaTime * character.GetScale();
+        timeSinceBegin += Time.deltaTime * character.GetScale() * character.PersonalScale;
         if (currentWave.firstIsLeader)
         {
             WaveElement x = currentWave.allEnnemies.First();

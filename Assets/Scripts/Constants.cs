@@ -38,6 +38,22 @@ public static class Constants{
         }
     }
 
+    /// <summary>
+    /// TimeScale des generateurs
+    /// </summary>
+    static float timeScaleGenerators = 1;
+    public static float TimeScaleGenerators
+    {
+        get
+        {
+            return timeScaleGenerators;
+        }
+        set
+        {
+            timeScaleGenerators = Mathf.Abs(value);
+        }
+    }
+
     //Empeche le OnDestroy quand on quitte le jeu
     static bool applicationQuit;
     public static bool ApplicationQuit
@@ -50,5 +66,12 @@ public static class Constants{
         {
             applicationQuit = value;
         }
+    }
+
+    public static void SetAllConstants(float newValue)
+    {
+        TimeScaleEnnemies = newValue;
+        TimeScaleGenerators = newValue;
+        TimeScalePlayer = newValue;
     }
 }
