@@ -13,12 +13,6 @@ public class ServerConnection : MonoBehaviour
     public string addScoreURL = "https://jiexdrop.herokuapp.com/addScore.php?"; // Ajout score
     public string highscoreURL = "https://jiexdrop.herokuapp.com/display.php";
 
-    void Start()
-    {
-        StartCoroutine(PostScores("Question", 42)); // Ajouter le score d'un joueur 
-        StartCoroutine(GetScores());
-    }
-
     // On se connecte au serveur et on lui passe un nom, un score et un hash
     IEnumerator PostScores(string name, int score)
     {
