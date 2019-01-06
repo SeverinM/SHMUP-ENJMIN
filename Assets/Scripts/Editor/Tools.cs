@@ -17,6 +17,9 @@ public class Tools : EditorWindow {
     SerializedProperty serWaves;
     public Waypoints waypoints;
 
+    Vector2 scrollPos = Vector2.zero;
+    Vector2 scrollPosWave = Vector2.zero;
+
     Generator currentGen;
     Generator previousGen = null;
 
@@ -73,14 +76,15 @@ public class Tools : EditorWindow {
         ser = obj.FindProperty("waypoints");
         SerializedProperty listWaypoints = ser.FindPropertyRelative("allWaypoints");
 
-        GUILayout.Label("Liste des waypoints , si la liste est finit il bougera aleatoirement", EditorStyles.boldLabel);
-        GUILayout.Space(20);
+        GUILayout.Label("Liste des waypoints , si la liste est finit il bougera aleatoirement à la fin", EditorStyles.boldLabel);
         EditorGUILayout.PropertyField(ser.FindPropertyRelative("loop"));
+        scrollPos = EditorGUILayout.BeginScrollView(scrollPos, GUILayout.Width(Mathf.Max(position.width, 300)), GUILayout.Height(Mathf.Max(position.height / 6, 10)));
         for (int i = 0; i < listWaypoints.arraySize; i++)
         {
             EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.PropertyField(listWaypoints.GetArrayElementAtIndex(i).FindPropertyRelative("targetPosition"), new GUIContent(""));
-            EditorGUILayout.PropertyField(listWaypoints.GetArrayElementAtIndex(i).FindPropertyRelative("speed"), new GUIContent("Vitesse"));
+            EditorGUILayout.PropertyField(listWaypoints.GetArrayElementAtIndex(i).FindPropertyRelative("targetPosition"), new GUIContent(""), GUILayout.Width(Mathf.Max(300,position.width / 3)));
+            EditorGUIUtility.labelWidth = 50;
+            EditorGUILayout.PropertyField(listWaypoints.GetArrayElementAtIndex(i).FindPropertyRelative("speed"), new GUIContent("Vitesse"), GUILayout.Width(200));
             if (i > 0 && GUILayout.Button("Up"))
             {
                 listWaypoints.MoveArrayElement(i, i - 1);
@@ -91,8 +95,8 @@ public class Tools : EditorWindow {
             }
 
             Vector3 value = listWaypoints.GetArrayElementAtIndex(i).FindPropertyRelative("targetPosition").vector3Value;
-            //Tous les waypoints sont entre -1 et 1
-            listWaypoints.GetArrayElementAtIndex(i).FindPropertyRelative("targetPosition").vector3Value = new Vector3(Mathf.Clamp(value.x, -1, 1), 0, Mathf.Clamp(value.z, -1, 1));
+            //Tous les waypoints sont entre 0 et 1
+            listWaypoints.GetArrayElementAtIndex(i).FindPropertyRelative("targetPosition").vector3Value = new Vector3(Mathf.Clamp(value.x, 0, 1), 0, Mathf.Clamp(value.z, 0, 1));
 
             if (GUILayout.Button("Supprimer"))
             {
@@ -101,6 +105,7 @@ public class Tools : EditorWindow {
 
             EditorGUILayout.EndHorizontal();
         }
+        EditorGUILayout.EndScrollView();
         if (GUILayout.Button("Ajouter"))
         {
             listWaypoints.InsertArrayElementAtIndex(0);
@@ -133,16 +138,11 @@ public class Tools : EditorWindow {
         GUILayout.Space(20);
 
         GUILayout.Label("Gestion des vagues , selectionnez un ennemie pour lui attribuer un waypoint", EditorStyles.boldLabel);
-        float distance = 10;
-        //distance camera / level pour l'affichage du plan
-        if (Selection.GetFiltered<Level>(SelectionMode.Unfiltered).Length > 0)
-        {
-            distance = Vector3.Distance(Selection.GetFiltered<Level>(SelectionMode.Unfiltered)[0].transform.position, Camera.main.transform.position);
-        }
 
         //Liste des waves
         serWaves = obj.FindProperty("allWaves");
         //Toutes les vagues
+        scrollPosWave = EditorGUILayout.BeginScrollView(scrollPosWave, GUILayout.Width(Mathf.Max(position.width, 300)), GUILayout.Height(Mathf.Max(position.height / 6, 10)));
         for (int i = 0; i < serWaves.arraySize; i++)
         {
             EditorGUILayout.BeginHorizontal();
@@ -201,6 +201,7 @@ public class Tools : EditorWindow {
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.Space();
         }
+        EditorGUILayout.EndScrollView();
 
         EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("Ajouter (vague)"))
