@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -20,16 +20,15 @@ public class FollowPathMovement : State
         positions = allPos;
         enn = (Enemy)character;
 
-        //Si la queue n'est pas vide on prend la valeur cible sur le devant de la queu
+        //Si la queue n'est pas vide on prend la valeur cible sur le devant de la queue
         if (allPos.Count > 0)
         {
             currentWaypoint = allPos.Peek();
             targetPosition = currentWaypoint.targetPosition;
         }
-        //Dans le cas contraire la position cible et actuel sont la meme
         else
         {
-            targetPosition = character.transform.position;
+            throw new System.Exception("Aucun waypoints d'attribué disponible");
         }
 
         this.loop = loop;
@@ -81,13 +80,12 @@ public class FollowPathMovement : State
         character.Separate();
 
         //Waypoint atteint ?
-        if (Vector3.Distance(targetPosition, character.transform.position) < (GetSpeed() * Time.deltaTime * 4))
+        if (Vector3.Distance(targetPosition, character.transform.position) < (GetSpeed() * character.PersonalScale * character.GetScale() * Time.deltaTime * 4))
         {
+            positions.Dequeue();
             //Encore des waypoints a atteindre ?
             if (positions.Count > 0)
             {
-                Debug.Log("encore des wp");
-                positions.Dequeue();
                 character.SetState(new FollowPathMovement(character, positions, loop));
             }
             else

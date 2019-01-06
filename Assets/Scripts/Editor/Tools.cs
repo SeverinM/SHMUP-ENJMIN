@@ -58,6 +58,7 @@ public class Tools : EditorWindow {
             obj = new SerializedObject(this);
         }
 
+        GUILayout.Label("Le cadre ne s'affichera que si vous avez choisi un Level , si besoin changez la selection dans la scene", EditorStyles.boldLabel);
         staticLvl = (Level)EditorGUILayout.ObjectField(staticLvl, typeof(Level));
         currentGen = (Generator)EditorGUILayout.ObjectField(currentGen, typeof(Generator));
         if (currentGen != previousGen && currentGen != null)
@@ -72,6 +73,8 @@ public class Tools : EditorWindow {
         ser = obj.FindProperty("waypoints");
         SerializedProperty listWaypoints = ser.FindPropertyRelative("allWaypoints");
 
+        GUILayout.Label("Liste des waypoints , si la liste est finit il bougera aleatoirement", EditorStyles.boldLabel);
+        GUILayout.Space(20);
         EditorGUILayout.PropertyField(ser.FindPropertyRelative("loop"));
         for (int i = 0; i < listWaypoints.arraySize; i++)
         {
@@ -129,6 +132,7 @@ public class Tools : EditorWindow {
         EditorGUI.EndDisabledGroup();
         GUILayout.Space(20);
 
+        GUILayout.Label("Gestion des vagues , selectionnez un ennemie pour lui attribuer un waypoint", EditorStyles.boldLabel);
         float distance = 10;
         //distance camera / level pour l'affichage du plan
         if (Selection.GetFiltered<Level>(SelectionMode.Unfiltered).Length > 0)
