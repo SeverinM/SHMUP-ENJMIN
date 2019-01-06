@@ -7,13 +7,11 @@ public class MainMenu : MonoBehaviour {
 
     public void PlayGame ()
     {
-        SceneManager.LoadScene("Enemies");
+        Utils.StartFading(1, Color.black, () => { SceneManager.LoadScene("Severin"); }, () => { });
     }
 
     public void QuitGame()
     {
-        Debug.Log("Quit");
         Application.Quit();
     }
-
 }

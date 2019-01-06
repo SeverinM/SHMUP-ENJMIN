@@ -30,6 +30,7 @@ public class Fade : MonoBehaviour {
         if (GetComponent<Canvas>() == null)
         {
             gameObject.AddComponent<Canvas>();
+            GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
         }
 
         if (GetComponent<CanvasGroup>() == null)
@@ -38,6 +39,7 @@ public class Fade : MonoBehaviour {
         }
 
         grp = GetComponent<CanvasGroup>();
+        grp.alpha = 0;
 
         if (GetComponent<Image>() == null)
         {
