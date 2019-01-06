@@ -60,10 +60,10 @@ public class ServerConnection : MonoBehaviour
         System.Text.UTF8Encoding ue = new System.Text.UTF8Encoding();
         byte[] bytes = ue.GetBytes(strToEncrypt);
 
-        // encrypt bytes
+        // Encrypter bytes
         byte[] hashBytes = md5.ComputeHash(bytes);
 
-        // Convert the encrypted bytes back to a string (base 16)
+        // Retourner les bytes convertis en md5 en string
         string hashString = "";
 
         for (int i = 0; i < hashBytes.Length; i++)
