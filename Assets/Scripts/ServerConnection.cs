@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ServerConnection : MonoBehaviour
 {
     private MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-    private string secretKey = "mySecretKey"; // La même clé est stockée dans le serveur
+    private string secretKey = "LaRéponseALaQuestionEst42!"; // La même clé est stockée dans le serveur
 
     public Text scoreDisplay;
     public string addScoreURL = "https://jiexdrop.herokuapp.com/addScore.php?"; // Ajout score
@@ -15,31 +15,29 @@ public class ServerConnection : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(PostScores("Question", 42));
+        StartCoroutine(PostScores("Question", 42)); // Ajouter le score d'un joueur 
         StartCoroutine(GetScores());
     }
 
-    // remember to use StartCoroutine when calling this function!
+    // On se connecte au serveur et on lui passe un nom, un score et un hash
     IEnumerator PostScores(string name, int score)
     {
-        //This connects to a server side php script that will add the name and score to a MySQL DB.
-        // Supply it with a string representing the players name and the players score.
+        // Le hash est composé d'un nom, d'un score et de la clé secrète
         string hash = Md5Sum(name + score + secretKey);
 
         string post_url = addScoreURL + "name=" + WWW.EscapeURL(name) + "&score=" + score + "&hash=" + hash;
 
-        // Post the URL to the site and create a download object to get the result.
+        // On se connecte au site GET
         WWW hs_post = new WWW(post_url);
-        yield return hs_post; // Wait until the download is done
+        yield return hs_post; // Attendre le résultat
 
         if (hs_post.error != null)
         {
-            print("There was an error posting the high score: " + hs_post.error);
+            print("Erreur envoi score: " + hs_post.error);
         }
     }
 
-    // Get the scores from the MySQL DB to display in a GUIText.
-    // remember to use StartCoroutine when calling this function!
+    // Obtenir les scores de la méthode display
     IEnumerator GetScores()
     {
         scoreDisplay.text = "Loading Scores";
@@ -48,11 +46,12 @@ public class ServerConnection : MonoBehaviour
 
         if (hs_get.error != null)
         {
-            print("There was an error getting the high score: " + hs_get.error);
+            scoreDisplay.text = "Erreur reception score";
+            print("Erreur reception score: " + hs_get.error);
         }
         else
         {
-            scoreDisplay.text = hs_get.text; // this is a GUIText that will display the scores in game.
+            scoreDisplay.text = hs_get.text; // affichage des scores en jeu
         }
     }
 
