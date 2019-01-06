@@ -59,18 +59,21 @@ public class GenerateEnemies : State
 
     public override void UpdateState()
     {
-        timeSinceBegin += Time.deltaTime;
+        timeSinceBegin += Time.deltaTime * character.GetScale();
         if (currentWave.firstIsLeader)
         {
             WaveElement x = currentWave.allEnnemies.First();
-            leader = level.AddEnemy(x.enn, character.transform.position);
-            Enemy enn = leader.GetComponent<Enemy>();
-            enn.enemyType = x.enn;
-            enn.movementType = x.enMov;
-            enn.SetWaypointsAndApply(x.Waypoints); 
-            enn.Destroyed += EnnemyDestroyed; 
-            x.spawned = true;
-            currentWave.firstIsLeader = false;
+            if (x != null && x.spawnAfter < timeSinceBegin && !x.spawned)
+            {
+                leader = level.AddEnemy(x.enn, character.transform.position);
+                Enemy enn = leader.GetComponent<Enemy>();
+                enn.enemyType = x.enn;
+                enn.movementType = x.enMov;
+                enn.SetWaypointsAndApply(x.Waypoints);
+                enn.Destroyed += EnnemyDestroyed;
+                x.spawned = true;
+                currentWave.firstIsLeader = false;
+            }
         }
         
         // Pour chaque ennemi de la vague courrante
