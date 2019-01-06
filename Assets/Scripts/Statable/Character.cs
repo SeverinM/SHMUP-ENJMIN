@@ -67,7 +67,7 @@ public abstract class Character : MonoBehaviour {
     //Combien de temps le joueur est invincible une fois touché ?
     protected float recoveryDuration = 1f;
     protected float freezeDuration = 1f;
-    internal float scaleDuration = 0.1f;
+    internal float scaleDuration = 1f;
     protected float personalScale = 1f;
     public float PersonalScale
     {

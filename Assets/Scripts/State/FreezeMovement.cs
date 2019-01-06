@@ -11,11 +11,13 @@ public class FreezeMovement : State
     public FreezeMovement(Character character) : base(character)
     {
         duration = character.scaleDuration;
+        character.PersonalScale = 0;
     }
 
     public override void EndState()
     {
-        Constants.TimeScalePlayer = 1;
+        character.GetComponent<Collider>().enabled = true;
+        character.PersonalScale = 1;
     }
 
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)
@@ -34,12 +36,11 @@ public class FreezeMovement : State
 
         if (character.Life > 0)
         {
-            character.StartRecovery(duration * 10);
+            character.StartRecovery(duration);
         }
         
         character.GetComponent<Collider>().enabled = false;
-        character.GetComponent<MeshRenderer>().enabled = false;
-        Constants.TimeScalePlayer = 0;
+        
     }
 
     public override string ToString()
@@ -50,7 +51,7 @@ public class FreezeMovement : State
     public override void UpdateState()
     {
         lastTime += Time.deltaTime;
-
+       
         if (lastTime > duration)
         {
             EndState();
