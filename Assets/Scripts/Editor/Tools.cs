@@ -142,7 +142,7 @@ public class Tools : EditorWindow {
         //Liste des waves
         serWaves = obj.FindProperty("allWaves");
         //Toutes les vagues
-        scrollPosWave = EditorGUILayout.BeginScrollView(scrollPosWave, GUILayout.Width(Mathf.Max(position.width, 300)), GUILayout.Height(Mathf.Max(position.height / 6, 10)));
+        scrollPosWave = EditorGUILayout.BeginScrollView(scrollPosWave, GUILayout.Width(Mathf.Max(position.width, 300)), GUILayout.Height(Mathf.Max(position.height / 2, 10)));
         for (int i = 0; i < serWaves.arraySize; i++)
         {
             EditorGUILayout.BeginHorizontal();

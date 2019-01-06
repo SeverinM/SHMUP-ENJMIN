@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -251,7 +251,7 @@ public abstract class Character : MonoBehaviour {
 
     public void OnDestroy()
     {
-        if (Destroyed != null)
+        if (!Constants.ApplicationQuit && Destroyed != null)
         {
             Destroyed(this);
         }
@@ -298,5 +298,10 @@ public abstract class Character : MonoBehaviour {
             GetComponent<Rigidbody>().AddForce(steer);
 
         }
+    }
+
+    private void OnApplicationQuit()
+    {
+        Constants.ApplicationQuit = true;
     }
 }

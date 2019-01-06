@@ -37,4 +37,18 @@ public static class Constants{
             timeScaleEnnemies = Mathf.Abs(value);
         }
     }
+
+    //Empeche le OnDestroy quand on quitte le jeu
+    static bool applicationQuit;
+    public static bool ApplicationQuit
+    {
+        get
+        {
+            return applicationQuit;
+        }
+        set
+        {
+            applicationQuit = value;
+        }
+    }
 }
