@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
-
+using SimpleJSON;
 
 public class LeaderBoardMenu : MonoBehaviour {
 
@@ -41,22 +41,20 @@ public class LeaderBoardMenu : MonoBehaviour {
         {
             // affichage des scores en jeu
             string lines = hs_get.text;
-
+            Debug.Log(lines);
+            JSONNode node = JSON.Parse(lines);
+            foreach(JSONNode nd in node)
+            {
+                Debug.Log("j");
+            }
             names.text = "";
             scores.text = "";
 
             int i = 0;
-            foreach (string line in lines.Split(";"[0])) {
-                if (!line.Split("="[0])[0].Equals("")) // ne pas split après ;
-                {
-                    names.text += line.Split("="[0])[0] + "\n";
-                    scores.text += line.Split("="[0])[1] + "\n";
-                    i++;
-                }
-                if (i == maxScores)
-                {
-                    break;
-                }
+            foreach (JSONNode line in node) {
+                names.text += line["name"] + "\n";
+                scores.text += line["score"] + "\n";
+                i++;
             }
         }
     }
