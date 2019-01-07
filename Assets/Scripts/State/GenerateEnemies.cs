@@ -99,10 +99,18 @@ public class GenerateEnemies : State
     {
         count--;
         generator.Count--;
-        // Si tous les énnemis on été détruits, on passe à l'état suivant
+        // Si tous les énnemis on été détruits, on tente de passer a l'etat suivant
         if (count == 0)
         {
-            NextState();
+            //Pas de lock , on peut passer à la vague suivante
+            if (!generator.AllLocks.ContainsKey(generator.WaveCount) || generator.AllLocks[generator.WaveCount].Count > 0)
+            {
+                NextState();
+            }
+            else
+            {
+                character.SetState(null);
+            }
         }
     }
 }

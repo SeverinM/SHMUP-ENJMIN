@@ -43,10 +43,6 @@ public class LeaderBoardMenu : MonoBehaviour {
             string lines = hs_get.text;
             Debug.Log(lines);
             JSONNode node = JSON.Parse(lines);
-            foreach(JSONNode nd in node)
-            {
-                Debug.Log("j");
-            }
             names.text = "";
             scores.text = "";
 

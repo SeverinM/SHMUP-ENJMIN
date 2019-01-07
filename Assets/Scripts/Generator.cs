@@ -90,5 +90,19 @@ public class Generator : Character {
         {
             eltList.RemoveAll(x => x == elt);
         }
+
+        TryPassWave();
+    }
+
+    /// <summary>
+    /// S'il n'y a pas de verrou , passe à la vague suivante , sinon ne fait rien
+    /// </summary>
+    public void TryPassWave()
+    {
+        //Plus de verrou , on peut passer a la vague concerné
+        if ((!AllLocks.ContainsKey(WaveCount) || AllLocks[WaveCount].Count > 0) && ActualState == null)
+        {
+            SetState(new GenerateEnemies(this, AllWaves));
+        }
     }
 }
