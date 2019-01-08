@@ -100,15 +100,19 @@ public class GenerateEnemies : State
                 leaderPos.x += spacingX;
                 leaderPos.z += spacingZ;
 
-                Debug.Log(leaderPos);
                 GameObject instanciated = level.AddEnemy(x.enn, leaderPos); //position will 
                 Enemy enn = instanciated.GetComponent<Enemy>();
                 enn.enemyType = x.enn;
                 enn.movementType = x.enMov;
-                enn.SetWaypointsAndApply(x.Waypoints); // On attribue les waypoints
+                if (enn.movementType == Enemy.EnemyMovementType.FOLLOW_PATH)
+                {
+                    enn.SetWaypointsAndApply(x.Waypoints);
+                }
+                 // On attribue les waypoints
                 enn.Leader = x.followPlayer ? level.Player : leader;
                 enn.Destroyed += EnnemyDestroyed; // Quand le joueur est détruit, il notifie GenerateEnemies
                 enn.MoveSpeed = x.speed;
+                enn.MoveSpeed = x.life;
                 x.spawned = true; //Cet ennemie ne peut pas etre spawn a nouveau
             }
         });

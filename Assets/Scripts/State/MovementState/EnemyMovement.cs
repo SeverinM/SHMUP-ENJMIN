@@ -14,6 +14,13 @@ public class EnemyMovement : State
     Queue<WaypointElement> allElems;
     bool followLeader;
 
+    public EnemyMovement(Character chara, Transform tar, bool followLeader = false) : base(chara)
+    {
+        enemy = (Enemy)character;
+        target = tar;
+        this.followLeader = followLeader;
+    }
+
     public EnemyMovement(Character chara, Transform tar, Queue<WaypointElement> elt, bool followLeader = false) : base(chara)
     {
         allElems = elt;
@@ -81,7 +88,12 @@ public class EnemyMovement : State
         //Quitter la zone du joueur n'a de sens que si l'ennemi poursuivait le joueur
         if (!followLeader && coll.tag == "FollowParent")
         {
-            character.SetState(new FollowPathMovement(character, allElems, ((Enemy)character).Waypoints.loop));
+            if (allElems == null) {
+                character.SetState(new EnemyMovement(character, target, true));
+            } else
+            {
+                character.SetState(new FollowPathMovement(character, allElems, ((Enemy)character).Waypoints.loop));
+            }
         }
     }
 
