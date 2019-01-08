@@ -10,6 +10,7 @@ public class HookDetector : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
         // Succés Hook
         if (other.tag == "Pullable") 
         {

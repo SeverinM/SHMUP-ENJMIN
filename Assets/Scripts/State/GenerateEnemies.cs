@@ -100,7 +100,6 @@ public class GenerateEnemies : State
                 leaderPos.x += spacingX;
                 leaderPos.z += spacingZ;
 
-                Debug.Log(leaderPos);
                 GameObject instanciated = level.AddEnemy(x.enn, leaderPos); //position will 
                 Enemy enn = instanciated.GetComponent<Enemy>();
                 enn.enemyType = x.enn;

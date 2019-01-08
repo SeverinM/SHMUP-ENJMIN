@@ -206,7 +206,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4741676917561938, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 65437895645053864, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
         type: 2}
@@ -217,6 +217,11 @@ Prefab:
         type: 2}
       propertyPath: life
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 23717912599401390, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
@@ -809,10 +814,13 @@ MonoBehaviour:
           speed: 2
       selected: 1
       speed: 0.1
+      life: 0
       spawned: 0
       followPlayer: 0
     delay: 0
     firstIsLeader: 0
+    spacingX: 0
+    spacingZ: 0
   Count: 0
   WaveCount: 0
 --- !u!4 &1935535043
@@ -826,7 +834,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2050674099
 GameObject:
