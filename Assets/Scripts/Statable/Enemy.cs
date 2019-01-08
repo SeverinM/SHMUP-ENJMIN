@@ -188,8 +188,13 @@ public class Enemy : Character
     public void FollowRandomPath()
     {
         int stepAngle = 10;
-        waypoints.loop = false;
-        Waypoints.allWaypoints.Clear();
+        if (Waypoints != null)
+        {
+            Waypoints.loop = false;
+        }
+
+        waypoints = new Waypoints();
+        waypoints.allWaypoints = new List<WaypointElement>();
         int movements = Random.Range(2, 5);
         float CurrentAngle = Random.Range(0, Mathf.PI * 2);
         //Projection de la position du personage apres X waypoints

@@ -17,7 +17,7 @@ public class PlayerMovement : State
     {
         direction = new Vector2();
         mode = character.Context.ValuesOrDefault<Player.MovementMode>("Mode", Player.MovementMode.Normal);
-        dashDistance = character.Context.ValuesOrDefault<float>("RangeDash", 10);
+        dashDistance = ((Player)character).DistanceDash;
     }
 
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)
@@ -45,6 +45,7 @@ public class PlayerMovement : State
         {
             if (typeAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Dash) && character.GetScale() * character.PersonalScale > 0)
             {
+                Debug.Log(dashDistance);
                 character.transform.position += character.transform.forward * dashDistance;
             }
 
