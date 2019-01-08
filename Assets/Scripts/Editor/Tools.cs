@@ -198,8 +198,6 @@ public class Tools : EditorWindow {
                 }
 
                 EditorGUILayout.EndHorizontal();
-
-                allWaves[j].allEnnemies.ForEach(x => x.speed = Mathf.Max(0.1f, Mathf.Abs(x.speed)));
             }
 
             //Fin de l'indentation

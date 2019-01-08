@@ -54,12 +54,6 @@ public class FollowPathMovement : State
         {
             character.SetState(new EnemyMovement(character, coll.transform, positions, false));
         }
-
-        if (coll.tag == "Hook")
-        {
-            character.PersonalScale = 0;
-        }
-
     }
 
 

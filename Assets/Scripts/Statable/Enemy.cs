@@ -178,7 +178,7 @@ public class Enemy : Character
     public void FollowPath()
     {
         //Toutes les positions globales
-        if (Waypoints.allWaypoints != null)
+        if (Waypoints != null && Waypoints.allWaypoints != null)
         {
             Queue<WaypointElement> allPos = new Queue<WaypointElement>(Waypoints.allWaypoints);
             SetState(new FollowPathMovement(this, allPos, Waypoints.loop));
