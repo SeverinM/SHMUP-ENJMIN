@@ -91,7 +91,8 @@ public class GenerateEnemies : State
                 enn.SetWaypointsAndApply(x.Waypoints); // On attribue les waypoints
                 enn.Leader = x.followPlayer ? level.Player : leader;
                 enn.Destroyed += EnnemyDestroyed; // Quand le joueur est détruit, il notifie GenerateEnemies
-                x.spawned = true;
+                enn.MoveSpeed = x.speed;
+                x.spawned = true; //Cet ennemie ne peut pas etre spawn a nouveau
             }
         });
     }

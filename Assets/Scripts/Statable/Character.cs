@@ -24,11 +24,10 @@ public class WaveElement
     //Cet attribut est utilisé uniquement dans l'outil
     [HideInInspector]
     public bool selected;
+    public float speed;
     [HideInInspector]
     public bool spawned;
-
     public bool followPlayer;
-
     public void End()
     {
         spawned = true;
@@ -58,6 +57,10 @@ public abstract class Character : MonoBehaviour {
         get
         {
             return moveSpeed;
+        }
+        set
+        {
+            moveSpeed = Mathf.Abs(value);
         }
     }
 

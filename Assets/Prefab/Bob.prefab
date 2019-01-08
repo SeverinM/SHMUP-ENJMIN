@@ -302,7 +302,7 @@ MonoBehaviour:
   moveSpeed: 5
   mass: 3
   recoveryMat: {fileID: 2100000, guid: 3615e864792955a4a912eda2c4bbddf0, type: 2}
-  life: 3
+  life: 1
   protectionPrefab: {fileID: 1999096423012838, guid: 7ab713d6b58d82142a6ef567773e3e05,
     type: 2}
   impactDeceleration: 5
