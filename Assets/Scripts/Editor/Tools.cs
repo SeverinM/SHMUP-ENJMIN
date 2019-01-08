@@ -20,7 +20,7 @@ public class Tools : EditorWindow {
     Vector2 scrollPos = Vector2.zero;
     Vector2 scrollPosWave = Vector2.zero;
 
-    Generator currentGen;
+    public static Generator currentGen;
     Generator previousGen = null;
 
 	[MenuItem("Outils GD/Ennemies et spawner")]
@@ -67,6 +67,8 @@ public class Tools : EditorWindow {
         if (currentGen != previousGen && currentGen != null)
         {
             allWaves = currentGen.allWaves;
+            if (ToolsLock.instance != null)
+                currentGen.ToList(ref ToolsLock.instance.allLocksNumber, ref ToolsLock.instance.allLocks);
         }
         previousGen = currentGen;
 
@@ -154,7 +156,7 @@ public class Tools : EditorWindow {
 
             //Debut de l'indentation
             EditorGUI.indentLevel = 1;
-            
+
             //Tous les ennemis d'une vague
             for (int j = 0; j < serRel.arraySize; j++)
             {
