@@ -177,8 +177,6 @@ public class Tools : EditorWindow {
                 EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("speed"), new GUIContent("Vitesse"));
                 EditorGUIUtility.labelWidth = 45;
                 EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("life"), new GUIContent("Vie"));
-                GUILayout.FlexibleSpace();
-                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("speed"), new GUIContent("Speed"));
                 EditorGUIUtility.labelWidth = 30;
                 EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("selected"), GUIContent.none);
                 GUILayout.FlexibleSpace();
