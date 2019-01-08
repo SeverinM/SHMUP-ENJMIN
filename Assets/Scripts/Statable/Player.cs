@@ -27,6 +27,13 @@ public class Player : Character
     [SerializeField]
     [Tooltip("Longueur d'un dash")]
     float distanceDash = 2;
+    public float DistanceDash
+    {
+        get
+        {
+            return distanceDash;
+        }
+    }
 
     [Header("Tir du grappin")]
     [SerializeField]
