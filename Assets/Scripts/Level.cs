@@ -34,7 +34,7 @@ public class Level : Layers
     Text Count;
 
     [SerializeField]
-    List<GameObject> generators;
+    List<Generator> generators;
 
     [SerializeField]
     GameObject canvas;
@@ -81,19 +81,33 @@ public class Level : Layers
 
         // Mettre en route tous les générateurs en leur attribuant un état
         countGenerator = generators.Count;
-        foreach (GameObject generator in generators)
+        foreach (Generator generator in generators)
         {
-            //Le generateur lit ses propres vagues
-            if (generator.GetComponent<Generator>().AllWaves.Count > 0)
+            countGenerator++;
+            //Initialisation du generateur
+            if (generator.AllWaves.Count > 0)
             {
-                generator.GetComponent<Generator>().SetState(new GenerateEnemies(generator.GetComponent<Generator>(), generator.GetComponent<Generator>().AllWaves));
+                generator.TryPassWave();
             }
-            generator.GetComponent<Generator>().EveryoneDied += GeneratorDone;
+            generator.EveryoneDied += GeneratorDone;
+            generator.WaveCleaned += Generator_WaveCleaned;
         }
 
         // Provisoirement
         GameObject toAddText = Instantiate(text, canvas.transform);
         characterTexts.Add(player.gameObject, toAddText.GetComponent<Text>());
+    }
+
+    private void Generator_WaveCleaned(int nb, Generator who)
+    {
+        LockWaveElement elt = new LockWaveElement();
+        elt.generator = who;
+        elt.number = nb;
+
+        foreach(Generator gen in generators.Where(x => x != who))
+        {
+            gen.RemoveLock(elt);
+        }
     }
 
     public void Update()

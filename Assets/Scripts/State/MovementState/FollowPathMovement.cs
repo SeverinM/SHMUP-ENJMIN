@@ -52,7 +52,7 @@ public class FollowPathMovement : State
         //L'ennemi est rentré dans la zone proche du joueur (seul les leader / ennemies seuls sont censés rentrer la dedans)
         if (coll.tag == "FollowParent")
         {
-            character.SetState(new EnemyMovement(character, coll.transform, new Queue<WaypointElement>(), false));
+            character.SetState(new EnemyMovement(character, coll.transform, positions, false));
         }
 
         if (coll.tag == "Hook")

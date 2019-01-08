@@ -3,6 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+[System.Serializable]
+public class LockWaveElement
+{
+    public Generator generator;
+    public int number;
+
+    public override bool Equals(object obj)
+    {
+        LockWaveElement elt = (LockWaveElement)obj;
+        if (elt == null)
+        {
+            return false;
+        }
+        else
+        {
+            return (generator == elt.generator && number == elt.number);
+        }
+    }
+
+    public override int GetHashCode()
+    {
+        return generator.GetHashCode() * number.GetHashCode();
+    }
+}
+
 /// <summary>
 /// The goal of this class is to keep the data of the Generator
 /// </summary>
@@ -12,9 +37,15 @@ public class Generator : Character {
     [HideInInspector]
     public List<Wave> allWaves = new List<Wave>();
     public int Count = 0;
+    public int WaveCount = 0;
+
+    public Dictionary<int, List<LockWaveElement>> AllLocks = new Dictionary<int, List<LockWaveElement>>();
 
     public delegate void noParam();
     public event noParam EveryoneDied;
+
+    public delegate void paramClean(int nb, Generator who);
+    public event paramClean WaveCleaned;
 
     //Combien d'ennemie reste t'il 
     public int EnnemiesLeftToSpawn
@@ -48,5 +79,55 @@ public class Generator : Character {
         {
             EveryoneDied();
         }
+    }
+
+    public void RaiseWaveFinished()
+    {
+        WaveCleaned(WaveCount, this);
+    }
+
+    public void RemoveLock(LockWaveElement elt)
+    {
+        foreach(List<LockWaveElement> eltList in AllLocks.Values)
+        {
+            eltList.RemoveAll(x => x == elt);
+        }
+
+        TryPassWave();
+    }
+
+    /// <summary>
+    /// S'il n'y a pas de verrou , passe à la vague suivante , sinon passe à un non-etat
+    /// </summary>
+    public void TryPassWave()
+    {
+        //Plus de verrou , on peut passer a la vague concerné
+        if ((!AllLocks.ContainsKey(WaveCount) || AllLocks[WaveCount].Count > 0))
+        {
+            if (AllWaves.Count > 0)
+                SetState(new GenerateEnemies(this, AllWaves));
+            else
+                SetState(null);
+        }
+        else
+        {
+            SetState(null);
+        }
+    }
+
+    //Convertir le dictionnaire en liste , utilisé seulement par les outils
+    public void ToList(ref List<int> index, ref List<LockWaveElement> lwE)
+    {
+        index.Clear();
+        lwE.Clear();
+        foreach (int key in AllLocks.Keys)
+        {
+            foreach(LockWaveElement lwEloop in AllLocks[key])
+            {
+                index.Add(key);
+                lwE.Add(lwEloop);
+            }
+        }
+
     }
 }
