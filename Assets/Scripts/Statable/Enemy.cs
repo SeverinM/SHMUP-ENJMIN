@@ -157,9 +157,6 @@ public class Enemy : Character
             case EnemyMovementType.FOLLOW_RANDOM_PATH:
                 FollowRandomPath();
                 break;
-            default:
-                FollowRandomPath();
-                break;
         }
 
         protection = Instantiate(protectionPrefab, transform);
@@ -178,7 +175,7 @@ public class Enemy : Character
     public void FollowPath()
     {
         //Toutes les positions globales
-        if (Waypoints.allWaypoints != null)
+        if (Waypoints != null && Waypoints.allWaypoints != null)
         {
             Queue<WaypointElement> allPos = new Queue<WaypointElement>(Waypoints.allWaypoints);
             SetState(new FollowPathMovement(this, allPos, Waypoints.loop));
@@ -229,7 +226,7 @@ public class Enemy : Character
     private void FollowCharacter()
     {
         if (Leader != null)
-            SetState(new EnemyMovement(this, Leader.transform, new Queue<WaypointElement>(), true));
+            SetState(new EnemyMovement(this, Leader.transform, true));
     }
 
     //Chaque ennemi agit differemment selon son type

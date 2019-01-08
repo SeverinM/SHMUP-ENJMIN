@@ -559,7 +559,7 @@ MonoBehaviour:
   mode: 1
   distanceDash: 2
   hookSpeed: 0.7
-  rangeHook: 10
+  rangeHook: 20
   speedPull: 10
   coeffHook: 0.1
   barrier: {fileID: 4181975481634658}

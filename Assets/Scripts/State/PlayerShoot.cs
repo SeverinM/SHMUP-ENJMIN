@@ -47,7 +47,8 @@ public class PlayerShoot : State
     {
         // Déplacement du grappin 
         player.Hook.transform.Translate(player.Hook.forward * speedTravel * character.GetScale(), Space.World);
-        
+       
+
         // Si le grapin dépasse la distance maximale, le joueur revient à l'état PlayerMovement, et le grappin est retracté
         if (Vector3.Distance(character.transform.position, player.Hook.transform.position) >= maxDistance)
         {

@@ -10,6 +10,7 @@ public class HookDetector : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
         // Succés Hook
         if (other.tag == "Pullable") 
         {
@@ -25,11 +26,14 @@ public class HookDetector : MonoBehaviour
             player.ActualState.NextState();
         }
 
+        if (other.tag == "Ennemy")
+        {
+            player.SetState(new PlayerMovement(player));
+        }
+
         // Si le joueur touche un bouclier, remetre à zero son Hook
         if (other.tag == "Shield")
         {
-            Enemy enemy = other.gameObject.transform.parent.GetComponent<Enemy>();
-            enemy.SetState(new FreezeMovement(enemy));
             Destroy(other.gameObject);
             player.SetState(new PlayerMovement(player));
         }
