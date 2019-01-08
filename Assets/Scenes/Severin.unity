@@ -216,12 +216,42 @@ Prefab:
     - target: {fileID: 114938182685806996, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
         type: 2}
       propertyPath: life
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114938182685806996, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: moveSpeed
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 114938182685806996, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: mass
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114938182685806996, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: level
+      value: 
+      objectReference: {fileID: 2050674100}
+    - target: {fileID: 114938182685806996, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: impactDeceleration
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114938182685806996, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: hookSpeed
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 23717912599401390, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+    - target: {fileID: 114938182685806996, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
         type: 2}
-      propertyPath: m_Enabled
-      value: 0
+      propertyPath: rangeHook
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114938182685806996, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: speedPull
+      value: 24
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
@@ -802,25 +832,543 @@ MonoBehaviour:
   levelObject: {fileID: 2050674099}
   allWaves:
   - allEnnemies:
-    - enn: 2
+    - enn: 0
       enMov: 2
       spawnAfter: 0
       Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints:
-        - targetPosition: {x: -119.8947, y: 114.843956, z: 129.16678}
+        - targetPosition: {x: -177.12901, y: 114.843956, z: 136.02005}
           speed: 2
-        - targetPosition: {x: -180.70543, y: 114.84395, z: 163.43317}
+        - targetPosition: {x: -177.12901, y: 114.84395, z: 156.5799}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.84395, z: 156.5799}
           speed: 2
       selected: 1
-      speed: 0.1
-      life: 0
+      speed: 3
+      life: 1
+      spawned: 0
+      followPlayer: 1
+    - enn: 0
+      enMov: 2
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints:
+        - targetPosition: {x: -177.12901, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -177.12901, y: 114.84395, z: 156.5799}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.84395, z: 156.5799}
+          speed: 2
+      selected: 1
+      speed: 3
+      life: 1
+      spawned: 0
+      followPlayer: 0
+    - enn: 0
+      enMov: 2
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints:
+        - targetPosition: {x: -177.12901, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -177.12901, y: 114.84395, z: 156.5799}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.84395, z: 156.5799}
+          speed: 2
+      selected: 1
+      speed: 3
+      life: 1
+      spawned: 0
+      followPlayer: 0
+    - enn: 0
+      enMov: 2
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints:
+        - targetPosition: {x: -177.12901, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -177.12901, y: 114.84395, z: 156.5799}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.84395, z: 156.5799}
+          speed: 2
+      selected: 1
+      speed: 3
+      life: 1
+      spawned: 0
+      followPlayer: 0
+    - enn: 0
+      enMov: 2
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints:
+        - targetPosition: {x: -177.12901, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -177.12901, y: 114.84395, z: 156.5799}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.84395, z: 156.5799}
+          speed: 2
+      selected: 1
+      speed: 3
+      life: 1
+      spawned: 0
+      followPlayer: 0
+    - enn: 0
+      enMov: 2
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints:
+        - targetPosition: {x: -177.12901, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -177.12901, y: 114.84395, z: 156.5799}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.84395, z: 156.5799}
+          speed: 2
+      selected: 1
+      speed: 3
+      life: 1
+      spawned: 0
+      followPlayer: 0
+    - enn: 2
+      enMov: 0
+      spawnAfter: 6
+      Waypoints:
+        loop: 0
+        allWaypoints:
+        - targetPosition: {x: -177.12901, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -177.12901, y: 114.84395, z: 156.5799}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.84395, z: 156.5799}
+          speed: 2
+      selected: 1
+      speed: 1
+      life: 3
+      spawned: 0
+      followPlayer: 1
+    delay: 0
+    firstIsLeader: 1
+    spacingX: 2
+    spacingZ: 2
+  - allEnnemies:
+    - enn: 0
+      enMov: 2
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints:
+        - targetPosition: {x: -177.12901, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -177.12901, y: 114.84395, z: 156.5799}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.84395, z: 156.5799}
+          speed: 2
+      selected: 1
+      speed: 3
+      life: 1
+      spawned: 0
+      followPlayer: 1
+    - enn: 0
+      enMov: 2
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints:
+        - targetPosition: {x: -177.12901, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -177.12901, y: 114.84395, z: 156.5799}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.84395, z: 156.5799}
+          speed: 2
+      selected: 1
+      speed: 3
+      life: 1
+      spawned: 0
+      followPlayer: 0
+    - enn: 0
+      enMov: 2
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints:
+        - targetPosition: {x: -177.12901, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -177.12901, y: 114.84395, z: 156.5799}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.84395, z: 156.5799}
+          speed: 2
+      selected: 1
+      speed: 3
+      life: 1
+      spawned: 0
+      followPlayer: 0
+    - enn: 0
+      enMov: 2
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints:
+        - targetPosition: {x: -177.12901, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -177.12901, y: 114.84395, z: 156.5799}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.84395, z: 156.5799}
+          speed: 2
+      selected: 1
+      speed: 3
+      life: 1
+      spawned: 0
+      followPlayer: 0
+    - enn: 0
+      enMov: 2
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints:
+        - targetPosition: {x: -177.12901, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -177.12901, y: 114.84395, z: 156.5799}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.84395, z: 156.5799}
+          speed: 2
+      selected: 1
+      speed: 3
+      life: 1
+      spawned: 0
+      followPlayer: 0
+    - enn: 0
+      enMov: 2
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints:
+        - targetPosition: {x: -177.12901, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -177.12901, y: 114.84395, z: 156.5799}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.84395, z: 156.5799}
+          speed: 2
+      selected: 1
+      speed: 3
+      life: 1
+      spawned: 0
+      followPlayer: 0
+    - enn: 1
+      enMov: 1
+      spawnAfter: 4
+      Waypoints:
+        loop: 0
+        allWaypoints:
+        - targetPosition: {x: -177.12901, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -177.12901, y: 114.84395, z: 156.5799}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.84395, z: 156.5799}
+          speed: 2
+      selected: 1
+      speed: 2
+      life: 2
+      spawned: 0
+      followPlayer: 0
+    - enn: 1
+      enMov: 1
+      spawnAfter: 4
+      Waypoints:
+        loop: 0
+        allWaypoints:
+        - targetPosition: {x: -177.12901, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -177.12901, y: 114.84395, z: 156.5799}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.84395, z: 156.5799}
+          speed: 2
+      selected: 1
+      speed: 2
+      life: 2
       spawned: 0
       followPlayer: 0
     delay: 0
-    firstIsLeader: 0
-    spacingX: 0
-    spacingZ: 0
+    firstIsLeader: 1
+    spacingX: 2
+    spacingZ: 2
+  - allEnnemies:
+    - enn: 1
+      enMov: 1
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints:
+        - targetPosition: {x: -177.12901, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -177.12901, y: 114.84395, z: 156.5799}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.84395, z: 156.5799}
+          speed: 2
+      selected: 1
+      speed: 2
+      life: 2
+      spawned: 0
+      followPlayer: 0
+    - enn: 1
+      enMov: 1
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints:
+        - targetPosition: {x: -177.12901, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -177.12901, y: 114.84395, z: 156.5799}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.84395, z: 156.5799}
+          speed: 2
+      selected: 1
+      speed: 2
+      life: 2
+      spawned: 0
+      followPlayer: 0
+    delay: 0
+    firstIsLeader: 1
+    spacingX: 2
+    spacingZ: 2
+  - allEnnemies:
+    - enn: 0
+      enMov: 2
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints:
+        - targetPosition: {x: -177.12901, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -177.12901, y: 114.84395, z: 156.5799}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.84395, z: 156.5799}
+          speed: 2
+      selected: 1
+      speed: 3
+      life: 1
+      spawned: 0
+      followPlayer: 1
+    - enn: 0
+      enMov: 2
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints:
+        - targetPosition: {x: -177.12901, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -177.12901, y: 114.84395, z: 156.5799}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.84395, z: 156.5799}
+          speed: 2
+      selected: 1
+      speed: 3
+      life: 1
+      spawned: 0
+      followPlayer: 0
+    - enn: 0
+      enMov: 2
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints:
+        - targetPosition: {x: -177.12901, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -177.12901, y: 114.84395, z: 156.5799}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.84395, z: 156.5799}
+          speed: 2
+      selected: 1
+      speed: 3
+      life: 1
+      spawned: 0
+      followPlayer: 0
+    - enn: 0
+      enMov: 2
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints:
+        - targetPosition: {x: -177.12901, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -177.12901, y: 114.84395, z: 156.5799}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.84395, z: 156.5799}
+          speed: 2
+      selected: 1
+      speed: 3
+      life: 1
+      spawned: 0
+      followPlayer: 0
+    - enn: 0
+      enMov: 2
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints:
+        - targetPosition: {x: -177.12901, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -177.12901, y: 114.84395, z: 156.5799}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.84395, z: 156.5799}
+          speed: 2
+      selected: 1
+      speed: 3
+      life: 1
+      spawned: 0
+      followPlayer: 0
+    - enn: 0
+      enMov: 2
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints:
+        - targetPosition: {x: -177.12901, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -177.12901, y: 114.84395, z: 156.5799}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.84395, z: 156.5799}
+          speed: 2
+      selected: 1
+      speed: 3
+      life: 1
+      spawned: 0
+      followPlayer: 0
+    delay: 0
+    firstIsLeader: 1
+    spacingX: 2
+    spacingZ: 2
+  - allEnnemies:
+    - enn: 0
+      enMov: 2
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints:
+        - targetPosition: {x: -177.12901, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -177.12901, y: 114.84395, z: 156.5799}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.84395, z: 156.5799}
+          speed: 2
+      selected: 1
+      speed: 3
+      life: 1
+      spawned: 0
+      followPlayer: 1
+    - enn: 0
+      enMov: 2
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints:
+        - targetPosition: {x: -177.12901, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -177.12901, y: 114.84395, z: 156.5799}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.84395, z: 156.5799}
+          speed: 2
+      selected: 1
+      speed: 3
+      life: 1
+      spawned: 0
+      followPlayer: 0
+    - enn: 0
+      enMov: 2
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints:
+        - targetPosition: {x: -177.12901, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -177.12901, y: 114.84395, z: 156.5799}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.84395, z: 156.5799}
+          speed: 2
+      selected: 1
+      speed: 3
+      life: 1
+      spawned: 0
+      followPlayer: 0
+    - enn: 0
+      enMov: 2
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints:
+        - targetPosition: {x: -177.12901, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -177.12901, y: 114.84395, z: 156.5799}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.843956, z: 136.02005}
+          speed: 2
+        - targetPosition: {x: -123.46925, y: 114.84395, z: 156.5799}
+          speed: 2
+      selected: 1
+      speed: 3
+      life: 1
+      spawned: 0
+      followPlayer: 0
+    delay: 0
+    firstIsLeader: 1
+    spacingX: 2
+    spacingZ: 2
   Count: 0
   WaveCount: 0
 --- !u!4 &1935535043

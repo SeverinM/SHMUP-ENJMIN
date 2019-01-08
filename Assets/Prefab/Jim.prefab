@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 65129822689777282}
   m_Layer: 0
   m_Name: Pullable
-  m_TagString: Pullable
+  m_TagString: Winchable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 65247820658486342}
   m_Layer: 0
   m_Name: Pullable (1)
-  m_TagString: Pullable
+  m_TagString: Winchable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
