@@ -146,9 +146,6 @@ public class Enemy : Character
 
     private void Start()
     {
-        // Watched life = Life
-        Life = life;
-
         switch (movementType)
         {
             case EnemyMovementType.FOLLOW_GAME_OBJECT:

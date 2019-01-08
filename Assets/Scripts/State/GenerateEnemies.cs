@@ -69,6 +69,8 @@ public class GenerateEnemies : State
                 Enemy enn = leader.GetComponent<Enemy>();
                 enn.enemyType = x.enn;
                 enn.movementType = x.enMov;
+                enn.MoveSpeed = x.speed;
+                enn.Life = x.life;
                 enn.SetWaypointsAndApply(x.Waypoints);
                 enn.Destroyed += EnnemyDestroyed;
                 x.spawned = true;

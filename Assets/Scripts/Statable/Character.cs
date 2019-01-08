@@ -19,6 +19,8 @@ public class WaveElement
     public Enemy.EnemyMovementType enMov;
     public float spawnAfter;
     public Waypoints Waypoints;
+    public float speed;
+    public int life;
 
     //Cet attribut est utilisé uniquement dans l'outil
     [HideInInspector]
@@ -57,6 +59,11 @@ public abstract class Character : MonoBehaviour {
         get
         {
             return moveSpeed;
+        }
+
+        set
+        {
+            moveSpeed = value;
         }
     }
 

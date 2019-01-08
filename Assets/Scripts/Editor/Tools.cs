@@ -169,6 +169,10 @@ public class Tools : EditorWindow {
                 EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("followPlayer"), new GUIContent("Suit le Joueur"));
                 GUILayout.FlexibleSpace();
                 EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("enMov"), new GUIContent("Type Mvmt"));
+                EditorGUIUtility.labelWidth = 60;
+                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("speed"), new GUIContent("Vitesse"));
+                EditorGUIUtility.labelWidth = 45;
+                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("life"), new GUIContent("Vie"));
                 GUILayout.FlexibleSpace();
                 EditorGUIUtility.labelWidth = 30;
                 EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("selected"), GUIContent.none);

@@ -98,7 +98,7 @@ public class Level : Layers
 
     public void Update()
     {
-        //???
+        // Enlever un personnage du niveau
         foreach (GameObject character in charactersToRemove)
         {
             character.GetComponent<Character>().SetState(null);
