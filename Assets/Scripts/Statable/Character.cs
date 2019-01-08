@@ -172,6 +172,7 @@ public abstract class Character : MonoBehaviour {
     internal void Rotate(GameObject player)
     {
         transform.LookAt(player.transform);
+        Quaternion.Euler(transform.rotation.x, transform.rotation.y, 0);
     }
 
     [SerializeField]

@@ -878,14 +878,20 @@ MonoBehaviour:
       enMov: 1
       spawnAfter: 0
       Waypoints:
-        loop: 0
+        loop: 1
         allWaypoints:
-        - targetPosition: {x: -0.000011444092, y: -0.0000038146973, z: 14.533675}
-          speed: 0
-        - targetPosition: {x: -25.648333, y: 0.0000019073486, z: -14.333676}
-          speed: 0
+        - targetPosition: {x: 0.49999315, y: -0.0000011320712, z: 1}
+          speed: 1
+        - targetPosition: {x: -20.541939, y: -0.0000009536743, z: 0.09999943}
+          speed: 1
+        - targetPosition: {x: -25.677416, y: 0.0000019073486, z: -14.333676}
+          speed: 1
+        - targetPosition: {x: -25.677416, y: -0.0000038146973, z: 14.533675}
+          speed: 1
+        - targetPosition: {x: 0.0005598267, y: -0.00000093385256, z: 0}
+          speed: 1
       selected: 1
-      speed: 1
+      speed: 10
       life: 10
       spawned: 0
       followPlayer: 0
@@ -896,7 +902,7 @@ MonoBehaviour:
         loop: 0
         allWaypoints: []
       selected: 0
-      speed: 1
+      speed: 5
       life: 10
       spawned: 0
       followPlayer: 0
@@ -907,43 +913,54 @@ MonoBehaviour:
         loop: 0
         allWaypoints: []
       selected: 0
-      speed: 1
+      speed: 5
       life: 10
       spawned: 0
       followPlayer: 0
-    - enn: 0
+    - enn: 1
       enMov: 0
       spawnAfter: 0
       Waypoints:
         loop: 0
         allWaypoints: []
       selected: 0
-      speed: 1
+      speed: 5
       life: 10
       spawned: 0
       followPlayer: 0
-    - enn: 0
+    - enn: 1
       enMov: 0
       spawnAfter: 0
       Waypoints:
         loop: 0
         allWaypoints: []
       selected: 0
-      speed: 1
+      speed: 5
       life: 10
       spawned: 0
       followPlayer: 0
-    - enn: 0
+    - enn: 1
       enMov: 0
       spawnAfter: 0
       Waypoints:
         loop: 0
         allWaypoints: []
       selected: 0
-      speed: 1
+      speed: 5
       life: 10
       spawned: 0
       followPlayer: 0
+    - enn: 2
+      enMov: 0
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints: []
+      selected: 0
+      speed: 5
+      life: 10
+      spawned: 0
+      followPlayer: 1
     delay: 0
     firstIsLeader: 1
     spacingX: 4
@@ -1049,7 +1066,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4741676917561938, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0.83
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4741676917561938, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1057,7 +1074,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4741676917561938, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 2.31
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4741676917561938, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1097,7 +1114,58 @@ Prefab:
     - target: {fileID: 65437895645053864, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
         type: 2}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1380677440080142, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 65437895645053864, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 65437895645053864, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: m_Size.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 65437895645053864, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: m_Center.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 65437895645053864, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: m_Center.z
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4773801651586066, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4773801651586066, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4773801651586066, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 65593104869491292, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: m_Center.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 65593104869491292, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 120.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 65593104869491292, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 59.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}

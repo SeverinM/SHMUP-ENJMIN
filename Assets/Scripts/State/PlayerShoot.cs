@@ -41,6 +41,7 @@ public class PlayerShoot : State
     public override void StartState()
     {
         player.Hook.GetComponent<BoxCollider>().enabled = true;
+        AkSoundEngine.PostEvent("H_Launch", character.gameObject);
     }
 
     public override void UpdateState()
