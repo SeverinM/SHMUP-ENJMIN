@@ -150,6 +150,8 @@ public class Tools : EditorWindow {
             EditorGUILayout.BeginHorizontal();
             GUILayout.Label("Vague numero " + i);
             EditorGUILayout.PropertyField(serWaves.GetArrayElementAtIndex(i).FindPropertyRelative("firstIsLeader"), new GUIContent("Premier est Leader"));
+            EditorGUILayout.PropertyField(serWaves.GetArrayElementAtIndex(i).FindPropertyRelative("spacingX"), new GUIContent("Espace X"));
+            EditorGUILayout.PropertyField(serWaves.GetArrayElementAtIndex(i).FindPropertyRelative("spacingZ"), new GUIContent("Espace Z"));
             EditorGUILayout.PropertyField(serWaves.GetArrayElementAtIndex(i).FindPropertyRelative("delay"), new GUIContent("Commence apres (s)"));
             EditorGUILayout.EndHorizontal();
             SerializedProperty serRel = serWaves.GetArrayElementAtIndex(i).FindPropertyRelative("allEnnemies");

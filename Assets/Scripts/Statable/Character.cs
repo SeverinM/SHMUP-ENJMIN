@@ -11,6 +11,8 @@ public class Wave
     public List<WaveElement> allEnnemies;
     public float delay;
     public bool firstIsLeader;
+    public float spacingX;
+    public float spacingZ;
 }
 
 [System.Serializable]
