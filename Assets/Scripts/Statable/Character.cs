@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class Wave
@@ -240,8 +241,27 @@ public abstract class Character : MonoBehaviour {
 
     public void StartRecovery(float duration)
     {
-        SetState(new CharacterRecovery(this, duration));
+        StartCoroutine(StartRecoveryCoroutine(duration));
     }
+
+    public IEnumerator StartRecoveryCoroutine(float duration)
+    {
+        Material original = GetComponent<MeshRenderer>().material;
+        if (recoveryMat != null)
+        {
+            GetComponent<MeshRenderer>().material = recoveryMat;
+        }
+
+        GetComponent<Collider>().enabled = false;
+        protection.SetActive(true);
+
+        yield return new WaitForSeconds(duration);
+
+        GetComponent<MeshRenderer>().material = original;
+        protection.SetActive(false);
+        GetComponent<Collider>().enabled = true;
+    }
+
 
     /// <summary>
     /// Chaque sous-classe a son propre timeScale , utilisez de preference un attribut facilement accessible
@@ -249,11 +269,12 @@ public abstract class Character : MonoBehaviour {
     /// <returns></returns>
     public abstract float GetScale();
 
-    public void OnDestroy()
+    public virtual void OnDestroy()
     {
-        if (!Constants.ApplicationQuit && Destroyed != null)
+        if (!Constants.ApplicationQuit)
         {
-            Destroyed(this);
+            if (Destroyed != null)
+                Destroyed(this);
         }
     }
 
