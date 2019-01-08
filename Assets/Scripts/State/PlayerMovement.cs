@@ -26,7 +26,7 @@ public class PlayerMovement : State
         if (mode.Equals(Player.MovementMode.Normal))
         {
             //Un mouvement quelconque (manette / souris) est detecté
-            if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.AllMovement))
+            if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.AllMovement) && character.GetScale() * character.PersonalScale > 0)
             {
                 direction.Set(val.x, val.y);
                 direction *= character.GetScale();
