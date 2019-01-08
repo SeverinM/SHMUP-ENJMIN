@@ -22,17 +22,15 @@ public class WaveElement
     public Enemy.EnemyMovementType enMov;
     public float spawnAfter;
     public Waypoints Waypoints;
-    public float speed;
-    public int life;
 
     //Cet attribut est utilisé uniquement dans l'outil
     [HideInInspector]
     public bool selected;
+    public float speed;
+    public int life;
     [HideInInspector]
     public bool spawned;
-
     public bool followPlayer;
-
     public void End()
     {
         spawned = true;
@@ -63,10 +61,10 @@ public abstract class Character : MonoBehaviour {
         {
             return moveSpeed;
         }
-
         set
         {
-            moveSpeed = value;
+            moveSpeed = Mathf.Abs(value);
+
         }
     }
 
