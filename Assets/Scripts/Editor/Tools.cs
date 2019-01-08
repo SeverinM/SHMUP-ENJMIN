@@ -68,7 +68,7 @@ public class Tools : EditorWindow {
         {
             allWaves = currentGen.allWaves;
             if (ToolsLock.instance != null)
-                currentGen.ToList(ref ToolsLock.instance.allLocksNumber, ref ToolsLock.instance.allLocks);
+                ToolsLock.instance.allLocks = currentGen.AllLocks;
         }
         previousGen = currentGen;
 

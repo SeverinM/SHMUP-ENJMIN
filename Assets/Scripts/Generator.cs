@@ -4,22 +4,16 @@ using UnityEngine;
 using System.Linq;
 
 [System.Serializable]
-public class LockWaveElement
+public struct LockWaveElement
 {
+    public int forWave;
     public Generator generator;
     public int number;
 
     public override bool Equals(object obj)
     {
         LockWaveElement elt = (LockWaveElement)obj;
-        if (elt == null)
-        {
-            return false;
-        }
-        else
-        {
-            return (generator == elt.generator && number == elt.number);
-        }
+        return (generator == elt.generator && number == elt.number);
     }
 
     public override int GetHashCode()
@@ -39,7 +33,7 @@ public class Generator : Character {
     public int Count = 0;
     public int WaveCount = 0;
 
-    public Dictionary<int, List<LockWaveElement>> AllLocks = new Dictionary<int, List<LockWaveElement>>();
+    public List<LockWaveElement> AllLocks;
 
     public delegate void noParam();
     public event noParam EveryoneDied;
@@ -88,11 +82,7 @@ public class Generator : Character {
 
     public void RemoveLock(LockWaveElement elt)
     {
-        foreach(List<LockWaveElement> eltList in AllLocks.Values)
-        {
-            eltList.RemoveAll(x => x == elt);
-        }
-
+        AllLocks.RemoveAll(x => x.Equals(elt));
         TryPassWave();
     }
 
@@ -101,8 +91,15 @@ public class Generator : Character {
     /// </summary>
     public void TryPassWave()
     {
+        if (AllLocks == null)
+        {
+            SetState(new GenerateEnemies(this, AllWaves));
+            return;
+        }
+
         //Plus de verrou , on peut passer a la vague concerné
-        if ((!AllLocks.ContainsKey(WaveCount) || AllLocks[WaveCount].Count > 0))
+        //WaveCount
+        if (AllLocks.Where(x => x.forWave == WaveCount).Count() == 0)
         {
             if (AllWaves.Count > 0)
                 SetState(new GenerateEnemies(this, AllWaves));
@@ -113,21 +110,5 @@ public class Generator : Character {
         {
             SetState(null);
         }
-    }
-
-    //Convertir le dictionnaire en liste , utilisé seulement par les outils
-    public void ToList(ref List<int> index, ref List<LockWaveElement> lwE)
-    {
-        index.Clear();
-        lwE.Clear();
-        foreach (int key in AllLocks.Keys)
-        {
-            foreach(LockWaveElement lwEloop in AllLocks[key])
-            {
-                index.Add(key);
-                lwE.Add(lwEloop);
-            }
-        }
-
     }
 }

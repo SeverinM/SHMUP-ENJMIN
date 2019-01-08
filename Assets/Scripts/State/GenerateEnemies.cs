@@ -89,14 +89,14 @@ public class GenerateEnemies : State
             }
         }
         
-        // Pour chaque ennemi de la vague courrante
-        currentWave.allEnnemies.ForEach(x =>
+
+        foreach(WaveElement x in currentWave.allEnnemies)
         {
             // Si l'enemi courrant doit spawn et n'a pas encore spawné
             if (x.spawnAfter < timeSinceBegin && !x.spawned)
             {
                 generator.Count++;
-   
+
                 leaderPos.x += spacingX;
                 leaderPos.z += spacingZ;
 
@@ -108,14 +108,14 @@ public class GenerateEnemies : State
                 {
                     enn.SetWaypointsAndApply(x.Waypoints);
                 }
-                 // On attribue les waypoints
+                // On attribue les waypoints
                 enn.Leader = x.followPlayer ? level.Player : leader;
                 enn.Destroyed += EnnemyDestroyed; // Quand le joueur est détruit, il notifie GenerateEnemies
                 enn.MoveSpeed = x.speed;
                 enn.MoveSpeed = x.life;
                 x.spawned = true; //Cet ennemie ne peut pas etre spawn a nouveau
             }
-        });
+        }
     }
 
     void EnnemyDestroyed(Character chara)
