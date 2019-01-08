@@ -150,6 +150,8 @@ public class Tools : EditorWindow {
             EditorGUILayout.BeginHorizontal();
             GUILayout.Label("Vague numero " + i);
             EditorGUILayout.PropertyField(serWaves.GetArrayElementAtIndex(i).FindPropertyRelative("firstIsLeader"), new GUIContent("Premier est Leader"));
+            EditorGUILayout.PropertyField(serWaves.GetArrayElementAtIndex(i).FindPropertyRelative("spacingX"), new GUIContent("Espace X"));
+            EditorGUILayout.PropertyField(serWaves.GetArrayElementAtIndex(i).FindPropertyRelative("spacingZ"), new GUIContent("Espace Z"));
             EditorGUILayout.PropertyField(serWaves.GetArrayElementAtIndex(i).FindPropertyRelative("delay"), new GUIContent("Commence apres (s)"));
             EditorGUILayout.EndHorizontal();
             SerializedProperty serRel = serWaves.GetArrayElementAtIndex(i).FindPropertyRelative("allEnnemies");
@@ -171,7 +173,12 @@ public class Tools : EditorWindow {
                 EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("followPlayer"), new GUIContent("Suit le Joueur"));
                 GUILayout.FlexibleSpace();
                 EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("enMov"), new GUIContent("Type Mvmt"));
+                EditorGUIUtility.labelWidth = 60;
+                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("speed"), new GUIContent("Vitesse"));
+                EditorGUIUtility.labelWidth = 45;
+                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("life"), new GUIContent("Vie"));
                 GUILayout.FlexibleSpace();
+                EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("speed"), new GUIContent("Speed"));
                 EditorGUIUtility.labelWidth = 30;
                 EditorGUILayout.PropertyField(serRel.GetArrayElementAtIndex(j).FindPropertyRelative("selected"), GUIContent.none);
                 GUILayout.FlexibleSpace();
@@ -191,6 +198,8 @@ public class Tools : EditorWindow {
                 }
 
                 EditorGUILayout.EndHorizontal();
+
+                allWaves[j].allEnnemies.ForEach(x => x.speed = Mathf.Max(0.1f, Mathf.Abs(x.speed)));
             }
 
             //Fin de l'indentation

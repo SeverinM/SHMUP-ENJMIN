@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class Wave
@@ -10,6 +11,8 @@ public class Wave
     public List<WaveElement> allEnnemies;
     public float delay;
     public bool firstIsLeader;
+    public float spacingX;
+    public float spacingZ;
 }
 
 [System.Serializable]
@@ -23,11 +26,11 @@ public class WaveElement
     //Cet attribut est utilisé uniquement dans l'outil
     [HideInInspector]
     public bool selected;
+    public float speed;
+    public int life;
     [HideInInspector]
     public bool spawned;
-
     public bool followPlayer;
-
     public void End()
     {
         spawned = true;
@@ -57,6 +60,11 @@ public abstract class Character : MonoBehaviour {
         get
         {
             return moveSpeed;
+        }
+        set
+        {
+            moveSpeed = Mathf.Abs(value);
+
         }
     }
 
@@ -240,8 +248,27 @@ public abstract class Character : MonoBehaviour {
 
     public void StartRecovery(float duration)
     {
-        SetState(new CharacterRecovery(this, duration));
+        StartCoroutine(StartRecoveryCoroutine(duration));
     }
+
+    public IEnumerator StartRecoveryCoroutine(float duration)
+    {
+        Material original = GetComponent<MeshRenderer>().material;
+        if (recoveryMat != null)
+        {
+            GetComponent<MeshRenderer>().material = recoveryMat;
+        }
+
+        GetComponent<Collider>().enabled = false;
+        protection.SetActive(true);
+
+        yield return new WaitForSeconds(duration);
+
+        GetComponent<MeshRenderer>().material = original;
+        protection.SetActive(false);
+        GetComponent<Collider>().enabled = true;
+    }
+
 
     /// <summary>
     /// Chaque sous-classe a son propre timeScale , utilisez de preference un attribut facilement accessible
@@ -249,11 +276,12 @@ public abstract class Character : MonoBehaviour {
     /// <returns></returns>
     public abstract float GetScale();
 
-    public void OnDestroy()
+    public virtual void OnDestroy()
     {
-        if (!Constants.ApplicationQuit && Destroyed != null)
+        if (!Constants.ApplicationQuit)
         {
-            Destroyed(this);
+            if (Destroyed != null)
+                Destroyed(this);
         }
     }
 

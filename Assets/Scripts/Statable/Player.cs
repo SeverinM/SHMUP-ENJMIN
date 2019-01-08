@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using UnityEngine.SceneManagement;
 
 public class Player : Character
 {
@@ -191,5 +192,15 @@ public class Player : Character
     public void AttachHook(Transform transform)
     {
         target = transform;
+    }
+
+    public override void OnDestroy()
+    {
+        base.OnDestroy();
+        if (!Constants.ApplicationQuit)
+        {
+            actualState = null;
+            Utils.StartFading(1, Color.black, () => { Constants.SetAllConstants(0); SceneManager.LoadScene(SceneManager.GetActiveScene().name); }, () => Constants.SetAllConstants(1));
+        }
     }
 }
