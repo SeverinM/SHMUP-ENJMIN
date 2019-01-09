@@ -36,6 +36,11 @@ public class EnemyMovement : State
 
     public override void UpdateState()
     {
+        //L'ennemi est freeze / en pause , il n'est pas supposé agir
+        if (character.PersonalScale == 0)
+        {
+            return;
+        }
 
         // Si la cible à été détruit, alors on se déplace aléatoirement
         if (target == null)
@@ -44,15 +49,9 @@ public class EnemyMovement : State
             return;
         }
 
-
         deltaPosition = target.transform.position - character.transform.position;
 
         character.Separate();
-        //L'ennemi est freeze / en pause , il n'est pas supposé agir
-        if (character.PersonalScale == 0)
-        {
-            return;
-        }
 
         if (!followLeader)
         {

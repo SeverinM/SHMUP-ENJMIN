@@ -516,81 +516,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1170232697}
   m_CullTransparentMesh: 0
---- !u!1 &1219863570
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1219863572}
-  - component: {fileID: 1219863571}
-  m_Layer: 0
-  m_Name: GeneratorBloquant
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1219863571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1219863570}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74ea6ec4297249d4cbad984f0434a79a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 6
-  mass: 3
-  recoveryMat: {fileID: 0}
-  life: 3
-  protectionPrefab: {fileID: 0}
-  impactDeceleration: 5
-  level: {fileID: 0}
-  levelObject: {fileID: 2050674099}
-  allWaves:
-  - allEnnemies:
-    - enn: 2
-      enMov: 2
-      spawnAfter: 0
-      Waypoints:
-        loop: 1
-        allWaypoints:
-        - targetPosition: {x: -168.5942, y: 114.843956, z: 139.4467}
-          speed: 2
-        - targetPosition: {x: -119.80865, y: 114.843956, z: 129.16678}
-          speed: 2
-      selected: 1
-      speed: 3
-      life: 1
-      spawned: 0
-      followPlayer: 0
-    delay: 0
-    firstIsLeader: 0
-    spacingX: 0
-    spacingZ: 0
-  Count: 0
-  WaveCount: 0
-  AllLocks:
-  - forWave: 0
-    generator: {fileID: 1935535042}
-    number: 0
---- !u!4 &1219863572
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1219863570}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -161.42, y: 114.8, z: 147.88}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1413497288
 GameObject:
   m_ObjectHideFlags: 0
@@ -981,7 +906,6 @@ MonoBehaviour:
   Count: {fileID: 1585205172}
   generators:
   - {fileID: 1935535042}
-  - {fileID: 0}
   canvas: {fileID: 1628502475}
   text: {fileID: 1170232697}
   characters: []

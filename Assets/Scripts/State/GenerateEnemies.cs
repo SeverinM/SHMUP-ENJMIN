@@ -31,7 +31,6 @@ public class GenerateEnemies : State
         wavesLeft = remainingWaves;
         timeSinceBegin -= currentWave.delay;
         count = currentWave.allEnnemies.Count;
-        Debug.Log(character.name);
     }
 
     public override void EndState()
@@ -112,7 +111,7 @@ public class GenerateEnemies : State
                 enn.Leader = x.followPlayer ? level.Player : leader;
                 enn.Destroyed += EnnemyDestroyed; // Quand le joueur est détruit, il notifie GenerateEnemies
                 enn.MoveSpeed = x.speed;
-                enn.MoveSpeed = x.life;
+                enn.Life = x.life;
                 x.spawned = true; //Cet ennemie ne peut pas etre spawn a nouveau
             }
         }
