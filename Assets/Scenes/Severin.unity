@@ -122,6 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 241145797}
   - component: {fileID: 241145796}
+  - component: {fileID: 241145798}
   m_Layer: 0
   m_Name: WwiseGlobal
   m_TagString: Untagged
@@ -169,6 +170,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &241145798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 241145795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e72ad8bbcbddbb4db91e91cad9d0de8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: f7e1664c
+  useOtherObject: 0
+  data:
+    valueGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: a94b77373167ab24d94af4d76ce628d9,
+      type: 2}
+  decodeBank: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  valueGuid: 
 --- !u!1001 &332854340
 Prefab:
   m_ObjectHideFlags: 0
@@ -530,7 +553,7 @@ MonoBehaviour:
   levelObject: {fileID: 2050674099}
   allWaves:
   - allEnnemies:
-    - enn: 0
+    - enn: 2
       enMov: 2
       spawnAfter: 0
       Waypoints:
@@ -551,6 +574,10 @@ MonoBehaviour:
     spacingZ: 0
   Count: 0
   WaveCount: 0
+  AllLocks:
+  - forWave: 0
+    generator: {fileID: 1935535042}
+    number: 0
 --- !u!4 &1219863572
 Transform:
   m_ObjectHideFlags: 0
@@ -903,24 +930,9 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 0
     spacingZ: 0
-  - allEnnemies:
-    - enn: 2
-      enMov: 2
-      spawnAfter: 0
-      Waypoints:
-        loop: 0
-        allWaypoints: []
-      selected: 0
-      speed: 1
-      life: 1
-      spawned: 0
-      followPlayer: 0
-    delay: 0
-    firstIsLeader: 0
-    spacingX: 0
-    spacingZ: 0
   Count: 0
   WaveCount: 0
+  AllLocks: []
 --- !u!4 &1935535043
 Transform:
   m_ObjectHideFlags: 0
@@ -933,73 +945,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1985072390
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1985072392}
-  - component: {fileID: 1985072391}
-  m_Layer: 0
-  m_Name: GeneratorBloque
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1985072391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1985072390}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74ea6ec4297249d4cbad984f0434a79a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 6
-  mass: 3
-  recoveryMat: {fileID: 0}
-  life: 3
-  protectionPrefab: {fileID: 0}
-  impactDeceleration: 5
-  level: {fileID: 0}
-  levelObject: {fileID: 2050674099}
-  allWaves:
-  - allEnnemies:
-    - enn: 2
-      enMov: 2
-      spawnAfter: 0
-      Waypoints:
-        loop: 0
-        allWaypoints: []
-      selected: 0
-      speed: 1
-      life: 1
-      spawned: 0
-      followPlayer: 0
-    delay: 0
-    firstIsLeader: 0
-    spacingX: 0
-    spacingZ: 0
-  Count: 0
-  WaveCount: 0
---- !u!4 &1985072392
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1985072390}
-  m_LocalRotation: {x: 0, y: 0.99963987, z: 0, w: -0.026836904}
-  m_LocalPosition: {x: -171.2, y: 114.8, z: 143.3}
-  m_LocalScale: {x: 2, y: 1, z: 2}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2050674099
 GameObject:
@@ -1036,7 +981,7 @@ MonoBehaviour:
   Count: {fileID: 1585205172}
   generators:
   - {fileID: 1935535042}
-  - {fileID: 1985072391}
+  - {fileID: 1219863571}
   canvas: {fileID: 1628502475}
   text: {fileID: 1170232697}
   characters: []

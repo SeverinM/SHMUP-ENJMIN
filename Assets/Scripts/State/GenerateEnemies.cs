@@ -36,7 +36,6 @@ public class GenerateEnemies : State
 
     public override void EndState()
     {
-        generator.RaiseWaveFinished();
         generator.WaveCount++;
     }
 
@@ -126,6 +125,7 @@ public class GenerateEnemies : State
         // Si tous les énnemis on été détruits, on tente de passer a l'etat suivant
         if (count == 0)
         {
+            generator.RaiseWaveFinished();
             generator.TryPassWave();
         }
     }
