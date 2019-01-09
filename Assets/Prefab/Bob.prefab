@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33580367293347030}
   - component: {fileID: 23550201510761766}
   m_Layer: 0
-  m_Name: Front
+  m_Name: FrontBob
   m_TagString: Winchable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 65721972778159086}
   - component: {fileID: 54627917516727406}
   m_Layer: 0
-  m_Name: Winchable
+  m_Name: WinchableBob
   m_TagString: Pullable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -300,8 +300,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  models:
+  - {fileID: 0}
+  - {fileID: 0}
   mass: 3
-  recoveryMat: {fileID: 2100000, guid: 3615e864792955a4a912eda2c4bbddf0, type: 2}
+  recoveryMat: {fileID: 2100000, guid: 77286c23e931b4b4397bce28b6a22b95, type: 2}
   life: 1
   protectionPrefab: {fileID: 1999096423012838, guid: 7ab713d6b58d82142a6ef567773e3e05,
     type: 2}

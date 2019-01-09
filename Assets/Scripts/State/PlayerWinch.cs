@@ -13,7 +13,7 @@ public class PlayerWinch : State
     //Vitesse de traversé du hook
     float speedTravel;
 
-    float hookRadius = 0.75f;
+    float hookRadius = 2f;
 
     public enum HookMode
     {

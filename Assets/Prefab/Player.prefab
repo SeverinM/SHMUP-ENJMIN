@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 33756588801716670}
   - component: {fileID: 23366632181439860}
   m_Layer: 0
-  m_Name: Hook
+  m_Name: HookMat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,7 +169,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1380677440080142}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.83, y: 0, z: 2.31}
+  m_LocalPosition: {x: -159.60248, y: 114.8, z: 135.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4181975481634658}
@@ -291,7 +291,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 2281d1885d0ed4542bce426598c9d29f, type: 3}
+  - {fileID: 2100000, guid: 7062f88e841c899448b462bd21900beb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -484,10 +484,10 @@ BoxCollider:
   m_GameObject: {fileID: 1380677440080142}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 3.5641632, y: 1, z: 2.318863}
+  m_Center: {x: 0.033927917, y: 0, z: -0.65943146}
 --- !u!65 &65593104869491292
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -549,15 +549,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  model: {fileID: 1380677440080142}
   mass: 3
-  recoveryMat: {fileID: 2100000, guid: 3615e864792955a4a912eda2c4bbddf0, type: 2}
-  life: 3
+  recoveryMat: {fileID: 2100000, guid: 77286c23e931b4b4397bce28b6a22b95, type: 2}
+  life: 4
   protectionPrefab: {fileID: 1999096423012838, guid: 7ab713d6b58d82142a6ef567773e3e05,
     type: 2}
   impactDeceleration: 5
   level: {fileID: 0}
   mode: 1
-  distanceDash: 2
+  distanceDash: 20
   hookSpeed: 0.7
   rangeHook: 20
   speedPull: 10
@@ -665,7 +666,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 5.35
+  m_Radius: 11.38
   m_Height: 14.32
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}

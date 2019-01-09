@@ -50,6 +50,7 @@ public class EnemyMovement : State
         }
 
         deltaPosition = target.transform.position - character.transform.position;
+        deltaPosition = new Vector3(deltaPosition.x, 0, deltaPosition.z);
 
         character.Separate();
 
@@ -65,7 +66,9 @@ public class EnemyMovement : State
         //La vitesse du personnage est de plus en plus lente au fur et a mesure qu'il s'approche de son leader pour eviter de lui rentrer dedans
         else
         {
-            character.PersonalScale = Mathf.Clamp(Vector3.Distance(target.transform.position, character.transform.position) / enemy.MoveSpeed, 0, 1);
+            if (target.GetComponent<Player>() == null)
+                character.PersonalScale = Mathf.Clamp(Vector3.Distance(target.transform.position, character.transform.position) / enemy.MoveSpeed, 0, 1);
+
             character.transform.forward = deltaPosition;
         }
 

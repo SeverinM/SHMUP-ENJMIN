@@ -199,6 +199,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114938182685806996, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: models.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4741676917561938, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
       propertyPath: m_LocalPosition.x
       value: -159.60248
@@ -231,40 +236,19 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 65437895645053864, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 114938182685806996, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
         type: 2}
-      propertyPath: life
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 23717912599401390, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 23382734626604814, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: models.Array.data[0]
+      value: 
+      objectReference: {fileID: 1350675056}
     - target: {fileID: 114938182685806996, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
         type: 2}
-      propertyPath: distanceDash
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 114938182685806996, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
-        type: 2}
-      propertyPath: mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 136024051789553022, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
-        type: 2}
-      propertyPath: m_Radius
-      value: 11.38
+      propertyPath: models.Array.data[1]
+      value: 
+      objectReference: {fileID: 1929134455}
+    - target: {fileID: 1417178209000040, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
+      propertyPath: m_Name
+      value: HookMat
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
@@ -521,6 +505,11 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1170232697}
   m_CullTransparentMesh: 0
+--- !u!1 &1350675056 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1517355800952374, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+    type: 2}
+  m_PrefabInternal: {fileID: 332854340}
 --- !u!1 &1413497288
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,6 +797,11 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1901939262}
   m_CullTransparentMesh: 0
+--- !u!1 &1929134455 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1417178209000040, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+    type: 2}
+  m_PrefabInternal: {fileID: 332854340}
 --- !u!1 &1935535041
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,6 +830,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  models: []
   mass: 3
   recoveryMat: {fileID: 0}
   life: 3
@@ -853,7 +848,7 @@ MonoBehaviour:
         allWaypoints: []
       selected: 1
       speed: 5
-      life: 1
+      life: 5
       spawned: 0
       followPlayer: 0
     delay: 0

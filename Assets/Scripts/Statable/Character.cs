@@ -69,11 +69,22 @@ public abstract class Character : MonoBehaviour {
     }
 
     [SerializeField]
+    [Tooltip("Qui doit on utiliser pour changer le material en cas de recovery ?")]
+    GameObject model;
+    public GameObject Model
+    {
+        get
+        {
+            return model;
+        }
+    }
+
+    [SerializeField]
     protected float mass = 3.0f;                
     protected float hitForce = 25.5f;            
     protected Vector3 impact = Vector3.zero;
     //Combien de temps le joueur est invincible une fois touché ?
-    protected float recoveryDuration = 1f;
+    protected float recoveryDuration = 2f;
     protected float freezeDuration = 1f;
     internal float scaleDuration = 1f;
     protected float personalScale = 1f;
@@ -254,19 +265,28 @@ public abstract class Character : MonoBehaviour {
 
     public IEnumerator StartRecoveryCoroutine(float duration)
     {
-        Material original = GetComponent<MeshRenderer>().material;
-        if (recoveryMat != null)
+        Dictionary<Transform, Material> allMats = new Dictionary<Transform, Material>();
+        allMats[model.transform] = model.GetComponent<MeshRenderer>().material;
+        foreach(Transform trsf in model.GetComponentsInChildren<Transform>())
         {
-            GetComponent<MeshRenderer>().material = recoveryMat;
+            if (trsf.GetComponent<MeshRenderer>() != null)
+            {
+                allMats[trsf] = trsf.GetComponent<MeshRenderer>().material;
+                if (recoveryMat != null)
+                {
+                    trsf.GetComponent<MeshRenderer>().material = recoveryMat;
+                }
+            }          
         }
 
         GetComponent<Collider>().enabled = false;
-        protection.SetActive(true);
 
         yield return new WaitForSeconds(duration);
 
-        GetComponent<MeshRenderer>().material = original;
-        protection.SetActive(false);
+        foreach(Transform key in allMats.Keys)
+        {
+            key.GetComponent<MeshRenderer>().material = allMats[key];
+        }
         GetComponent<Collider>().enabled = true;
     }
 
