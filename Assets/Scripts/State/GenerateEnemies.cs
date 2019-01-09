@@ -31,6 +31,7 @@ public class GenerateEnemies : State
         wavesLeft = remainingWaves;
         timeSinceBegin -= currentWave.delay;
         count = currentWave.allEnnemies.Count;
+        Debug.Log(character.name);
     }
 
     public override void EndState()
