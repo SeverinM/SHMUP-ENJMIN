@@ -4,17 +4,14 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
 
-    private int lastTime;
-
     [SerializeField]
-    private int lasting = 256;
+    private float lasting = 1f;
+    private float elapsedTime;
 
     void Update () {
+        elapsedTime += Time.deltaTime;
 
-        if (lastTime < lasting)
-        {
-            lastTime++;
-        } else
+        if (elapsedTime > lasting)
         {
             Destroy(gameObject);
         }
