@@ -261,6 +261,11 @@ Prefab:
       propertyPath: mode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 136024051789553022, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: m_Radius
+      value: 11.38
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
   m_IsPrefabAsset: 0
@@ -844,10 +849,10 @@ MonoBehaviour:
       enMov: 2
       spawnAfter: 0
       Waypoints:
-        loop: 0
+        loop: 1
         allWaypoints: []
-      selected: 0
-      speed: 1
+      selected: 1
+      speed: 5
       life: 1
       spawned: 0
       followPlayer: 0

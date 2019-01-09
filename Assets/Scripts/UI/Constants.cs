@@ -68,10 +68,17 @@ public static class Constants{
         }
     }
 
+    //Raccourci
     public static void SetAllConstants(float newValue)
     {
         TimeScaleEnnemies = newValue;
         TimeScaleGenerators = newValue;
         TimeScalePlayer = newValue;
+    }
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    public static void Debug()
+    {
+        UnityEngine.Debug.Log("Ce code se lancera tout le temps");
     }
 }
