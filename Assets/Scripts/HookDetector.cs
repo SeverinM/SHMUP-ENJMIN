@@ -17,6 +17,7 @@ public class HookDetector : MonoBehaviour
             player.Context.SetInDictionary("HookMode", PlayerWinch.HookMode.Pull);
             player.AttachHook(other.transform);
             player.ActualState.NextState();
+            AkSoundEngine.PostEvent("H_Grab", gameObject);
         }
 
         if (other.tag == "Winchable")
@@ -24,11 +25,13 @@ public class HookDetector : MonoBehaviour
             player.Context.SetInDictionary("HookMode", PlayerWinch.HookMode.Winch);
             player.AttachHook(other.transform);
             player.ActualState.NextState();
+            AkSoundEngine.PostEvent("H_Grab", gameObject);
         }
 
         if (other.tag == "Ennemy")
         {
             player.SetState(new PlayerMovement(player));
+            AkSoundEngine.PostEvent("H_Grab", gameObject);
         }
 
         // Si le joueur touche un bouclier, remetre à zero son Hook

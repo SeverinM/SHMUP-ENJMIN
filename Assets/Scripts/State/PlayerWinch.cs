@@ -38,7 +38,8 @@ public class PlayerWinch : State
         if (player.Target != null)
         {
             player.Target.parent.GetComponent<Character>().PersonalScale = 1;
-        }      
+        }
+        AkSoundEngine.PostEvent("H_Winch_Stop", character.gameObject);
     }
 
     public override void NextState()
@@ -50,6 +51,7 @@ public class PlayerWinch : State
     public override void StartState()
     {
         barrier.GetComponent<Barrier>().IsWinching = true;
+        AkSoundEngine.PostEvent("H_Winch", character.gameObject);
     }
 
     public override void UpdateState()
