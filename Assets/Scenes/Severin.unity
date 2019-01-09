@@ -981,7 +981,7 @@ MonoBehaviour:
   Count: {fileID: 1585205172}
   generators:
   - {fileID: 1935535042}
-  - {fileID: 1219863571}
+  - {fileID: 0}
   canvas: {fileID: 1628502475}
   text: {fileID: 1170232697}
   characters: []
