@@ -55,10 +55,11 @@ public class Enemy : Character
         JIM,
         MIKE
     }
-
+    
     [SerializeField]
-    //Si la distance ennemi / joueur est inferieur a cette distance , l'ennemi va attaquer le joueur au lieu de poursuivre
-    protected float attackRange = 2.0f;
+    [Tooltip("Distance à laquelle un ennemi démarre une attaque")]
+    protected float attackRange = 2.0f; //Si la distance ennemi / joueur est inferieur a cette distance , l'ennemi va attaquer le joueur au lieu de poursuivre
+
     public float AttackRange
     {
         get
@@ -69,6 +70,7 @@ public class Enemy : Character
 
 
     [SerializeField]
+    [Tooltip("Combien de temps avant la prochaine attaque")]
     protected float shootPeriod = 2.0f;
     public float ShootPeriod
     {
@@ -79,6 +81,7 @@ public class Enemy : Character
     }
 
     [SerializeField]
+    [Tooltip("Combien de temps avant la prochaine attaque")]
     protected int shootAmount = 3;
     public int ShootAmount
     {
@@ -117,6 +120,17 @@ public class Enemy : Character
         get
         {
             return shootRadius;
+        }
+    }
+
+    [SerializeField]
+    protected float bulletLastingDuration = 2f;
+
+    public float BulletLastingDuration
+    {
+        get
+        {
+            return bulletLastingDuration;
         }
     }
 
@@ -302,7 +316,7 @@ public class Enemy : Character
                 //Tir simple en face de lui
                 clone = Instantiate(bulletPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation).GetComponent<Rigidbody>();
                 clone.velocity = transform.forward * shootSpeed;
-                Destroy(clone.gameObject, durationBullet);
+                Destroy(clone.gameObject, bulletLastingDuration);
                 break;
             case EnemyType.JIM:
                 float x = 0, y = 0;
@@ -321,7 +335,7 @@ public class Enemy : Character
                     clone = Instantiate(bulletPrefab, new Vector3(x, 0, y), Quaternion.AngleAxis(angle * Mathf.Rad2Deg, new Vector3(0, 1, 0))).GetComponent<Rigidbody>();
                     Vector3 direction = Quaternion.Euler(0, angle, 0) * clone.transform.forward;
                     clone.velocity = transform.TransformDirection(direction * shootSpeed);
-                    Destroy(clone, durationBullet);
+                    Destroy(clone.gameObject, bulletLastingDuration);
                 }
                 break;
             case EnemyType.MIKE:
