@@ -213,7 +213,11 @@ public class Level : Layers
 
     public void GeneratorDone()
     {
-        Debug.Log("Ce generateur a finit");
+        countGenerator--;
+        if (countGenerator == 1)
+        {
+            player.StartDelayedState(1, new IdleTransition(player));
+        }
     }
 
     public void PlayerDied(Character chara)

@@ -194,6 +194,12 @@ public abstract class Character : MonoBehaviour {
         }
     }
 
+    public void NextState()
+    {
+        if (ActualState != null)
+            ActualState.NextState();
+    }
+
     public void SetState(State state)
     {
         if (actualState != null)
@@ -345,6 +351,19 @@ public abstract class Character : MonoBehaviour {
             GetComponent<Rigidbody>().AddForce(steer);
 
         }
+    }
+
+    //Permet de changer d'etat en differé
+    public void StartDelayedState(float duration, State st)
+    {
+        StartCoroutine(DelayedSetState(duration, st));
+    }
+
+    public IEnumerator DelayedSetState(float duration, State st)
+    {
+        yield return new WaitForSeconds(duration);
+        SetState(st);
+
     }
 
     private void OnApplicationQuit()

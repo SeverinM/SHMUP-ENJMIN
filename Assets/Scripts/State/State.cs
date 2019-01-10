@@ -80,6 +80,10 @@ public abstract class State
     /// </summary>
     public virtual void NextState() { }
 
+    /// <summary>
+    /// Permet de nommer les etats
+    /// </summary>
+    /// <returns></returns>
     public abstract string GetName();
 
     /// <summary>
