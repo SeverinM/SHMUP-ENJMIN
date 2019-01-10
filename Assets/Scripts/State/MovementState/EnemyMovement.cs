@@ -18,7 +18,7 @@ public class EnemyMovement : State
     {
         enemy = (Enemy)character;
         target = tar;
-        this.followLeader = followLeader;
+        this.followLeader = followLeader;       
     }
 
     public EnemyMovement(Character chara, Transform tar, Queue<WaypointElement> elt, bool followLeader = false) : base(chara)
@@ -40,6 +40,14 @@ public class EnemyMovement : State
         if (character.PersonalScale == 0)
         {
             return;
+        }
+
+
+        //Un bob poursuit un ennemie differemment
+        if (enemy.enemyType == Enemy.EnemyType.BOB)
+        {
+            enemy.Context.SetInDictionary("FollowButAvoid", target);
+            enemy.FollowRandomPath();
         }
 
         // Si la cible à été détruit, alors on se déplace aléatoirement

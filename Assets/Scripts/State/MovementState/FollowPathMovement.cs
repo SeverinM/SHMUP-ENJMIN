@@ -75,6 +75,15 @@ public class FollowPathMovement : State
         if (Vector3.Distance(targetPosition, character.transform.position) < (GetSpeed() * character.PersonalScale * character.GetScale() * Time.deltaTime * 4))
         {
             positions.Dequeue();
+
+            //Suit...mais pas trop
+            Transform followButAvoid = character.Context.ValuesOrDefault<Transform>("FollowButAvoid", null);
+            if (followButAvoid != null)
+            {
+                character.SetState(new EnemyAttack(character, positions, followButAvoid));
+                return;
+            }
+
             //Encore des waypoints a atteindre ?
             if (positions.Count > 0)
             {

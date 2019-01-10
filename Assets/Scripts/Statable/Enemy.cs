@@ -134,6 +134,22 @@ public class Enemy : Character
         }
     }
 
+    [Tooltip("Combien de temps dure chaque balle")]
+    [SerializeField]
+    float durationBullet = 1;
+    public float DurationBullet
+    {
+        get
+        {
+            return durationBullet;
+        }
+        set
+        {
+            durationBullet = Mathf.Abs(value);
+        }
+    }
+
+
     [SerializeField]
     private GameObject bulletPrefab;
 
@@ -205,6 +221,8 @@ public class Enemy : Character
         waypoints = new Waypoints();
         waypoints.allWaypoints = new List<WaypointElement>();
         int movements = Random.Range(2, 5);
+
+        //Angle de depart
         float CurrentAngle;
 
         //Projection de la position du personage apres X waypoints
@@ -213,18 +231,32 @@ public class Enemy : Character
         for (int i = 0; i < movements; i++)
         {
             CurrentAngle = Random.Range(0, Mathf.PI * 2);
-            //Si l'angle ressemble trop a l'angle precedent , creuse l'ecart
-            if (i > 0 && Mathf.Abs(CurrentAngle - PreviousAngle) < tolerateInterval)
-            {
-                CurrentAngle += ((CurrentAngle - PreviousAngle) * Random.Range(0, 10));
-                CurrentAngle %= Mathf.PI * 2;
-            }
 
-            //Empeche les demi-tours trop brusque
-            if (i > 0 && Mathf.Abs(CurrentAngle - PreviousAngle) > 160 * Mathf.Deg2Rad && Mathf.Abs(CurrentAngle - PreviousAngle) < 200 * Mathf.Deg2Rad)
+            if (context.ValuesOrDefault<Transform>("FollowButAvoid",null) == null)
             {
-                Debug.Log("trop abrupt");
-                CurrentAngle += Random.Range(20 * Mathf.Deg2Rad, 40 * Mathf.Deg2Rad) * (Random.value > 0.5f ? 1 : -1);
+                //Si l'angle ressemble trop a l'angle precedent , creuse l'ecart
+                if (i > 0 && Mathf.Abs(CurrentAngle - PreviousAngle) < tolerateInterval)
+                {
+                    CurrentAngle += ((CurrentAngle - PreviousAngle) * Random.Range(0, 10));
+                    CurrentAngle %= Mathf.PI * 2;
+                }
+
+                //Empeche les demi-tours trop brusque
+                if (i > 0 && Mathf.Abs(CurrentAngle - PreviousAngle) > 160 * Mathf.Deg2Rad && Mathf.Abs(CurrentAngle - PreviousAngle) < 200 * Mathf.Deg2Rad)
+                {
+                    CurrentAngle += Random.Range(20 * Mathf.Deg2Rad, 40 * Mathf.Deg2Rad) * (Random.value > 0.5f ? 1 : -1);
+                }
+            }
+            //S'il cherche a eviter quelque chose tout en le suivant
+            else
+            {
+                Vector3 targetPosition = context.ValuesOrDefault<Transform>("FollowButAvoid", null).position;
+                float angle = (Vector3.Angle(Vector3.right, targetPosition - transform.position)) * Mathf.Deg2Rad;
+                if (Mathf.Abs(angle - CurrentAngle) < Mathf.PI / 4)
+                {
+                    CurrentAngle += ((angle - CurrentAngle) + 1) * 2;
+                    CurrentAngle %= Mathf.PI * 2;
+                }
             }
 
             WaypointElement wE = new WaypointElement();
@@ -270,6 +302,7 @@ public class Enemy : Character
                 //Tir simple en face de lui
                 clone = Instantiate(bulletPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation).GetComponent<Rigidbody>();
                 clone.velocity = transform.forward * shootSpeed;
+                Destroy(clone.gameObject, durationBullet);
                 break;
             case EnemyType.JIM:
                 float x = 0, y = 0;
@@ -288,6 +321,7 @@ public class Enemy : Character
                     clone = Instantiate(bulletPrefab, new Vector3(x, 0, y), Quaternion.AngleAxis(angle * Mathf.Rad2Deg, new Vector3(0, 1, 0))).GetComponent<Rigidbody>();
                     Vector3 direction = Quaternion.Euler(0, angle, 0) * clone.transform.forward;
                     clone.velocity = transform.TransformDirection(direction * shootSpeed);
+                    Destroy(clone, durationBullet);
                 }
                 break;
             case EnemyType.MIKE:

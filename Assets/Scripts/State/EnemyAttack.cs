@@ -34,6 +34,11 @@ public class EnemyAttack : State
 
     public override void NextState()
     {
+        if (character.Context.ValuesOrDefault<Transform>("FollowButAvoid",null) != null)
+        {
+            enemy.FollowRandomPath();
+        }
+
         //Il existe un leader , il continue a le suivre
         if (character.Leader != null)
         {
