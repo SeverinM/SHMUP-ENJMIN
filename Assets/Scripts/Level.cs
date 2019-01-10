@@ -46,7 +46,10 @@ public class Level : Layers
 
     Dictionary<GameObject, Text> characterTexts = new Dictionary<GameObject, Text>();
 
+    [HideInInspector]
     public List<GameObject> characters = new List<GameObject>();
+
+    [HideInInspector]
     public List<GameObject> charactersToRemove = new List<GameObject>();
     public Binding<int> watchNbSpawn = new Binding<int>(0, null);
 
@@ -89,6 +92,7 @@ public class Level : Layers
             generator.EveryoneDied += GeneratorDone;
             generator.WaveCleaned += Generator_WaveCleaned;
         }
+        watchNbSpawn.WatchedValue = transform.GetComponentsInChildren<Generator>().Select(x => x.GetComponent<Generator>().EnnemiesLeftToSpawn).Sum();
 
         // Provisoirement
         GameObject toAddText = Instantiate(text, canvas.transform);
@@ -217,11 +221,11 @@ public class Level : Layers
         if (countGenerator == 0)
         {
             //On renvoit successivement des events
-            player.StartDelayedState(1, new IdleTransition(player));
-            player.NextLevel += () => {
-                if (NextLevel != null && OnNextLevel != null)
-                    OnNextLevel(NextLevel);
-            };
+            if (NextLevel != null && OnNextLevel != null)
+            {
+                player.StartDelayedState(1, new IdleTransition(player));
+                player.NextLevel += () => { OnNextLevel(NextLevel); };
+            }              
         }
     }
 
