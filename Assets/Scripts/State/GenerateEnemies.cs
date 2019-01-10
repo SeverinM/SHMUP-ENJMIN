@@ -85,6 +85,8 @@ public class GenerateEnemies : State
                 enn.Destroyed += EnnemyDestroyed;
                 x.spawned = true;
                 currentWave.firstIsLeader = false;
+                if (x.followPlayer)
+                    enn.SetState(new EnemyMovement(enn, level.Player.transform));
             }
         }
         
@@ -99,7 +101,7 @@ public class GenerateEnemies : State
                 leaderPos.x += spacingX;
                 leaderPos.z += spacingZ;
 
-                GameObject instanciated = level.AddEnemy(x.enn, leaderPos); //position will 
+                GameObject instanciated = level.AddEnemy(x.enn, leaderPos);
                 Enemy enn = instanciated.GetComponent<Enemy>();
                 enn.enemyType = x.enn;
                 enn.movementType = x.enMov;
@@ -108,6 +110,7 @@ public class GenerateEnemies : State
                     enn.SetWaypointsAndApply(x.Waypoints);
                 }
                 // On attribue les waypoints
+                enn.name = enn.name + " numero " + Generator.Number++;
                 enn.Leader = x.followPlayer ? level.Player : leader;
                 enn.Destroyed += EnnemyDestroyed; // Quand le joueur est détruit, il notifie GenerateEnemies
                 enn.MoveSpeed = x.speed;
@@ -127,5 +130,10 @@ public class GenerateEnemies : State
             generator.RaiseWaveFinished();
             generator.TryPassWave();
         }
+    }
+
+    public override string GetName()
+    {
+        return "GenerateEnemies";
     }
 }

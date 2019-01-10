@@ -160,6 +160,8 @@ public abstract class Character : MonoBehaviour {
         set
         {
             leader = value;
+            if (leader != null)
+                SetState(new EnemyMovement(this, leader.transform,true));
         }
     }
 

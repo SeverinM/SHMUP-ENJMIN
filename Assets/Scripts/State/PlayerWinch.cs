@@ -83,4 +83,9 @@ public class PlayerWinch : State
             NextState();
         }
     }
+
+    public override string GetName()
+    {
+        return "PlayerWinch";
+    }
 }

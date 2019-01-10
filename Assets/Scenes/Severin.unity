@@ -206,7 +206,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4741676917561938, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -159.60248
+      value: -135
       objectReference: {fileID: 0}
     - target: {fileID: 4741676917561938, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
       propertyPath: m_LocalPosition.y
@@ -214,7 +214,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4741676917561938, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 135.27
+      value: 133.88
       objectReference: {fileID: 0}
     - target: {fileID: 4741676917561938, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
       propertyPath: m_LocalRotation.x
@@ -249,6 +249,11 @@ Prefab:
     - target: {fileID: 1417178209000040, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
       propertyPath: m_Name
       value: HookMat
+      objectReference: {fileID: 0}
+    - target: {fileID: 114938182685806996, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: mass
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
@@ -830,19 +835,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
-  models: []
+  model: {fileID: 0}
   mass: 3
   recoveryMat: {fileID: 0}
   life: 3
   protectionPrefab: {fileID: 0}
   impactDeceleration: 5
-  level: {fileID: 0}
   levelObject: {fileID: 2050674099}
   allWaves:
   - allEnnemies:
     - enn: 0
-      enMov: 2
+      enMov: 0
       spawnAfter: 0
+      Waypoints:
+        loop: 1
+        allWaypoints: []
+      selected: 1
+      speed: 5
+      life: 5
+      spawned: 0
+      followPlayer: 1
+    - enn: 0
+      enMov: 0
+      spawnAfter: 1
       Waypoints:
         loop: 1
         allWaypoints: []
@@ -852,9 +867,9 @@ MonoBehaviour:
       spawned: 0
       followPlayer: 0
     delay: 0
-    firstIsLeader: 0
-    spacingX: 0
-    spacingZ: 0
+    firstIsLeader: 1
+    spacingX: 5
+    spacingZ: 5
   Count: 0
   WaveCount: 0
   AllLocks: []

@@ -80,6 +80,8 @@ public abstract class State
     /// </summary>
     public virtual void NextState() { }
 
+    public abstract string GetName();
+
     /// <summary>
     /// Methode appellé a chaque fois qu'un input a changé , si la methode n'est jamais appellé verifier si le layer cable les evenements
     /// </summary>

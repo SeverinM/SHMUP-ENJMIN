@@ -42,9 +42,17 @@ public class EnemyMovement : State
             return;
         }
 
+        //Si le leader attaque , l'imite
+        Debug.Log(character.name);
+        Debug.Log(followLeader);
+        Debug.Log(target.GetComponent<Character>().Context.ValuesOrDefault<Transform>("Target", null));
+        if (followLeader && target.GetComponent<Character>().Context.ValuesOrDefault<Transform>("Target",null) != null)
+        {
+            character.SetState(new EnemyAttack(character, allElems, target.GetComponent<Character>().Context.ValuesOrDefault<Transform>("Target", null)));
+        }
 
-        //Un bob poursuit un ennemie differemment
-        if (enemy.enemyType == Enemy.EnemyType.BOB)
+        //Un bob poursuit un ennemie differemment qui est un joueur 
+        if (target.GetComponent<Player>() != null && enemy.enemyType == Enemy.EnemyType.BOB)
         {
             enemy.Context.SetInDictionary("FollowButAvoid", target);
             enemy.FollowRandomPath();
@@ -71,7 +79,7 @@ public class EnemyMovement : State
 
         //La vitesse du personnage est de plus en plus lente au fur et a mesure qu'il s'approche de son leader pour eviter de lui rentrer dedans
         if (target.GetComponent<Player>() == null)
-            character.PersonalScale = Mathf.Clamp(Vector3.Distance(target.transform.position, character.transform.position) / enemy.MoveSpeed, 0, 1);
+            character.PersonalScale = Mathf.Clamp((Vector3.Distance(target.transform.position, character.transform.position) / 3) / enemy.MoveSpeed, 0, 1);
 
         character.transform.forward = deltaPosition;
         character.Move(deltaPosition.normalized);
@@ -99,6 +107,11 @@ public class EnemyMovement : State
                 character.SetState(new FollowPathMovement(character, allElems, ((Enemy)character).Waypoints.loop));
             }
         }
+    }
+
+    public override string GetName()
+    {
+        return "EnemyMovement";
     }
 
 }

@@ -50,7 +50,7 @@ public class FollowPathMovement : State
     public void TriggerEnter(Collider coll)
     {
         //L'ennemi est rentré dans la zone proche du joueur (seul les leader / ennemies seuls sont censés rentrer la dedans)
-        if (coll.tag == "FollowParent")
+        if (coll.tag == "FollowParent" && character.Context.ValuesOrDefault<Transform>("FollowButAvoid", null) == null)
         {
             character.SetState(new EnemyMovement(character, coll.transform, positions, false));
         }
@@ -119,5 +119,10 @@ public class FollowPathMovement : State
         {
             return 1;
         }
+    }
+
+    public override string GetName()
+    {
+        return "FollowPathMovement";
     }
 }

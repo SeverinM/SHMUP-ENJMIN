@@ -25,6 +25,7 @@ public class EnemyAttack : State
     public override void EndState()
     {
         base.EndState();
+        character.Context.Remove("Target");
     }
 
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)
@@ -34,6 +35,7 @@ public class EnemyAttack : State
 
     public override void NextState()
     {
+        //Apres avoir attaqué , revient en mode aleatoire
         if (character.Context.ValuesOrDefault<Transform>("FollowButAvoid",null) != null)
         {
             enemy.FollowRandomPath();
@@ -53,6 +55,7 @@ public class EnemyAttack : State
     public override void StartState()
     {
         base.StartState();
+        character.Context.SetInDictionary("Target", playerTarget);
     }
 
     public override void UpdateState()
@@ -71,5 +74,10 @@ public class EnemyAttack : State
                 NextState();
             }
         }
+    }
+
+    public override string GetName()
+    {
+        return "EnemyAttack";
     }
 }
