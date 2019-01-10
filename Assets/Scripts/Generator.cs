@@ -27,6 +27,7 @@ public struct LockWaveElement
 /// </summary>
 public class Generator : Character {
 
+    public static int Number = 0;
     public GameObject levelObject;        // Level
     [HideInInspector]
     public List<Wave> allWaves = new List<Wave>();

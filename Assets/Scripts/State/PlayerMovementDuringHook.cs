@@ -57,4 +57,9 @@ public class PlayerMovementDuringHook : PlayerMovement {
             NextState();
         }
     }
+
+    public override string GetName()
+    {
+        return "PlayerMovementDuringHook";
+    }
 }

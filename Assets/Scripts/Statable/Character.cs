@@ -149,8 +149,6 @@ public abstract class Character : MonoBehaviour {
     [Tooltip("Déceleration lors d'un impact de bullet")]
     protected float impactDeceleration = 5f;
 
-    public Level level;
-
     GameObject leader;
     public GameObject Leader
     {
@@ -163,7 +161,7 @@ public abstract class Character : MonoBehaviour {
         {
             leader = value;
             if (leader != null)
-                SetState(new EnemyMovement(this, leader.transform, new Queue<WaypointElement>(), true));
+                SetState(new EnemyMovement(this, leader.transform,true));
         }
     }
 

@@ -50,7 +50,7 @@ public class FollowPathMovement : State
     public void TriggerEnter(Collider coll)
     {
         //L'ennemi est rentré dans la zone proche du joueur (seul les leader / ennemies seuls sont censés rentrer la dedans)
-        if (coll.tag == "FollowParent")
+        if (coll.tag == "FollowParent" && character.Context.ValuesOrDefault<Transform>("FollowButAvoid", null) == null)
         {
             character.SetState(new EnemyMovement(character, coll.transform, positions, false));
         }
@@ -75,6 +75,15 @@ public class FollowPathMovement : State
         if (Vector3.Distance(targetPosition, character.transform.position) < (GetSpeed() * character.PersonalScale * character.GetScale() * Time.deltaTime * 4))
         {
             positions.Dequeue();
+
+            //Suit...mais pas trop
+            Transform followButAvoid = character.Context.ValuesOrDefault<Transform>("FollowButAvoid", null);
+            if (followButAvoid != null)
+            {
+                character.SetState(new EnemyAttack(character, positions, followButAvoid));
+                return;
+            }
+
             //Encore des waypoints a atteindre ?
             if (positions.Count > 0)
             {
@@ -110,5 +119,10 @@ public class FollowPathMovement : State
         {
             return 1;
         }
+    }
+
+    public override string GetName()
+    {
+        return "FollowPathMovement";
     }
 }

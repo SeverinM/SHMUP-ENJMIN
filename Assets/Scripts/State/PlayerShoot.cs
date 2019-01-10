@@ -58,4 +58,9 @@ public class PlayerShoot : State
             character.SetState(new PlayerMovement(character));
         }
     }
+
+    public override string GetName()
+    {
+        return "PlayerShoot";
+    }
 }

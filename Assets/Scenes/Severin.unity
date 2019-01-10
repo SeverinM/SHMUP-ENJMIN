@@ -206,7 +206,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4741676917561938, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -159.60248
+      value: -135
       objectReference: {fileID: 0}
     - target: {fileID: 4741676917561938, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
       propertyPath: m_LocalPosition.y
@@ -214,7 +214,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4741676917561938, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 135.27
+      value: 133.88
       objectReference: {fileID: 0}
     - target: {fileID: 4741676917561938, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
       propertyPath: m_LocalRotation.x
@@ -861,18 +861,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
-  models: []
+  model: {fileID: 0}
   mass: 3
   recoveryMat: {fileID: 0}
   life: 3
   protectionPrefab: {fileID: 0}
   impactDeceleration: 5
-  level: {fileID: 0}
   levelObject: {fileID: 2050674099}
   allWaves:
   - allEnnemies:
     - enn: 0
-      enMov: 2
+      enMov: 0
       spawnAfter: 0
       Waypoints:
         loop: 0

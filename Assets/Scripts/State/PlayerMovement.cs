@@ -97,4 +97,9 @@ public class PlayerMovement : State
     {
         ((Player)character).ResetHook();
     }
+
+    public override string GetName()
+    {
+        return "PlayerMovement";
+    }
 }
