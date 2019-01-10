@@ -9,6 +9,7 @@ public class Tools : EditorWindow {
     static SerializedProperty ser;
     static SerializedObject obj;
     static Level staticLvl;
+    public static Generator currentGen;
 
     // Liste de toutes les vagues à lancer
     public List<Wave> allWaves;
@@ -20,7 +21,6 @@ public class Tools : EditorWindow {
     Vector2 scrollPos = Vector2.zero;
     Vector2 scrollPosWave = Vector2.zero;
 
-    public static Generator currentGen;
     Generator previousGen = null;
 
 	[MenuItem("Outils GD/Ennemies et spawner")]
@@ -59,6 +59,10 @@ public class Tools : EditorWindow {
         if (obj == null)
         {
             obj = new SerializedObject(this);
+            GameObject gobGen = GameObject.Find(PlayerPrefs.GetString("ToolsGenerator", ""));
+            GameObject gobLevel = GameObject.Find(PlayerPrefs.GetString("ToolsLevel", ""));
+            currentGen = (gobGen == null ? null : gobGen.GetComponent<Generator>());
+            staticLvl = (gobLevel == null ? null : gobLevel.GetComponent<Level>());
         }
 
         GUILayout.Label("Le cadre ne s'affichera que si vous avez choisi un Level , si besoin changez la selection dans la scene", EditorStyles.boldLabel);
@@ -237,6 +241,8 @@ public class Tools : EditorWindow {
     private void OnDestroy()
     {
         instance = null;
+        PlayerPrefs.SetString("ToolsGenerator", currentGen == null ? "" : currentGen.name);
+        PlayerPrefs.SetString("ToolsLevel", staticLvl == null ? "" : staticLvl.name);
     }
 
     static Vector3 GetPositionAbsolute(Vector3 input)

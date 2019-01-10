@@ -103,7 +103,6 @@ public class Level : Layers
         LockWaveElement elt = new LockWaveElement();
         elt.generator = who;
         elt.number = nb;
-
         foreach(Generator gen in generators.Where(x => x != who))
         {
             gen.RemoveLock(elt);

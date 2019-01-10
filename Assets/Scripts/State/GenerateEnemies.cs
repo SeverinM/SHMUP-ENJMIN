@@ -35,7 +35,6 @@ public class GenerateEnemies : State
 
     public override void EndState()
     {
-        generator.RaiseWaveFinished();
         generator.WaveCount++;
     }
 
@@ -112,7 +111,7 @@ public class GenerateEnemies : State
                 enn.Leader = x.followPlayer ? level.Player : leader;
                 enn.Destroyed += EnnemyDestroyed; // Quand le joueur est détruit, il notifie GenerateEnemies
                 enn.MoveSpeed = x.speed;
-                enn.MoveSpeed = x.life;
+                enn.Life = x.life;
                 x.spawned = true; //Cet ennemie ne peut pas etre spawn a nouveau
             }
         }
@@ -125,6 +124,7 @@ public class GenerateEnemies : State
         // Si tous les énnemis on été détruits, on tente de passer a l'etat suivant
         if (count == 0)
         {
+            generator.RaiseWaveFinished();
             generator.TryPassWave();
         }
     }
