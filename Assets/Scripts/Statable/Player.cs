@@ -88,6 +88,15 @@ public class Player : Character
 
     internal Vector3 origin;
 
+    public delegate void voidParam();
+    public event voidParam NextLevel;
+
+    public void RaiseNextLevel()
+    {
+        if (NextLevel != null)
+            NextLevel();
+    }
+
     void Start()
     {
         context.SetInDictionary("Mode", mode);

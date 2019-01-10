@@ -45,8 +45,8 @@ public abstract class Character : MonoBehaviour {
     public event collDelegate OnTriggerEnterChar;
     public event collDelegate OnTriggerExitChar;
 
-    public delegate void voidParam(Character chara);
-    public event voidParam Destroyed;
+    public delegate void charaParam(Character chara);
+    public event charaParam Destroyed;
 
     public delegate Player PlayerDelagate();
     public event PlayerDelagate TryReachingPlayer;

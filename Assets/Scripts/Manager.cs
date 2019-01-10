@@ -12,7 +12,7 @@ public class Manager : MonoBehaviour {
     Stack<Layers> allLayers = new Stack<Layers>();
 
     [SerializeField]
-    Layers lvl;
+    Level lvl;
 
 	// Use this for initialization
 	void Start () {
@@ -30,16 +30,31 @@ public class Manager : MonoBehaviour {
         
 
         AddToStack(lvl);
+        lvl.OnNextLevel += Lvl_OnNextLevel;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    /// <summary>
+    /// Passage a la prochaine parcelle de niveau 
+    /// </summary>
+    /// <param name="nextLevel"></param>
+    private void Lvl_OnNextLevel(Level nextLevel)
+    {
+        AddToStack(nextLevel);
+        nextLevel.OnNextLevel += Lvl_OnNextLevel;
+    }
+
+    // Update is called once per frame
+    void Update () {
         foreach (BaseInput bI in allInputs)
         {
             bI.UpdateInput();
         }
     }
 
+    /// <summary>
+    /// On ajoute une couche au dessus du layer
+    /// </summary>
+    /// <param name="lay"></param>
     public void AddToStack(Layers lay)
     {
         allLayers.Push(lay);
@@ -47,6 +62,9 @@ public class Manager : MonoBehaviour {
         allLayers.Peek().OnFocusGet();
     }
 
+    /// <summary>
+    /// On supprime la derniere couche , cela detruit le gameobject
+    /// </summary>
     public void PopToStack()
     {
         allLayers.Peek().OnFocusLost();
