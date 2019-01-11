@@ -85,11 +85,10 @@ public class Tools : EditorWindow {
         {
             Camera.main.transform.position = originPosition;
         }
+        groupWall = (Transform)EditorGUILayout.ObjectField(groupWall, typeof(Transform));
         GUILayout.EndHorizontal();
 
-        //Marche pas bien
-        groupWall = (Transform)EditorGUILayout.ObjectField(groupWall, typeof(Transform));
-
+        //Redimensionne les murs
         width = Vector3.Distance(GetPositionAbsolute(new Vector3(0, 0, 0)), GetPositionAbsolute(new Vector3(1, 0, 0)));
         height = Vector3.Distance(GetPositionAbsolute(new Vector3(0, 0, 0)), GetPositionAbsolute(new Vector3(0, 0, 1)));
 

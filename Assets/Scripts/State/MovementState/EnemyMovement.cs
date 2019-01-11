@@ -18,7 +18,7 @@ public class EnemyMovement : State
     {
         enemy = (Enemy)character;
         target = tar;
-        this.followLeader = followLeader;       
+        this.followLeader = followLeader;
     }
 
     public EnemyMovement(Character chara, Transform tar, Queue<WaypointElement> elt, bool followLeader = false) : base(chara)

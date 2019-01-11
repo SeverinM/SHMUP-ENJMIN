@@ -173,7 +173,7 @@ public class Player : Character
     public void Impact(Vector3 force)
     {
         Vector3 dir = force.normalized;
-        dir.y = 0.5f; // En hauteur
+        dir.y = 0; // En hauteur
         impact += dir.normalized * force.magnitude / mass;
     }
 

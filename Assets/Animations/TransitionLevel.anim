@@ -506,7 +506,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_GenerateMotionCurves: 1
   m_Events:
-  - time: 2.15
+  - time: 2.1666667
     functionName: NextState
     data: 
     objectReferenceParameter: {fileID: 0}

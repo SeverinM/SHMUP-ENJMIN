@@ -29,7 +29,6 @@ public class PlayerMovement : State
             if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.AllMovement) && character.GetScale() * character.PersonalScale > 0)
             {
                 direction.Set(val.x, val.y);
-                direction *= character.GetScale();
                 character.Move(direction);
             }
 
@@ -45,7 +44,6 @@ public class PlayerMovement : State
         {
             if (typeAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Dash) && character.GetScale() * character.PersonalScale > 0)
             {
-                Debug.Log(dashDistance);
                 character.transform.position += character.transform.forward * dashDistance;
             }
 
