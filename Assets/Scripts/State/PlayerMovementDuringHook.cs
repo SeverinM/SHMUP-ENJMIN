@@ -58,8 +58,11 @@ public class PlayerMovementDuringHook : PlayerMovement {
             {
                 character.Move(direction);
             }
+
+            //On detache de force
             if(Vector3.Distance(projectedPosition, pos) > range + 1)
             {
+                player.Target.parent.GetComponent<Character>().PersonalScale = 1;   
                 character.SetState(new PlayerMovement(character));
             }
         }
