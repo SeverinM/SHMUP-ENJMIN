@@ -19,6 +19,9 @@ public class Level : Layers
     [SerializeField]
     protected GameObject BobPrefab;
 
+    [SerializeField]
+    protected Level NextLevel;
+
     public GameObject Player
     {
         get
@@ -40,9 +43,6 @@ public class Level : Layers
     Text ScoreUI;
 
     [SerializeField]
-    List<Generator> generators;
-
-    [SerializeField]
     GameObject canvas;
 
     [SerializeField]
@@ -54,10 +54,16 @@ public class Level : Layers
 
     Dictionary<GameObject, Text> characterTexts = new Dictionary<GameObject, Text>();
 
+    [HideInInspector]
     public List<GameObject> characters = new List<GameObject>();
+
+    [HideInInspector]
     public List<GameObject> charactersToRemove = new List<GameObject>();
     public Binding<int> watchNbSpawn = new Binding<int>(0, null);
     public Binding<int> watchScore = new Binding<int>(0, null);
+
+    public delegate void LevelParam(Level nextLevel);
+    public event LevelParam OnNextLevel;
 
     //Appellé quand le layer est au dessus de la stack
     public override void OnFocusGet()
@@ -95,14 +101,8 @@ public class Level : Layers
             inp.OnInputExecuted += player.InterpretInput;
         }
 
-        if (generators.Count == 0)
-        {
-            return;
-        }
-
         // Mettre en route tous les générateurs en leur attribuant un état
-        countGenerator = generators.Count;
-        foreach (Generator generator in generators)
+        foreach (Generator generator in transform.GetComponentsInChildren<Generator>())
         {
             countGenerator++;
             //Initialisation du generateur
@@ -113,6 +113,7 @@ public class Level : Layers
             generator.EveryoneDied += GeneratorDone;
             generator.WaveCleaned += Generator_WaveCleaned;
         }
+        watchNbSpawn.WatchedValue = transform.GetComponentsInChildren<Generator>().Select(x => x.GetComponent<Generator>().EnnemiesLeftToSpawn).Sum();
 
         // Provisoirement
         GameObject toAddText = Instantiate(text, canvas.transform);
@@ -124,7 +125,7 @@ public class Level : Layers
         LockWaveElement elt = new LockWaveElement();
         elt.generator = who;
         elt.number = nb;
-        foreach(Generator gen in generators.Where(x => x != who))
+        foreach(Generator gen in transform.GetComponentsInChildren<Generator>().Where(x => x != who))
         {
             gen.RemoveLock(elt);
         }
@@ -142,8 +143,10 @@ public class Level : Layers
         }
         charactersToRemove.Clear();
 
+
         watchScore.WatchedValue = score;
-        watchNbSpawn.WatchedValue = generators.Select(x => x.GetComponent<Generator>().EnnemiesLeftToSpawn).Sum();
+        watchNbSpawn.WatchedValue = transform.GetComponentsInChildren<Generator>().Select(x => x.GetComponent<Generator>().EnnemiesLeftToSpawn).Sum();
+
     }
 
     public void LateUpdate()
@@ -236,9 +239,21 @@ public class Level : Layers
         }
     }
 
+    /// <summary>
+    /// On a battu tous les ennemies , niveau suivant
+    /// </summary>
     public void GeneratorDone()
     {
-        Debug.Log("Ce generateur a finit");
+        countGenerator--;
+        if (countGenerator == 0)
+        {
+            //On renvoit successivement des events
+            if (NextLevel != null && OnNextLevel != null)
+            {
+                player.StartDelayedState(1, new IdleTransition(player));
+                player.NextLevel += () => { OnNextLevel(NextLevel); };
+            }              
+        }
     }
 
     public void PlayerDied(Character chara)

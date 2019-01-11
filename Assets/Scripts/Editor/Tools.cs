@@ -10,6 +10,7 @@ public class Tools : EditorWindow {
     static SerializedObject obj;
     static Level staticLvl;
     public static Generator currentGen;
+    static Vector3 originPosition;
 
     // Liste de toutes les vagues à lancer
     public List<Wave> allWaves;
@@ -17,6 +18,9 @@ public class Tools : EditorWindow {
     // Liste des vagues sérializés dans l'UI
     SerializedProperty serWaves;
     public Waypoints waypoints;
+
+    float width;
+    float height;
 
     Vector2 scrollPos = Vector2.zero;
     Vector2 scrollPosWave = Vector2.zero;
@@ -29,6 +33,7 @@ public class Tools : EditorWindow {
         if (instance == null)
         {
             instance = (Tools)EditorWindow.GetWindow(typeof(Tools));
+            originPosition = Camera.main.transform.position;
             instance.Show();
         }
     }
@@ -68,13 +73,32 @@ public class Tools : EditorWindow {
         GUILayout.Label("Le cadre ne s'affichera que si vous avez choisi un Level , si besoin changez la selection dans la scene", EditorStyles.boldLabel);
         staticLvl = (Level)EditorGUILayout.ObjectField(staticLvl, typeof(Level));
         currentGen = (Generator)EditorGUILayout.ObjectField(currentGen, typeof(Generator));
+
+        GUILayout.BeginHorizontal();
+        if (staticLvl != null && GUILayout.Button("Placer camera"))
+        {
+            Vector3 deltaPosition = Camera.main.transform.position - GameObject.FindObjectOfType<Player>().transform.position;
+            Camera.main.transform.position = staticLvl.transform.position + deltaPosition;
+        }
+        if (originPosition != Camera.main.transform.position && GUILayout.Button("Reset Camera"))
+        {
+            Camera.main.transform.position = originPosition;
+        }
+        GUILayout.EndHorizontal();
+
+        //Redimensionne les murs
+        width = Vector3.Distance(GetPositionAbsolute(new Vector3(0, 0, 0)), GetPositionAbsolute(new Vector3(1, 0, 0)));
+        height = Vector3.Distance(GetPositionAbsolute(new Vector3(0, 0, 0)), GetPositionAbsolute(new Vector3(0, 0, 1)));
+
         if (currentGen != previousGen && currentGen != null)
         {
             allWaves = currentGen.allWaves;
             if (ToolsLock.instance != null)
                 ToolsLock.instance.allLocks = currentGen.AllLocks;
         }
+
         previousGen = currentGen;
+
 
         //Waypoints
         obj = new SerializedObject(this);
@@ -137,6 +161,7 @@ public class Tools : EditorWindow {
                 foreach(WaypointElement wE in elem.Waypoints.allWaypoints)
                 {
                     wE.targetPosition = Tools.GetPositionAbsolute(wE.targetPosition);
+                    Debug.Log(wE.targetPosition);
                 }
             }
         }
@@ -240,6 +265,7 @@ public class Tools : EditorWindow {
     private void OnDestroy()
     {
         instance = null;
+        Camera.main.transform.position = originPosition;
         PlayerPrefs.SetString("ToolsGenerator", currentGen == null ? "" : currentGen.name);
         PlayerPrefs.SetString("ToolsLevel", staticLvl == null ? "" : staticLvl.name);
     }
@@ -254,6 +280,7 @@ public class Tools : EditorWindow {
         float coeff = Vector3.Distance(staticLvl.transform.position, Camera.main.transform.position);
         //Recuperation des quatres coins
         Vector3 leftBottom = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, coeff));
+        Debug.Log(coeff);
         Vector3 leftTop = Camera.main.ScreenToWorldPoint(new Vector3(0, Camera.main.pixelHeight, coeff));
         Vector3 rightBottom = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, 0, coeff));
         Vector3 rightTop = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight, coeff));

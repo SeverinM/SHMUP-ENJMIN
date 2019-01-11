@@ -31,9 +31,12 @@ public class PlayerMovement : State
             //Un mouvement quelconque (manette / souris) est detecté
             if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.AllMovement) && character.GetScale() * character.PersonalScale > 0)
             {
+                float size = character.GetComponent<BoxCollider>().size.magnitude;
                 direction.Set(val.x, val.y);
-                direction *= character.GetScale();
-                character.Move(direction);
+                if (Utils.IsInCamera(character.transform.position + (new Vector3(direction.x,0,direction.y) * size * 0.5f), Mathf.Abs(character.transform.position.y - Camera.main.transform.position.y)))
+                {
+                    character.Move(direction);
+                }
             }
 
             //rotation stick droit

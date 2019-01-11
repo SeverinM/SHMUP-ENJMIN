@@ -53,9 +53,9 @@ public static class Utils {
         Vector3 rightBottom = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, 0, distance));
         Vector3 rightTop = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight, distance));
 
-        float XRelative = Mathf.Abs(leftBottom.x - input.x) / Mathf.Abs(leftBottom.x - rightBottom.x);
-        float ZRelative = Mathf.Abs(leftBottom.z - input.z) / Mathf.Abs(leftBottom.z - leftTop.z);
+        float XRelative = (input.x - leftBottom.x) / Mathf.Abs(leftBottom.x - rightBottom.x);
+        float ZRelative = (input.z - leftBottom.z) / Mathf.Abs(leftBottom.z - leftTop.z);
 
-        return (XRelative <= 1 && ZRelative <= 1);
+        return (XRelative <= 1 && XRelative >= 0 && ZRelative >= 0 && ZRelative <= 1);
     }
 }

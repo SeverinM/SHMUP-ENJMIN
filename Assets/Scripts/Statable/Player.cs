@@ -101,6 +101,14 @@ public class Player : Character
 
     internal Vector3 origin;
 
+    public delegate void voidParam();
+    public event voidParam NextLevel;
+
+    public void RaiseNextLevel()
+    {
+        if (NextLevel != null)
+            NextLevel();
+    }
 
     void Start()
     {
@@ -178,7 +186,7 @@ public class Player : Character
     public void Impact(Vector3 force)
     {
         Vector3 dir = force.normalized;
-        dir.y = 0.5f; // En hauteur
+        dir.y = 0; // En hauteur
         impact += dir.normalized * force.magnitude / mass;
     }
 
