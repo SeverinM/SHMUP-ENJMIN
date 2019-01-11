@@ -51,6 +51,9 @@ public class Level : Layers
     GameObject canvas;
 
     [SerializeField]
+    AnimationCurve textAnimation;
+
+    [SerializeField]
     GameObject textDefault;
 
     [SerializeField]
@@ -107,6 +110,8 @@ public class Level : Layers
         {
             if (ScoreUI != null)
                 ScoreUI.text = "Score : " + x.ToString();
+
+            Constants.TotalScore = x;
         };
 
         // Faire en sorte que tous les inputs notifient le joueur
@@ -136,7 +141,7 @@ public class Level : Layers
         LockWaveElement elt = new LockWaveElement();
         elt.generator = who;
         elt.number = nb;
-        foreach(Generator gen in transform.GetComponentsInChildren<Generator>().Where(x => x != who))
+        foreach (Generator gen in transform.GetComponentsInChildren<Generator>().Where(x => x != who))
         {
             gen.RemoveLock(elt);
         }
@@ -163,7 +168,7 @@ public class Level : Layers
     internal void AddCharacterForScore(Character chara)
     {
         score += chara.GetComponent<Enemy>().KillScore; // Score on destruction
-   
+
         enemiesOnBonus.Add(chara.GetComponent<Enemy>());
 
         PopScore(chara, chara.GetComponent<Enemy>().KillScore); // Draw score over ennemy head
@@ -173,6 +178,7 @@ public class Level : Layers
     }
 
     /// <summary>
+    /// Calucul des combos
     /// 10 points de plus par Bob détruit 
     /// 20 points de plus par Jim détruit
     /// 40 points de plus par Mike détruit
@@ -202,10 +208,12 @@ public class Level : Layers
         if (enemiesOnBonus.Count >= 9)
         {
             total *= 4;
-        } else if (enemiesOnBonus.Count >= 6)
+        }
+        else if (enemiesOnBonus.Count >= 6)
         {
             total *= 3;
-        } else if (enemiesOnBonus.Count >= 3)
+        }
+        else if (enemiesOnBonus.Count >= 3)
         {
             total *= 2;
         }
@@ -214,15 +222,21 @@ public class Level : Layers
         watchScore.WatchedValue = score; // Update Value
     }
 
+    /// <summary>
+    /// Afficher un score au dessus d'un ennemi
+    /// </summary>
+    /// <param name="chara"></param>
+    /// <param name="killScore"></param>
     internal void PopScore(Character chara, int killScore)
     {
         TextMeshProUGUI toAddText = Instantiate(textMeshProDefault, canvas.transform).GetComponent<TextMeshProUGUI>();
-        
+
         // Position du texte au dessus d'un gameObject
         Vector3 offsetPos = new Vector3(chara.transform.position.x, chara.transform.position.y, chara.transform.position.z + 0.5f);
 
         // Calcul de la position à l'écran 
         Vector2 canvasPos;
+        Vector2 canvasEndPos;
         Vector2 screenPoint = Camera.main.WorldToScreenPoint(offsetPos);
 
         // Convertir la position à l'écran vers l'espace du canvas 
@@ -230,7 +244,45 @@ public class Level : Layers
 
         toAddText.text = killScore.ToString();
         toAddText.transform.localPosition = canvasPos;
-        Destroy(toAddText.gameObject, textDuration);
+
+        canvasEndPos = canvasPos;
+        canvasEndPos.y += 10f;
+
+        StartCoroutine(PopScoreCoroutine(toAddText, canvasPos, canvasEndPos));
+    }
+
+    /// <summary>
+    /// Animation de texte
+    /// </summary>
+    /// <param name="text"></param>
+    /// <param name="start"></param>
+    /// <param name="end"></param>
+    /// <returns></returns>
+    IEnumerator PopScoreCoroutine(TextMeshProUGUI text, Vector3 start, Vector3 end)
+    {
+        float time = 0.0f;
+        float movement = 0.0f;
+        float alpha = 0.0f;
+
+        while (time <= textDuration)
+        {
+            // obtenir la distance depuis la courbe d'animation
+            movement = textAnimation.Evaluate(time / textDuration);
+            alpha = 1f - textAnimation.Evaluate(time / textDuration);
+
+            // lerp postion
+            text.transform.localPosition = Vector3.Lerp(start, end, movement);
+
+            Color color = text.color;
+            color.a = alpha; // Changer l'alpha de la couleur
+            text.color = color;
+
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        // Retirer le texte du niveau
+        Destroy(text);
     }
 
     /// <summary>
@@ -264,10 +316,10 @@ public class Level : Layers
         // Instantier un ennemi
         GameObject toAdd = Instantiate(character, position, Quaternion.identity);
         characters.Add(toAdd);
-        if(textDefault != null)
+        if (textDefault != null)
         {
             GameObject toAddText = Instantiate(textDefault, canvas.transform);
-        }      
+        }
         return toAdd;
     }
 
@@ -297,7 +349,7 @@ public class Level : Layers
             {
                 player.StartDelayedState(1, new IdleTransition(player));
                 player.NextLevel += () => { OnNextLevel(NextLevel); };
-            }              
+            }
         }
     }
 

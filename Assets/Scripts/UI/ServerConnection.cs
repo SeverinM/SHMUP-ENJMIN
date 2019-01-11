@@ -13,8 +13,9 @@ public class ServerConnection : MonoBehaviour
     public string addScoreURL = "https://jiexdrop.herokuapp.com/addScore.php?"; // Ajout score
     public string highscoreURL = "https://jiexdrop.herokuapp.com/display.php";
 
+
     // On se connecte au serveur et on lui passe un nom, un score et un hash
-    IEnumerator PostScores(string name, int score)
+    public IEnumerator PostScores(string name, int score)
     {
         // Le hash est composé d'un nom, d'un score et de la clé secrète
         string hash = Md5Sum(name + score + secretKey);
