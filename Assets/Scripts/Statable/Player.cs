@@ -21,7 +21,7 @@ public class Player : Character
     {
         Dash,
         Normal,
-        NormalDash
+        NormalDash,
     }
 
     [Header("Mouvement")]
@@ -61,6 +61,11 @@ public class Player : Character
     [Tooltip("A quel point la vitesse est reduite par rapport a la vitesse normale ? (exemple : 0.1 signifie 10 fois moins vite)")]
     [SerializeField]
     float coeffHook = 0.1f;
+
+    [Header("Vitesse dash")]
+    [Tooltip("A quel point la vitesse est reduite par rapport a la vitesse normale ? (exemple : 0.1 signifie 10 fois moins vite)")]
+    [SerializeField]
+    internal float dashSpeed = 5f;
 
     [Header("Auto references (pas toucher... normalement)")]
     [SerializeField]

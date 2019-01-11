@@ -184,6 +184,17 @@ public abstract class Character : MonoBehaviour {
         }
     }
 
+    [SerializeField]
+    [Tooltip("Score lorsque le joeueur tue l'ennemi")]
+    private int killScore = 1000;
+    public int KillScore
+    {
+        get
+        {
+            return killScore;
+        }
+    }
+
     void Awake()
     {
         watchedLife = new Binding<int>(0, null);

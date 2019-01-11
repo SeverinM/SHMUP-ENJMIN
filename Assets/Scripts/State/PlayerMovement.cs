@@ -11,12 +11,7 @@ public class PlayerMovement : State
     protected Vector2 direction;
     Player.MovementMode mode;
 
-    protected float dashDistance;
-
-    private float dashTime = 0.2f;
     private float dashMultiplicator = 1.2f;
-
-    private float dashSpeed;
 
     private float dashCooldownTime;
 
@@ -26,7 +21,6 @@ public class PlayerMovement : State
     {
         direction = new Vector2();
         mode = character.Context.ValuesOrDefault<Player.MovementMode>("Mode", Player.MovementMode.Normal);
-        dashDistance = ((Player)character).DistanceDash;
     }
 
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)
@@ -72,7 +66,7 @@ public class PlayerMovement : State
                 if (((Player)character).Dash > 0) // StartDashing
                 {
                     ((Player)character).Dash--;
-                    dashing = dashTime; 
+                    dashing = ((Player)character).DistanceDash/100; 
                 }
             }
         }
@@ -83,8 +77,7 @@ public class PlayerMovement : State
         {
             if (typeAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Dash) && character.GetScale() * character.PersonalScale > 0)
             {
-                Debug.Log(dashDistance);
-                character.transform.position += character.transform.forward * dashDistance;
+                character.transform.position += character.transform.forward * ((Player)character).DistanceDash;
             }
 
             //rotation stick gauche
@@ -100,7 +93,7 @@ public class PlayerMovement : State
 
                 //Rotation ET dash
                 character.transform.eulerAngles = new Vector3(0, value, 0);
-                character.transform.position += character.transform.forward * dashDistance;
+                character.transform.position += character.transform.forward * ((Player)character).DistanceDash;
             }
         }
 
@@ -109,14 +102,12 @@ public class PlayerMovement : State
             NextState();
         }
 
-        if (typeAct.Equals(BaseInput.TypeAction.Mouse) && acts.Equals(BaseInput.Actions.Rotate) && character.GetScale() * character.PersonalScale > 0)
+        if (typeAct.Equals(BaseInput.TypeAction.Mouse) && acts.Equals(BaseInput.Actions.Rotate) && character.GetScale() * character.PersonalScale > 0 && !(dashing > 0f))
         {
             Vector3 objectPos = Camera.main.WorldToScreenPoint(character.transform.position);
             Vector2 mousePos = new Vector2();
             mousePos.x = val.x - objectPos.x;
             mousePos.y = val.y - objectPos.y;
-
-            dashing -= Time.deltaTime; // Reduce dashing
 
             float angle = Mathf.Atan2(mousePos.x, mousePos.y) * Mathf.Rad2Deg;
             character.transform.localEulerAngles = new Vector3(0, angle, 0);
@@ -132,9 +123,7 @@ public class PlayerMovement : State
         {
             dashing -= Time.deltaTime;
 
-            dashSpeed += dashMultiplicator;
-
-            character.Move(forward * dashSpeed);
+            character.Move(forward * ((Player)character).dashSpeed);
         } else
         {
             dashCooldownTime += Time.deltaTime;
@@ -143,7 +132,6 @@ public class PlayerMovement : State
                 ((Player)character).Dash++;
                 dashCooldownTime = 0;
             }
-            dashSpeed = 0f;
         }
     }
 

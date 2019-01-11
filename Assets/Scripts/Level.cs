@@ -33,9 +33,11 @@ public class Level : Layers
     [SerializeField]
     Text CountUI;
 
-
     [SerializeField]
     Text DashUI;
+
+    [SerializeField]
+    Text ScoreUI;
 
     [SerializeField]
     List<Generator> generators;
@@ -48,11 +50,14 @@ public class Level : Layers
 
     int countGenerator = 0;
 
+    private int score = 0;
+
     Dictionary<GameObject, Text> characterTexts = new Dictionary<GameObject, Text>();
 
     public List<GameObject> characters = new List<GameObject>();
     public List<GameObject> charactersToRemove = new List<GameObject>();
     public Binding<int> watchNbSpawn = new Binding<int>(0, null);
+    public Binding<int> watchScore = new Binding<int>(0, null);
 
     //Appellé quand le layer est au dessus de la stack
     public override void OnFocusGet()
@@ -66,17 +71,23 @@ public class Level : Layers
                 LifeUI.text = "Nombre de vie : " + x.ToString();
         });
 
+        player.SetOnDashChanged((x) =>
+        {
+            if (DashUI != null)
+                DashUI.text = "Dash : " + x.ToString();
+        });
+
         watchNbSpawn.ValueChanged = (x) =>
         {
             if (CountUI != null)
                 CountUI.text = "Nombre d'ennemies restant : " + x.ToString();
         };
 
-        player.SetOnDashChanged((x) =>
+        watchScore.ValueChanged = (x) =>
         {
-            if (DashUI != null)
-                DashUI.text = "Dash : " + x.ToString();
-        });
+            if (ScoreUI != null)
+                ScoreUI.text = "Score : " + x.ToString();
+        };
 
         // Faire en sorte que tous les inputs notifient le joueur
         foreach (BaseInput inp in refInput)
@@ -130,6 +141,8 @@ public class Level : Layers
             Destroy(character);
         }
         charactersToRemove.Clear();
+
+        watchScore.WatchedValue = score;
         watchNbSpawn.WatchedValue = generators.Select(x => x.GetComponent<Generator>().EnnemiesLeftToSpawn).Sum();
     }
 
@@ -206,10 +219,12 @@ public class Level : Layers
 
     /// <summary>
     /// Retirer un personnage du niveau
+    /// Ajouter le score correspondant
     /// </summary>
     /// <param name="character">Le personnage à retirer</param>
     public void Remove(Character character)
     {
+        score += character.KillScore;
         charactersToRemove.Add(character.gameObject);
     }
 
