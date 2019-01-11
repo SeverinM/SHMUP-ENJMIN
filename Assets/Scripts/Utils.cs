@@ -58,4 +58,18 @@ public static class Utils {
 
         return (XRelative <= 1 && XRelative >= 0 && ZRelative >= 0 && ZRelative <= 1);
     }
+
+    public static Vector3 GetPositionAbsolute(Vector3 input, float distance)
+    {
+        //Recuperation des quatres coins
+        Vector3 leftBottom = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, distance));
+        Vector3 leftTop = Camera.main.ScreenToWorldPoint(new Vector3(0, Camera.main.pixelHeight, distance));
+        Vector3 rightBottom = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, 0, distance));
+        Vector3 rightTop = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight, distance));
+        Vector3 xAxis = rightBottom - leftBottom;
+        Vector3 yAxis = leftTop - leftBottom;
+        Vector3 finalPosition = leftBottom + (xAxis * input.x) + (yAxis * input.z);
+
+        return finalPosition;
+    }
 }
