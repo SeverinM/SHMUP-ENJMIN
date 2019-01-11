@@ -78,7 +78,7 @@ public class FollowPathMovement : State
 
             //Suit...mais pas trop
             Transform followButAvoid = character.Context.ValuesOrDefault<Transform>("FollowButAvoid", null);
-            if (followButAvoid != null)
+            if (followButAvoid != null && character.GetScale() * character.PersonalScale > 0)
             {
                 character.SetState(new EnemyAttack(character, positions, followButAvoid));
                 return;
