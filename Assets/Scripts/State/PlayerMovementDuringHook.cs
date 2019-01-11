@@ -11,11 +11,15 @@ public class PlayerMovementDuringHook : PlayerMovement {
     Transform hook;
     float coeff;
     Player player;
+    float range;
+    Vector3 pos;
     
 
     public PlayerMovementDuringHook(Character chara) : base(chara)
     {
         coeff = character.Context.ValuesOrDefault<float>("CoeffHook", 0.1f);
+        range = character.Context.ValuesOrDefault<float>("RangeHook", 10);
+        pos = character.Context.ValuesOrDefault<Vector3>("PositionLand", Vector3.zero);
         player = (Player)chara;
     }
 
@@ -39,7 +43,7 @@ public class PlayerMovementDuringHook : PlayerMovement {
 
     public override void EndState()
     {
-       
+        character.Context.Remove("PostionLand");
     }
 
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)
@@ -49,7 +53,15 @@ public class PlayerMovementDuringHook : PlayerMovement {
         if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.AllMovement))
         {
             direction.Set(val.x, val.y);
-            character.Move(direction);
+            Vector3 projectedPosition = (new Vector3(direction.x, 0, direction.y) * character.MoveSpeed * Time.deltaTime) + character.transform.position;
+            if (Vector3.Distance(projectedPosition , pos) <= range && Utils.IsInCamera(projectedPosition,Mathf.Abs(projectedPosition.y - Camera.main.transform.position.y)))
+            {
+                character.Move(direction);
+            }
+            if(Vector3.Distance(projectedPosition, pos) > range + 1)
+            {
+                character.SetState(new PlayerMovement(character));
+            }
         }
 
         if (typeAct.Equals(BaseInput.TypeAction.Up) && acts.Equals(BaseInput.Actions.Shoot))
