@@ -20,7 +20,8 @@ public class Player : Character
     public enum MovementMode
     {
         Dash,
-        Normal
+        Normal,
+        NormalDash
     }
 
     [Header("Mouvement")]
@@ -34,6 +35,13 @@ public class Player : Character
             return distanceDash;
         }
     }
+    [SerializeField]
+    [Tooltip("Temps de régeneration des dash")]
+    internal float dashCooldown = 2f;
+
+    [SerializeField]
+    [Tooltip("Maximum dashes")]
+    internal int maxDashes = 3;
 
     [Header("Tir du grappin")]
     [SerializeField]
@@ -87,6 +95,7 @@ public class Player : Character
     }
 
     internal Vector3 origin;
+
 
     void Start()
     {

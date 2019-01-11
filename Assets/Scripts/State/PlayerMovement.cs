@@ -13,6 +13,15 @@ public class PlayerMovement : State
 
     protected float dashDistance;
 
+    private float dashTime = 0.2f;
+    private float dashMultiplicator = 1.2f;
+
+    private float dashSpeed;
+
+    private float dashCooldownTime;
+
+    private float dashing;
+
     public PlayerMovement(Character character) : base(character)
     {
         direction = new Vector2();
@@ -39,6 +48,35 @@ public class PlayerMovement : State
                 character.transform.eulerAngles = new Vector3(0, val.x, 0);
             }
         }
+
+        if (mode.Equals(Player.MovementMode.NormalDash))
+        {
+           
+            //Un mouvement quelconque (manette / souris) est detecté
+            if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.AllMovement) && character.GetScale() * character.PersonalScale > 0)
+            {
+                direction.Set(val.x, val.y);
+                direction *= character.GetScale();
+                character.Move(direction);
+            }
+
+            //rotation stick droit
+            if (typeAct.Equals(BaseInput.TypeAction.Mouse) && acts.Equals(BaseInput.Actions.RotateAbsolute) && character.GetScale() * character.PersonalScale > 0)
+            {
+                character.transform.eulerAngles = new Vector3(0, val.x, 0);
+                dashing = 0; // Stop dashing
+            }
+
+            if (typeAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Dash) && character.GetScale() * character.PersonalScale > 0)
+            {
+                if (((Player)character).Dash > 0) // StartDashing
+                {
+                    ((Player)character).Dash--;
+                    dashing = dashTime; 
+                }
+            }
+        }
+
 
         //Mode dash
         if (mode.Equals(Player.MovementMode.Dash))
@@ -78,6 +116,8 @@ public class PlayerMovement : State
             mousePos.x = val.x - objectPos.x;
             mousePos.y = val.y - objectPos.y;
 
+            dashing -= Time.deltaTime; // Reduce dashing
+
             float angle = Mathf.Atan2(mousePos.x, mousePos.y) * Mathf.Rad2Deg;
             character.transform.localEulerAngles = new Vector3(0, angle, 0);
         }
@@ -86,6 +126,25 @@ public class PlayerMovement : State
     public override void UpdateState()
     {
         ((Player)character).UpdateHook();
+        Vector3 forward = character.transform.TransformDirection(Vector3.forward);
+
+        if (dashing > 0)
+        {
+            dashing -= Time.deltaTime;
+
+            dashSpeed += dashMultiplicator;
+
+            character.Move(forward * dashSpeed);
+        } else
+        {
+            dashCooldownTime += Time.deltaTime;
+            if(dashCooldownTime > ((Player)character).dashCooldown && ((Player)character).Dash < ((Player)character).maxDashes)
+            {
+                ((Player)character).Dash++;
+                dashCooldownTime = 0;
+            }
+            dashSpeed = 0f;
+        }
     }
 
     public override void NextState()

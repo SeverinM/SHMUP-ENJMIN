@@ -28,10 +28,14 @@ public class Level : Layers
     }
 
     [SerializeField]
-    Text textUI;
+    Text LifeUI;
 
     [SerializeField]
-    Text Count;
+    Text CountUI;
+
+
+    [SerializeField]
+    Text DashUI;
 
     [SerializeField]
     List<Generator> generators;
@@ -58,15 +62,21 @@ public class Level : Layers
         //Mise en place des data bindings;
         player.SetOnLifeChanged((x) =>
         {
-            if (textUI != null)
-                textUI.text = "Nombre de vie : " + x.ToString();
+            if (LifeUI != null)
+                LifeUI.text = "Nombre de vie : " + x.ToString();
         });
 
         watchNbSpawn.ValueChanged = (x) =>
         {
-            if (Count != null)
-                Count.text = "Nombre d'ennemies restant : " + x.ToString();
+            if (CountUI != null)
+                CountUI.text = "Nombre d'ennemies restant : " + x.ToString();
         };
+
+        player.SetOnDashChanged((x) =>
+        {
+            if (DashUI != null)
+                DashUI.text = "Dash : " + x.ToString();
+        });
 
         // Faire en sorte que tous les inputs notifient le joueur
         foreach (BaseInput inp in refInput)
