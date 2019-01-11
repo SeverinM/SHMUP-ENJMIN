@@ -9,6 +9,7 @@ public class Tools : EditorWindow {
     static SerializedProperty ser;
     static SerializedObject obj;
     static Level staticLvl;
+    static Transform groupWall;
     public static Generator currentGen;
     static Vector3 originPosition;
 
@@ -18,6 +19,9 @@ public class Tools : EditorWindow {
     // Liste des vagues sérializés dans l'UI
     SerializedProperty serWaves;
     public Waypoints waypoints;
+
+    float width;
+    float height;
 
     Vector2 scrollPos = Vector2.zero;
     Vector2 scrollPosWave = Vector2.zero;
@@ -84,11 +88,32 @@ public class Tools : EditorWindow {
         GUILayout.EndHorizontal();
 
         //Marche pas bien
+        groupWall = (Transform)EditorGUILayout.ObjectField(groupWall, typeof(Transform));
+
+        width = Vector3.Distance(GetPositionAbsolute(new Vector3(0, 0, 0)), GetPositionAbsolute(new Vector3(1, 0, 0)));
+        height = Vector3.Distance(GetPositionAbsolute(new Vector3(0, 0, 0)), GetPositionAbsolute(new Vector3(0, 0, 1)));
+
+        if (groupWall != null && groupWall.GetComponentsInChildren<Transform>().Count() > 3)
+        {
+            groupWall.GetChild(0).transform.position = GetPositionAbsolute(new Vector3(0.5f, 0, 1));
+            groupWall.GetChild(1).transform.position = GetPositionAbsolute(new Vector3(0, 0, 0.5f));
+            groupWall.GetChild(2).transform.position = GetPositionAbsolute(new Vector3(0.5f, 0, 0));
+            groupWall.GetChild(3).transform.position = GetPositionAbsolute(new Vector3(1, 0, 0.5f));
+            groupWall.GetChild(0).localScale = groupWall.GetChild(2).localScale = new Vector3(width, 1, 1);
+            groupWall.GetChild(1).localScale = groupWall.GetChild(3).localScale = new Vector3(height, 1, 1);
+        }
+
         if (currentGen != previousGen && currentGen != null)
         {
             allWaves = currentGen.allWaves;
             if (ToolsLock.instance != null)
                 ToolsLock.instance.allLocks = currentGen.AllLocks;
+        }
+
+
+        if (groupWall != null)
+        {
+            groupWall.transform.position = GetPositionAbsolute(new Vector3(0.5f,0,0.5f));
         }
 
         previousGen = currentGen;
