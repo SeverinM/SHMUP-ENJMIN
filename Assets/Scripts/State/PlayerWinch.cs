@@ -7,6 +7,7 @@ using System.Collections;
 public class PlayerWinch : State
 {
     private Player player;
+    bool isShield;
 
     Transform barrier;
     
@@ -35,11 +36,12 @@ public class PlayerWinch : State
     public override void EndState()
     {
         barrier.GetComponent<Barrier>().IsWinching = false;
-        if (player.Target != null)
+        if (player.Target != null && player.Target.parent != null)
         {
             player.Target.parent.GetComponent<Character>().PersonalScale = 1;
         }
         AkSoundEngine.PostEvent("H_Winch_Stop", character.gameObject);
+        character.Context.Remove("IsShield");
     }
 
     public override void NextState()
@@ -50,6 +52,13 @@ public class PlayerWinch : State
 
     public override void StartState()
     {
+        isShield = character.Context.ValuesOrDefault<bool>("IsShield", false);
+        if (isShield)
+        {
+            currentMode = HookMode.Pull;
+            player.Target.parent.GetComponent<Character>().PersonalScale = 1;
+            player.Target.transform.parent = null;
+        }
         barrier.GetComponent<Barrier>().IsWinching = true;
         AkSoundEngine.PostEvent("H_Winch", character.gameObject);
     }
@@ -68,9 +77,10 @@ public class PlayerWinch : State
         if (currentMode == HookMode.Pull)
         {
             // Puisque l'on est en collision avec l'enfant, on va tirer tout l'ensemble, donc le parent
-            if (player.Target)
+            if (player.Target != null)
             {
-                player.Target.parent.transform.position -= character.transform.forward * Time.deltaTime * character.GetScale() * character.PersonalScale * speedTravel;
+                Transform who = isShield ? player.Target : player.Target.parent;
+                who.position -= character.transform.forward * Time.deltaTime * character.GetScale() * character.PersonalScale * speedTravel;
             }
             player.Hook.transform.position -= character.transform.forward * Time.deltaTime * character.GetScale() * speedTravel;
         }
@@ -80,6 +90,10 @@ public class PlayerWinch : State
         //Si la distance hook / vaisseau est inferieur au radius de hook, retourner vers mouvement
         if (distanceToHook <= hookRadius)
         {
+            if (isShield)
+            {
+                Object.Destroy(player.Target.gameObject);
+            }
             NextState();
         }
     }

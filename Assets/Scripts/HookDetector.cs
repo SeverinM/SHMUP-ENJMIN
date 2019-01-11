@@ -16,7 +16,7 @@ public class HookDetector : MonoBehaviour
         {
             player.Context.SetInDictionary("HookMode", PlayerWinch.HookMode.Pull);
             player.AttachHook(other.transform);
-            player.ActualState.NextState();
+            player.NextState();
             AkSoundEngine.PostEvent("H_Grab", gameObject);
         }
 
@@ -24,7 +24,7 @@ public class HookDetector : MonoBehaviour
         {
             player.Context.SetInDictionary("HookMode", PlayerWinch.HookMode.Winch);
             player.AttachHook(other.transform);
-            player.ActualState.NextState();
+            player.NextState();
             AkSoundEngine.PostEvent("H_Grab", gameObject);
         }
 
@@ -34,11 +34,12 @@ public class HookDetector : MonoBehaviour
             AkSoundEngine.PostEvent("H_Grab", gameObject);
         }
 
-        // Si le joueur touche un bouclier, remetre à zero son Hook
+        // Si le joueur touche un bouclier, le grab
         if (other.tag == "Shield")
         {
-            Destroy(other.gameObject);
-            player.SetState(new PlayerMovement(player));
+            player.Context.SetInDictionary("IsShield", true);
+            player.AttachHook(other.transform);
+            player.NextState();
         }
 
     }
