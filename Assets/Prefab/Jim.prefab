@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 65129822689777282}
   m_Layer: 0
   m_Name: Pullable (1)
-  m_TagString: Pullable
+  m_TagString: Winchable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 65880067527716088}
   m_Layer: 0
   m_Name: Pullable
-  m_TagString: Pullable
+  m_TagString: Winchable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -370,7 +370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  model: {fileID: 1796657138515930}
+  model: {fileID: 0}
   mass: 3
   recoveryMat: {fileID: 2100000, guid: 77286c23e931b4b4397bce28b6a22b95, type: 2}
   life: 3
@@ -383,7 +383,7 @@ MonoBehaviour:
   shootSpeed: 8
   maxBullets: 5
   shootRadius: 1
-  bulletLastingDuration: 2
+  bulletLastingDuration: 10
   bulletPrefab: {fileID: 1282062362704492, guid: 119f19512e8adaa4a976ceeddba29da5,
     type: 2}
   movementType: 1
