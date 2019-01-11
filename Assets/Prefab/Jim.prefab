@@ -378,7 +378,6 @@ MonoBehaviour:
   protectionPrefab: {fileID: 1999096423012838, guid: 7ab713d6b58d82142a6ef567773e3e05,
     type: 2}
   impactDeceleration: 5
-  killScore: 1000
   attackRange: 2
   shootPeriod: 2
   shootAmount: 3
@@ -386,7 +385,7 @@ MonoBehaviour:
   maxBullets: 5
   shootRadius: 1
   bulletLastingDuration: 2
-  durationBullet: 1
+  killScore: 100
   bulletPrefab: {fileID: 1282062362704492, guid: 119f19512e8adaa4a976ceeddba29da5,
     type: 2}
   movementType: 1

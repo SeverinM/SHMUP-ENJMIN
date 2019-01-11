@@ -55,7 +55,8 @@ public class Enemy : Character
         JIM,
         MIKE
     }
-    
+
+    [Header("Enemy")]
     [SerializeField]
     [Tooltip("Distance à laquelle un ennemi démarre une attaque")]
     protected float attackRange = 2.0f; //Si la distance ennemi / joueur est inferieur a cette distance , l'ennemi va attaquer le joueur au lieu de poursuivre
@@ -145,6 +146,17 @@ public class Enemy : Character
         set
         {
             waypoints = value;
+        }
+    }
+
+    [SerializeField]
+    [Tooltip("Score lorsque le joeueur tue l'ennemi")]
+    private int killScore = 100;
+    public int KillScore
+    {
+        get
+        {
+            return killScore;
         }
     }
 

@@ -124,6 +124,7 @@ public class GenerateEnemies : State
     {
         count--;
         generator.Count--;
+        level.AddCharacterForScore(chara);
         // Si tous les énnemis on été détruits, on tente de passer a l'etat suivant
         if (count == 0)
         {
