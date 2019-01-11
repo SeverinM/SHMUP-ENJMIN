@@ -57,6 +57,9 @@ public class Manager : MonoBehaviour {
     /// <param name="lay"></param>
     public void AddToStack(Layers lay)
     {
+        if( allLayers.Count > 0)
+            allLayers.Peek().OnFocusLost();
+
         allLayers.Push(lay);
         allLayers.Peek().Init(allInputs);
         allLayers.Peek().OnFocusGet();
