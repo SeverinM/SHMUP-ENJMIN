@@ -9,7 +9,6 @@ public class Tools : EditorWindow {
     static SerializedProperty ser;
     static SerializedObject obj;
     static Level staticLvl;
-    static Transform groupWall;
     public static Generator currentGen;
     static Vector3 originPosition;
 
@@ -85,34 +84,17 @@ public class Tools : EditorWindow {
         {
             Camera.main.transform.position = originPosition;
         }
-        groupWall = (Transform)EditorGUILayout.ObjectField(groupWall, typeof(Transform));
         GUILayout.EndHorizontal();
 
         //Redimensionne les murs
         width = Vector3.Distance(GetPositionAbsolute(new Vector3(0, 0, 0)), GetPositionAbsolute(new Vector3(1, 0, 0)));
         height = Vector3.Distance(GetPositionAbsolute(new Vector3(0, 0, 0)), GetPositionAbsolute(new Vector3(0, 0, 1)));
 
-        if (groupWall != null && groupWall.GetComponentsInChildren<Transform>().Count() > 3)
-        {
-            groupWall.GetChild(0).transform.position = GetPositionAbsolute(new Vector3(0.5f, 0, 1));
-            groupWall.GetChild(1).transform.position = GetPositionAbsolute(new Vector3(0, 0, 0.5f));
-            groupWall.GetChild(2).transform.position = GetPositionAbsolute(new Vector3(0.5f, 0, 0));
-            groupWall.GetChild(3).transform.position = GetPositionAbsolute(new Vector3(1, 0, 0.5f));
-            groupWall.GetChild(0).localScale = groupWall.GetChild(2).localScale = new Vector3(width, 1, 1);
-            groupWall.GetChild(1).localScale = groupWall.GetChild(3).localScale = new Vector3(height, 1, 1);
-        }
-
         if (currentGen != previousGen && currentGen != null)
         {
             allWaves = currentGen.allWaves;
             if (ToolsLock.instance != null)
                 ToolsLock.instance.allLocks = currentGen.AllLocks;
-        }
-
-
-        if (groupWall != null)
-        {
-            groupWall.transform.position = GetPositionAbsolute(new Vector3(0.5f,0,0.5f));
         }
 
         previousGen = currentGen;
@@ -298,6 +280,7 @@ public class Tools : EditorWindow {
         float coeff = Vector3.Distance(staticLvl.transform.position, Camera.main.transform.position);
         //Recuperation des quatres coins
         Vector3 leftBottom = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, coeff));
+        Debug.Log(coeff);
         Vector3 leftTop = Camera.main.ScreenToWorldPoint(new Vector3(0, Camera.main.pixelHeight, coeff));
         Vector3 rightBottom = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, 0, coeff));
         Vector3 rightTop = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight, coeff));
