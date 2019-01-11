@@ -65,7 +65,8 @@ public abstract class BaseInput {
     //Les classes enfants ne pouvant lever l'evenement il faut le faire depuis cette methode
     protected void RaiseEvent(TypeAction tyAct, Actions acts, Vector2 values)
     {
-        OnInputExecuted.Invoke(tyAct, acts, values);
+        if (OnInputExecuted != null)
+            OnInputExecuted.Invoke(tyAct, acts, values);
     }
 
     public abstract void UpdateInput();

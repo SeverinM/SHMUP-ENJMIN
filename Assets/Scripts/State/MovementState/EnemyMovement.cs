@@ -18,7 +18,7 @@ public class EnemyMovement : State
     {
         enemy = (Enemy)character;
         target = tar;
-        this.followLeader = followLeader;       
+        this.followLeader = followLeader;
     }
 
     public EnemyMovement(Character chara, Transform tar, Queue<WaypointElement> elt, bool followLeader = false) : base(chara)
@@ -42,10 +42,6 @@ public class EnemyMovement : State
             return;
         }
 
-        //Si le leader attaque , l'imite
-        Debug.Log(character.name);
-        Debug.Log(followLeader);
-        Debug.Log(target.GetComponent<Character>().Context.ValuesOrDefault<Transform>("Target", null));
         if (followLeader && target.GetComponent<Character>().Context.ValuesOrDefault<Transform>("Target",null) != null)
         {
             character.SetState(new EnemyAttack(character, allElems, target.GetComponent<Character>().Context.ValuesOrDefault<Transform>("Target", null)));

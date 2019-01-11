@@ -60,6 +60,7 @@ public class EnemyAttack : State
 
     public override void UpdateState()
     {
+        character.transform.LookAt(playerTarget);
         // Lance une attaque selon la periode
         if (lastTime < Time.time)
         {

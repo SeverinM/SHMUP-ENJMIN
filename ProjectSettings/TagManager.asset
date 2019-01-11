@@ -12,6 +12,7 @@ TagManager:
   - Pullable
   - Winchable
   - Barrier
+  - Wall
   layers:
   - Default
   - TransparentFX

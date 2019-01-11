@@ -20,7 +20,8 @@ public class Player : Character
     public enum MovementMode
     {
         Dash,
-        Normal
+        Normal,
+        NormalDash,
     }
 
     [Header("Mouvement")]
@@ -34,6 +35,13 @@ public class Player : Character
             return distanceDash;
         }
     }
+    [SerializeField]
+    [Tooltip("Temps de régeneration des dash")]
+    internal float dashCooldown = 2f;
+
+    [SerializeField]
+    [Tooltip("Maximum dashes")]
+    internal int maxDashes = 3;
 
     [Header("Tir du grappin")]
     [SerializeField]
@@ -53,6 +61,11 @@ public class Player : Character
     [Tooltip("A quel point la vitesse est reduite par rapport a la vitesse normale ? (exemple : 0.1 signifie 10 fois moins vite)")]
     [SerializeField]
     float coeffHook = 0.1f;
+
+    [Header("Vitesse dash")]
+    [Tooltip("A quel point la vitesse est reduite par rapport a la vitesse normale ? (exemple : 0.1 signifie 10 fois moins vite)")]
+    [SerializeField]
+    internal float dashSpeed = 5f;
 
     [Header("Auto references (pas toucher... normalement)")]
     [SerializeField]
@@ -87,6 +100,15 @@ public class Player : Character
     }
 
     internal Vector3 origin;
+
+    public delegate void voidParam();
+    public event voidParam NextLevel;
+
+    public void RaiseNextLevel()
+    {
+        if (NextLevel != null)
+            NextLevel();
+    }
 
     void Start()
     {
@@ -164,7 +186,7 @@ public class Player : Character
     public void Impact(Vector3 force)
     {
         Vector3 dir = force.normalized;
-        dir.y = 0.5f; // En hauteur
+        dir.y = 0; // En hauteur
         impact += dir.normalized * force.magnitude / mass;
     }
 

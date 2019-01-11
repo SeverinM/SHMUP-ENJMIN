@@ -45,8 +45,8 @@ public abstract class Character : MonoBehaviour {
     public event collDelegate OnTriggerEnterChar;
     public event collDelegate OnTriggerExitChar;
 
-    public delegate void voidParam(Character chara);
-    public event voidParam Destroyed;
+    public delegate void charaParam(Character chara);
+    public event charaParam Destroyed;
 
     public delegate Player PlayerDelagate();
     public event PlayerDelagate TryReachingPlayer;
@@ -138,6 +138,25 @@ public abstract class Character : MonoBehaviour {
         }
     }
 
+
+    [SerializeField]
+    [Tooltip("Nombre de dash")]
+    protected int dash = 3;
+
+    Binding<int> watchedDash;
+    public int Dash
+    {
+        get
+        {
+            return watchedDash.WatchedValue;
+        }
+
+        set
+        {
+            watchedDash.WatchedValue = value;
+        }
+    }
+
     internal GameObject protection;
 
     [SerializeField]
@@ -165,9 +184,21 @@ public abstract class Character : MonoBehaviour {
         }
     }
 
+    [SerializeField]
+    [Tooltip("Score lorsque le joeueur tue l'ennemi")]
+    private int killScore = 1000;
+    public int KillScore
+    {
+        get
+        {
+            return killScore;
+        }
+    }
+
     void Awake()
     {
         watchedLife = new Binding<int>(0, null);
+        watchedDash = new Binding<int>(0, null);
     }
 
     //Appellé a chaque fois que la vie du joueur change
@@ -176,6 +207,14 @@ public abstract class Character : MonoBehaviour {
         watchedLife.ValueChanged = newAction;
         //Reactualise avec la valeur actuelle
         Life = life;
+    }
+
+    //Appelé a chaque fois que le nb de dash change
+    public void SetOnDashChanged(Action<int> newAction)
+    {
+        watchedDash.ValueChanged = newAction;
+        //Reactualise avec la valeur actuelle
+        Dash = dash;
     }
 
     internal void Rotate(GameObject player)
@@ -192,6 +231,12 @@ public abstract class Character : MonoBehaviour {
         {
             return actualState;
         }
+    }
+
+    public void NextState()
+    {
+        if (ActualState != null)
+            ActualState.NextState();
     }
 
     public void SetState(State state)
@@ -345,6 +390,19 @@ public abstract class Character : MonoBehaviour {
             GetComponent<Rigidbody>().AddForce(steer);
 
         }
+    }
+
+    //Permet de changer d'etat en differé
+    public void StartDelayedState(float duration, State st)
+    {
+        StartCoroutine(DelayedSetState(duration, st));
+    }
+
+    public IEnumerator DelayedSetState(float duration, State st)
+    {
+        yield return new WaitForSeconds(duration);
+        SetState(st);
+
     }
 
     private void OnApplicationQuit()

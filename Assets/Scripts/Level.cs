@@ -19,6 +19,9 @@ public class Level : Layers
     [SerializeField]
     protected GameObject BobPrefab;
 
+    [SerializeField]
+    protected Level NextLevel;
+
     public GameObject Player
     {
         get
@@ -28,13 +31,16 @@ public class Level : Layers
     }
 
     [SerializeField]
-    Text textUI;
+    Text LifeUI;
 
     [SerializeField]
-    Text Count;
+    Text CountUI;
 
     [SerializeField]
-    List<Generator> generators;
+    Text DashUI;
+
+    [SerializeField]
+    Text ScoreUI;
 
     [SerializeField]
     GameObject canvas;
@@ -44,11 +50,20 @@ public class Level : Layers
 
     int countGenerator = 0;
 
+    private int score = 0;
+
     Dictionary<GameObject, Text> characterTexts = new Dictionary<GameObject, Text>();
 
+    [HideInInspector]
     public List<GameObject> characters = new List<GameObject>();
+
+    [HideInInspector]
     public List<GameObject> charactersToRemove = new List<GameObject>();
     public Binding<int> watchNbSpawn = new Binding<int>(0, null);
+    public Binding<int> watchScore = new Binding<int>(0, null);
+
+    public delegate void LevelParam(Level nextLevel);
+    public event LevelParam OnNextLevel;
 
     //Appellé quand le layer est au dessus de la stack
     public override void OnFocusGet()
@@ -58,14 +73,26 @@ public class Level : Layers
         //Mise en place des data bindings;
         player.SetOnLifeChanged((x) =>
         {
-            if (textUI != null)
-                textUI.text = "Nombre de vie : " + x.ToString();
+            if (LifeUI != null)
+                LifeUI.text = "Nombre de vie : " + x.ToString();
+        });
+
+        player.SetOnDashChanged((x) =>
+        {
+            if (DashUI != null)
+                DashUI.text = "Dash : " + x.ToString();
         });
 
         watchNbSpawn.ValueChanged = (x) =>
         {
-            if (Count != null)
-                Count.text = "Nombre d'ennemies restant : " + x.ToString();
+            if (CountUI != null)
+                CountUI.text = "Nombre d'ennemies restant : " + x.ToString();
+        };
+
+        watchScore.ValueChanged = (x) =>
+        {
+            if (ScoreUI != null)
+                ScoreUI.text = "Score : " + x.ToString();
         };
 
         // Faire en sorte que tous les inputs notifient le joueur
@@ -74,14 +101,8 @@ public class Level : Layers
             inp.OnInputExecuted += player.InterpretInput;
         }
 
-        if (generators.Count == 0)
-        {
-            return;
-        }
-
         // Mettre en route tous les générateurs en leur attribuant un état
-        countGenerator = generators.Count;
-        foreach (Generator generator in generators)
+        foreach (Generator generator in transform.GetComponentsInChildren<Generator>())
         {
             countGenerator++;
             //Initialisation du generateur
@@ -92,6 +113,7 @@ public class Level : Layers
             generator.EveryoneDied += GeneratorDone;
             generator.WaveCleaned += Generator_WaveCleaned;
         }
+        watchNbSpawn.WatchedValue = transform.GetComponentsInChildren<Generator>().Select(x => x.GetComponent<Generator>().EnnemiesLeftToSpawn).Sum();
 
         // Provisoirement
         GameObject toAddText = Instantiate(text, canvas.transform);
@@ -103,7 +125,7 @@ public class Level : Layers
         LockWaveElement elt = new LockWaveElement();
         elt.generator = who;
         elt.number = nb;
-        foreach(Generator gen in generators.Where(x => x != who))
+        foreach(Generator gen in transform.GetComponentsInChildren<Generator>().Where(x => x != who))
         {
             gen.RemoveLock(elt);
         }
@@ -120,7 +142,11 @@ public class Level : Layers
             Destroy(character);
         }
         charactersToRemove.Clear();
-        watchNbSpawn.WatchedValue = generators.Select(x => x.GetComponent<Generator>().EnnemiesLeftToSpawn).Sum();
+
+
+        watchScore.WatchedValue = score;
+        watchNbSpawn.WatchedValue = transform.GetComponentsInChildren<Generator>().Select(x => x.GetComponent<Generator>().EnnemiesLeftToSpawn).Sum();
+
     }
 
     public void LateUpdate()
@@ -196,10 +222,12 @@ public class Level : Layers
 
     /// <summary>
     /// Retirer un personnage du niveau
+    /// Ajouter le score correspondant
     /// </summary>
     /// <param name="character">Le personnage à retirer</param>
     public void Remove(Character character)
     {
+        score += character.KillScore;
         charactersToRemove.Add(character.gameObject);
     }
 
@@ -211,9 +239,21 @@ public class Level : Layers
         }
     }
 
+    /// <summary>
+    /// On a battu tous les ennemies , niveau suivant
+    /// </summary>
     public void GeneratorDone()
     {
-        Debug.Log("Ce generateur a finit");
+        countGenerator--;
+        if (countGenerator == 0)
+        {
+            //On renvoit successivement des events
+            if (NextLevel != null && OnNextLevel != null)
+            {
+                player.StartDelayedState(1, new IdleTransition(player));
+                player.NextLevel += () => { OnNextLevel(NextLevel); };
+            }              
+        }
     }
 
     public void PlayerDied(Character chara)

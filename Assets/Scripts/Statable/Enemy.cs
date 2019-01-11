@@ -148,22 +148,6 @@ public class Enemy : Character
         }
     }
 
-    [Tooltip("Combien de temps dure chaque balle")]
-    [SerializeField]
-    float durationBullet = 1;
-    public float DurationBullet
-    {
-        get
-        {
-            return durationBullet;
-        }
-        set
-        {
-            durationBullet = Mathf.Abs(value);
-        }
-    }
-
-
     [SerializeField]
     private GameObject bulletPrefab;
 
@@ -219,6 +203,15 @@ public class Enemy : Character
         }
     }
 
+    public void IncreaseGapAngle(ref float originAngle, float otherAngle, float distance)
+    {
+        if (Mathf.Abs(originAngle - otherAngle) < distance)
+        {
+            originAngle += (originAngle - otherAngle) * 2;
+            originAngle %= Mathf.PI * 2;
+        }
+    }
+
     /// <summary>
     /// Le personnage suit des positions choisies aléatoirement
     /// </summary>
@@ -249,11 +242,7 @@ public class Enemy : Character
             if (context.ValuesOrDefault<Transform>("FollowButAvoid",null) == null)
             {
                 //Si l'angle ressemble trop a l'angle precedent , creuse l'ecart
-                if (i > 0 && Mathf.Abs(CurrentAngle - PreviousAngle) < tolerateInterval)
-                {
-                    CurrentAngle += ((CurrentAngle - PreviousAngle) * Random.Range(0, 10));
-                    CurrentAngle %= Mathf.PI * 2;
-                }
+                IncreaseGapAngle(ref CurrentAngle, PreviousAngle, tolerateInterval);
 
                 //Empeche les demi-tours trop brusque
                 if (i > 0 && Mathf.Abs(CurrentAngle - PreviousAngle) > 160 * Mathf.Deg2Rad && Mathf.Abs(CurrentAngle - PreviousAngle) < 200 * Mathf.Deg2Rad)
@@ -261,16 +250,13 @@ public class Enemy : Character
                     CurrentAngle += Random.Range(20 * Mathf.Deg2Rad, 40 * Mathf.Deg2Rad) * (Random.value > 0.5f ? 1 : -1);
                 }
             }
+
             //S'il cherche a eviter quelque chose tout en le suivant
             else
             {
                 Vector3 targetPosition = context.ValuesOrDefault<Transform>("FollowButAvoid", null).position;
                 float angle = (Vector3.Angle(Vector3.right, targetPosition - transform.position)) * Mathf.Deg2Rad;
-                if (Mathf.Abs(angle - CurrentAngle) < Mathf.PI / 4)
-                {
-                    CurrentAngle += ((angle - CurrentAngle) + 1) * 2;
-                    CurrentAngle %= Mathf.PI * 2;
-                }
+                IncreaseGapAngle(ref CurrentAngle, angle, Mathf.PI / 4);
             }
 
             WaypointElement wE = new WaypointElement();
