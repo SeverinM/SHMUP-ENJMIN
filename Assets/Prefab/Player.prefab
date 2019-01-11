@@ -556,13 +556,12 @@ MonoBehaviour:
   protectionPrefab: {fileID: 1999096423012838, guid: 7ab713d6b58d82142a6ef567773e3e05,
     type: 2}
   impactDeceleration: 5
-  level: {fileID: 0}
   mode: 1
   distanceDash: 20
   hookSpeed: 0.7
   rangeHook: 20
   speedPull: 10
-  coeffHook: 0.1
+  coeffHook: 0.8
   barrier: {fileID: 4181975481634658}
   hook: {fileID: 4840222661834636}
 --- !u!120 &120035746370447866
