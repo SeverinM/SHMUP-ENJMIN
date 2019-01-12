@@ -33,13 +33,22 @@ public class Level : Layers
     }
 
     [SerializeField]
-    Text LifeUI;
+    GameObject LifeUI;
 
     [SerializeField]
-    Text CountUI;
+    GameObject LifePrefab;
 
     [SerializeField]
-    Text DashUI;
+    GameObject CountEnemyUI;
+
+    [SerializeField]
+    GameObject CountEnemyPrefab;
+
+    [SerializeField]
+    GameObject DashUI;
+
+    [SerializeField]
+    GameObject DashPrefab;
 
     [SerializeField]
     Text ScoreUI;
@@ -82,6 +91,8 @@ public class Level : Layers
     public delegate void LevelParam(Level nextLevel);
     public event LevelParam OnNextLevel;
 
+
+
     //Appellé quand le layer est au dessus de la stack
     public override void OnFocusGet()
     {
@@ -91,19 +102,46 @@ public class Level : Layers
         player.SetOnLifeChanged((x) =>
         {
             if (LifeUI != null)
-                LifeUI.text = "Nombre de vie : " + x.ToString();
+            {
+                for (int i = 0; i < LifeUI.transform.childCount; i++)
+                {
+                    Destroy(LifeUI.transform.GetChild(i).gameObject);
+                }
+                for (int i = 0; i < x; i++)
+                {
+                    Instantiate(LifePrefab, LifeUI.transform);
+                }
+            }
         });
 
         player.SetOnDashChanged((x) =>
         {
             if (DashUI != null)
-                DashUI.text = "Dash : " + x.ToString();
+            {
+                for (int i = 0; i < DashUI.transform.childCount; i++)
+                {
+                    Destroy(DashUI.transform.GetChild(i).gameObject);
+                }
+                for (int i = 0; i < x; i++)
+                {
+                    Instantiate(DashPrefab, DashUI.transform);
+                }
+            }
         });
 
         watchNbSpawn.ValueChanged = (x) =>
         {
-            if (CountUI != null)
-                CountUI.text = "Nombre d'ennemies restant : " + x.ToString();
+            if (CountEnemyUI != null)
+            {
+                for (int i = 0; i < CountEnemyUI.transform.childCount; i++)
+                {
+                    Destroy(CountEnemyUI.transform.GetChild(i).gameObject);
+                }
+                for (int i = 0; i < x; i++)
+                {
+                    Instantiate(CountEnemyPrefab, CountEnemyUI.transform);
+                }
+            }
         };
 
         watchScore.ValueChanged = (x) =>
