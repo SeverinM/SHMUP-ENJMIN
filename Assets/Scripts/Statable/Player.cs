@@ -92,7 +92,7 @@ public class Player : Character
     public event voidParam NextLevel;
 
     public void RaiseNextLevel()
-    {
+    { 
         if (NextLevel != null)
             NextLevel();
     }
