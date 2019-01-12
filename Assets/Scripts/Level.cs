@@ -462,6 +462,7 @@ public class Level : Layers
     /// </summary>
     public void GeneratorDone()
     {
+        Debug.Log("cnt :"+ countGenerator);
         countGenerator--;
         if (countGenerator == 0)
         {
