@@ -105,7 +105,7 @@ public class Player : Character
     public event voidParam NextLevel;
 
     public void RaiseNextLevel()
-    {
+    { 
         if (NextLevel != null)
             NextLevel();
     }
@@ -119,7 +119,7 @@ public class Player : Character
         context.SetInDictionary("SpeedHook", hookSpeed);
         context.SetInDictionary("RangeDash", distanceDash);
         context.SetInDictionary("CoeffHook", coeffHook);
-        context.SetInDictionary("RangeDash", rangeHook);
+        context.SetInDictionary("RangeHook", rangeHook);
 
         line = hook.GetComponent<LineRenderer>();
         origin = hook.transform.localPosition;

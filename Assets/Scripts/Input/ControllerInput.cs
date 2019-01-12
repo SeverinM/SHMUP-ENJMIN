@@ -77,6 +77,7 @@ public class ControllerInput : BaseInput {
                 value *= -1;
             }
             value += 90;
+            
             RaiseEvent(TypeAction.Mouse, Actions.RotateAbsolute, new Vector2(value,0));
         }
 

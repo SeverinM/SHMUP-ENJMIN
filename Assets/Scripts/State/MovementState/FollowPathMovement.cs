@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 /// <summary>
 /// Permet à un personnage de suivre un chemin , un etat correspond a un seul chemin , pour en faire plusieurs il faut donc repasser dans cet etat
@@ -13,12 +14,12 @@ public class FollowPathMovement : State
 
     private Vector3 deltaPosition;
     private bool loop;
-    Enemy enn;
+
+    Action act;
 
     public FollowPathMovement(Character character, Queue<WaypointElement> allPos, bool loop) : base(character)
     {
         positions = allPos;
-        enn = (Enemy)character;
 
         //Si la queue n'est pas vide on prend la valeur cible sur le devant de la queue
         if (allPos.Count > 0)
@@ -32,6 +33,27 @@ public class FollowPathMovement : State
         }
 
         this.loop = loop;
+    }
+
+    //Utilisé si l'on souhaite effectuer une action specifique a la fin des waypoints
+    public FollowPathMovement(Character character,Queue<WaypointElement> allPos , Action after) : base(character)
+    {
+        positions = allPos;
+
+        //Si la queue n'est pas vide on prend la valeur cible sur le devant de la queue
+        if (allPos.Count > 0)
+        {
+            currentWaypoint = allPos.Peek();
+            targetPosition = currentWaypoint.targetPosition;
+        }
+        else
+        {
+            throw new System.Exception("Aucun waypoints d'attribué disponible");
+        }
+
+        act = after;
+
+        this.loop = false;
     }
 
     public override void StartState()
@@ -78,7 +100,7 @@ public class FollowPathMovement : State
 
             //Suit...mais pas trop
             Transform followButAvoid = character.Context.ValuesOrDefault<Transform>("FollowButAvoid", null);
-            if (followButAvoid != null)
+            if (followButAvoid != null && character.GetScale() * character.PersonalScale > 0)
             {
                 character.SetState(new EnemyAttack(character, positions, followButAvoid));
                 return;
@@ -92,13 +114,17 @@ public class FollowPathMovement : State
             else
             {
                 //On recommence
-                if (loop && (Enemy)character != null)
+                if (loop)
                 {
                     character.SetState(new FollowPathMovement(character,new Queue<WaypointElement>(((Enemy)character).Waypoints.allWaypoints), ((Enemy)character).Waypoints.loop));
                 }
                 else
                 {
-                    enn.FollowRandomPath();
+                    if (act != null)
+                        act();
+
+                    if (character is Enemy)
+                        ((Enemy)character).FollowRandomPath();
                 }
             }    
         }

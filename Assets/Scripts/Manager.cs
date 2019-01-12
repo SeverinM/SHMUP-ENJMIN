@@ -13,6 +13,8 @@ public class Manager : MonoBehaviour {
 
     [SerializeField]
     Level lvl;
+    
+    private ServerConnection connection = new ServerConnection();
 
 	// Use this for initialization
 	void Start () {
@@ -40,6 +42,7 @@ public class Manager : MonoBehaviour {
     private void Lvl_OnNextLevel(Level nextLevel)
     {
         AddToStack(nextLevel);
+        StartCoroutine(connection.PostScores(Constants.PlayerName, Constants.TotalScore));
         nextLevel.OnNextLevel += Lvl_OnNextLevel;
     }
 

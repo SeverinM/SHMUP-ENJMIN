@@ -54,6 +54,39 @@ public static class Constants{
         }
     }
 
+    /// <summary>
+    /// Nom du joueur
+    /// </summary>
+    private static string playerName = "anonymous";
+    public static string PlayerName
+    {
+        get
+        {
+            return playerName;
+        }
+        set
+        {
+            playerName = value;
+        }
+    }
+
+    /// <summary>
+    /// Score Total
+    /// </summary>
+    private static int totalScore = 0;
+    public static int TotalScore
+    {
+        get
+        {
+            return totalScore;
+        }
+        set
+        {
+            totalScore = value;
+        }
+    }
+
+
     //Empeche le OnDestroy quand on quitte le jeu
     static bool applicationQuit;
     public static bool ApplicationQuit
