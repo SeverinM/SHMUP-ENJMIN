@@ -269,6 +269,8 @@ public abstract class Character : MonoBehaviour {
 
     public IEnumerator StartRecoveryCoroutine(float duration)
     {
+        float timeBegin = 0;
+        Context.SetInDictionary("InRecovery", true);
         Dictionary<Transform, Material> allMats = new Dictionary<Transform, Material>();
         allMats[model.transform] = model.GetComponent<MeshRenderer>().material;
         foreach(Transform trsf in model.GetComponentsInChildren<Transform>())
@@ -285,13 +287,18 @@ public abstract class Character : MonoBehaviour {
 
         GetComponent<Collider>().enabled = false;
 
-        yield return new WaitForSeconds(duration);
+        while(timeBegin < duration)
+        {
+            timeBegin += Time.deltaTime * GetScale();
+            yield return null;
+        }
 
         foreach(Transform key in allMats.Keys)
         {
             key.GetComponent<MeshRenderer>().material = allMats[key];
         }
         GetComponent<Collider>().enabled = true;
+        Context.Remove("InRecovery");
     }
 
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class Level : Layers
 {
@@ -20,6 +21,9 @@ public class Level : Layers
     protected GameObject BobPrefab;
 
     [SerializeField]
+    protected GameObject MenuPrefab;
+
+    [SerializeField]
     protected Level NextLevel;
 
     public GameObject Player
@@ -29,6 +33,20 @@ public class Level : Layers
             return player.gameObject;
         }
     }
+
+    int indexSelection = 0;
+    public int IndexSelection
+    {
+        get
+        {
+            return indexSelection;
+        }
+        set
+        {
+            indexSelection = Mathf.Clamp(value,0, allButtonsMenu.Count - 1);
+        }
+    }
+    List<Button> allButtonsMenu = new List<Button>();
 
     [SerializeField]
     Text textUI;
@@ -42,9 +60,12 @@ public class Level : Layers
     [SerializeField]
     GameObject text;
 
+    Navigation nav;
+
     int countGenerator = 0;
 
     Dictionary<GameObject, Text> characterTexts = new Dictionary<GameObject, Text>();
+    Dictionary<GameObject, Vector3> StoredValue = new Dictionary<GameObject, Vector3>();
 
     [HideInInspector]
     public List<GameObject> characters = new List<GameObject>();
@@ -59,6 +80,11 @@ public class Level : Layers
     //Appellé quand le layer est au dessus de la stack
     public override void OnFocusGet()
     {
+        foreach(Button btn in MenuPrefab.GetComponentsInChildren<Button>())
+        {
+            allButtonsMenu.Add(btn);
+        }
+
         player.Destroyed += PlayerDied;
 
         //Mise en place des data bindings;
@@ -78,6 +104,7 @@ public class Level : Layers
         foreach (BaseInput inp in refInput)
         {
             inp.OnInputExecuted += player.InterpretInput;
+            inp.OnInputExecuted += Inp_OnInputExecuted;
         }
 
         // Mettre en route tous les générateurs en leur attribuant un état
@@ -97,6 +124,56 @@ public class Level : Layers
         // Provisoirement
         GameObject toAddText = Instantiate(text, canvas.transform);
         characterTexts.Add(player.gameObject, toAddText.GetComponent<Text>());
+    }
+
+    private void Inp_OnInputExecuted(BaseInput.TypeAction tyAct, BaseInput.Actions acts, Vector2 values)
+    {
+        //On alterne le resultat de l'inputs
+        if (tyAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Pause))
+        {
+            TogglePause();
+        }
+
+        if (tyAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.AllMovement))
+        {
+            double angle = Utils.AngleBetween(Vector2.left, values);
+            //On va vers le bas
+            if (angle > 70 && angle < 110)
+            {
+                IndexSelection++;
+            }
+            if (angle > -110 && angle < -70)
+            {
+                IndexSelection--;
+            }
+            allButtonsMenu[IndexSelection].Select();
+        }
+    }
+
+    public void TogglePause()
+    {
+        Constants.Pausing = !Constants.Pausing;
+        Constants.SetAllConstants(Constants.Pausing ? 0 : 1);
+        MenuPrefab.SetActive(Constants.Pausing);
+
+        if (Constants.Pausing)
+        {
+            allButtonsMenu[0].Select();
+        }
+     
+        foreach (GameObject gob in GameObject.FindGameObjectsWithTag("Bullet"))
+        {
+            if (Constants.Pausing)
+            {
+                StoredValue[gob] = gob.GetComponent<Rigidbody>().velocity;
+                gob.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            }
+            else
+            {
+                if (StoredValue.ContainsKey(gob))
+                    gob.GetComponent<Rigidbody>().velocity = StoredValue[gob];
+            }
+        }
     }
 
     private void Generator_WaveCleaned(int nb, Generator who)
@@ -209,6 +286,7 @@ public class Level : Layers
         foreach (BaseInput inp in refInput)
         {
             inp.OnInputExecuted -= player.InterpretInput;
+            inp.OnInputExecuted -= Inp_OnInputExecuted;
         }
     }
 
@@ -232,6 +310,24 @@ public class Level : Layers
                 player.StartDelayedState(1, st);
             }
         }
+    }
+
+    public void Menu()
+    {
+        Constants.ApplicationQuit = true;
+        Constants.SetAllConstants(0);
+        Utils.StartFading(1f, Color.black, () => SceneManager.LoadScene("Menu"), () => { Constants.SetAllConstants(1); Constants.ApplicationQuit = false; });
+    }
+
+    public void Restart()
+    {
+        Constants.ApplicationQuit = true;
+        Utils.StartFading(1f, Color.black, () => SceneManager.LoadScene(SceneManager.GetActiveScene().name), () => { Constants.SetAllConstants(1);Constants.ApplicationQuit = false; });
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 
     public void PlayerDied(Character chara)
