@@ -29,6 +29,8 @@ public class Level : Layers
     [SerializeField]
     protected Level NextLevel;
 
+    int countFocus = 0;
+
     public GameObject Player
     {
         get
@@ -36,20 +38,6 @@ public class Level : Layers
             return player.gameObject;
         }
     }
-
-    int indexSelection = 0;
-    public int IndexSelection
-    {
-        get
-        {
-            return indexSelection;
-        }
-        set
-        {
-            indexSelection = Mathf.Clamp(value,0, allButtonsMenu.Count - 1);
-        }
-    }
-    List<Button> allButtonsMenu = new List<Button>();
 
     [SerializeField]
     GameObject LifeUI;
@@ -122,9 +110,17 @@ public class Level : Layers
     //Appellé quand le layer est au dessus de la stack
     public override void OnFocusGet()
     {
-        foreach(Button btn in MenuPrefab.GetComponentsInChildren<Button>())
+        // Faire en sorte que tous les inputs notifient le joueur
+        foreach (BaseInput inp in refInput)
         {
-            allButtonsMenu.Add(btn);
+            inp.OnInputExecuted += player.InterpretInput;
+            inp.OnInputExecuted += Inp_OnInputExecuted;
+        }
+
+        //On arrete là si la couche a deja été mis en avant
+        if (countFocus > 0)
+        {
+            return;
         }
 
         player.Destroyed += PlayerDied;
@@ -183,13 +179,6 @@ public class Level : Layers
             Constants.TotalScore = x;
         };
 
-        // Faire en sorte que tous les inputs notifient le joueur
-        foreach (BaseInput inp in refInput)
-        {
-            inp.OnInputExecuted += player.InterpretInput;
-            inp.OnInputExecuted += Inp_OnInputExecuted;
-        }
-
         // Mettre en route tous les générateurs en leur attribuant un état
         foreach (Generator generator in transform.GetComponentsInChildren<Generator>())
         {
@@ -203,6 +192,7 @@ public class Level : Layers
             generator.WaveCleaned += Generator_WaveCleaned;
         }
         watchNbSpawn.WatchedValue = transform.GetComponentsInChildren<Generator>().Select(x => x.GetComponent<Generator>().EnnemiesLeftToSpawn).Sum();
+        countFocus++;
 
     }
 
@@ -211,48 +201,7 @@ public class Level : Layers
         //On alterne le resultat de l'inputs
         if (tyAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Pause))
         {
-            TogglePause();
-        }
-
-        if (tyAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.AllMovement))
-        {
-            double angle = Utils.AngleBetween(Vector2.left, values);
-            //On va vers le bas
-            if (angle > 70 && angle < 110)
-            {
-                IndexSelection++;
-            }
-            if (angle > -110 && angle < -70)
-            {
-                IndexSelection--;
-            }
-            allButtonsMenu[IndexSelection].Select();
-        }
-    }
-
-    public void TogglePause()
-    {
-        Constants.Pausing = !Constants.Pausing;
-        Constants.SetAllConstants(Constants.Pausing ? 0 : 1);
-        MenuPrefab.SetActive(Constants.Pausing);
-
-        if (Constants.Pausing)
-        {
-            allButtonsMenu[0].Select();
-        }
-     
-        foreach (GameObject gob in GameObject.FindGameObjectsWithTag("Bullet"))
-        {
-            if (Constants.Pausing)
-            {
-                StoredValue[gob] = gob.GetComponent<Rigidbody>().velocity;
-                gob.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            }
-            else
-            {
-                if (StoredValue.ContainsKey(gob))
-                    gob.GetComponent<Rigidbody>().velocity = StoredValue[gob];
-            }
+            Manager.GetInstance().EnableMenu();
         }
     }
 
@@ -443,11 +392,6 @@ public class Level : Layers
         return toAdd;
     }
 
-    private Player Level_TryReachingPlayer()
-    {
-        return player;
-    }
-
     public override void OnFocusLost()
     {
         foreach (BaseInput inp in refInput)
@@ -477,24 +421,6 @@ public class Level : Layers
                 player.StartDelayedState(1, st);
             }
         }
-    }
-
-    public void Menu()
-    {
-        Constants.ApplicationQuit = true;
-        Constants.SetAllConstants(0);
-        Utils.StartFading(1f, Color.black, () => SceneManager.LoadScene("Menu"), () => { Constants.SetAllConstants(1); Constants.ApplicationQuit = false; });
-    }
-
-    public void Restart()
-    {
-        Constants.ApplicationQuit = true;
-        Utils.StartFading(1f, Color.black, () => SceneManager.LoadScene(SceneManager.GetActiveScene().name), () => { Constants.SetAllConstants(1);Constants.ApplicationQuit = false; });
-    }
-
-    public void Quit()
-    {
-        Application.Quit();
     }
 
     public void PlayerDied(Character chara)

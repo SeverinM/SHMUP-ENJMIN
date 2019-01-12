@@ -115,19 +115,6 @@ public static class Constants{
         }
     }
 
-    static bool pausing = false;
-    public static bool Pausing
-    {
-        get
-        {
-            return pausing;
-        }
-        set
-        {
-            pausing = value;
-        }
-    }
-
     //Raccourci
     public static void SetAllConstants(float newValue)
     {
