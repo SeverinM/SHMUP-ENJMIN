@@ -55,7 +55,6 @@ public class KeyBoardInput : BaseInput {
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log("jo");
             RaiseEvent(TypeAction.Down, Actions.Pause, Vector2.zero);
         }
 

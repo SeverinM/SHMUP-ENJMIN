@@ -13,6 +13,9 @@ public class Manager : MonoBehaviour {
 
     [SerializeField]
     Level lvl;
+
+    [SerializeField]
+    Menu menu;
     
     private ServerConnection connection = new ServerConnection();
 
@@ -33,6 +36,20 @@ public class Manager : MonoBehaviour {
 
         AddToStack(lvl);
         lvl.OnNextLevel += Lvl_OnNextLevel;
+    }
+
+    public void EnableMenu()
+    {
+        AddToStack(menu);
+    }
+
+    public static Manager GetInstance()
+    {
+        if (instance == null)
+        {
+            instance = new GameObject().AddComponent<Manager>();
+        }
+        return instance;
     }
 
     /// <summary>
