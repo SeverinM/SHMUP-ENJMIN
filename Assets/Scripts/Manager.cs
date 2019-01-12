@@ -12,10 +12,7 @@ public class Manager : MonoBehaviour {
     Stack<Layers> allLayers = new Stack<Layers>();
 
     [SerializeField]
-    Level lvl;
-
-    [SerializeField]
-    Menu menu;
+    Layers firstLayer;
     
     private ServerConnection connection = new ServerConnection();
 
@@ -32,13 +29,13 @@ public class Manager : MonoBehaviour {
         allInputs.Add(new KeyBoardInput());
         allInputs.Add(new MouseInput());
         allInputs.Add(new ControllerInput());
-        
+        DontDestroyOnLoad(instance);
 
-        AddToStack(lvl);
-        lvl.OnNextLevel += Lvl_OnNextLevel;
+
+        AddToStack(firstLayer);
     }
 
-    public void EnableMenu()
+    public void EnableMenu(Menu menu)
     {
         AddToStack(menu);
     }
@@ -48,6 +45,7 @@ public class Manager : MonoBehaviour {
         if (instance == null)
         {
             instance = new GameObject().AddComponent<Manager>();
+            DontDestroyOnLoad(instance);
         }
         return instance;
     }
@@ -77,12 +75,16 @@ public class Manager : MonoBehaviour {
     /// <param name="lay"></param>
     public void AddToStack(Layers lay)
     {
-        if( allLayers.Count > 0)
+        if( allLayers.Count > 0 && allLayers.Peek() != null)
             allLayers.Peek().OnFocusLost();
 
         allLayers.Push(lay);
         allLayers.Peek().Init(allInputs);
         allLayers.Peek().OnFocusGet();
+        if (allLayers.Peek() is Level)
+        {
+            ((Level)allLayers.Peek()).OnNextLevel += Lvl_OnNextLevel;
+        }
     }
 
     /// <summary>

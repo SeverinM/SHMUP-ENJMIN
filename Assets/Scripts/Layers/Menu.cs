@@ -6,14 +6,14 @@ using UnityEngine.UI;
 
 public class Menu : Layers
 {
-    Dictionary<GameObject, Vector3> StoredValue = new Dictionary<GameObject, Vector3>();
+    protected Dictionary<GameObject, Vector3> StoredValue = new Dictionary<GameObject, Vector3>();
 
     [SerializeField]
-    GameObject parentUI;
+    protected GameObject parentUI;
 
-    List<Button> allButtonsMenu = new List<Button>();
+    protected List<Button> allButtonsMenu = new List<Button>();
 
-    int indexSelection;
+    protected int indexSelection;
     public int IndexSelection
     {
         get
@@ -22,7 +22,7 @@ public class Menu : Layers
         }
         set
         {
-            indexSelection = value % StoredValue.Count;
+            indexSelection = value % allButtonsMenu.Count;
         }
     }
 
@@ -53,7 +53,7 @@ public class Menu : Layers
        
     }
 
-    private void Inp_OnInputExecuted(BaseInput.TypeAction tyAct, BaseInput.Actions acts, Vector2 values)
+    protected void Inp_OnInputExecuted(BaseInput.TypeAction tyAct, BaseInput.Actions acts, Vector2 values)
     {
         if (tyAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.AllMovement))
         {

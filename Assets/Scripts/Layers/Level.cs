@@ -75,6 +75,9 @@ public class Level : Layers
     [SerializeField]
     GameObject textMeshProDefault;
 
+    [SerializeField]
+    Menu menu;
+
     Navigation nav;
 
     int countGenerator = 0;
@@ -201,7 +204,7 @@ public class Level : Layers
         //On alterne le resultat de l'inputs
         if (tyAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Pause))
         {
-            Manager.GetInstance().EnableMenu();
+            Manager.GetInstance().EnableMenu(menu);
         }
     }
 
