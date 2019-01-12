@@ -95,5 +95,10 @@ public class ControllerInput : BaseInput {
         {
             RaiseEvent(TypeAction.Up, Actions.Dash, Vector2.zero);
         }
+
+        if (Input.GetKeyDown(KeyCode.Joystick1Button7))
+        {
+            RaiseEvent(TypeAction.Down, Actions.Pause, Vector2.zero);
+        }
     }
 }

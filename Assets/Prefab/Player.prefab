@@ -45,7 +45,11 @@ GameObject:
   - component: {fileID: 65437895645053864}
   - component: {fileID: 114938182685806996}
   - component: {fileID: 54938321024312278}
+<<<<<<< HEAD
   - component: {fileID: 95899878081975186}
+=======
+  - component: {fileID: 95946686564045684}
+>>>>>>> 398f9b30f2f85f6ada3fd4e4a3c53bb2d6d6b19d
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -292,7 +296,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
+<<<<<<< HEAD
   - {fileID: 2100000, guid: e86756c6fb385474cb3c574e6fcd8aca, type: 2}
+=======
+  - {fileID: 2100000, guid: 97f1b3979d17f3547b3997a43c1fd3d5, type: 2}
+>>>>>>> 398f9b30f2f85f6ada3fd4e4a3c53bb2d6d6b19d
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -499,8 +507,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 91.91821, y: 125.53597, z: 160.22095}
-  m_Center: {x: 0, y: -81.73476, z: 1.9129502}
+  m_Size: {x: 91.91821, y: 154.5388, z: 160.22095}
+  m_Center: {x: 0, y: -96.236176, z: 1.9129502}
 --- !u!65 &65688702874340814
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -513,7 +521,11 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!95 &95899878081975186
+=======
+--- !u!95 &95946686564045684
+>>>>>>> 398f9b30f2f85f6ada3fd4e4a3c53bb2d6d6b19d
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
@@ -571,7 +583,11 @@ MonoBehaviour:
   model: {fileID: 1380677440080142}
   mass: 0.8
   recoveryMat: {fileID: 2100000, guid: 77286c23e931b4b4397bce28b6a22b95, type: 2}
-  life: 4
+  moveSpeed: 14
+  model: {fileID: 1380677440080142}
+  mass: 0.8
+  recoveryMat: {fileID: 2100000, guid: 77286c23e931b4b4397bce28b6a22b95, type: 2}
+  life: 50
   dash: 3
   protectionPrefab: {fileID: 1999096423012838, guid: 7ab713d6b58d82142a6ef567773e3e05,
     type: 2}
@@ -580,9 +596,9 @@ MonoBehaviour:
   distanceDash: 10
   dashCooldown: 2
   maxDashes: 3
-  hookSpeed: 0.9
-  rangeHook: 30
-  speedPull: 10
+  hookSpeed: 1
+  rangeHook: 17
+  speedPull: 35
   coeffHook: 0.8
   dashSpeed: 5
   barrier: {fileID: 4181975481634658}

@@ -280,7 +280,6 @@ public class Tools : EditorWindow {
         float coeff = Vector3.Distance(staticLvl.transform.position, Camera.main.transform.position);
         //Recuperation des quatres coins
         Vector3 leftBottom = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, coeff));
-        Debug.Log(coeff);
         Vector3 leftTop = Camera.main.ScreenToWorldPoint(new Vector3(0, Camera.main.pixelHeight, coeff));
         Vector3 rightBottom = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, 0, coeff));
         Vector3 rightTop = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight, coeff));

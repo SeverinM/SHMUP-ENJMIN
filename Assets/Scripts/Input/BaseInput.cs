@@ -59,7 +59,8 @@ public abstract class BaseInput {
         Shoot,
         Rotate,
         RotateAbsolute,
-        Dash
+        Dash,
+        Pause
     }
 
     //Les classes enfants ne pouvant lever l'evenement il faut le faire depuis cette methode

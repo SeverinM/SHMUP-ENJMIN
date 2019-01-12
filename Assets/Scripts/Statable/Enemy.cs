@@ -314,7 +314,7 @@ public class Enemy : Character
                 //Tir simple en face de lui
                 clone = Instantiate(bulletPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation).GetComponent<Rigidbody>();
                 clone.velocity = transform.forward * shootSpeed;
-                Destroy(clone.gameObject, bulletLastingDuration);
+                clone.GetComponent<Bullet>().Duration = bulletLastingDuration;
                 break;
             case EnemyType.JIM:
                 float x = 0, z = 0;
@@ -333,7 +333,7 @@ public class Enemy : Character
                     clone = Instantiate(bulletPrefab, new Vector3(x, transform.position.y, z), Quaternion.AngleAxis(angle, new Vector3(0, 1, 0))).GetComponent<Rigidbody>();
                     Vector3 direction = Quaternion.Euler(0, angle, 0) * clone.transform.forward;
                     clone.velocity = transform.TransformDirection(direction * shootSpeed);
-                    Destroy(clone.gameObject, bulletLastingDuration);
+                    clone.GetComponent<Bullet>().Duration = bulletLastingDuration;
                 }
                 break;
             case EnemyType.MIKE:
