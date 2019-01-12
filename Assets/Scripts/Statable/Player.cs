@@ -177,6 +177,7 @@ public class Player : Character
                 else
                 {
                     StartRecovery(recoveryDuration);
+                    AkSoundEngine.PostEvent("S_Hurt", gameObject);
                 }
             }
         }

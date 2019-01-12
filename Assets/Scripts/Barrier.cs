@@ -29,6 +29,7 @@ public class Barrier : MonoBehaviour {
         if (other.gameObject.tag == "Bullet")
         {
             Destroy(other.gameObject);
+            AkSoundEngine.PostEvent("S_HitShield", gameObject);
         }
 
         if (other.gameObject.tag == "Ennemy" && isWinching)
