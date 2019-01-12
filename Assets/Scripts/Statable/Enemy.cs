@@ -317,20 +317,20 @@ public class Enemy : Character
                 Destroy(clone.gameObject, bulletLastingDuration);
                 break;
             case EnemyType.JIM:
-                float x = 0, y = 0;
+                float x = 0, z = 0;
 
-                //L'angle du premier projectile est aleatoire
-                float angle = UnityEngine.Random.Range(0, 2 * Mathf.PI);
+                // Orienter l'angle vers l'avant de la tête de Jim
+                float angle = -90f * Mathf.Deg2Rad;
 
                 //Tir en rayon a angle uniforme
                 for (int i = 0; i < maxBullets; i++)
                 {
                     x = (shootRadius * Mathf.Cos(angle)) + transform.position.x;
-                    y = (shootRadius * Mathf.Sin(angle)) + transform.position.z;
+                    z = (shootRadius * Mathf.Sin(angle)) + transform.position.z;
 
-                    angle += ((2 * Mathf.PI) / maxBullets);
-                    angle = angle % (2 * Mathf.PI);
-                    clone = Instantiate(bulletPrefab, new Vector3(x, 0, y), Quaternion.AngleAxis(angle * Mathf.Rad2Deg, new Vector3(0, 1, 0))).GetComponent<Rigidbody>();
+                    angle += ((2 * Mathf.PI )/ maxBullets)/3;
+                    
+                    clone = Instantiate(bulletPrefab, new Vector3(x, transform.position.y, z), Quaternion.AngleAxis(angle, new Vector3(0, 1, 0))).GetComponent<Rigidbody>();
                     Vector3 direction = Quaternion.Euler(0, angle, 0) * clone.transform.forward;
                     clone.velocity = transform.TransformDirection(direction * shootSpeed);
                     Destroy(clone.gameObject, bulletLastingDuration);
