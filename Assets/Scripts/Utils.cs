@@ -72,4 +72,12 @@ public static class Utils {
 
         return finalPosition;
     }
+
+    public static double AngleBetween(Vector2 vector1, Vector2 vector2)
+    {
+        double sin = vector1.x * vector2.y - vector2.x * vector1.y;
+        double cos = vector1.x * vector2.x + vector1.y * vector2.y;
+
+        return Math.Atan2(sin, cos) * (180 / Math.PI);
+    }
 }

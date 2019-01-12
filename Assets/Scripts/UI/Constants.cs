@@ -86,6 +86,20 @@ public static class Constants{
         }
     }
 
+    /// TimeScale des bullets
+    /// </summary>
+    static float timeScaleBullet = 1;
+    public static float TimeScaleBullet
+    {
+        get
+        {
+            return timeScaleBullet;
+        }
+        set
+        {
+            timeScaleBullet = value;
+        }
+    }
 
     //Empeche le OnDestroy quand on quitte le jeu
     static bool applicationQuit;
@@ -101,12 +115,26 @@ public static class Constants{
         }
     }
 
+    static bool pausing = false;
+    public static bool Pausing
+    {
+        get
+        {
+            return pausing;
+        }
+        set
+        {
+            pausing = value;
+        }
+    }
+
     //Raccourci
     public static void SetAllConstants(float newValue)
     {
         TimeScaleEnnemies = newValue;
         TimeScaleGenerators = newValue;
         TimeScalePlayer = newValue;
+        TimeScaleBullet = newValue;
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]

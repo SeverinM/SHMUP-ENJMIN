@@ -9,8 +9,9 @@ public class EnemyAttack : State
 {
     private Enemy enemy;
 
-    private float lastTime;
+    private float lastTime = 0;
     private float shoots = 0;
+    public float totalTime = 0;
     Queue<WaypointElement> elements;
     Transform playerTarget;
 
@@ -18,7 +19,6 @@ public class EnemyAttack : State
     {
         enemy = character.GetComponent<Enemy>();
         elements = elt;
-        lastTime = Time.time;
         playerTarget = player;
     }
     
@@ -62,12 +62,15 @@ public class EnemyAttack : State
     {
         character.transform.LookAt(playerTarget);
         // Lance une attaque selon la periode
-        if (lastTime < Time.time)
+        totalTime += Time.deltaTime * character.PersonalScale * character.GetScale();
+        if (totalTime > lastTime)
         {
             lastTime += enemy.ShootPeriod;
             character.transform.LookAt(playerTarget);
 
-            enemy.Shoot();
+            if (!character.Context.ValuesOrDefault<bool>("InRecovery",false))
+                enemy.Shoot();
+
             shoots++;
 
             if (shoots == enemy.ShootAmount)

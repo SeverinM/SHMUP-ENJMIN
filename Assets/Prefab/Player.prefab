@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 65437895645053864}
   - component: {fileID: 114938182685806996}
   - component: {fileID: 54938321024312278}
+  - component: {fileID: 95946686564045684}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -169,7 +170,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1380677440080142}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -159.60248, y: 114.8, z: 135.27}
+  m_LocalPosition: {x: -160.99, y: 110, z: 146.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4181975481634658}
@@ -291,7 +292,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 7062f88e841c899448b462bd21900beb, type: 2}
+  - {fileID: 2100000, guid: 97f1b3979d17f3547b3997a43c1fd3d5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -498,8 +499,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 91.91821, y: 125.53597, z: 160.22095}
-  m_Center: {x: 0, y: -81.73476, z: 1.9129502}
+  m_Size: {x: 91.91821, y: 154.5388, z: 160.22095}
+  m_Center: {x: 0, y: -96.236176, z: 1.9129502}
 --- !u!65 &65688702874340814
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -512,6 +513,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &95946686564045684
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1380677440080142}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f72129112e7eba54194fb0c66d90f249, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114131631155788512
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -548,20 +567,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7dd465f0ca588b4e81e4cb2410b52db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 6
+  moveSpeed: 10
   model: {fileID: 1380677440080142}
-  mass: 2
+  mass: 0.8
   recoveryMat: {fileID: 2100000, guid: 77286c23e931b4b4397bce28b6a22b95, type: 2}
-  life: 4
+  moveSpeed: 14
+  model: {fileID: 1380677440080142}
+  mass: 0.8
+  recoveryMat: {fileID: 2100000, guid: 77286c23e931b4b4397bce28b6a22b95, type: 2}
+  life: 50
+  dash: 3
   protectionPrefab: {fileID: 1999096423012838, guid: 7ab713d6b58d82142a6ef567773e3e05,
     type: 2}
   impactDeceleration: 5
-  mode: 1
+  mode: 2
   distanceDash: 10
-  hookSpeed: 0.9
-  rangeHook: 30
-  speedPull: 10
+  dashCooldown: 2
+  maxDashes: 3
+  hookSpeed: 1
+  rangeHook: 17
+  speedPull: 35
   coeffHook: 0.8
+  dashSpeed: 5
   barrier: {fileID: 4181975481634658}
   hook: {fileID: 4840222661834636}
 --- !u!120 &120035746370447866

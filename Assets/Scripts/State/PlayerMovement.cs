@@ -47,8 +47,7 @@ public class PlayerMovement : State
         }
 
         if (mode.Equals(Player.MovementMode.NormalDash))
-        {
-           
+        {  
             //Un mouvement quelconque (manette / souris) est detecté
             if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.AllMovement) && character.GetScale() * character.PersonalScale > 0)
             {
@@ -69,7 +68,8 @@ public class PlayerMovement : State
                 if (((Player)character).Dash > 0) // StartDashing
                 {
                     ((Player)character).Dash--;
-                    dashing = ((Player)character).DistanceDash/100; 
+                    dashing = ((Player)character).DistanceDash/100;
+                    AkSoundEngine.PostEvent("S_Dash", character.gameObject);
                 }
             }
         }
@@ -78,9 +78,11 @@ public class PlayerMovement : State
         //Mode dash
         if (mode.Equals(Player.MovementMode.Dash))
         {
+            // start dash
             if (typeAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Dash) && character.GetScale() * character.PersonalScale > 0)
             {
                 character.transform.position += character.transform.forward * ((Player)character).DistanceDash;
+                AkSoundEngine.PostEvent("S_Dash", character.gameObject);
             }
 
             //rotation stick gauche

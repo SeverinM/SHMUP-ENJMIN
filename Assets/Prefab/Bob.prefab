@@ -299,7 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1070dd86fa54834db841af2a97dbe44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 15
   model: {fileID: 1561519513433908}
   mass: 3
   recoveryMat: {fileID: 2100000, guid: 3615e864792955a4a912eda2c4bbddf0, type: 2}
@@ -309,8 +309,8 @@ MonoBehaviour:
     type: 2}
   impactDeceleration: 5
   attackRange: 5
-  shootPeriod: 0.5
-  shootAmount: 3
+  shootPeriod: 0.25
+  shootAmount: 5
   shootSpeed: 8
   maxBullets: 5
   shootRadius: 1
