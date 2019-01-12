@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 54627917516727406}
   m_Layer: 0
   m_Name: WinchableBob
-  m_TagString: Pullable
+  m_TagString: Winchable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -316,6 +316,7 @@ MonoBehaviour:
   shootRadius: 1
   bulletLastingDuration: 2
   killScore: 50
+  bulletLastingDuration: 10
   bulletPrefab: {fileID: 1282062362704492, guid: 119f19512e8adaa4a976ceeddba29da5,
     type: 2}
   movementType: 1

@@ -344,11 +344,16 @@ public class Level : Layers
         countGenerator--;
         if (countGenerator == 0)
         {
-            //On renvoit successivement des events
-            if (NextLevel != null && OnNextLevel != null)
+            if (NextLevel != null)
             {
-                player.StartDelayedState(1, new IdleTransition(player));
                 player.NextLevel += () => { OnNextLevel(NextLevel); };
+                WaypointElement we = new WaypointElement();
+                we.speed = 1;
+                we.targetPosition = Utils.GetPositionAbsolute(new Vector3(0.5f, 0, 0.5f), Mathf.Abs(Camera.main.transform.position.y - player.transform.position.y));
+                Queue<WaypointElement> queue = new Queue<WaypointElement>();
+                queue.Enqueue(we);
+                State st = new FollowPathMovement(player, queue, () => player.SetState(new IdleTransition(player)));
+                player.StartDelayedState(1, st);
             }
         }
     }
