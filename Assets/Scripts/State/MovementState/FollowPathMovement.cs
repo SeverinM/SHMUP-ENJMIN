@@ -93,7 +93,6 @@ public class FollowPathMovement : State
     {
         deltaPosition = targetPosition - character.transform.position;
 
-        //Waypoint atteint ?
         if (Vector3.Distance(targetPosition, character.transform.position) < (GetSpeed() * character.PersonalScale * character.GetScale() * Time.deltaTime * 4))
         {
             positions.Dequeue();
@@ -132,7 +131,7 @@ public class FollowPathMovement : State
         if (deltaPosition != Vector3.zero)
             character.transform.forward = deltaPosition;
 
-        character.Move(deltaPosition.normalized);
+        character.Move(deltaPosition.normalized * GetSpeed());
     }
 
     float GetSpeed()

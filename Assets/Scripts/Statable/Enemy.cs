@@ -300,8 +300,16 @@ public class Enemy : Character
     /// </summary>
     private void FollowCharacter()
     {
-        if (Leader != null)
-            SetState(new EnemyMovement(this, Leader.transform, true));
+        if (enemyType == EnemyType.BOB && Leader == null)
+        {
+            Context.SetInDictionary("FollowButAvoid", GameObject.FindObjectOfType<Player>().transform);
+            FollowRandomPath();
+        }
+        else
+        {
+            if (Leader != null)
+                SetState(new EnemyMovement(this, Leader.transform, true));
+        }
     }
 
     //Chaque ennemi agit differemment selon son type

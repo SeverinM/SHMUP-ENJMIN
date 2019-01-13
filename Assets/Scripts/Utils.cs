@@ -42,7 +42,8 @@ public static class Utils {
     public static void EndFade()
     {
         isFading = false;
-        GameObject.Destroy(fading.gameObject);
+        if (fading != null)
+            GameObject.Destroy(fading.gameObject);
     }
 
     //Ne marche que si la camera regarde parfaitement vers le bas

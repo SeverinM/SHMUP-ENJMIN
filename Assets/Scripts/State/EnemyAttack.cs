@@ -39,6 +39,7 @@ public class EnemyAttack : State
         if (character.Context.ValuesOrDefault<Transform>("FollowButAvoid",null) != null)
         {
             enemy.FollowRandomPath();
+            return;
         }
 
         //Il existe un leader , il continue a le suivre

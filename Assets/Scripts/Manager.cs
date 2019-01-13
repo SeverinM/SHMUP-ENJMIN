@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System.Linq;
 
 /// <summary>
 /// Classe singleton et indestructibles ayant pour but de tenir des references d'autres objets et de gerer les layers
@@ -12,10 +14,7 @@ public class Manager : MonoBehaviour {
     Stack<Layers> allLayers = new Stack<Layers>();
 
     [SerializeField]
-    Level lvl;
-
-    [SerializeField]
-    Menu menu;
+    Layers firstLayer;
     
     private ServerConnection connection = new ServerConnection();
 
@@ -32,13 +31,28 @@ public class Manager : MonoBehaviour {
         allInputs.Add(new KeyBoardInput());
         allInputs.Add(new MouseInput());
         allInputs.Add(new ControllerInput());
-        
+        SceneManager.sceneLoaded += SceneManager_sceneLoaded;
 
-        AddToStack(lvl);
-        lvl.OnNextLevel += Lvl_OnNextLevel;
+        DontDestroyOnLoad(instance);
+        AddToStack(firstLayer);
     }
 
-    public void EnableMenu()
+    private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+        PopAll();
+        Layers lay = GameObject.FindObjectsOfType<Layers>().Where(x => x.IsFirst).First();
+        AddToStack(lay);
+    }
+
+    public void PopAll()
+    {
+        while(allLayers.Count > 0)
+        {
+            PopToStack();
+        }
+    }
+
+    public void EnableMenu(Menu menu)
     {
         AddToStack(menu);
     }
@@ -48,6 +62,7 @@ public class Manager : MonoBehaviour {
         if (instance == null)
         {
             instance = new GameObject().AddComponent<Manager>();
+            DontDestroyOnLoad(instance);
         }
         return instance;
     }
@@ -75,14 +90,34 @@ public class Manager : MonoBehaviour {
     /// On ajoute une couche au dessus du layer
     /// </summary>
     /// <param name="lay"></param>
-    public void AddToStack(Layers lay)
+    public void AddToStack(Layers lay, bool destroyPrevious = false)
     {
-        if( allLayers.Count > 0)
-            allLayers.Peek().OnFocusLost();
-
+        if(allLayers.Count > 0)
+        {
+            if (allLayers.Peek() != null)
+            {
+                allLayers.Peek().OnFocusLost();
+                if (destroyPrevious)
+                {
+                    Destroy(allLayers.Pop().gameObject);
+                }
+            }
+            else
+            {
+                //Dans le cas où le dessus du tas est un null
+                if (destroyPrevious)
+                {
+                    allLayers.Pop();
+                }
+            }
+        }
         allLayers.Push(lay);
         allLayers.Peek().Init(allInputs);
         allLayers.Peek().OnFocusGet();
+        if (allLayers.Peek() is Level)
+        {
+            ((Level)allLayers.Peek()).OnNextLevel += Lvl_OnNextLevel;
+        }
     }
 
     /// <summary>
@@ -90,8 +125,17 @@ public class Manager : MonoBehaviour {
     /// </summary>
     public void PopToStack()
     {
-        allLayers.Peek().OnFocusLost();
-        Destroy(allLayers.Pop().gameObject);
-        allLayers.Peek().OnFocusGet();
+        if (allLayers.Peek() != null)
+        {
+            allLayers.Peek().OnFocusLost();
+            Destroy(allLayers.Pop().gameObject);
+        }
+        else
+        {
+            allLayers.Pop();
+        }
+        
+        if (allLayers.Count > 0 && allLayers.Peek() != null)
+            allLayers.Peek().OnFocusGet();
     }
 }

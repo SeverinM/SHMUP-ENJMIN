@@ -115,6 +115,9 @@ public static class Constants{
         }
     }
 
+    public static System.Action Act { get; set; }
+    public static System.Action Act2 { get; set; }
+
     //Raccourci
     public static void SetAllConstants(float newValue)
     {
@@ -122,11 +125,5 @@ public static class Constants{
         TimeScaleGenerators = newValue;
         TimeScalePlayer = newValue;
         TimeScaleBullet = newValue;
-    }
-
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-    public static void Debug()
-    {
-        UnityEngine.Debug.Log("Ce code se lancera tout le temps");
     }
 }

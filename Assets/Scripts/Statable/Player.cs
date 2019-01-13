@@ -226,10 +226,10 @@ public class Player : Character
 
     public override void OnDestroy()
     {
-        base.OnDestroy();
         if (!Constants.ApplicationQuit)
         {
-            actualState = null;
+            base.OnDestroy();
+            SetState(null);
             Utils.StartFading(1, Color.black, () => { Constants.SetAllConstants(0); SceneManager.LoadScene(SceneManager.GetActiveScene().name); }, () => Constants.SetAllConstants(1));
         }
     }

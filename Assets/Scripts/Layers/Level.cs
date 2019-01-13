@@ -35,6 +35,10 @@ public class Level : Layers
     {
         get
         {
+            if (player == null)
+            {
+                player = GameObject.FindObjectOfType<Player>();
+            }
             return player.gameObject;
         }
     }
@@ -75,6 +79,9 @@ public class Level : Layers
     [SerializeField]
     GameObject textMeshProDefault;
 
+    [SerializeField]
+    Menu menu;
+
     Navigation nav;
 
     int countGenerator = 0;
@@ -105,8 +112,6 @@ public class Level : Layers
     public delegate void LevelParam(Level nextLevel);
     public event LevelParam OnNextLevel;
 
-
-
     //Appellé quand le layer est au dessus de la stack
     public override void OnFocusGet()
     {
@@ -123,6 +128,7 @@ public class Level : Layers
             return;
         }
 
+        Constants.ApplicationQuit = false;
         player.Destroyed += PlayerDied;
 
         //Mise en place des data bindings;
@@ -193,7 +199,7 @@ public class Level : Layers
         }
         watchNbSpawn.WatchedValue = transform.GetComponentsInChildren<Generator>().Select(x => x.GetComponent<Generator>().EnnemiesLeftToSpawn).Sum();
         countFocus++;
-
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Inp_OnInputExecuted(BaseInput.TypeAction tyAct, BaseInput.Actions acts, Vector2 values)
@@ -201,7 +207,7 @@ public class Level : Layers
         //On alterne le resultat de l'inputs
         if (tyAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Pause))
         {
-            Manager.GetInstance().EnableMenu();
+            Manager.GetInstance().EnableMenu(menu);
         }
     }
 
@@ -298,26 +304,26 @@ public class Level : Layers
     /// <param name="killScore"></param>
     internal void PopScore(Character chara, int killScore)
     {
-        TextMeshProUGUI toAddText = Instantiate(textMeshProDefault, canvas.transform).GetComponent<TextMeshProUGUI>();
+        //TextMeshProUGUI toAddText = Instantiate(textMeshProDefault, canvas.transform).GetComponent<TextMeshProUGUI>();
 
-        // Position du texte au dessus d'un gameObject
-        Vector3 offsetPos = new Vector3(chara.transform.position.x, chara.transform.position.y, chara.transform.position.z + 0.5f);
+        //// Position du texte au dessus d'un gameObject
+        //Vector3 offsetPos = new Vector3(chara.transform.position.x, chara.transform.position.y, chara.transform.position.z + 0.5f);
 
-        // Calcul de la position à l'écran 
-        Vector2 canvasPos;
-        Vector2 canvasEndPos;
-        Vector2 screenPoint = Camera.main.WorldToScreenPoint(offsetPos);
+        //// Calcul de la position à l'écran 
+        //Vector2 canvasPos;
+        //Vector2 canvasEndPos;
+        //Vector2 screenPoint = Camera.main.WorldToScreenPoint(offsetPos);
 
-        // Convertir la position à l'écran vers l'espace du canvas 
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.GetComponent<RectTransform>(), screenPoint, null, out canvasPos);
+        //// Convertir la position à l'écran vers l'espace du canvas 
+        //RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.GetComponent<RectTransform>(), screenPoint, null, out canvasPos);
 
-        toAddText.text = killScore.ToString();
-        toAddText.transform.localPosition = canvasPos;
+        //toAddText.text = killScore.ToString();
+        //toAddText.transform.localPosition = canvasPos;
 
-        canvasEndPos = canvasPos;
-        canvasEndPos.y += 10f;
+        //canvasEndPos = canvasPos;
+        //canvasEndPos.y += 10f;
 
-        StartCoroutine(PopScoreCoroutine(toAddText, canvasPos, canvasEndPos));
+        //StartCoroutine(PopScoreCoroutine(toAddText, canvasPos, canvasEndPos));
     }
 
     /// <summary>
@@ -407,6 +413,7 @@ public class Level : Layers
     public void GeneratorDone()
     {
         countGenerator--;
+        Debug.Log(countGenerator);
         if (countGenerator == 0)
         {
             if (NextLevel != null)
@@ -425,7 +432,5 @@ public class Level : Layers
 
     public void PlayerDied(Character chara)
     {
-        Debug.Log("Le joueur est mort");
     }
-
 }

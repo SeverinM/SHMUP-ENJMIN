@@ -7,6 +7,16 @@ using UnityEngine;
 /// </summary>
 public abstract class Layers : MonoBehaviour {
 
+    [SerializeField]
+    bool isFirst;
+    public bool IsFirst
+    {
+        get
+        {
+            return isFirst;
+        }
+    }
+
     protected List<BaseInput> refInput = new List<BaseInput>();
 
     public void Init(List<BaseInput> refs)
