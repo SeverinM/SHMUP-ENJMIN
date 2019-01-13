@@ -49,7 +49,6 @@ public class MainMenu : Layers {
 
     public override void OnFocusGet()
     {
-        parentUI.SetActive(true);
         foreach (BaseInput bI in refInput)
         {
             bI.OnInputExecuted += BI_OnInputExecuted;
@@ -78,7 +77,8 @@ public class MainMenu : Layers {
             {
                 IndexSelection--;
             }
-            allButtonsMenu[IndexSelection].Select();
+            if (allButtonsMenu != null)
+                allButtonsMenu[IndexSelection].Select();
         }
     }
 
@@ -86,7 +86,8 @@ public class MainMenu : Layers {
     {
         foreach (BaseInput bI in refInput)
         {
-            bI.OnInputExecuted -= BI_OnInputExecuted;
+            bI.Reset();
         }
+        allButtonsMenu = null;
     }
 }

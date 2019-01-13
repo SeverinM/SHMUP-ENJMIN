@@ -205,7 +205,8 @@ public class Level : Layers
         float deltaY = Mathf.Abs(plyr.transform.position.y - transform.position.y);
         if (plyr && deltaY > 0.1f)
         {
-            plyr.transform.position = Utils.GetPositionAbsolute(new Vector3(0.5f, 0, 0.5f), Mathf.Abs(transform.position.y - Camera.main.transform.position.y));
+            Vector3 camPos = Utils.GetPositionAbsolute(new Vector3(0.5f, 0, 0.5f), Mathf.Abs(transform.position.y - Camera.main.transform.position.y));
+            plyr.transform.position = camPos;
         }
     }
 

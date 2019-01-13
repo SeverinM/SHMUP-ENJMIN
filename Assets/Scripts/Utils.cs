@@ -31,7 +31,6 @@ public static class Utils {
     {
         if (isFading || duration <= 0)
         {
-            Debug.Log("Une transition a deja lieu");
             return;
         }
 

@@ -25,11 +25,23 @@ public class Manager : MonoBehaviour {
             return cameraPositionRelative;
         }
     }
+
+    public Layers TopLayer
+    {
+        get
+        {
+            if (allLayers.Count > 0)
+            {
+                return allLayers.Peek();
+            }
+            return null;
+        }
+    }
     
     private ServerConnection connection = new ServerConnection();
 
 	// Use this for initialization
-	void Start () {
+	void Awake() {
 		if (instance != null)
         {
             Destroy(gameObject);
@@ -41,12 +53,17 @@ public class Manager : MonoBehaviour {
         allInputs.Add(new KeyBoardInput());
         allInputs.Add(new MouseInput());
         allInputs.Add(new ControllerInput());
-        SceneManager.sceneLoaded += SceneManager_sceneLoaded;
 
         DontDestroyOnLoad(instance);
+    }
+
+    private void Start()
+    {
+        SceneManager.sceneLoaded += SceneManager_sceneLoaded;
         AddToStack(firstLayer);
     }
 
+    //Lorsuq'un scene est chargé chercher le IsFirst
     private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
         PopAll();
