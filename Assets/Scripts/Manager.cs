@@ -12,6 +12,7 @@ public class Manager : MonoBehaviour {
     static Manager instance;
     List<BaseInput> allInputs = new List<BaseInput>();
     Stack<Layers> allLayers = new Stack<Layers>();
+    public int Count = 0;
 
     [SerializeField]
     Layers firstLayer;
@@ -66,7 +67,7 @@ public class Manager : MonoBehaviour {
     //Lorsuq'un scene est chargé chercher le IsFirst
     private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
-        PopAll();
+        //PopAll();
         Layers lay = GameObject.FindObjectsOfType<Layers>().Where(x => x.IsFirst).First();
         AddToStack(lay);
     }
@@ -119,6 +120,7 @@ public class Manager : MonoBehaviour {
     /// <param name="lay"></param>
     public void AddToStack(Layers lay, bool destroyPrevious = false)
     {
+        Count++;
         if(allLayers.Count > 0)
         {
             if (allLayers.Peek() != null)

@@ -232,6 +232,7 @@ public class Level : Layers
 
     public void Update()
     {
+
         watchNbSpawn.WatchedValue = transform.GetComponentsInChildren<Generator>().Select(x => x.GetComponent<Generator>().EnnemiesLeftToSpawn).Sum();
 
         // Bonus
@@ -410,7 +411,9 @@ public class Level : Layers
     {
         foreach (BaseInput inp in refInput)
         {
-            inp.OnInputExecuted -= player.InterpretInput;
+            if (player != null)
+                inp.OnInputExecuted -= player.InterpretInput;
+
             inp.OnInputExecuted -= Inp_OnInputExecuted;
         }
     }

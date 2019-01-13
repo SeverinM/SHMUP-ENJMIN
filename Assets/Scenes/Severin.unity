@@ -334,6 +334,36 @@ Prefab:
       propertyPath: speedPull
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 65437895645053864, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 65437895645053864, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 2.809494
+      objectReference: {fileID: 0}
+    - target: {fileID: 65437895645053864, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: m_Center.x
+      value: 0.09302521
+      objectReference: {fileID: 0}
+    - target: {fileID: 65437895645053864, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: m_Size.z
+      value: 1.8528748
+      objectReference: {fileID: 0}
+    - target: {fileID: 65437895645053864, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: m_Center.z
+      value: -0.42643738
+      objectReference: {fileID: 0}
+    - target: {fileID: 114938182685806996, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: life
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
   m_IsPrefabAsset: 0
@@ -2109,14 +2139,14 @@ MonoBehaviour:
   allWaves:
   - allEnnemies:
     - enn: 0
-      enMov: 1
+      enMov: 2
       spawnAfter: 1
       Waypoints:
         loop: 0
         allWaypoints:
-        - targetPosition: {x: -188.12146, y: 109.71488, z: 131.0505}
+        - targetPosition: {x: 0, y: 0, z: 0}
           speed: 1
-        - targetPosition: {x: -188.12146, y: 109.714874, z: 161.54887}
+        - targetPosition: {x: 0, y: 0, z: 1}
           speed: 1
       selected: 1
       speed: 2
