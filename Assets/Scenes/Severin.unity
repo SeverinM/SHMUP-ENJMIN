@@ -329,6 +329,11 @@ Prefab:
       propertyPath: mass
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114938182685806996, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: speedPull
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
   m_IsPrefabAsset: 0
@@ -2118,51 +2123,6 @@ MonoBehaviour:
       life: 2
       spawned: 0
       followPlayer: 1
-    - enn: 0
-      enMov: 1
-      spawnAfter: 2
-      Waypoints:
-        loop: 0
-        allWaypoints:
-        - targetPosition: {x: -188.12146, y: 109.71488, z: 131.0505}
-          speed: 1
-        - targetPosition: {x: -188.12146, y: 109.714874, z: 161.54887}
-          speed: 1
-      selected: 1
-      speed: 2
-      life: 2
-      spawned: 0
-      followPlayer: 0
-    - enn: 0
-      enMov: 1
-      spawnAfter: 3
-      Waypoints:
-        loop: 0
-        allWaypoints:
-        - targetPosition: {x: -188.12146, y: 109.71488, z: 131.0505}
-          speed: 1
-        - targetPosition: {x: -188.12146, y: 109.714874, z: 161.54887}
-          speed: 1
-      selected: 1
-      speed: 2
-      life: 2
-      spawned: 0
-      followPlayer: 0
-    - enn: 0
-      enMov: 1
-      spawnAfter: 4
-      Waypoints:
-        loop: 0
-        allWaypoints:
-        - targetPosition: {x: -188.12146, y: 109.71488, z: 131.0505}
-          speed: 1
-        - targetPosition: {x: -188.12146, y: 109.714874, z: 161.54887}
-          speed: 1
-      selected: 1
-      speed: 2
-      life: 2
-      spawned: 0
-      followPlayer: 0
     delay: 0
     firstIsLeader: 1
     spacingX: 0
