@@ -3359,7 +3359,7 @@ GameObject:
   - component: {fileID: 996643521}
   - component: {fileID: 996643520}
   m_Layer: 0
-  m_Name: Manager
+  m_Name: ManagerMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3377,6 +3377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstLayer: {fileID: 1063279016}
+  cameraPositionRelative: {x: 0, y: 27.1, z: 0}
 --- !u!4 &996643521
 Transform:
   m_ObjectHideFlags: 0

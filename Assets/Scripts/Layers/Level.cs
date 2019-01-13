@@ -85,20 +85,14 @@ public class Level : Layers
     Navigation nav;
 
     int countGenerator = 0;
-
-    private int score = 0;
-
-    private int bonus = 0;
-
-    private float textDuration = 1.0f;
-
-    private float bonusDuration = 2.0f;
-    private float timeBonus;
-
+    int score = 0;
+    int bonus = 0;
+    float textDuration = 1.0f;
+    float bonusDuration = 2.0f;
+    float timeBonus;
 
     Dictionary<GameObject, Text> characterTexts = new Dictionary<GameObject, Text>();
     Dictionary<GameObject, Vector3> StoredValue = new Dictionary<GameObject, Vector3>();
-
 
     [HideInInspector]
     public List<GameObject> characters = new List<GameObject>();
@@ -115,6 +109,8 @@ public class Level : Layers
     //Appellé quand le layer est au dessus de la stack
     public override void OnFocusGet()
     {
+        TryPlace();
+
         // Faire en sorte que tous les inputs notifient le joueur
         foreach (BaseInput inp in refInput)
         {
@@ -200,6 +196,17 @@ public class Level : Layers
         watchNbSpawn.WatchedValue = transform.GetComponentsInChildren<Generator>().Select(x => x.GetComponent<Generator>().EnnemiesLeftToSpawn).Sum();
         countFocus++;
         DontDestroyOnLoad(gameObject);
+    }
+
+    void TryPlace()
+    {
+        Camera.main.transform.position = transform.position + Manager.GetInstance().CameraPositionRelative;
+        Player plyr = GameObject.FindObjectOfType<Player>();
+        float deltaY = Mathf.Abs(plyr.transform.position.y - transform.position.y);
+        if (plyr && deltaY > 0.1f)
+        {
+            plyr.transform.position = Utils.GetPositionAbsolute(new Vector3(0.5f, 0, 0.5f), Mathf.Abs(transform.position.y - Camera.main.transform.position.y));
+        }
     }
 
     private void Inp_OnInputExecuted(BaseInput.TypeAction tyAct, BaseInput.Actions acts, Vector2 values)

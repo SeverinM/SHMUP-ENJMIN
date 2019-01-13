@@ -15,6 +15,16 @@ public class Manager : MonoBehaviour {
 
     [SerializeField]
     Layers firstLayer;
+
+    [SerializeField]
+    Vector3 cameraPositionRelative;
+    public Vector3 CameraPositionRelative
+    {
+        get
+        {
+            return cameraPositionRelative;
+        }
+    }
     
     private ServerConnection connection = new ServerConnection();
 
