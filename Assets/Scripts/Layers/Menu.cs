@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Linq;
 
 public class Menu : Layers
 {
@@ -22,7 +23,7 @@ public class Menu : Layers
         }
         set
         {
-            indexSelection = value % allButtonsMenu.Count;
+            indexSelection = Mathf.Clamp(value, 0, allButtonsMenu.Count - 1);
         }
     }
 
@@ -50,7 +51,7 @@ public class Menu : Layers
         {
             inp.OnInputExecuted += Inp_OnInputExecuted;
         }
-       
+        DontDestroyOnLoad(gameObject);
     }
 
     protected void Inp_OnInputExecuted(BaseInput.TypeAction tyAct, BaseInput.Actions acts, Vector2 values)
@@ -72,7 +73,7 @@ public class Menu : Layers
 
         if (tyAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Pause))
         {
-            Manager.GetInstance().PopToStack();
+            Resume();
         }
     }
 
@@ -92,18 +93,23 @@ public class Menu : Layers
         }
     }
 
+    public void Resume()
+    {
+        Manager.GetInstance().PopToStack();
+    }
+
     public void GoToMenu()
     {
         Constants.ApplicationQuit = true;
         Constants.SetAllConstants(0);
-        Debug.Log("menu");
         Utils.StartFading(1f, Color.black, () => SceneManager.LoadScene("Menu"), () => { Constants.SetAllConstants(1); Constants.ApplicationQuit = false; });
     }
 
     public void Restart()
     {
         Constants.ApplicationQuit = true;
-        Utils.StartFading(1f, Color.black, () => SceneManager.LoadScene(SceneManager.GetActiveScene().name), () => { Constants.SetAllConstants(1); Constants.ApplicationQuit = false; });
+        Manager.GetInstance().PopAll();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void Quit()
