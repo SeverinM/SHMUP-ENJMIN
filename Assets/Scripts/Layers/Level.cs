@@ -62,10 +62,10 @@ public class Level : Layers
     GameObject DashPrefab;
 
     [SerializeField]
-    Text ScoreUI;
+    TextMeshProUGUI ScoreUI;
 
     [SerializeField]
-    Text BonusUI;
+    TextMeshProUGUI BonusUI;
 
     [SerializeField]
     GameObject canvas;
