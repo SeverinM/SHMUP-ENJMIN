@@ -562,6 +562,47 @@ MonoBehaviour:
     positionOffset: {x: 0, y: 0, z: 0}
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
+--- !u!1 &1076448781
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1076448783}
+  - component: {fileID: 1076448782}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1076448782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1076448781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d4dc536932db3b4fae38ce7f5fc79ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstLayer: {fileID: 2050674100}
+--- !u!4 &1076448783
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1076448781}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 28.426346, y: 48.400635, z: -10.839905}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1088336894
 GameObject:
   m_ObjectHideFlags: 0
@@ -2062,49 +2103,65 @@ MonoBehaviour:
   allWaves:
   - allEnnemies:
     - enn: 0
-      enMov: 0
+      enMov: 1
       spawnAfter: 1
       Waypoints:
         loop: 0
-        allWaypoints: []
-      selected: 0
+        allWaypoints:
+        - targetPosition: {x: -160.98915, y: 109.714874, z: 161.54887}
+          speed: 0
+        - targetPosition: {x: -160.98915, y: 109.71488, z: 131.0505}
+          speed: 0
+      selected: 1
       speed: 4
       life: 2
       spawned: 0
       followPlayer: 1
     - enn: 0
-      enMov: 0
+      enMov: 1
       spawnAfter: 2
       Waypoints:
         loop: 0
-        allWaypoints: []
-      selected: 0
+        allWaypoints:
+        - targetPosition: {x: -160.98915, y: 109.714874, z: 161.54887}
+          speed: 0
+        - targetPosition: {x: -160.98915, y: 109.71488, z: 131.0505}
+          speed: 0
+      selected: 1
       speed: 4
       life: 2
       spawned: 0
-      followPlayer: 1
+      followPlayer: 0
     - enn: 0
-      enMov: 0
+      enMov: 1
       spawnAfter: 3
       Waypoints:
         loop: 0
-        allWaypoints: []
-      selected: 0
+        allWaypoints:
+        - targetPosition: {x: -160.98915, y: 109.714874, z: 161.54887}
+          speed: 0
+        - targetPosition: {x: -160.98915, y: 109.71488, z: 131.0505}
+          speed: 0
+      selected: 1
       speed: 4
       life: 2
       spawned: 0
-      followPlayer: 1
+      followPlayer: 0
     - enn: 0
-      enMov: 0
+      enMov: 1
       spawnAfter: 4
       Waypoints:
         loop: 0
-        allWaypoints: []
-      selected: 0
+        allWaypoints:
+        - targetPosition: {x: -160.98915, y: 109.714874, z: 161.54887}
+          speed: 0
+        - targetPosition: {x: -160.98915, y: 109.71488, z: 131.0505}
+          speed: 0
+      selected: 1
       speed: 4
       life: 2
       spawned: 0
-      followPlayer: 1
+      followPlayer: 0
     delay: 0
     firstIsLeader: 1
     spacingX: 0
