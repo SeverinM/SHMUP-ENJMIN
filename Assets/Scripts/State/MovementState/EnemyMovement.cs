@@ -47,13 +47,6 @@ public class EnemyMovement : State
             character.SetState(new EnemyAttack(character, allElems, target.GetComponent<Character>().Context.ValuesOrDefault<Transform>("Target", null)));
         }
 
-        //Un bob poursuit un ennemie differemment qui est un joueur 
-        if (target.GetComponent<Player>() != null && enemy.enemyType == Enemy.EnemyType.BOB)
-        {
-            enemy.Context.SetInDictionary("FollowButAvoid", target);
-            enemy.FollowRandomPath();
-        }
-
         // Si la cible à été détruit, alors on se déplace aléatoirement
         if (target == null)
         {

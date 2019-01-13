@@ -85,8 +85,6 @@ public class GenerateEnemies : State
                 enn.Destroyed += EnnemyDestroyed;
                 x.spawned = true;
                 currentWave.firstIsLeader = false;
-                if (x.followPlayer)
-                    enn.SetState(new EnemyMovement(enn, level.Player.transform));
             }
         }
         
