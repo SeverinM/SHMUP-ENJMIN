@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -562,7 +562,7 @@ MonoBehaviour:
   levelObject: {fileID: 938488901}
   allWaves:
   - allEnnemies:
-    - enn: 0
+    - enn: 1
       enMov: 0
       spawnAfter: 0
       Waypoints:
@@ -581,7 +581,7 @@ MonoBehaviour:
       life: 1
       spawned: 0
       followPlayer: 1
-    - enn: 0
+    - enn: 1
       enMov: 0
       spawnAfter: 0
       Waypoints:
@@ -600,7 +600,7 @@ MonoBehaviour:
       life: 1
       spawned: 0
       followPlayer: 1
-    - enn: 0
+    - enn: 1
       enMov: 0
       spawnAfter: 0
       Waypoints:
@@ -783,7 +783,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 169484686}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -1.5375004, y: 0.28750038, z: 0.46249962}
+  m_LocalPosition: {x: -1.516, y: 0.28750038, z: 0.46249962}
   m_LocalScale: {x: 0.125, y: 0.12500006, z: 0.12500006}
   m_Children: []
   m_Father: {fileID: 216492865}
@@ -949,6 +949,10 @@ Prefab:
     - target: {fileID: 4110631392572846, guid: 46c9216ca856d3e4d836743c1d9c8564, type: 2}
       propertyPath: m_RootOrder
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1561519513433908, guid: 46c9216ca856d3e4d836743c1d9c8564, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46c9216ca856d3e4d836743c1d9c8564, type: 2}
@@ -2628,7 +2632,7 @@ GameObject:
   - component: {fileID: 805271052}
   - component: {fileID: 805271053}
   m_Layer: 0
-  m_Name: cristal_01
+  m_Name: cristal_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3288,6 +3292,97 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &979713344
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 979713345}
+  - component: {fileID: 979713346}
+  m_Layer: 0
+  m_Name: GeneratorLvl1 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &979713345
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 979713344}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.53, y: 0, z: 0.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2050674101}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &979713346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 979713344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74ea6ec4297249d4cbad984f0434a79a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 6
+  model: {fileID: 0}
+  mass: 3
+  recoveryMat: {fileID: 0}
+  life: 3
+  dash: 3
+  protectionPrefab: {fileID: 0}
+  impactDeceleration: 5
+  levelObject: {fileID: 2050674099}
+  allWaves:
+  - allEnnemies:
+    - enn: 1
+      enMov: 2
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints: []
+      selected: 0
+      speed: 1
+      life: 1
+      spawned: 0
+      followPlayer: 1
+    - enn: 1
+      enMov: 2
+      spawnAfter: 1
+      Waypoints:
+        loop: 0
+        allWaypoints: []
+      selected: 0
+      speed: 1
+      life: 1
+      spawned: 0
+      followPlayer: 1
+    - enn: 1
+      enMov: 2
+      spawnAfter: 2
+      Waypoints:
+        loop: 0
+        allWaypoints: []
+      selected: 0
+      speed: 1
+      life: 1
+      spawned: 0
+      followPlayer: 1
+    delay: 0.2
+    firstIsLeader: 0
+    spacingX: 0
+    spacingZ: 0
+  Count: 0
+  WaveCount: 0
+  AllLocks: []
 --- !u!1001 &1028703797
 Prefab:
   m_ObjectHideFlags: 0
@@ -3498,6 +3593,72 @@ MonoBehaviour:
     positionOffset: {x: 0, y: 0, z: 0}
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
+--- !u!1 &1068393272
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1068393274}
+  - component: {fileID: 1068393273}
+  m_Layer: 0
+  m_Name: Directional Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!108 &1068393273
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1068393272}
+  m_Enabled: 1
+  serializedVersion: 8
+  m_Type: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!4 &1068393274
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1068393272}
+  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1087241301
 GameObject:
   m_ObjectHideFlags: 0
@@ -3814,6 +3975,97 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1143800742}
   m_CullTransparentMesh: 0
+--- !u!1 &1169080222
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1169080223}
+  - component: {fileID: 1169080224}
+  m_Layer: 0
+  m_Name: GeneratorLvl1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1169080223
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1169080222}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.89, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2050674101}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1169080224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1169080222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74ea6ec4297249d4cbad984f0434a79a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 6
+  model: {fileID: 0}
+  mass: 3
+  recoveryMat: {fileID: 0}
+  life: 3
+  dash: 3
+  protectionPrefab: {fileID: 0}
+  impactDeceleration: 5
+  levelObject: {fileID: 2050674099}
+  allWaves:
+  - allEnnemies:
+    - enn: 0
+      enMov: 0
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints: []
+      selected: 0
+      speed: 1
+      life: 1
+      spawned: 0
+      followPlayer: 1
+    - enn: 0
+      enMov: 0
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints: []
+      selected: 0
+      speed: 1
+      life: 1
+      spawned: 0
+      followPlayer: 1
+    - enn: 0
+      enMov: 0
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints: []
+      selected: 0
+      speed: 1
+      life: 1
+      spawned: 0
+      followPlayer: 1
+    delay: 0
+    firstIsLeader: 0
+    spacingX: 0
+    spacingZ: 0
+  Count: 0
+  WaveCount: 0
+  AllLocks: []
 --- !u!1 &1170232697
 GameObject:
   m_ObjectHideFlags: 0
@@ -4769,6 +5021,97 @@ MonoBehaviour:
   Count: 0
   WaveCount: 0
   AllLocks: []
+--- !u!1 &1439855663
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1439855664}
+  - component: {fileID: 1439855665}
+  m_Layer: 0
+  m_Name: GeneratorLvl1 (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1439855664
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1439855663}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.93, y: 0, z: -5.39}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2050674101}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1439855665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1439855663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74ea6ec4297249d4cbad984f0434a79a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 6
+  model: {fileID: 0}
+  mass: 3
+  recoveryMat: {fileID: 0}
+  life: 3
+  dash: 3
+  protectionPrefab: {fileID: 0}
+  impactDeceleration: 5
+  levelObject: {fileID: 2050674099}
+  allWaves:
+  - allEnnemies:
+    - enn: 0
+      enMov: 0
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints: []
+      selected: 0
+      speed: 1
+      life: 1
+      spawned: 0
+      followPlayer: 1
+    - enn: 0
+      enMov: 0
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints: []
+      selected: 0
+      speed: 1
+      life: 1
+      spawned: 0
+      followPlayer: 1
+    - enn: 0
+      enMov: 0
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints: []
+      selected: 0
+      speed: 1
+      life: 1
+      spawned: 0
+      followPlayer: 1
+    delay: 0.2
+    firstIsLeader: 0
+    spacingX: 0
+    spacingZ: 0
+  Count: 0
+  WaveCount: 0
+  AllLocks: []
 --- !u!1 &1482472050
 GameObject:
   m_ObjectHideFlags: 0
@@ -5264,97 +5607,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1935535041
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1935535043}
-  - component: {fileID: 1935535042}
-  m_Layer: 0
-  m_Name: Generator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1935535042
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1935535041}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74ea6ec4297249d4cbad984f0434a79a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 6
-  model: {fileID: 0}
-  mass: 3
-  recoveryMat: {fileID: 0}
-  life: 3
-  dash: 3
-  protectionPrefab: {fileID: 0}
-  impactDeceleration: 5
-  levelObject: {fileID: 2050674099}
-  allWaves:
-  - allEnnemies:
-    - enn: 0
-      enMov: 0
-      spawnAfter: 0
-      Waypoints:
-        loop: 0
-        allWaypoints: []
-      selected: 0
-      speed: 1
-      life: 1
-      spawned: 0
-      followPlayer: 1
-    - enn: 0
-      enMov: 0
-      spawnAfter: 0
-      Waypoints:
-        loop: 0
-        allWaypoints: []
-      selected: 0
-      speed: 1
-      life: 1
-      spawned: 0
-      followPlayer: 1
-    - enn: 0
-      enMov: 0
-      spawnAfter: 0
-      Waypoints:
-        loop: 0
-        allWaypoints: []
-      selected: 0
-      speed: 1
-      life: 1
-      spawned: 0
-      followPlayer: 1
-    delay: 0
-    firstIsLeader: 0
-    spacingX: 0
-    spacingZ: 0
-  Count: 0
-  WaveCount: 0
-  AllLocks: []
---- !u!4 &1935535043
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1935535041}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.6525002, y: 0, z: -0.22499847}
-  m_LocalScale: {x: 0.25, y: 0.5, z: 0.5}
-  m_Children: []
-  m_Father: {fileID: 2050674101}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1997263230
 Prefab:
   m_ObjectHideFlags: 0
@@ -5548,7 +5800,9 @@ Transform:
   m_LocalPosition: {x: -157.62, y: 110, z: 148.33}
   m_LocalScale: {x: 4, y: 2, z: 2}
   m_Children:
-  - {fileID: 1935535043}
+  - {fileID: 1169080223}
+  - {fileID: 979713345}
+  - {fileID: 1439855664}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

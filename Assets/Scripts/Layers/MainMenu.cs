@@ -25,7 +25,7 @@ public class MainMenu : Layers {
     public void Play()
     {
         Manager.GetInstance().PopToStack();
-        Utils.StartFading(0.3f, Color.black, () => { SceneManager.LoadScene("Severin"); Constants.SetAllConstants(0); },
+        Utils.StartFading(0.3f, Color.black, () => { SceneManager.LoadScene("Game"); Constants.SetAllConstants(0); },
             () => { Constants.SetAllConstants(1);});
     }
 

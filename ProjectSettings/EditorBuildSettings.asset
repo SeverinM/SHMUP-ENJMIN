@@ -16,5 +16,8 @@ EditorBuildSettings:
     guid: a3e4f82937ed9cf4b991dc84e22fee1d
   - enabled: 1
     path: Assets/Scenes/Jorge.unity
-    guid: 9e1242152cf83214c85865e52f77b397
+    guid: d8e8429a24b669e4b831da51d17bc79d
+  - enabled: 1
+    path: Assets/Scenes/Game.unity
+    guid: ded6e3457b33050418b1801fb3706d2b
   m_configObjects: {}
