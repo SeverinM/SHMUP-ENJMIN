@@ -37,7 +37,7 @@ public class EnemyMovement : State
     public override void UpdateState()
     {
         //L'ennemi est freeze / en pause , il n'est pas supposé agir
-        if (character.PersonalScale == 0)
+        if (character.PersonalScale == 0 || target == null)
         {
             return;
         }

@@ -79,6 +79,15 @@ public abstract class Character : MonoBehaviour {
         }
     }
 
+    IEnumerator coroutine;
+    public bool IsInRecovery
+    {
+        get
+        {
+            return coroutine != null;
+        }
+    }
+
     [SerializeField]
     protected float mass = 3.0f;                
     protected float hitForce = 25.5f;            
@@ -292,7 +301,11 @@ public abstract class Character : MonoBehaviour {
 
     public void StartRecovery(float duration)
     {
-        StartCoroutine(StartRecoveryCoroutine(duration));
+        if (!IsInRecovery)
+        {
+            coroutine = StartRecoveryCoroutine(duration);
+            StartCoroutine(coroutine);
+        }
     }
 
     public IEnumerator StartRecoveryCoroutine(float duration)
@@ -317,7 +330,7 @@ public abstract class Character : MonoBehaviour {
 
         while(timeBegin < duration)
         {
-            timeBegin += Time.deltaTime * GetScale();
+            timeBegin += Time.deltaTime * GetScale() * PersonalScale;
             yield return null;
         }
 

@@ -230,8 +230,11 @@ public class Player : Character
         if (!Constants.ApplicationQuit)
         {
             base.OnDestroy();
-            SetState(null);
-            Utils.StartFading(1, Color.black, () => { Constants.SetAllConstants(0); SceneManager.LoadScene(SceneManager.GetActiveScene().name); }, () => Constants.SetAllConstants(1));
+            //SetState(null);
+            //Utils.StartFading(1, Color.black, () => { Constants.SetAllConstants(0); SceneManager.LoadScene(SceneManager.GetActiveScene().name); }, () => Constants.SetAllConstants(1));
+            Constants.ApplicationQuit = true;
+            Manager.GetInstance().PopAll();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }
