@@ -14,7 +14,7 @@ public class PlayerWinch : State
     //Vitesse de traversé du hook
     float speedTravel;
 
-    float hookRadius = 0.1f;
+    float hookRadius = 0.3f;
 
     public enum HookMode
     {
@@ -85,6 +85,7 @@ public class PlayerWinch : State
                 who.position -= character.transform.forward * Time.deltaTime * character.GetScale() * character.PersonalScale * speedTravel;
             }
             player.Hook.transform.position -= character.transform.forward * Time.deltaTime * character.GetScale() * speedTravel;
+            
         }
 
         //Si la distance hook / vaisseau est inferieur au radius de hook, retourner vers mouvement
