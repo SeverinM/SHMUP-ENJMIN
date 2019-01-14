@@ -79,6 +79,7 @@ public class Generator : Character {
     public void RaiseWaveFinished()
     {
         WaveCleaned(WaveCount, this);
+        WaveCount++;
     }
 
     public void RemoveLock(LockWaveElement elt)
@@ -103,7 +104,9 @@ public class Generator : Character {
         if (AllLocks.Where(x => x.forWave == WaveCount).Count() == 0)
         {
             if (AllWaves.Count > 0)
+            {
                 SetState(new GenerateEnemies(this, AllWaves));
+            }
             else
                 SetState(null);
         }

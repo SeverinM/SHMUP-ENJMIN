@@ -37,7 +37,7 @@ public class EnemyMovement : State
     public override void UpdateState()
     {
         //L'ennemi est freeze / en pause , il n'est pas supposé agir
-        if (character.PersonalScale == 0)
+        if (character.PersonalScale == 0 || target == null)
         {
             return;
         }
@@ -45,13 +45,6 @@ public class EnemyMovement : State
         if (followLeader && target.GetComponent<Character>().Context.ValuesOrDefault<Transform>("Target",null) != null)
         {
             character.SetState(new EnemyAttack(character, allElems, target.GetComponent<Character>().Context.ValuesOrDefault<Transform>("Target", null)));
-        }
-
-        //Un bob poursuit un ennemie differemment qui est un joueur 
-        if (target.GetComponent<Player>() != null && enemy.enemyType == Enemy.EnemyType.BOB)
-        {
-            enemy.Context.SetInDictionary("FollowButAvoid", target);
-            enemy.FollowRandomPath();
         }
 
         // Si la cible à été détruit, alors on se déplace aléatoirement
@@ -74,7 +67,7 @@ public class EnemyMovement : State
         }
 
         //La vitesse du personnage est de plus en plus lente au fur et a mesure qu'il s'approche de son leader pour eviter de lui rentrer dedans
-        if (target.GetComponent<Player>() == null)
+        if (target.GetComponent<Player>() == null && character.PersonalScale > 0)
             character.PersonalScale = Mathf.Clamp((Vector3.Distance(target.transform.position, character.transform.position) / 3) / enemy.MoveSpeed, 0, 1);
 
         character.transform.forward = deltaPosition;

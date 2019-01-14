@@ -33,11 +33,6 @@ public class GenerateEnemies : State
         count = currentWave.allEnnemies.Count;
     }
 
-    public override void EndState()
-    {
-        generator.WaveCount++;
-    }
-
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)
     {
         base.InterpretInput(typeAct, acts, val);
@@ -85,8 +80,6 @@ public class GenerateEnemies : State
                 enn.Destroyed += EnnemyDestroyed;
                 x.spawned = true;
                 currentWave.firstIsLeader = false;
-                if (x.followPlayer)
-                    enn.SetState(new EnemyMovement(enn, level.Player.transform));
             }
         }
         

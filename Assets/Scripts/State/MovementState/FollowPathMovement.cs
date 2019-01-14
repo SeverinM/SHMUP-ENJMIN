@@ -92,9 +92,9 @@ public class FollowPathMovement : State
     public override void UpdateState()
     {
         deltaPosition = targetPosition - character.transform.position;
+        float distanceToObjective = Vector3.Distance(targetPosition, character.transform.position);
 
-        //Waypoint atteint ?
-        if (Vector3.Distance(targetPosition, character.transform.position) < (GetSpeed() * character.PersonalScale * character.GetScale() * Time.deltaTime * 4))
+        if (distanceToObjective < 0.1f)
         {
             positions.Dequeue();
 
@@ -132,19 +132,7 @@ public class FollowPathMovement : State
         if (deltaPosition != Vector3.zero)
             character.transform.forward = deltaPosition;
 
-        character.Move(deltaPosition.normalized);
-    }
-
-    float GetSpeed()
-    {
-        if (currentWaypoint != null)
-        {
-            return currentWaypoint.speed;
-        }
-        else
-        {
-            return 1;
-        }
+        character.transform.position +=  character.transform.forward * Mathf.Min(distanceToObjective, Time.deltaTime * character.GetScale() * currentWaypoint.speed * character.MoveSpeed * character.PersonalScale);
     }
 
     public override string GetName()

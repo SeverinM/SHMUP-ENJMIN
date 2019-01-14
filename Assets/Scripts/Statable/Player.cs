@@ -173,6 +173,7 @@ public class Player : Character
                 if (Life <= 0)
                 {
                     Destroy(gameObject);
+                    AkSoundEngine.PostEvent("S_Destroy", gameObject);
                 }
                 else
                 {
@@ -226,11 +227,14 @@ public class Player : Character
 
     public override void OnDestroy()
     {
-        base.OnDestroy();
         if (!Constants.ApplicationQuit)
         {
-            actualState = null;
-            Utils.StartFading(1, Color.black, () => { Constants.SetAllConstants(0); SceneManager.LoadScene(SceneManager.GetActiveScene().name); }, () => Constants.SetAllConstants(1));
+            base.OnDestroy();
+            //SetState(null);
+            //Utils.StartFading(1, Color.black, () => { Constants.SetAllConstants(0); SceneManager.LoadScene(SceneManager.GetActiveScene().name); }, () => Constants.SetAllConstants(1));
+            Constants.ApplicationQuit = true;
+            Manager.GetInstance().PopAll();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }

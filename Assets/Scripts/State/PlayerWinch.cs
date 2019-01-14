@@ -14,7 +14,7 @@ public class PlayerWinch : State
     //Vitesse de traversé du hook
     float speedTravel;
 
-    float hookRadius = 0.5f;
+    float hookRadius = 0.3f;
 
     public enum HookMode
     {
@@ -65,12 +65,14 @@ public class PlayerWinch : State
 
     public override void UpdateState()
     {
+        float distanceToHook = Vector3.Distance(character.transform.position, player.Hook.transform.position);
+
         if (currentMode == HookMode.Winch)
         {
             // Le joueur se propulse en avant, ce qui fait avancer tous les enfants
             // On utilise copy afin de maintenir le hook à la même position
             copy = player.Hook.transform.position;
-            character.transform.position += character.transform.forward * Time.deltaTime * character.GetScale() * speedTravel;
+            character.transform.position += character.transform.forward * Mathf.Min(distanceToHook, Time.deltaTime * character.GetScale() * speedTravel);
             player.Hook.transform.position = copy;
         }
 
@@ -82,10 +84,8 @@ public class PlayerWinch : State
                 Transform who = isShield ? player.Target : player.Target.parent;
                 who.position -= character.transform.forward * Time.deltaTime * character.GetScale() * character.PersonalScale * speedTravel;
             }
-            player.Hook.transform.position -= character.transform.forward * Time.deltaTime * character.GetScale() * speedTravel;
+            player.Hook.transform.position -= character.transform.forward * Mathf.Min(distanceToHook, Time.deltaTime * character.GetScale() * speedTravel);
         }
-
-        float distanceToHook = Vector3.Distance(character.transform.position, player.Hook.transform.position);
 
         //Si la distance hook / vaisseau est inferieur au radius de hook, retourner vers mouvement
         if (distanceToHook <= hookRadius)

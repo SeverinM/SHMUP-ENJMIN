@@ -70,6 +70,12 @@ public abstract class BaseInput {
             OnInputExecuted.Invoke(tyAct, acts, values);
     }
 
+    //Plus personne n'ecoute
+    public void Reset()
+    {
+        OnInputExecuted = delegate { };
+    }
+
     public abstract void UpdateInput();
 
     public delegate void InputEvent(TypeAction tyAct, Actions acts, Vector2 values);
