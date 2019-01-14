@@ -4,11 +4,70 @@ ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Small_Bob
+    100004: Spider
+    100006: Spider 1
+    100008: SpiderHub
+    100010: SpiderLLeg21
+    100012: SpiderLLeg22
+    100014: SpiderLLeg23
+    100016: SpiderLLeg2Platform
+    100018: SpiderLLeg31
+    100020: SpiderLLeg32
+    100022: SpiderLLeg33
+    100024: SpiderLLeg3Platform
+    100026: SpiderLLeg41
+    100028: SpiderLLeg42
+    100030: SpiderLLeg43
+    100032: SpiderLLeg4Platform
+    100034: SpiderRLeg21
+    100036: SpiderRLeg22
+    100038: SpiderRLeg23
+    100040: SpiderRLeg2Platform
+    100042: SpiderRLeg31
+    100044: SpiderRLeg32
+    100046: SpiderRLeg33
+    100048: SpiderRLeg3Platform
+    100050: SpiderRLeg41
+    100052: SpiderRLeg42
+    100054: SpiderRLeg43
+    100056: SpiderRLeg4Platform
     400000: //RootNode
+    400002: Small_Bob
+    400004: Spider
+    400006: Spider 1
+    400008: SpiderHub
+    400010: SpiderLLeg21
+    400012: SpiderLLeg22
+    400014: SpiderLLeg23
+    400016: SpiderLLeg2Platform
+    400018: SpiderLLeg31
+    400020: SpiderLLeg32
+    400022: SpiderLLeg33
+    400024: SpiderLLeg3Platform
+    400026: SpiderLLeg41
+    400028: SpiderLLeg42
+    400030: SpiderLLeg43
+    400032: SpiderLLeg4Platform
+    400034: SpiderRLeg21
+    400036: SpiderRLeg22
+    400038: SpiderRLeg23
+    400040: SpiderRLeg2Platform
+    400042: SpiderRLeg31
+    400044: SpiderRLeg32
+    400046: SpiderRLeg33
+    400048: SpiderRLeg3Platform
+    400050: SpiderRLeg41
+    400052: SpiderRLeg42
+    400054: SpiderRLeg43
+    400056: SpiderRLeg4Platform
     2100000: 'Material #2'
     2300000: //RootNode
+    2300002: Small_Bob
     3300000: //RootNode
+    3300002: Small_Bob
     4300000: Small_Bob
+    9500000: //RootNode
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -29,7 +88,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -60,8 +119,8 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -82,10 +141,10 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

@@ -173,6 +173,7 @@ public class Player : Character
                 if (Life <= 0)
                 {
                     Destroy(gameObject);
+                    AkSoundEngine.PostEvent("S_Destroy", gameObject);
                 }
                 else
                 {

@@ -73,7 +73,7 @@ public abstract class BaseInput {
     //Plus personne n'ecoute
     public void Reset()
     {
-        OnInputExecuted = null;
+        OnInputExecuted = delegate { };
     }
 
     public abstract void UpdateInput();
