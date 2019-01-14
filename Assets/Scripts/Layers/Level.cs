@@ -82,6 +82,9 @@ public class Level : Layers
     [SerializeField]
     Menu menu;
 
+    [SerializeField]
+    private Animator animator;
+
     Navigation nav;
 
     int countGenerator = 0;
@@ -430,6 +433,10 @@ public class Level : Layers
             if (NextLevel != null)
             {
                 player.NextLevel += () => { OnNextLevel(NextLevel); };
+                if (animator != null)
+                {
+                    animator.SetTrigger("SpaceShip");
+                }
                 WaypointElement we = new WaypointElement();
                 we.speed = 1;
                 we.targetPosition = Utils.GetPositionAbsolute(new Vector3(0.5f, 0, 0.5f), Mathf.Abs(Camera.main.transform.position.y - player.transform.position.y));
