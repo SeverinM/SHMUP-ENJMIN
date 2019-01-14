@@ -84,8 +84,7 @@ public class PlayerWinch : State
                 Transform who = isShield ? player.Target : player.Target.parent;
                 who.position -= character.transform.forward * Time.deltaTime * character.GetScale() * character.PersonalScale * speedTravel;
             }
-            player.Hook.transform.position -= character.transform.forward * Time.deltaTime * character.GetScale() * speedTravel;
-            
+            player.Hook.transform.position -= character.transform.forward * Mathf.Min(distanceToHook, Time.deltaTime * character.GetScale() * speedTravel);
         }
 
         //Si la distance hook / vaisseau est inferieur au radius de hook, retourner vers mouvement

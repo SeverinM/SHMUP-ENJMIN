@@ -240,18 +240,7 @@ MonoBehaviour:
   levelObject: {fileID: 2050674099}
   allWaves:
   - allEnnemies:
-    - enn: 0
-      enMov: 0
-      spawnAfter: 1
-      Waypoints:
-        loop: 0
-        allWaypoints: []
-      selected: 0
-      speed: 4
-      life: 1
-      spawned: 0
-      followPlayer: 1
-    - enn: 0
+    - enn: 1
       enMov: 0
       spawnAfter: 1
       Waypoints:
@@ -268,10 +257,7 @@ MonoBehaviour:
     spacingZ: 0
   Count: 0
   WaveCount: 0
-  AllLocks:
-  - forWave: 0
-    generator: {fileID: 1935535042}
-    number: 0
+  AllLocks: []
 --- !u!4 &294062317
 Transform:
   m_ObjectHideFlags: 0
@@ -570,7 +556,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1047461087}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -160.99, y: 137, z: 146.3}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1190,111 +1176,6 @@ MonoBehaviour:
   - forWave: 0
     generator: {fileID: 1620762118}
     number: 0
---- !u!1 &1448790496
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1448790498}
-  - component: {fileID: 1448790497}
-  m_Layer: 0
-  m_Name: GeneratorLvl1-4
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1448790497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1448790496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74ea6ec4297249d4cbad984f0434a79a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 6
-  model: {fileID: 0}
-  mass: 3
-  recoveryMat: {fileID: 0}
-  life: 3
-  dash: 3
-  protectionPrefab: {fileID: 0}
-  impactDeceleration: 5
-  levelObject: {fileID: 2050674099}
-  allWaves:
-  - allEnnemies:
-    - enn: 0
-      enMov: 0
-      spawnAfter: 1
-      Waypoints:
-        loop: 0
-        allWaypoints: []
-      selected: 0
-      speed: 4
-      life: 1
-      spawned: 0
-      followPlayer: 1
-    - enn: 0
-      enMov: 0
-      spawnAfter: 1
-      Waypoints:
-        loop: 0
-        allWaypoints: []
-      selected: 0
-      speed: 4
-      life: 1
-      spawned: 0
-      followPlayer: 1
-    - enn: 0
-      enMov: 0
-      spawnAfter: 1
-      Waypoints:
-        loop: 0
-        allWaypoints: []
-      selected: 0
-      speed: 4
-      life: 1
-      spawned: 0
-      followPlayer: 1
-    - enn: 0
-      enMov: 0
-      spawnAfter: 1
-      Waypoints:
-        loop: 0
-        allWaypoints: []
-      selected: 0
-      speed: 4
-      life: 1
-      spawned: 0
-      followPlayer: 1
-    delay: 0
-    firstIsLeader: 1
-    spacingX: 0
-    spacingZ: 0
-  Count: 0
-  WaveCount: 0
-  AllLocks:
-  - forWave: 0
-    generator: {fileID: 1793360324}
-    number: 0
---- !u!4 &1448790498
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1448790496}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.29, y: 0, z: -7.1}
-  m_LocalScale: {x: 0.25, y: 0.5, z: 0.5}
-  m_Children: []
-  m_Father: {fileID: 2050674101}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1476565984
 GameObject:
   m_ObjectHideFlags: 0
@@ -2045,30 +1926,8 @@ MonoBehaviour:
   levelObject: {fileID: 2050674099}
   allWaves:
   - allEnnemies:
-    - enn: 0
-      enMov: 0
-      spawnAfter: 1
-      Waypoints:
-        loop: 0
-        allWaypoints: []
-      selected: 0
-      speed: 4
-      life: 1
-      spawned: 0
-      followPlayer: 1
-    - enn: 0
-      enMov: 0
-      spawnAfter: 1
-      Waypoints:
-        loop: 0
-        allWaypoints: []
-      selected: 0
-      speed: 4
-      life: 1
-      spawned: 0
-      followPlayer: 1
-    - enn: 0
-      enMov: 0
+    - enn: 2
+      enMov: 2
       spawnAfter: 1
       Waypoints:
         loop: 0
@@ -2084,10 +1943,7 @@ MonoBehaviour:
     spacingZ: 0
   Count: 0
   WaveCount: 0
-  AllLocks:
-  - forWave: 0
-    generator: {fileID: 294062316}
-    number: 0
+  AllLocks: []
 --- !u!4 &1793360325
 Transform:
   m_ObjectHideFlags: 0
@@ -2139,7 +1995,7 @@ MonoBehaviour:
   levelObject: {fileID: 2050674099}
   allWaves:
   - allEnnemies:
-    - enn: 0
+    - enn: 1
       enMov: 0
       spawnAfter: 1
       Waypoints:
@@ -2160,7 +2016,13 @@ MonoBehaviour:
     spacingZ: 0
   Count: 0
   WaveCount: 0
-  AllLocks: []
+  AllLocks:
+  - forWave: 0
+    generator: {fileID: 294062316}
+    number: 0
+  - forWave: 0
+    generator: {fileID: 1793360324}
+    number: 0
 --- !u!4 &1935535043
 Transform:
   m_ObjectHideFlags: 0
@@ -2242,7 +2104,6 @@ Transform:
   - {fileID: 1935535043}
   - {fileID: 294062317}
   - {fileID: 1793360325}
-  - {fileID: 1448790498}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

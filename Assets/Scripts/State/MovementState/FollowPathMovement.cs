@@ -132,7 +132,7 @@ public class FollowPathMovement : State
         if (deltaPosition != Vector3.zero)
             character.transform.forward = deltaPosition;
 
-        character.transform.position +=  character.transform.forward * Mathf.Min(distanceToObjective, Time.deltaTime * character.GetScale() * currentWaypoint.speed * character.MoveSpeed);
+        character.transform.position +=  character.transform.forward * Mathf.Min(distanceToObjective, Time.deltaTime * character.GetScale() * currentWaypoint.speed * character.MoveSpeed * character.PersonalScale);
     }
 
     public override string GetName()
