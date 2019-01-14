@@ -112,6 +112,8 @@ public class Level : Layers
     //Appellé quand le layer est au dessus de la stack
     public override void OnFocusGet()
     {
+        score = Constants.TotalScore;
+
         TryPlace();
 
         // Faire en sorte que tous les inputs notifient le joueur
