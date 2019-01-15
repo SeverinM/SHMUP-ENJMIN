@@ -129,9 +129,7 @@ public class FollowPathMovement : State
             }    
         }
 
-        if (deltaPosition != Vector3.zero)
-            character.transform.forward = deltaPosition;
-
+        character.transform.forward = character.Separate(character.transform.forward, 3);        
         character.transform.position +=  character.transform.forward * Mathf.Min(distanceToObjective, Time.deltaTime * character.GetScale() * currentWaypoint.speed * character.MoveSpeed * character.PersonalScale);
     }
 

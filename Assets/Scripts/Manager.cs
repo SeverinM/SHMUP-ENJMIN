@@ -14,6 +14,7 @@ public class Manager : MonoBehaviour {
     Stack<Layers> allLayers = new Stack<Layers>();
     public int Count = 0;
 
+
     [SerializeField]
     Layers firstLayer;
 
@@ -24,6 +25,25 @@ public class Manager : MonoBehaviour {
         get
         {
             return cameraPositionRelative;
+        }
+    }
+
+    int countLayer = 0;
+    public int CountLayer
+    {
+        get
+        {
+            return countLayer;
+        }
+    }
+
+    [SerializeField]
+    int baseLife = 3;
+    public int BaseLife
+    {
+        get
+        {
+            return baseLife;
         }
     }
 
@@ -41,9 +61,20 @@ public class Manager : MonoBehaviour {
     
     private ServerConnection connection = new ServerConnection();
 
-	// Use this for initialization
-	void Awake() {
-		if (instance != null)
+    public void IncreaseCount()
+    {
+        countLayer++;
+    }
+
+    public void ResetCount()
+    {
+        countLayer = 0;
+    }
+
+    // Use this for initialization
+    void Awake()
+    {
+        if (instance != null)
         {
             Destroy(gameObject);
         }
@@ -68,6 +99,7 @@ public class Manager : MonoBehaviour {
     private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
         Layers lay = GameObject.FindObjectsOfType<Layers>().Where(x => x.IsFirst).First();
+        lay = FindSubsequentLayer(countLayer, lay);
         AddToStack(lay);
     }
 
@@ -104,6 +136,7 @@ public class Manager : MonoBehaviour {
         AddToStack(nextLevel);
         StartCoroutine(connection.PostScores(Constants.PlayerName, Constants.TotalScore));
         nextLevel.OnNextLevel += Lvl_OnNextLevel;
+        countLayer++;
     }
 
     // Update is called once per frame
@@ -166,5 +199,20 @@ public class Manager : MonoBehaviour {
         
         if (allLayers.Count > 0 && allLayers.Peek() != null)
             allLayers.Peek().OnFocusGet();
+    }
+
+    public static Layers FindSubsequentLayer(int depth,Layers firstLayer)
+    {
+        Layers output = firstLayer;
+        int count = 0;
+        while (depth > count)
+        {
+            if (output.NextLevel != null)
+            {
+                output = output.NextLevel;
+            }
+            count++;
+        }
+        return output;
     }
 }

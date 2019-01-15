@@ -26,9 +26,6 @@ public class Level : Layers
     [SerializeField]
     protected GameObject MenuPrefab;
 
-    [SerializeField]
-    protected Level NextLevel;
-
     int countFocus = 0;
 
     public GameObject Player
@@ -114,8 +111,6 @@ public class Level : Layers
     {
         score = Constants.TotalScore;
 
-        TryPlace();
-
         // Faire en sorte que tous les inputs notifient le joueur
         foreach (BaseInput inp in refInput)
         {
@@ -128,6 +123,8 @@ public class Level : Layers
         {
             return;
         }
+
+        TryPlace();
 
         Constants.ApplicationQuit = false;
         player.Destroyed += PlayerDied;
@@ -147,6 +144,8 @@ public class Level : Layers
                 }
             }
         });
+
+        player.Life = Manager.GetInstance().BaseLife;
 
         player.SetOnDashChanged((x) =>
         {
@@ -176,6 +175,11 @@ public class Level : Layers
                     Instantiate(CountEnemyPrefab, CountEnemyUI.transform);
                 }
             }
+
+            if (x == 0)
+            {
+                EndLevel();
+            }
         };
 
         watchScore.ValueChanged = (x) =>
@@ -195,7 +199,6 @@ public class Level : Layers
             {
                 generator.TryPassWave();
             }
-            generator.EveryoneDied += GeneratorDone;
             generator.WaveCleaned += Generator_WaveCleaned;
         }
         watchNbSpawn.WatchedValue = transform.GetComponentsInChildren<Generator>().Select(x => x.GetComponent<Generator>().EnnemiesLeftToSpawn).Sum();
@@ -422,29 +425,22 @@ public class Level : Layers
         }
     }
 
-    /// <summary>
-    /// On a battu tous les ennemies , niveau suivant
-    /// </summary>
-    public void GeneratorDone()
+    public void EndLevel()
     {
-        countGenerator--;
-        if (countGenerator == 0)
+        if (nextLevel != null)
         {
-            if (NextLevel != null)
+            player.NextLevel += () => { OnNextLevel(nextLevel); };
+            if (animator != null)
             {
-                player.NextLevel += () => { OnNextLevel(NextLevel); };
-                if (animator != null)
-                {
-                    animator.SetTrigger("SpaceShip");
-                }
-                WaypointElement we = new WaypointElement();
-                we.speed = 1;
-                we.targetPosition = Utils.GetPositionAbsolute(new Vector3(0.5f, 0, 0.5f), Mathf.Abs(Camera.main.transform.position.y - player.transform.position.y));
-                Queue<WaypointElement> queue = new Queue<WaypointElement>();
-                queue.Enqueue(we);
-                State st = new FollowPathMovement(player, queue, () => player.SetState(new IdleTransition(player)));
-                player.StartDelayedState(1, st);
+                animator.SetTrigger("SpaceShip");
             }
+            WaypointElement we = new WaypointElement();
+            we.speed = 1;
+            we.targetPosition = Utils.GetPositionAbsolute(new Vector3(0.5f, 0, 0.5f), Mathf.Abs(Camera.main.transform.position.y - player.transform.position.y));
+            Queue<WaypointElement> queue = new Queue<WaypointElement>();
+            queue.Enqueue(we);
+            State st = new FollowPathMovement(player, queue, () => player.SetState(new IdleTransition(player)));
+            player.StartDelayedState(1, st);
         }
     }
 

@@ -71,7 +71,7 @@ public class EnemyMovement : State
             character.PersonalScale = Mathf.Clamp((Vector3.Distance(target.transform.position, character.transform.position) / 3) / enemy.MoveSpeed, 0, 1);
 
         character.transform.forward = deltaPosition;
-        character.Move(deltaPosition.normalized);
+        character.Move(character.Separate(deltaPosition.normalized));
     }
 
     public override void StartState()

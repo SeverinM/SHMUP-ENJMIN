@@ -46,7 +46,6 @@ public class GenerateEnemies : State
         }
         else
         {
-            generator.RaiseEveryoneDied();
             character.SetState(null);
         }
     }
@@ -123,10 +122,6 @@ public class GenerateEnemies : State
         {
             generator.RaiseWaveFinished();
             generator.TryPassWave();
-            if(wavesLeft.Count == 0)
-            {
-                generator.RaiseEveryoneDied();
-            }
         }
     }
 

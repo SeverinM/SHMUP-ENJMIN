@@ -17,6 +17,16 @@ public abstract class Layers : MonoBehaviour {
         }
     }
 
+    [SerializeField]
+    protected Level nextLevel;
+    public Level NextLevel
+    {
+        get
+        {
+            return nextLevel;
+        }
+    }
+
     protected List<BaseInput> refInput = new List<BaseInput>();
 
     public void Init(List<BaseInput> refs)

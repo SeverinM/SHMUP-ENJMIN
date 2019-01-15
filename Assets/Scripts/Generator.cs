@@ -36,9 +36,6 @@ public class Generator : Character {
 
     public List<LockWaveElement> AllLocks;
 
-    public delegate void noParam();
-    public event noParam EveryoneDied;
-
     public delegate void paramClean(int nb, Generator who);
     public event paramClean WaveCleaned;
 
@@ -66,14 +63,6 @@ public class Generator : Character {
     public override float GetScale()
     {
         return Constants.TimeScaleGenerators;
-    }
-
-    public void RaiseEveryoneDied()
-    {
-        if (EveryoneDied != null)
-        {
-            EveryoneDied();
-        }
     }
 
     public void RaiseWaveFinished()
@@ -112,6 +101,7 @@ public class Generator : Character {
         }
         else
         {
+            Debug.Log("Acces refusé");
             SetState(null);
         }
     }
