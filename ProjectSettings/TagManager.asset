@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ennemy
+  - Bullet
+  - FollowParent
+  - Shield
+  - Hook
+  - Pullable
+  - Winchable
+  - Barrier
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -13,7 +22,7 @@ TagManager:
   - UI
   - 
   - 
-  - PostProcessing
+  - 
   - 
   - 
   - 
