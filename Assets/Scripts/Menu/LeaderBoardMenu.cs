@@ -41,17 +41,19 @@ public class LeaderBoardMenu : MonoBehaviour {
         {
             // affichage des scores en jeu
             string lines = hs_get.text;
-            Debug.Log(lines);
             JSONNode node = JSON.Parse(lines);
             names.text = "";
             scores.text = "";
 
-            int i = 0;
-            foreach (JSONNode line in node) {
-                names.text += line["name"] + "\n";
-                scores.text += line["score"] + "\n";
-                i++;
+            for(int i = 0; i < maxScores; i++)
+            {
+                if ( i < node.Count && node[i]["name"] != null && node[i]["score"] != null)
+                {
+                    names.text += node[i]["name"] + "\n";
+                    scores.text += node[i]["score"] + "\n";
+                }
             }
+
         }
     }
 
