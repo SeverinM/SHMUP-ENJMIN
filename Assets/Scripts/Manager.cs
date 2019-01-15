@@ -81,6 +81,7 @@ public class Manager : MonoBehaviour {
 
     public void EnableMenu(Menu menu)
     {
+        Constants.SetAllConstants(0);
         AddToStack(menu);
     }
 

@@ -29,7 +29,6 @@ public class Menu : Layers
 
     public override void OnFocusGet()
     {
-        Constants.SetAllConstants(0);
         parentUI.SetActive(true);
 
         //On freeze tous les bullets
@@ -78,7 +77,6 @@ public class Menu : Layers
 
     public override void OnFocusLost()
     {
-        Constants.SetAllConstants(1);
         parentUI.SetActive(false);
         //On cable tous les inputs
         foreach (BaseInput inp in refInput)
@@ -94,6 +92,7 @@ public class Menu : Layers
 
     public void Resume()
     {
+        Constants.SetAllConstants(1);
         Manager.GetInstance().PopToStack();
     }
 
