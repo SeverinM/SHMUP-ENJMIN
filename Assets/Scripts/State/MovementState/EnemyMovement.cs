@@ -57,7 +57,6 @@ public class EnemyMovement : State
         deltaPosition = target.transform.position - character.transform.position;
         deltaPosition = new Vector3(deltaPosition.x, 0, deltaPosition.z);
 
-        //character.Separate();
         character.transform.LookAt(target.transform);
 
         // L'ennemie est proche du joueur

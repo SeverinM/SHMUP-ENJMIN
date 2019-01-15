@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public class Wave
 {
     public List<WaveElement> allEnnemies;
+    public bool healAtBegin;
     public float delay;
     public bool firstIsLeader;
     public float spacingX;

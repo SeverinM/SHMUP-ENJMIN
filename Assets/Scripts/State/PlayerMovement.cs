@@ -107,7 +107,7 @@ public class PlayerMovement : State
             }
         }
 
-        if(typeAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Shoot))
+        if(typeAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Shoot) && character.GetScale() * character.PersonalScale > 0)
         {
             NextState();
         }

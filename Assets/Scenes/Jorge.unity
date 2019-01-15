@@ -203,6 +203,7 @@ MonoBehaviour:
       life: 3
       spawned: 0
       followPlayer: 1
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 1
     spacingX: 4
@@ -619,6 +620,7 @@ MonoBehaviour:
       life: 1
       spawned: 0
       followPlayer: 1
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 1
     spacingX: 4
@@ -892,6 +894,7 @@ MonoBehaviour:
       life: 3
       spawned: 0
       followPlayer: 1
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 1
     spacingX: 4
@@ -1224,6 +1227,7 @@ MonoBehaviour:
       life: 2
       spawned: 0
       followPlayer: 0
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 1
     spacingX: 4
@@ -1386,6 +1390,7 @@ MonoBehaviour:
       life: 3
       spawned: 0
       followPlayer: 1
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 1
     spacingX: 4
@@ -1724,6 +1729,7 @@ MonoBehaviour:
       life: 2
       spawned: 0
       followPlayer: 0
+    healAtBegin: 1
     delay: 0
     firstIsLeader: 0
     spacingX: 4
@@ -2085,6 +2091,7 @@ MonoBehaviour:
       life: 1
       spawned: 0
       followPlayer: 1
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 1
     spacingX: 4
@@ -2363,6 +2370,40 @@ MonoBehaviour:
       life: 1
       spawned: 0
       followPlayer: 1
+    - enn: 0
+      enMov: 0
+      spawnAfter: 6
+      Waypoints:
+        loop: 1
+        allWaypoints: []
+      selected: 0
+      speed: 4
+      life: 1
+      spawned: 0
+      followPlayer: 1
+    - enn: 0
+      enMov: 0
+      spawnAfter: 6
+      Waypoints:
+        loop: 1
+        allWaypoints: []
+      selected: 0
+      speed: 4
+      life: 1
+      spawned: 0
+      followPlayer: 1
+    - enn: 0
+      enMov: 0
+      spawnAfter: 6
+      Waypoints:
+        loop: 1
+        allWaypoints: []
+      selected: 0
+      speed: 4
+      life: 1
+      spawned: 0
+      followPlayer: 1
+    healAtBegin: 1
     delay: 0
     firstIsLeader: 1
     spacingX: 4
@@ -2866,6 +2907,7 @@ MonoBehaviour:
       life: 3
       spawned: 0
       followPlayer: 1
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 1
     spacingX: 4
@@ -3144,6 +3186,7 @@ MonoBehaviour:
       life: 2
       spawned: 0
       followPlayer: 0
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 0
     spacingX: 4
@@ -3333,6 +3376,7 @@ MonoBehaviour:
       life: 1
       spawned: 0
       followPlayer: 1
+    healAtBegin: 0
     delay: 0.2
     firstIsLeader: 0
     spacingX: 0
@@ -3523,7 +3567,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1047461087}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -160.99, y: 150, z: 146.3}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4017,6 +4061,7 @@ MonoBehaviour:
       life: 1
       spawned: 0
       followPlayer: 1
+    healAtBegin: 1
     delay: 0
     firstIsLeader: 0
     spacingX: 0
@@ -4287,6 +4332,7 @@ MonoBehaviour:
       life: 3
       spawned: 0
       followPlayer: 1
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 1
     spacingX: 4
@@ -4745,6 +4791,7 @@ MonoBehaviour:
       life: 2
       spawned: 0
       followPlayer: 0
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 1
     spacingX: 4
@@ -4981,6 +5028,7 @@ MonoBehaviour:
       life: 1
       spawned: 0
       followPlayer: 1
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 1
     spacingX: 4
@@ -5060,7 +5108,7 @@ MonoBehaviour:
       speed: 1
       life: 1
       spawned: 0
-      followPlayer: 1
+      followPlayer: 0
     - enn: 0
       enMov: 0
       spawnAfter: 0
@@ -5072,6 +5120,7 @@ MonoBehaviour:
       life: 1
       spawned: 0
       followPlayer: 1
+    healAtBegin: 1
     delay: 0.2
     firstIsLeader: 0
     spacingX: 0
@@ -5201,6 +5250,7 @@ MonoBehaviour:
       life: 2
       spawned: 0
       followPlayer: 0
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 1
     spacingX: 4
@@ -5401,6 +5451,7 @@ MonoBehaviour:
       life: 2
       spawned: 0
       followPlayer: 0
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 1
     spacingX: 4
@@ -5948,6 +5999,7 @@ MonoBehaviour:
       life: 2
       spawned: 0
       followPlayer: 0
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 1
     spacingX: 4

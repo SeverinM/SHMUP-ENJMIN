@@ -10,7 +10,6 @@ using UnityEngine.SceneManagement;
 
 public class Level : Layers
 {
-
     [SerializeField]
     protected Player player;
 
@@ -28,15 +27,11 @@ public class Level : Layers
 
     int countFocus = 0;
 
-    public GameObject Player
+    public Player Player
     {
         get
         {
-            if (player == null)
-            {
-                player = GameObject.FindObjectOfType<Player>();
-            }
-            return player.gameObject;
+            return player;
         }
     }
 
@@ -145,7 +140,7 @@ public class Level : Layers
             }
         });
 
-        player.Life = Manager.GetInstance().BaseLife;
+        Manager.GetInstance().ResetLife();
 
         player.SetOnDashChanged((x) =>
         {
