@@ -104,6 +104,11 @@ public class Menu : Layers
         Utils.StartFading(1f, Color.black, () => SceneManager.LoadScene("Menu"), () => { Constants.SetAllConstants(1); Constants.ApplicationQuit = false; });
     }
 
+    public void UpdateNickName(string nickname)
+    {
+        Constants.PlayerName = nickname;
+    }
+
     public void Restart()
     {
         Manager.GetInstance().ResetCount();
