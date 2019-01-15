@@ -2608,8 +2608,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: SetPlayerName
+      - m_Target: {fileID: 853226376}
+        m_MethodName: UpdateNickName
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2933,6 +2933,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 853226375}
+  - component: {fileID: 853226376}
   m_Layer: 5
   m_Name: NickName
   m_TagString: Untagged
@@ -2960,6 +2961,20 @@ RectTransform:
   m_AnchoredPosition: {x: -10.199997, y: 0.3500061}
   m_SizeDelta: {x: 500.7, y: 420.3}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &853226376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 853226374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26eb1edfb9215e042a27f9b5af64dc91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFirst: 0
+  nextLevel: {fileID: 0}
+  parentUI: {fileID: 853226374}
 --- !u!1 &902193465
 GameObject:
   m_ObjectHideFlags: 0
