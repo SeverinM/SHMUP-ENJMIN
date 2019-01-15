@@ -358,47 +358,19 @@ public abstract class Character : MonoBehaviour {
         }
     }
 
-    //Permet de separer les ennemies entre eux pour eviter qu'ils se marchent dessus
-    public void Separate()
+    public Vector3 Separate(Vector3 initialDirection, float desiredseparation = 6)
     {
-        float desiredseparation = 6f;
-  
-        List<GameObject> characters = new List<GameObject>();
+        Vector3 output = initialDirection.normalized;
         foreach (RaycastHit hit in Physics.SphereCastAll(transform.position, desiredseparation, Vector3.forward))
         {
             if (hit.collider.tag == "Ennemy")
             {
-                characters.Add(hit.collider.gameObject);
+                //Plus la cible est loin et moins on s'ecarte
+                output += (transform.position - hit.transform.position).normalized * (Vector3.Distance(hit.transform.position, transform.position) / desiredseparation);
+                output.Normalize();
             }
         }
-
-        float maxForce = 2f;
-        Vector3 sum = new Vector3();
-        int count = 0;
-
-        foreach (GameObject other in characters)
-        { 
-            if (other.Equals(this)) break;
-            
-            float d = Vector3.Distance(transform.position, other.transform.position);
-            Vector3 diff = transform.position - other.transform.position;
-            diff.Normalize();
-            diff /= d;
-            sum += diff;
-            count++;
-        }
-
-        if (count > 0)
-        {
-            sum /= count;
-            sum.Normalize();
-            sum *= 5f;
-            Vector3 steer = sum - GetComponent<Rigidbody>().velocity;
-            Vector3.ClampMagnitude(steer, maxForce);
-            // Pour kinematic
-            GetComponent<Rigidbody>().AddForce(steer);
-
-        }
+        return output;
     }
 
     //Permet de changer d'etat en differé

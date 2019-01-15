@@ -8,10 +8,8 @@ public class MainMenu : Layers {
 
     [SerializeField]
     GameObject FirstMenu;
-
     protected GameObject parentUI;
     protected List<Button> allButtonsMenu = new List<Button>();
-
     GameObject ActualGameObject;
 
     // Use this for initialization
@@ -25,13 +23,13 @@ public class MainMenu : Layers {
     public void Play()
     {
         Manager.GetInstance().PopToStack();
-        Utils.StartFading(0.3f, Color.black, () => { SceneManager.LoadScene("Game"); Constants.SetAllConstants(0); },
+        Utils.StartFading(2f, Color.black, () => { SceneManager.LoadScene("Game"); Constants.SetAllConstants(0); },
             () => { Constants.SetAllConstants(1);});
     }
 
     public void StartTransition(GameObject target)
     {
-        Utils.StartFading(0.3f, Color.black, () => { ActualGameObject.SetActive(false); target.SetActive(true); ActualGameObject = target; }, () => { });
+        Utils.StartFading(0.3f, Color.black, () => { ActualGameObject.SetActive(false); target.SetActive(true); ActualGameObject = target;}, () => { });
     }
 
     protected int indexSelection;
