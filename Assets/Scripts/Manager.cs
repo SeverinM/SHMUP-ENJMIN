@@ -64,10 +64,9 @@ public class Manager : MonoBehaviour {
         AddToStack(firstLayer);
     }
 
-    //Lorsuq'un scene est chargé chercher le IsFirst
+    //Lorsqu'une scene est chargé chercher le IsFirst
     private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
-        //PopAll();
         Layers lay = GameObject.FindObjectsOfType<Layers>().Where(x => x.IsFirst).First();
         AddToStack(lay);
     }

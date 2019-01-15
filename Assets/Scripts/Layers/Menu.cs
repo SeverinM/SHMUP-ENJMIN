@@ -51,7 +51,6 @@ public class Menu : Layers
         {
             inp.OnInputExecuted += Inp_OnInputExecuted;
         }
-        DontDestroyOnLoad(gameObject);
     }
 
     protected void Inp_OnInputExecuted(BaseInput.TypeAction tyAct, BaseInput.Actions acts, Vector2 values)
@@ -109,7 +108,7 @@ public class Menu : Layers
     {
         Constants.ApplicationQuit = true;
         Manager.GetInstance().PopAll();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Utils.StartFading(1, Color.black, () => { Constants.SetAllConstants(0); SceneManager.LoadScene(SceneManager.GetActiveScene().name); }, () => Constants.SetAllConstants(1));
     }
 
     public void Quit()
