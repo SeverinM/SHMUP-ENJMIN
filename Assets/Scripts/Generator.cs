@@ -29,7 +29,6 @@ public class Generator : Character {
 
     public static int Number = 0;
     public GameObject levelObject;        // Level
-    [HideInInspector]
     public List<Wave> allWaves = new List<Wave>();
     public int Count = 0;
     public int WaveCount = 0;
@@ -101,7 +100,6 @@ public class Generator : Character {
         }
         else
         {
-            Debug.Log("Acces refusé");
             SetState(null);
         }
     }

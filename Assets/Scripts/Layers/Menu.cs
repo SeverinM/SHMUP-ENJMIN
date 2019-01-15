@@ -86,7 +86,8 @@ public class Menu : Layers
 
         foreach (GameObject gob in StoredValue.Keys)
         {
-            gob.GetComponent<Rigidbody>().velocity = StoredValue[gob];
+            if (gob != null)
+                gob.GetComponent<Rigidbody>().velocity = StoredValue[gob];
         }
     }
 
