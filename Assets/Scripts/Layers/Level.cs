@@ -200,7 +200,6 @@ public class Level : Layers
         }
         watchNbSpawn.WatchedValue = transform.GetComponentsInChildren<Generator>().Select(x => x.GetComponent<Generator>().EnnemiesLeftToSpawn).Sum();
         countFocus++;
-        DontDestroyOnLoad(gameObject);
     }
 
     void TryPlace()
@@ -429,7 +428,6 @@ public class Level : Layers
     public void GeneratorDone()
     {
         countGenerator--;
-        Debug.Log(countGenerator);
         if (countGenerator == 0)
         {
             if (NextLevel != null)

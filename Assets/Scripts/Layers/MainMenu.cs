@@ -59,7 +59,6 @@ public class MainMenu : Layers {
             allButtonsMenu.Add(btn);
         }
 
-        DontDestroyOnLoad(gameObject);
         allButtonsMenu[0].Select();
     }
 
