@@ -209,12 +209,9 @@ public class Manager : MonoBehaviour {
         if (allLayers.Peek() != null)
         {
             allLayers.Peek().OnFocusLost();
-            Destroy(allLayers.Pop().gameObject);
         }
-        else
-        {
-            allLayers.Pop();
-        }
+
+        allLayers.Pop();
         
         if (allLayers.Count > 0 && allLayers.Peek() != null)
             allLayers.Peek().OnFocusGet();

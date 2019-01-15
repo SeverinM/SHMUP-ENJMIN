@@ -14,7 +14,7 @@ public class PlayerWinch : State
     //Vitesse de traversé du hook
     float speedTravel;
 
-    float hookRadius = 0.3f;
+    float hookRadius = 0.5f;
 
     public enum HookMode
     {
@@ -72,6 +72,9 @@ public class PlayerWinch : State
             // Le joueur se propulse en avant, ce qui fait avancer tous les enfants
             // On utilise copy afin de maintenir le hook à la même position
             copy = player.Hook.transform.position;
+            if (distanceToHook < Time.deltaTime * character.GetScale() * speedTravel)
+                Debug.Log("stop");
+
             character.transform.position += character.transform.forward * Mathf.Min(distanceToHook, Time.deltaTime * character.GetScale() * speedTravel);
             player.Hook.transform.position = copy;
         }
