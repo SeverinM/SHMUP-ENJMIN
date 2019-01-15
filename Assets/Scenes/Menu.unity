@@ -3376,8 +3376,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d4dc536932db3b4fae38ce7f5fc79ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Count: 0
   firstLayer: {fileID: 1063279016}
   cameraPositionRelative: {x: 0, y: 27.1, z: 0}
+  baseLife: 5
 --- !u!4 &996643521
 Transform:
   m_ObjectHideFlags: 0
