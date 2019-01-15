@@ -503,6 +503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFirst: 0
+  nextLevel: {fileID: 0}
   parentUI: {fileID: 9827109}
 --- !u!1 &884515727
 GameObject:
@@ -1077,6 +1078,7 @@ MonoBehaviour:
   Count: 0
   firstLayer: {fileID: 2050674100}
   cameraPositionRelative: {x: 0, y: 27, z: 0}
+  baseLife: 3
 --- !u!4 &1321803383
 Transform:
   m_ObjectHideFlags: 0
@@ -2680,12 +2682,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFirst: 1
+  nextLevel: {fileID: 2127061447}
   player: {fileID: 332854341}
   JimPrefab: {fileID: 1796657138515930, guid: 02c41df092ae0a142b8866396d0a138e, type: 2}
   MikePrefab: {fileID: 1663835522049710, guid: ae66e2c413491d642bb19e18f4749421, type: 2}
   BobPrefab: {fileID: 1561519513433908, guid: 46c9216ca856d3e4d836743c1d9c8564, type: 2}
   MenuPrefab: {fileID: 9827109}
-  NextLevel: {fileID: 2127061447}
   LifeUI: {fileID: 0}
   LifePrefab: {fileID: 0}
   CountEnemyUI: {fileID: 0}
@@ -2813,12 +2815,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFirst: 0
+  nextLevel: {fileID: 0}
   player: {fileID: 332854341}
   JimPrefab: {fileID: 1796657138515930, guid: 02c41df092ae0a142b8866396d0a138e, type: 2}
   MikePrefab: {fileID: 1663835522049710, guid: ae66e2c413491d642bb19e18f4749421, type: 2}
   BobPrefab: {fileID: 1561519513433908, guid: 46c9216ca856d3e4d836743c1d9c8564, type: 2}
   MenuPrefab: {fileID: 0}
-  NextLevel: {fileID: 0}
   LifeUI: {fileID: 0}
   LifePrefab: {fileID: 0}
   CountEnemyUI: {fileID: 0}
