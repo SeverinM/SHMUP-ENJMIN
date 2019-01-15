@@ -1232,10 +1232,16 @@ MonoBehaviour:
   WaveCount: 0
   AllLocks:
   - forWave: 0
-    generator: {fileID: 918723824}
+    generator: {fileID: 1400052963}
     number: 0
   - forWave: 0
-    generator: {fileID: 2544307}
+    generator: {fileID: 105818622}
+    number: 0
+  - forWave: 0
+    generator: {fileID: 617180272}
+    number: 0
+  - forWave: 0
+    generator: {fileID: 441725973}
     number: 0
 --- !u!4 &307011544
 Transform:
@@ -1388,16 +1394,28 @@ MonoBehaviour:
   WaveCount: 0
   AllLocks:
   - forWave: 0
-    generator: {fileID: 918723824}
+    generator: {fileID: 1400052963}
     number: 0
   - forWave: 0
-    generator: {fileID: 2544307}
+    generator: {fileID: 105818622}
     number: 0
   - forWave: 0
-    generator: {fileID: 537918100}
+    generator: {fileID: 617180272}
     number: 0
   - forWave: 0
-    generator: {fileID: 1619340670}
+    generator: {fileID: 441725973}
+    number: 0
+  - forWave: 0
+    generator: {fileID: 307011543}
+    number: 0
+  - forWave: 0
+    generator: {fileID: 854999031}
+    number: 0
+  - forWave: 0
+    generator: {fileID: 1296580495}
+    number: 0
+  - forWave: 0
+    generator: {fileID: 1482472052}
     number: 0
 --- !u!1001 &332854340
 Prefab:
@@ -1441,7 +1459,17 @@ Prefab:
     - target: {fileID: 114938182685806996, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
         type: 2}
       propertyPath: mass
-      value: 5
+      value: 0.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 114938182685806996, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: moveSpeed
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 114938182685806996, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: life
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
@@ -2335,39 +2363,6 @@ MonoBehaviour:
       life: 1
       spawned: 0
       followPlayer: 1
-    - enn: 0
-      enMov: 0
-      spawnAfter: 6
-      Waypoints:
-        loop: 1
-        allWaypoints: []
-      selected: 0
-      speed: 4
-      life: 1
-      spawned: 0
-      followPlayer: 1
-    - enn: 0
-      enMov: 0
-      spawnAfter: 6
-      Waypoints:
-        loop: 1
-        allWaypoints: []
-      selected: 0
-      speed: 4
-      life: 1
-      spawned: 0
-      followPlayer: 1
-    - enn: 0
-      enMov: 0
-      spawnAfter: 6
-      Waypoints:
-        loop: 1
-        allWaypoints: []
-      selected: 0
-      speed: 4
-      life: 1
-      spawned: 0
-      followPlayer: 1
     delay: 0
     firstIsLeader: 1
     spacingX: 4
@@ -2376,7 +2371,10 @@ MonoBehaviour:
   WaveCount: 0
   AllLocks:
   - forWave: 0
-    generator: {fileID: 918723824}
+    generator: {fileID: 1400052963}
+    number: 0
+  - forWave: 0
+    generator: {fileID: 105818622}
     number: 0
 --- !u!4 &617180273
 Transform:
@@ -4296,13 +4294,22 @@ MonoBehaviour:
   WaveCount: 0
   AllLocks:
   - forWave: 0
-    generator: {fileID: 918723824}
+    generator: {fileID: 1400052963}
     number: 0
   - forWave: 0
-    generator: {fileID: 2544307}
+    generator: {fileID: 105818622}
     number: 0
   - forWave: 0
-    generator: {fileID: 537918100}
+    generator: {fileID: 617180272}
+    number: 0
+  - forWave: 0
+    generator: {fileID: 441725973}
+    number: 0
+  - forWave: 0
+    generator: {fileID: 307011543}
+    number: 0
+  - forWave: 0
+    generator: {fileID: 854999031}
     number: 0
 --- !u!4 &1296580496
 Transform:
