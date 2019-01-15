@@ -53,6 +53,12 @@ public class GenerateEnemies : State
     public override void StartState()
     {
         base.StartState();
+
+        //Heal dés que cette vague a commencé
+        if (currentWave.healAtBegin)
+        {
+            Manager.GetInstance().ResetLife();
+        }
     }
 
 
@@ -103,7 +109,7 @@ public class GenerateEnemies : State
                 }
                 // On attribue les waypoints
                 enn.name = enn.name + " numero " + Generator.Number++;
-                enn.Leader = x.followPlayer ? level.Player : leader;
+                enn.Leader = x.followPlayer ? level.Player.gameObject : leader;
                 enn.Destroyed += EnnemyDestroyed; // Quand le joueur est détruit, il notifie GenerateEnemies
                 enn.MoveSpeed = x.speed;
                 enn.Life = x.life;

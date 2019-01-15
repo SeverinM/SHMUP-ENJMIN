@@ -37,6 +37,19 @@ public class Manager : MonoBehaviour {
         }
     }
 
+    Player player;
+    public Player Player
+    {
+        get
+        {
+            if (TopLayer is Level)
+            {
+                return ((Level)TopLayer).Player;
+            }
+            return null;
+        }
+    }
+
     [SerializeField]
     int baseLife = 3;
     public int BaseLife
@@ -87,6 +100,12 @@ public class Manager : MonoBehaviour {
         allInputs.Add(new ControllerInput());
 
         DontDestroyOnLoad(instance);
+    }
+
+    public void ResetLife()
+    {
+        if (Player != null)
+            Player.Life = BaseLife;
     }
 
     private void Start()
