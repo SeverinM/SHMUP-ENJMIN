@@ -303,11 +303,8 @@ public abstract class Character : MonoBehaviour {
 
     public void StartRecovery(float duration)
     {
-        if (!IsInRecovery)
-        {
-            coroutine = StartRecoveryCoroutine(duration);
-            StartCoroutine(coroutine);
-        }
+        coroutine = StartRecoveryCoroutine(duration);
+        StartCoroutine(coroutine);
     }
 
     public IEnumerator StartRecoveryCoroutine(float duration)
