@@ -56,6 +56,7 @@ public abstract class Character : MonoBehaviour {
     [Tooltip("A quel vitesse le personnage peut se deplacer ?")]
     [SerializeField]
     protected float moveSpeed = 6.0f;
+
     public float MoveSpeed
     {
         get
@@ -364,10 +365,18 @@ public abstract class Character : MonoBehaviour {
         Vector3 output = initialDirection.normalized;
         foreach (RaycastHit hit in Physics.SphereCastAll(transform.position, desiredseparation, Vector3.forward))
         {
-            if (hit.collider.tag == "Ennemy")
+            if (hit.collider.tag == "Ennemy" && hit.collider.transform != transform)
             {
                 //Plus la cible est loin et moins on s'ecarte
-                output += (transform.position - hit.transform.position).normalized * (Vector3.Distance(hit.transform.position, transform.position) / desiredseparation);
+                Vector3 deltaPosition = (transform.position - hit.transform.position).normalized;
+                //S'il se trouve exactement sur la meme position , en trouve une aleatoire
+                if (deltaPosition == Vector3.zero)
+                {
+                    Vector2 temp = UnityEngine.Random.insideUnitCircle;
+                    temp.Normalize();
+                    deltaPosition = new Vector3(temp.x, 0, temp.y);
+                }
+                output += deltaPosition * (Vector3.Distance(hit.transform.position, transform.position) / desiredseparation);
                 output.Normalize();
             }
         }

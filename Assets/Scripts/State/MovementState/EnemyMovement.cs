@@ -42,6 +42,7 @@ public class EnemyMovement : State
             return;
         }
 
+        //S'il tire sur quelqu'un
         if (followLeader && target.GetComponent<Character>().Context.ValuesOrDefault<Transform>("Target",null) != null)
         {
             character.SetState(new EnemyAttack(character, allElems, target.GetComponent<Character>().Context.ValuesOrDefault<Transform>("Target", null)));
