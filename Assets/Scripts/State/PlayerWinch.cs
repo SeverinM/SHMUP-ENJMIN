@@ -42,6 +42,7 @@ public class PlayerWinch : State
         }
         AkSoundEngine.PostEvent("H_Winch_Stop", character.gameObject);
         character.Context.Remove("IsShield");
+        character.GetComponent<Collider>().enabled = true;
     }
 
     public override void NextState()
@@ -52,6 +53,7 @@ public class PlayerWinch : State
 
     public override void StartState()
     {
+        character.GetComponent<Collider>().enabled = false;
         isShield = character.Context.ValuesOrDefault<bool>("IsShield", false);
         if (isShield)
         {
