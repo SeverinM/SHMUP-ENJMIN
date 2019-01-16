@@ -24,7 +24,7 @@ public class MainMenu : Layers {
     {
         Manager.GetInstance().PopToStack();
         Utils.StartFading(2f, Color.black, () => { SceneManager.LoadScene("Game"); Constants.SetAllConstants(0); },
-            () => { Constants.SetAllConstants(1);});
+            () => { Constants.SetAllConstants(1); });
     }
 
     public void StartTransition(GameObject target)

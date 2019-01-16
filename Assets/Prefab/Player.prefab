@@ -597,9 +597,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7dd465f0ca588b4e81e4cb2410b52db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 14
   model: {fileID: 1380677440080142}
-  mass: 0.8
+  mass: 2
   recoveryMat: {fileID: 2100000, guid: 77286c23e931b4b4397bce28b6a22b95, type: 2}
   life: 5
   dash: 3
@@ -613,7 +613,7 @@ MonoBehaviour:
   hookSpeed: 1
   rangeHook: 17
   speedPull: 35
-  coeffHook: 0.8
+  coeffHook: 1.2
   dashSpeed: 5
   barrier: {fileID: 4181975481634658}
   hook: {fileID: 4840222661834636}
