@@ -14,7 +14,7 @@ public class PlayerWinch : State
     //Vitesse de traversé du hook
     float speedTravel;
 
-    float hookRadius = 0.01f;
+    float hookRadius = 0.1f;
 
     public enum HookMode
     {
@@ -67,6 +67,7 @@ public class PlayerWinch : State
 
     public override void UpdateState()
     {
+        character.transform.forward = new Vector3(character.transform.forward.x, 0, character.transform.forward.z);
         float distanceToHook = Vector3.Distance(character.transform.position, player.Hook.transform.position);
 
         if (currentMode == HookMode.Winch)
