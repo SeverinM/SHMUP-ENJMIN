@@ -318,26 +318,26 @@ public class Level : Layers
     /// <param name="killScore"></param>
     internal void PopScore(Character chara, int killScore)
     {
-        //TextMeshProUGUI toAddText = Instantiate(textMeshProDefault, canvas.transform).GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI toAddText = Instantiate(textMeshProDefault, canvas.transform).GetComponent<TextMeshProUGUI>();
 
         //// Position du texte au dessus d'un gameObject
-        //Vector3 offsetPos = new Vector3(chara.transform.position.x, chara.transform.position.y, chara.transform.position.z + 0.5f);
+        Vector3 offsetPos = new Vector3(chara.transform.position.x, chara.transform.position.y, chara.transform.position.z + 0.5f);
 
         //// Calcul de la position à l'écran 
-        //Vector2 canvasPos;
-        //Vector2 canvasEndPos;
-        //Vector2 screenPoint = Camera.main.WorldToScreenPoint(offsetPos);
+        Vector2 canvasPos;
+        Vector2 canvasEndPos;
+        Vector2 screenPoint = Camera.main.WorldToScreenPoint(offsetPos);
 
         //// Convertir la position à l'écran vers l'espace du canvas 
-        //RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.GetComponent<RectTransform>(), screenPoint, null, out canvasPos);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.GetComponent<RectTransform>(), screenPoint, null, out canvasPos);
 
-        //toAddText.text = killScore.ToString();
-        //toAddText.transform.localPosition = canvasPos;
+        toAddText.text = killScore.ToString();
+        toAddText.transform.localPosition = canvasPos;
 
-        //canvasEndPos = canvasPos;
-        //canvasEndPos.y += 10f;
+        canvasEndPos = canvasPos;
+        canvasEndPos.y += 10f;
 
-        //StartCoroutine(PopScoreCoroutine(toAddText, canvasPos, canvasEndPos));
+        StartCoroutine(PopScoreCoroutine(toAddText, canvasPos, canvasEndPos));
     }
 
     /// <summary>
@@ -428,7 +428,7 @@ public class Level : Layers
         if (nextLevel != null)
         {
             player.NextLevel += () => { OnNextLevel(nextLevel); };
-            if (animator != null)
+            if (animator != null && Manager.GetInstance().CountLayer == 2)
             {
                 animator.SetTrigger("SpaceShip");
             }
