@@ -114,7 +114,8 @@ public class Menu : Layers
         Manager.GetInstance().ResetCount();
         Constants.ApplicationQuit = true;
         Manager.GetInstance().PopAll();
-        Utils.StartFading(1, Color.black, () => { Constants.SetAllConstants(0); SceneManager.LoadScene(SceneManager.GetActiveScene().name); }, () => Constants.SetAllConstants(1));
+        Constants.SetAllConstants(0);
+        Utils.StartFading(1, Color.black, () => {SceneManager.LoadScene(SceneManager.GetActiveScene().name); }, () => Constants.SetAllConstants(1));
     }
 
     public void Quit()

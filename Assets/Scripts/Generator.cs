@@ -81,6 +81,9 @@ public class Generator : Character {
     /// </summary>
     public void TryPassWave()
     {
+        if (ActualState != null)
+            return;
+
         if (AllLocks == null)
         {
             SetState(new GenerateEnemies(this, AllWaves));
