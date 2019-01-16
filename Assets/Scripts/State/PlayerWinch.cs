@@ -99,6 +99,9 @@ public class PlayerWinch : State
             }
             NextState();
         }
+        
+        if (player.Target != null)
+            character.transform.forward = player.Target.transform.position - character.transform.position;
     }
 
     public override string GetName()
