@@ -119,6 +119,8 @@ public class Level : Layers
             return;
         }
 
+        AkSoundEngine.PostEvent("Level_01_Start", gameObject);
+
         TryPlace();
 
         Constants.ApplicationQuit = false;
