@@ -32,6 +32,7 @@ public class FollowPathMovement : State
             throw new System.Exception("Aucun waypoints d'attribué disponible");
         }
 
+        float dist = Vector3.Distance(targetPosition, character.transform.position);
         this.loop = loop;
     }
 
@@ -51,8 +52,8 @@ public class FollowPathMovement : State
             throw new System.Exception("Aucun waypoints d'attribué disponible");
         }
 
+        float dist = Vector3.Distance(targetPosition, character.transform.position);
         act = after;
-
         this.loop = false;
     }
 
@@ -94,7 +95,7 @@ public class FollowPathMovement : State
         deltaPosition = targetPosition - character.transform.position;
         float distanceToObjective = Vector3.Distance(targetPosition, character.transform.position);
 
-        if (distanceToObjective < 0.1f)
+        if (distanceToObjective < 0.3f)
         {
             positions.Dequeue();
 
@@ -128,9 +129,10 @@ public class FollowPathMovement : State
                 }
             }    
         }
-
-        character.transform.forward = character.Separate(character.transform.forward, 3);        
-        character.transform.position +=  character.transform.forward * Mathf.Min(distanceToObjective, Time.deltaTime * character.GetScale() * currentWaypoint.speed * character.MoveSpeed * character.PersonalScale);
+        float distanceBetweenFrame = Time.deltaTime * character.GetScale() * currentWaypoint.speed * character.MoveSpeed * character.PersonalScale;
+        float finalValue = Mathf.Min(distanceToObjective, distanceBetweenFrame);
+        //character.transform.forward = character.Separate(deltaPosition, 1);        
+        character.transform.position +=  character.transform.forward * finalValue;
     }
 
     public override string GetName()

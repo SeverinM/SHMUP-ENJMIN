@@ -12,6 +12,8 @@ public class Manager : MonoBehaviour {
     static Manager instance;
     List<BaseInput> allInputs = new List<BaseInput>();
     Stack<Layers> allLayers = new Stack<Layers>();
+
+    [HideInInspector]
     public int Count = 0;
 
 

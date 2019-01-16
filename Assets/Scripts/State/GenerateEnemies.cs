@@ -15,10 +15,6 @@ public class GenerateEnemies : State
     List<Wave> wavesLeft;
     int count;
 
-    // Permet au character d'être éloigné d'un certain espacement lorsqu'ils sont en file
-    float spacingX;
-    float spacingZ;
-
     GameObject leader;
 
     public GenerateEnemies(Character character, List<Wave> remainingWaves) : base(character)
@@ -70,8 +66,6 @@ public class GenerateEnemies : State
 
         if (currentWave.firstIsLeader)
         {
-            spacingX = currentWave.spacingX;
-            spacingZ = currentWave.spacingZ;
             WaveElement x = currentWave.allEnnemies.First();
             if (x != null && x.spawnAfter < timeSinceBegin && !x.spawned)
             {
@@ -96,9 +90,6 @@ public class GenerateEnemies : State
             {
                 generator.Count++;
 
-                leaderPos.x += spacingX;
-                leaderPos.z += spacingZ;
-
                 GameObject instanciated = level.AddEnemy(x.enn, leaderPos);
                 Enemy enn = instanciated.GetComponent<Enemy>();
                 enn.enemyType = x.enn;
@@ -109,7 +100,15 @@ public class GenerateEnemies : State
                 }
                 // On attribue les waypoints
                 enn.name = enn.name + " numero " + Generator.Number++;
-                enn.Leader = x.followPlayer ? level.Player.gameObject : leader;
+                if (leader)
+                {
+                    enn.Leader = leader;
+                }
+                else
+                {
+                    enn.SetState(new EnemyMovement(enn, level.Player.transform));
+                }
+
                 enn.Destroyed += EnnemyDestroyed; // Quand le joueur est détruit, il notifie GenerateEnemies
                 enn.MoveSpeed = x.speed;
                 enn.Life = x.life;

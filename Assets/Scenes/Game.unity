@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -203,6 +203,7 @@ MonoBehaviour:
       life: 3
       spawned: 0
       followPlayer: 1
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 1
     spacingX: 4
@@ -619,6 +620,7 @@ MonoBehaviour:
       life: 1
       spawned: 0
       followPlayer: 1
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 1
     spacingX: 4
@@ -892,6 +894,7 @@ MonoBehaviour:
       life: 3
       spawned: 0
       followPlayer: 1
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 1
     spacingX: 4
@@ -1266,6 +1269,7 @@ MonoBehaviour:
       life: 2
       spawned: 0
       followPlayer: 0
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 1
     spacingX: 4
@@ -1422,6 +1426,7 @@ MonoBehaviour:
       life: 3
       spawned: 0
       followPlayer: 1
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 1
     spacingX: 4
@@ -1685,6 +1690,7 @@ MonoBehaviour:
       life: 2
       spawned: 0
       followPlayer: 0
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 0
     spacingX: 4
@@ -2046,6 +2052,7 @@ MonoBehaviour:
       life: 1
       spawned: 0
       followPlayer: 1
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 1
     spacingX: 4
@@ -2363,6 +2370,7 @@ MonoBehaviour:
       life: 1
       spawned: 0
       followPlayer: 1
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 1
     spacingX: 4
@@ -2863,6 +2871,7 @@ MonoBehaviour:
       life: 3
       spawned: 0
       followPlayer: 1
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 1
     spacingX: 4
@@ -3141,6 +3150,7 @@ MonoBehaviour:
       life: 2
       spawned: 0
       followPlayer: 0
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 0
     spacingX: 4
@@ -3330,6 +3340,7 @@ MonoBehaviour:
       life: 1
       spawned: 0
       followPlayer: 1
+    healAtBegin: 0
     delay: 0.2
     firstIsLeader: 0
     spacingX: 0
@@ -3520,7 +3531,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1047461087}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -160.99, y: 150, z: 146.3}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4014,6 +4025,7 @@ MonoBehaviour:
       life: 1
       spawned: 0
       followPlayer: 1
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 0
     spacingX: 0
@@ -4284,6 +4296,7 @@ MonoBehaviour:
       life: 3
       spawned: 0
       followPlayer: 1
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 1
     spacingX: 4
@@ -4733,6 +4746,7 @@ MonoBehaviour:
       life: 2
       spawned: 0
       followPlayer: 0
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 1
     spacingX: 4
@@ -4949,7 +4963,7 @@ MonoBehaviour:
       speed: 4
       life: 1
       spawned: 0
-      followPlayer: 1
+      followPlayer: 0
     - enn: 0
       enMov: 0
       spawnAfter: 2
@@ -4968,7 +4982,8 @@ MonoBehaviour:
       speed: 4
       life: 1
       spawned: 0
-      followPlayer: 1
+      followPlayer: 0
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 1
     spacingX: 4
@@ -5060,6 +5075,7 @@ MonoBehaviour:
       life: 1
       spawned: 0
       followPlayer: 1
+    healAtBegin: 0
     delay: 0.2
     firstIsLeader: 0
     spacingX: 0
@@ -5189,6 +5205,7 @@ MonoBehaviour:
       life: 2
       spawned: 0
       followPlayer: 0
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 1
     spacingX: 4
@@ -5389,6 +5406,7 @@ MonoBehaviour:
       life: 2
       spawned: 0
       followPlayer: 0
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 1
     spacingX: 4
@@ -5935,6 +5953,7 @@ MonoBehaviour:
       life: 2
       spawned: 0
       followPlayer: 0
+    healAtBegin: 0
     delay: 0
     firstIsLeader: 1
     spacingX: 4
