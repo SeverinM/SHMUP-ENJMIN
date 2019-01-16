@@ -226,6 +226,7 @@ public class Tools : EditorWindow {
                 }
 
                 EditorGUILayout.EndHorizontal();
+
             }
 
             //Fin de l'indentation
