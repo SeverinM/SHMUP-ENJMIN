@@ -91,9 +91,20 @@ public class PlayerWinch : State
             player.Hook.transform.position -= character.transform.forward * Mathf.Min(distanceToHook, Time.deltaTime * character.GetScale() * speedTravel);
         }
 
+        if (player.Target == null)
+        {
+            NextState();
+            return;
+        }
+
         //Si la distance hook / vaisseau est inferieur au radius de hook, retourner vers mouvement
         if (distanceToHook <= hookRadius)
         {
+            if (player.Target.parent != null && player.Target.parent.GetComponent<Enemy>().enemyType == Enemy.EnemyType.MIKE)
+            {
+                Object.Destroy(player.Target.gameObject);
+            }
+
             if (isShield)
             {
                 Object.Destroy(player.Target.gameObject);
@@ -102,7 +113,11 @@ public class PlayerWinch : State
         }
         
         if (player.Target != null)
+        {
             character.transform.forward = player.Target.transform.position - character.transform.position;
+            character.transform.forward = new Vector3(character.transform.forward.x, 0, character.transform.forward.z);
+        }
+            
     }
 
     public override string GetName()

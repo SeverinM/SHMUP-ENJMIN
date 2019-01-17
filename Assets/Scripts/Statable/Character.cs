@@ -335,7 +335,8 @@ public abstract class Character : MonoBehaviour {
 
         foreach(Transform key in allMats.Keys)
         {
-            key.GetComponent<MeshRenderer>().material = allMats[key];
+            if (key != null)
+                key.GetComponent<MeshRenderer>().material = allMats[key];
         }
         GetComponent<Collider>().enabled = true;
         Context.Remove("InRecovery");
