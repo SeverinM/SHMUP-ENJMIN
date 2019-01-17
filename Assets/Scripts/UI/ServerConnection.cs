@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ServerConnection : MonoBehaviour
+public class ServerConnection
 {
     private MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
     private string secretKey = "LaRéponseALaQuestionEst42!"; // La même clé est stockée dans le serveur
@@ -28,7 +28,7 @@ public class ServerConnection : MonoBehaviour
 
         if (hs_post.error != null)
         {
-            print("Erreur envoi score: " + hs_post.error);
+            Debug.Log("Erreur envoi score: " + hs_post.error);
         }
     }
 
@@ -42,7 +42,7 @@ public class ServerConnection : MonoBehaviour
         if (hs_get.error != null)
         {
             scoreDisplay.text = "Erreur reception score";
-            print("Erreur reception score: " + hs_get.error);
+            Debug.Log("Erreur reception score: " + hs_get.error);
         }
         else
         {
