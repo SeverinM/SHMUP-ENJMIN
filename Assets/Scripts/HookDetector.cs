@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 
 [RequireComponent(typeof(LineRenderer))]
 public class HookDetector : MonoBehaviour
@@ -10,10 +10,15 @@ public class HookDetector : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        List<string> possibleTags = new List<string> { "Pullable", "Winchable", "Ennemy", "Shield" };
+        if (other.transform.parent != null && other.transform.parent.GetComponent<Character>() != null && other.transform.parent.GetComponent<Character>().Context.ValuesOrDefault<bool>("InRecovery", false))
+        {
+            player.SetState(new PlayerMovement(player));
+        }
 
         // Succés Hook
         if (other.tag == "Pullable") 
-        {
+        {            
             player.Context.SetInDictionary("HookMode", PlayerWinch.HookMode.Pull);
             player.Context.SetInDictionary("PositionLand", transform.position);
             player.AttachHook(other.transform);

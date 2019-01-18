@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -143,6 +143,7 @@ MonoBehaviour:
   moveSpeed: 6
   model: {fileID: 0}
   mass: 3
+  recoveryDuration: 2
   recoveryMat: {fileID: 0}
   life: 3
   dash: 3
@@ -555,6 +556,7 @@ MonoBehaviour:
   moveSpeed: 6
   model: {fileID: 0}
   mass: 3
+  recoveryDuration: 2
   recoveryMat: {fileID: 0}
   life: 3
   dash: 3
@@ -906,6 +908,7 @@ MonoBehaviour:
   moveSpeed: 6
   model: {fileID: 0}
   mass: 3
+  recoveryDuration: 2
   recoveryMat: {fileID: 0}
   life: 3
   dash: 3
@@ -1010,8 +1013,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 201472636}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -161.3, y: 111, z: 146.1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -161.3, y: 109.91, z: 146.1}
+  m_LocalScale: {x: 0.58256, y: 0.58256, z: 0.58256}
   m_Children:
   - {fileID: 1623647678}
   - {fileID: 346595310}
@@ -1138,12 +1141,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 241145795}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e72ad8bbcbddbb4db91e91cad9d0de8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerList: f7e1664c
+  triggerList: ae8d9d44f7e1664c
   useOtherObject: 0
   data:
     valueGuid: 
@@ -1259,6 +1262,7 @@ MonoBehaviour:
   moveSpeed: 6
   model: {fileID: 0}
   mass: 3
+  recoveryDuration: 2
   recoveryMat: {fileID: 0}
   life: 3
   dash: 3
@@ -1408,6 +1412,7 @@ MonoBehaviour:
   moveSpeed: 6
   model: {fileID: 0}
   mass: 3
+  recoveryDuration: 2
   recoveryMat: {fileID: 0}
   life: 3
   dash: 3
@@ -1785,6 +1790,7 @@ MonoBehaviour:
   moveSpeed: 6
   model: {fileID: 0}
   mass: 3
+  recoveryDuration: 2
   recoveryMat: {fileID: 0}
   life: 3
   dash: 3
@@ -2090,6 +2096,7 @@ MonoBehaviour:
   moveSpeed: 6
   model: {fileID: 0}
   mass: 3
+  recoveryDuration: 2
   recoveryMat: {fileID: 0}
   life: 3
   dash: 3
@@ -2431,6 +2438,7 @@ MonoBehaviour:
   moveSpeed: 6
   model: {fileID: 0}
   mass: 3
+  recoveryDuration: 2
   recoveryMat: {fileID: 0}
   life: 3
   dash: 3
@@ -2946,6 +2954,7 @@ MonoBehaviour:
   moveSpeed: 6
   model: {fileID: 0}
   mass: 3
+  recoveryDuration: 2
   recoveryMat: {fileID: 0}
   life: 3
   dash: 3
@@ -3164,6 +3173,7 @@ MonoBehaviour:
   moveSpeed: 6
   model: {fileID: 0}
   mass: 3
+  recoveryDuration: 2
   recoveryMat: {fileID: 0}
   life: 3
   dash: 3
@@ -3359,6 +3369,7 @@ MonoBehaviour:
   moveSpeed: 6
   model: {fileID: 0}
   mass: 3
+  recoveryDuration: 2
   recoveryMat: {fileID: 0}
   life: 3
   dash: 3
@@ -4050,6 +4061,7 @@ MonoBehaviour:
   moveSpeed: 6
   model: {fileID: 0}
   mass: 3
+  recoveryDuration: 2
   recoveryMat: {fileID: 0}
   life: 3
   dash: 3
@@ -4206,6 +4218,7 @@ MonoBehaviour:
   moveSpeed: 6
   model: {fileID: 0}
   mass: 3
+  recoveryDuration: 2
   recoveryMat: {fileID: 0}
   life: 3
   dash: 3
@@ -4648,6 +4661,7 @@ MonoBehaviour:
   moveSpeed: 6
   model: {fileID: 0}
   mass: 3
+  recoveryDuration: 2
   recoveryMat: {fileID: 0}
   life: 3
   dash: 3
@@ -4899,6 +4913,7 @@ MonoBehaviour:
   moveSpeed: 6
   model: {fileID: 0}
   mass: 3
+  recoveryDuration: 2
   recoveryMat: {fileID: 0}
   life: 3
   dash: 3
@@ -5015,6 +5030,7 @@ MonoBehaviour:
   moveSpeed: 6
   model: {fileID: 0}
   mass: 3
+  recoveryDuration: 2
   recoveryMat: {fileID: 0}
   life: 3
   dash: 3
@@ -5107,6 +5123,7 @@ MonoBehaviour:
   moveSpeed: 6
   model: {fileID: 0}
   mass: 3
+  recoveryDuration: 2
   recoveryMat: {fileID: 0}
   life: 3
   dash: 3
@@ -5308,6 +5325,7 @@ MonoBehaviour:
   moveSpeed: 6
   model: {fileID: 0}
   mass: 3
+  recoveryDuration: 2
   recoveryMat: {fileID: 0}
   life: 3
   dash: 3
@@ -5934,6 +5952,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114938182685806996, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: speedPull
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 114938182685806996, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: recoveryDuration
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
   m_IsPrefabAsset: 0
@@ -5980,6 +6008,7 @@ MonoBehaviour:
   moveSpeed: 6
   model: {fileID: 0}
   mass: 3
+  recoveryDuration: 2
   recoveryMat: {fileID: 0}
   life: 3
   dash: 3

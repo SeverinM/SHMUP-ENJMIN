@@ -622,6 +622,7 @@ MonoBehaviour:
   moveSpeed: 14
   model: {fileID: 1380677440080142}
   mass: 2
+  recoveryDuration: 1
   recoveryMat: {fileID: 2100000, guid: 77286c23e931b4b4397bce28b6a22b95, type: 2}
   life: 5
   dash: 3
@@ -634,9 +635,9 @@ MonoBehaviour:
   maxDashes: 3
   hookSpeed: 1
   rangeHook: 17
-  speedPull: 35
+  speedPull: 300
   screenShakeForce: 1
-  screenShakeDuration: 0.01
+  screenShakeDuration: 0.1
   coeffHook: 1.2
   dashSpeed: 5
   barrier: {fileID: 4181975481634658}

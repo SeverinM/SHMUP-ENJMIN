@@ -10,14 +10,10 @@ public class Barrier : MonoBehaviour {
     [SerializeField]
     private int lifeHit = 1;
 
-    [SerializeField]
-    private float screenShakeDuration = 0.0012f;
+    private float screenShakeDuration = 0.011f;
 
-
-    [SerializeField]
     private float screenShakeForce = 0.5f;
 
-    [SerializeField]
     private float screenShakeBarrierForce = 1f;
 
 
@@ -36,18 +32,23 @@ public class Barrier : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Bullet")
+        if (other.gameObject.tag == "Bullet" || (other.gameObject.tag == "Shield" && IsWinching))
         {
-            Manager.GetInstance().ShakeCamera(screenShakeForce, screenShakeDuration);
+            Manager.GetInstance().ShakeCamera(screenShakeForce/2, screenShakeDuration);
             Destroy(other.gameObject);
             AkSoundEngine.PostEvent("S_HitShield", gameObject);
         }
 
         if (other.gameObject.tag == "Ennemy" && isWinching)
         {
+            Debug.Log(screenShakeForce + "  " + screenShakeDuration);
             Manager.GetInstance().ShakeCamera(screenShakeBarrierForce, screenShakeDuration);
-            other.GetComponent<Enemy>().Life -= lifeHit;
-            other.GetComponent<Enemy>().StartRecovery(barrierRecovery);
+            Character chara = other.GetComponent<Character>();
+            chara.StartRecovery(barrierRecovery);
+
+            Vector3 delta = other.transform.position - transform.position;
+            delta.y = 0;
+            other.GetComponent<Character>().Hit(delta.normalized * 100);
         }
     }
 }

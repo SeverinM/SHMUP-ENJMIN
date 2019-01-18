@@ -70,7 +70,9 @@ public class EnemyMovement : State
         if (target.GetComponent<Player>() == null && character.PersonalScale > 0)
             character.PersonalScale = Mathf.Clamp((Vector3.Distance(target.transform.position, character.transform.position) / 3) / enemy.MoveSpeed, 0, 1);
 
-        character.transform.forward = deltaPosition;
+        if (character.PersonalScale * character.GetScale() > 0)
+            character.transform.forward = deltaPosition;
+
         character.Move(character.Separate(deltaPosition.normalized));
     }
 

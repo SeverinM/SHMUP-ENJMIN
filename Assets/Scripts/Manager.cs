@@ -236,24 +236,19 @@ public class Manager : MonoBehaviour {
 
 
     // ScreenShake
+    float DefaultShakeAmount = 0.5f;
+    float ShakeAmount; // Montant de secousse
+    float DefaultShakeDuration = 0.011f;
+    float ShakeDuration = 0.2f; // La duration de la secousse
+    float ShakePercentage = 0.2f; // Le pourcentage de 0 à 1 représentant le montant de secousse appliquée
 
-    [Header("ScreenShake")]
-    [SerializeField]
-    static float DefaultShakeAmount = 1f;
-    static float ShakeAmount; // Montant de secousse
-    [SerializeField]
-    static float DefaultShakeDuration = 0.02f;
-    static float ShakeDuration = 0.02f; // La duration de la secousse
-    [SerializeField]
-    static float ShakePercentage = 0.2f; // Le pourcentage de 0 à 1 représentant le montant de secousse appliquée
+    float startAmount; // Le montant au départ de la secousse
+    float startDuration; // La durée de secousse
 
-    static float startAmount; // Le montant au départ de la secousse
-    static float startDuration; // La durée de secousse
+    bool isRunning = false; // La coroutine est en route ?
 
-    static bool isRunning = false; // La coroutine est en route ?
-
-    static public bool smooth;
-    static public float smoothAmount = 5f; // Montant d'adouci
+    bool smooth;
+    float smoothAmount = 5f; // Montant d'adouci
 
     public void ShakeCamera(float amount, float duration)
     {
@@ -261,9 +256,6 @@ public class Manager : MonoBehaviour {
         ShakeDuration = duration;
         startAmount = ShakeAmount; // Remettre par défault pour determiner un pourcentage
         startDuration = ShakeDuration; // Remettre par défault le temps de départ
-
-
-        Debug.Log(ShakeAmount);
 
         if (!isRunning) StartCoroutine(Shake());  // Appeler la corroutine que si elle n'est pas déja en cours d'execution
     }

@@ -74,7 +74,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1561519513433908}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -139.42667, y: 140.25693, z: 149.14198}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4495648320846752}
@@ -285,7 +285,7 @@ MonoBehaviour:
   moveSpeed: 15
   model: {fileID: 1561519513433908}
   mass: 3
-  recoveryMat: {fileID: 2100000, guid: 3615e864792955a4a912eda2c4bbddf0, type: 2}
+  recoveryMat: {fileID: 2100000, guid: 77286c23e931b4b4397bce28b6a22b95, type: 2}
   life: 1
   dash: 3
   protectionPrefab: {fileID: 1999096423012838, guid: 7ab713d6b58d82142a6ef567773e3e05,
