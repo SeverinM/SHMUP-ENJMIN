@@ -40,6 +40,7 @@ GameObject:
   m_Layer: 0
   m_Name: mid_jim
   m_TagString: Untagged
+  m_Name: MidJim
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -636,7 +637,7 @@ MonoBehaviour:
   shootSpeed: 8
   maxBullets: 5
   shootRadius: 2
-  bulletLastingDuration: 12
+  bulletLastingDuration: 10
   killScore: 100
   bulletPrefab: {fileID: 1282062362704492, guid: 119f19512e8adaa4a976ceeddba29da5,
     type: 2}

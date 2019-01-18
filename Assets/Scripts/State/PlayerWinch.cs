@@ -97,7 +97,6 @@ public class PlayerWinch : State
             if (isShield)
             {
                 Object.Destroy(player.Target.gameObject);
-                Manager.GetInstance().ShakeCamera(player.ScreenShakeForce, player.ScreenShakeDuration);
             }
             NextState();
         }

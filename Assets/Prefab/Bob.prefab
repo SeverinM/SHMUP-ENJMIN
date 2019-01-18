@@ -297,7 +297,7 @@ MonoBehaviour:
   shootSpeed: 8
   maxBullets: 5
   shootRadius: 1
-  bulletLastingDuration: 12
+  bulletLastingDuration: 2
   killScore: 50
   bulletPrefab: {fileID: 1282062362704492, guid: 119f19512e8adaa4a976ceeddba29da5,
     type: 2}

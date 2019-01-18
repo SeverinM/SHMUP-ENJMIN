@@ -27,7 +27,6 @@ public class PlayerMovementDuringHook : PlayerMovement {
     public override void StartState()
     {
         player.Target.parent.GetComponent<Character>().PersonalScale = 0;
-        Manager.GetInstance().ShakeCamera(player.ScreenShakeForce, player.ScreenShakeDuration);
     }
 
     public override void NextState()
