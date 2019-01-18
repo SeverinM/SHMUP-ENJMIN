@@ -62,6 +62,7 @@ public class EnemyAttack : State
     public override void UpdateState()
     {
         character.transform.LookAt(playerTarget);
+        character.transform.forward = new Vector3(character.transform.forward.x, 0, character.transform.forward.z);
         // Lance une attaque selon la periode
         totalTime += Time.deltaTime * character.PersonalScale * character.GetScale();
         if (totalTime > lastTime)
