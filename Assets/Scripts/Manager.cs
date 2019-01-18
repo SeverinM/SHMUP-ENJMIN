@@ -255,22 +255,15 @@ public class Manager : MonoBehaviour {
     static public bool smooth;
     static public float smoothAmount = 5f; // Montant d'adouci
 
-    public void ShakeCamera()
-    {
-        ShakeAmount = DefaultShakeAmount;
-        ShakeDuration = DefaultShakeDuration;
-        startAmount = ShakeAmount; // Remettre par défault pour determiner un pourcentage
-        startDuration = ShakeDuration; // Remettre par défault le temps de départ
-
-        if (!isRunning) StartCoroutine(Shake());  // Appeler la corroutine que si elle n'est pas déja en cours d'execution
-    }
-
     public void ShakeCamera(float amount, float duration)
     {
         ShakeAmount = amount;
         ShakeDuration = duration;
         startAmount = ShakeAmount; // Remettre par défault pour determiner un pourcentage
         startDuration = ShakeDuration; // Remettre par défault le temps de départ
+
+
+        Debug.Log(ShakeAmount);
 
         if (!isRunning) StartCoroutine(Shake());  // Appeler la corroutine que si elle n'est pas déja en cours d'execution
     }
@@ -282,7 +275,6 @@ public class Manager : MonoBehaviour {
         while (ShakeDuration > 0.01f)
         {
             Vector3 rotationAmount = UnityEngine.Random.insideUnitSphere * ShakeAmount; // Montant de rotation à ajouter à la rotation locale
-
             rotationAmount.x = 90;
 
             ShakePercentage = ShakeDuration / startDuration; // Utilisé pour définir le montant de secousse (% * startAmount)

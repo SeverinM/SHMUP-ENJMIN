@@ -200,7 +200,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1380677440080142}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -161.1, y: 110, z: 147.6}
+  m_LocalPosition: {x: -161.1, y: 110, z: 145.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4181975481634658}
@@ -593,6 +593,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barrierRecovery: 1
   lifeHit: 1
+  screenShakeDuration: 0.008
+  screenShakeForce: 0.5
+  screenShakeBarrierForce: 1
 --- !u!114 &114680068698736828
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -632,6 +635,8 @@ MonoBehaviour:
   hookSpeed: 1
   rangeHook: 17
   speedPull: 35
+  screenShakeForce: 1
+  screenShakeDuration: 0.01
   coeffHook: 1.2
   dashSpeed: 5
   barrier: {fileID: 4181975481634658}
