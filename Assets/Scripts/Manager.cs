@@ -233,4 +233,68 @@ public class Manager : MonoBehaviour {
         }
         return output;
     }
+
+
+    // ScreenShake
+
+    [Header("ScreenShake")]
+    [SerializeField]
+    static float DefaultShakeAmount = 1f;
+    static float ShakeAmount; // Montant de secousse
+    [SerializeField]
+    static float DefaultShakeDuration = 0.02f;
+    static float ShakeDuration = 0.02f; // La duration de la secousse
+    [SerializeField]
+    static float ShakePercentage = 0.2f; // Le pourcentage de 0 à 1 représentant le montant de secousse appliquée
+
+    static float startAmount; // Le montant au départ de la secousse
+    static float startDuration; // La durée de secousse
+
+    static bool isRunning = false; // La coroutine est en route ?
+
+    static public bool smooth;
+    static public float smoothAmount = 5f; // Montant d'adouci
+
+    public void ShakeCamera()
+    {
+        ShakeAmount = DefaultShakeAmount;
+        ShakeDuration = DefaultShakeDuration;
+        startAmount = ShakeAmount; // Remettre par défault pour determiner un pourcentage
+        startDuration = ShakeDuration; // Remettre par défault le temps de départ
+
+        if (!isRunning) StartCoroutine(Shake());  // Appeler la corroutine que si elle n'est pas déja en cours d'execution
+    }
+
+    public void ShakeCamera(float amount, float duration)
+    {
+        ShakeAmount = amount;
+        ShakeDuration = duration;
+        startAmount = ShakeAmount; // Remettre par défault pour determiner un pourcentage
+        startDuration = ShakeDuration; // Remettre par défault le temps de départ
+
+        if (!isRunning) StartCoroutine(Shake());  // Appeler la corroutine que si elle n'est pas déja en cours d'execution
+    }
+
+    private IEnumerator Shake()
+    {
+        isRunning = true;
+
+        while (ShakeDuration > 0.01f)
+        {
+            Vector3 rotationAmount = UnityEngine.Random.insideUnitSphere * ShakeAmount; // Montant de rotation à ajouter à la rotation locale
+
+            rotationAmount.x = 90;
+
+            ShakePercentage = ShakeDuration / startDuration; // Utilisé pour définir le montant de secousse (% * startAmount)
+
+            ShakeAmount = startAmount * ShakePercentage; // Définir le montant de secousse (% * startAmount)
+            ShakeDuration = Mathf.Lerp(ShakeDuration, 0, Time.deltaTime); // Lerp le temps pour moins de secousses vers la fin
+
+            Camera.main.transform.localRotation = Quaternion.Euler(rotationAmount); //Le montant de rotation devient la rotation Locale
+
+            yield return null;
+        }
+        Camera.main.transform.localRotation = Quaternion.AngleAxis(90, Vector3.right); // Rotation locale à 0 pour eviter que cela continue de secouer
+        isRunning = false;
+    }
 }
