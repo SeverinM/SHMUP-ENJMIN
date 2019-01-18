@@ -12,7 +12,7 @@ public class KeyBoardInput : BaseInput {
     public override void UpdateInput()
     {
         movements = Vector2.zero;
-        if ((Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.S)) && BaseInput.IsFree(Actions.AllMovement,this))
+        if ((Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.D)) && BaseInput.IsFree(Actions.AllMovement,this))
         {
             if (Input.GetKey(KeyCode.S))
             {
