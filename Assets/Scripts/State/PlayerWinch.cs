@@ -76,7 +76,7 @@ public class PlayerWinch : State
             // On utilise copy afin de maintenir le hook à la même position
             copy = player.Hook.transform.position;
 
-            character.transform.position += character.transform.forward * Mathf.Min(distanceToHook, Time.deltaTime * character.GetScale() * speedTravel);
+            character.transform.position += character.transform.forward * Mathf.Min(distanceToHook, Time.deltaTime * character.GetScale() * speedTravel * character.PersonalScale);
             player.Hook.transform.position = copy;
         }
 
@@ -88,12 +88,23 @@ public class PlayerWinch : State
                 Transform who = isShield ? player.Target : player.Target.parent;
                 who.position -= character.transform.forward * Time.deltaTime * character.GetScale() * character.PersonalScale * speedTravel;
             }
-            player.Hook.transform.position -= character.transform.forward * Mathf.Min(distanceToHook, Time.deltaTime * character.GetScale() * speedTravel);
+            player.Hook.transform.position -= character.transform.forward * Mathf.Min(distanceToHook, Time.deltaTime * character.GetScale() * speedTravel * character.PersonalScale);
+        }
+
+        if (player.Target == null)
+        {
+            NextState();
+            return;
         }
 
         //Si la distance hook / vaisseau est inferieur au radius de hook, retourner vers mouvement
         if (distanceToHook <= hookRadius)
         {
+            if (player.Target.parent != null && player.Target.parent.GetComponent<Enemy>().enemyType == Enemy.EnemyType.MIKE)
+            {
+                Object.Destroy(player.Target.gameObject);
+            }
+
             if (isShield)
             {
                 Object.Destroy(player.Target.gameObject);
@@ -102,7 +113,11 @@ public class PlayerWinch : State
         }
         
         if (player.Target != null)
+        {
             character.transform.forward = player.Target.transform.position - character.transform.position;
+            character.transform.forward = new Vector3(character.transform.forward.x, 0, character.transform.forward.z);
+        }
+            
     }
 
     public override string GetName()

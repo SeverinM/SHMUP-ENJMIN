@@ -40,7 +40,6 @@ GameObject:
   m_Layer: 0
   m_Name: mid_jim
   m_TagString: Untagged
-  m_Name: MidJim
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -241,7 +240,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1796657138515930}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -140.1189, y: 84.572754, z: 146.12613}
+  m_LocalPosition: {x: -115.70682, y: 259.77072, z: 183.99086}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4608639111972932}
@@ -588,11 +587,11 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1796657138515930}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 1, z: 6}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.5, y: 1, z: 2.7314148}
+  m_Center: {x: 0, y: 0, z: -0.6661072}
 --- !u!95 &95037193264863378
 Animator:
   serializedVersion: 3
