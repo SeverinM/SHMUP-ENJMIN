@@ -13,17 +13,17 @@ public class PlayerWinch : State
     
     //Vitesse de traversé du hook
     float speedTravel;
-
     float hookRadius = 0.1f;
-
     public enum HookMode
     {
         Pull,
         Winch
     }
     HookMode currentMode;
-
     Vector3 copy;
+
+    float distanceToHook;
+    float minimalDistance;
 
     public PlayerWinch(Character character) : base(character)
     {
@@ -42,7 +42,7 @@ public class PlayerWinch : State
         }
         AkSoundEngine.PostEvent("H_Winch_Stop", character.gameObject);
         character.Context.Remove("IsShield");
-        character.GetComponent<Collider>().enabled = true;
+        player.Hook.parent = player.transform;
     }
 
     public override void NextState()
@@ -53,22 +53,28 @@ public class PlayerWinch : State
 
     public override void StartState()
     {
-        character.GetComponent<Collider>().enabled = false;
         isShield = character.Context.ValuesOrDefault<bool>("IsShield", false);
         if (isShield)
         {
             currentMode = HookMode.Pull;
             player.Target.parent.GetComponent<Character>().PersonalScale = 1;
-            player.Target.transform.parent = null;
+            //player.Target.transform.parent = null;
         }
         barrier.GetComponent<Barrier>().IsWinching = true;
         AkSoundEngine.PostEvent("H_Winch", character.gameObject);
+        player.Hook.parent = null;
     }
 
     public override void UpdateState()
     {
-        character.transform.forward = new Vector3(character.transform.forward.x, 0, character.transform.forward.z);
-        float distanceToHook = Vector3.Distance(character.transform.position, player.Hook.transform.position);
+        if (player.Target == null)
+        {
+            NextState();
+            return;
+        }
+        //La distance se fait entre le joueur et son hook
+        distanceToHook = Vector3.Distance(character.transform.position, player.Hook.transform.position);
+        minimalDistance = Mathf.Min(distanceToHook - 0.02f, Time.deltaTime * character.GetScale() * speedTravel * character.PersonalScale);
 
         if (currentMode == HookMode.Winch)
         {
@@ -76,48 +82,31 @@ public class PlayerWinch : State
             // On utilise copy afin de maintenir le hook à la même position
             copy = player.Hook.transform.position;
 
-            character.transform.position += character.transform.forward * Mathf.Min(distanceToHook, Time.deltaTime * character.GetScale() * speedTravel * character.PersonalScale);
-            player.Hook.transform.position = copy;
+            character.transform.position += character.transform.forward * minimalDistance;
         }
 
         if (currentMode == HookMode.Pull)
         {
             // Puisque l'on est en collision avec l'enfant, on va tirer tout l'ensemble, donc le parent
-            if (player.Target != null)
-            {
-                Transform who = isShield ? player.Target : player.Target.parent;
-                who.position -= character.transform.forward * Time.deltaTime * character.GetScale() * character.PersonalScale * speedTravel;
-            }
-            player.Hook.transform.position -= character.transform.forward * Mathf.Min(distanceToHook, Time.deltaTime * character.GetScale() * speedTravel * character.PersonalScale);
-        }
-
-        if (player.Target == null)
-        {
-            NextState();
-            return;
+            Transform who = isShield ? player.Target : player.Target.parent;
+            who.position -= character.transform.forward * minimalDistance;
+            player.Hook.transform.position -= character.transform.forward * minimalDistance;
         }
 
         //Si la distance hook / vaisseau est inferieur au radius de hook, retourner vers mouvement
         if (distanceToHook <= hookRadius)
         {
-            if (player.Target.parent != null && player.Target.parent.GetComponent<Enemy>().enemyType == Enemy.EnemyType.MIKE)
-            {
-                Object.Destroy(player.Target.gameObject);
-            }
-
-            if (isShield)
+            if (player.Target.parent != null && player.Target.parent.GetComponent<Enemy>().enemyType != Enemy.EnemyType.BOB)
             {
                 Object.Destroy(player.Target.gameObject);
             }
             NextState();
         }
-        
-        if (player.Target != null)
-        {
-            character.transform.forward = player.Target.transform.position - character.transform.position;
-            character.transform.forward = new Vector3(character.transform.forward.x, 0, character.transform.forward.z);
-        }
-            
+
+        Debug.Log(character.transform.forward);
+        character.transform.forward = player.Hook.position - character.transform.position;
+        character.transform.forward = new Vector3(character.transform.forward.x, 0, character.transform.forward.z);
+        player.Hook.transform.position = new Vector3(player.Hook.transform.position.x, character.transform.position.y, player.Hook.transform.position.z);
     }
 
     public override string GetName()
