@@ -81,15 +81,6 @@ public abstract class Character : MonoBehaviour {
         }
     }
 
-    IEnumerator coroutine;
-    public bool IsInRecovery
-    {
-        get
-        {
-            return coroutine != null;
-        }
-    }
-
     [SerializeField]
     protected float mass = 3.0f;                
     protected float hitForce = 25.5f;            
@@ -283,6 +274,20 @@ public abstract class Character : MonoBehaviour {
         impact = Vector3.Lerp(impact, Vector3.zero, impactDeceleration * Time.deltaTime);
     }
 
+    public virtual void Hit(Vector3 speed)
+    {
+        Impact(speed);
+        Life--;
+    }
+
+    // Le joueur se voit propulsé dans la direction opposée à un impact reçu
+    public void Impact(Vector3 force)
+    {
+        Vector3 dir = force.normalized;
+        dir.y = 0; // En hauteur
+        impact += dir.normalized * force.magnitude / mass;
+    }
+
     public void InterpretInput(BaseInput.TypeAction typAct, BaseInput.Actions baseInput, Vector2 value)
     {
         if (actualState != null)
@@ -303,8 +308,7 @@ public abstract class Character : MonoBehaviour {
 
     public void StartRecovery(float duration)
     {
-        coroutine = StartRecoveryCoroutine(duration);
-        StartCoroutine(coroutine);
+        StartCoroutine(StartRecoveryCoroutine(duration));
     }
 
     public IEnumerator StartRecoveryCoroutine(float duration)

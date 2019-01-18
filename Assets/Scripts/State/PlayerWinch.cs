@@ -76,7 +76,7 @@ public class PlayerWinch : State
             // On utilise copy afin de maintenir le hook à la même position
             copy = player.Hook.transform.position;
 
-            character.transform.position += character.transform.forward * Mathf.Min(distanceToHook, Time.deltaTime * character.GetScale() * speedTravel);
+            character.transform.position += character.transform.forward * Mathf.Min(distanceToHook, Time.deltaTime * character.GetScale() * speedTravel * character.PersonalScale);
             player.Hook.transform.position = copy;
         }
 
@@ -88,7 +88,7 @@ public class PlayerWinch : State
                 Transform who = isShield ? player.Target : player.Target.parent;
                 who.position -= character.transform.forward * Time.deltaTime * character.GetScale() * character.PersonalScale * speedTravel;
             }
-            player.Hook.transform.position -= character.transform.forward * Mathf.Min(distanceToHook, Time.deltaTime * character.GetScale() * speedTravel);
+            player.Hook.transform.position -= character.transform.forward * Mathf.Min(distanceToHook, Time.deltaTime * character.GetScale() * speedTravel * character.PersonalScale);
         }
 
         if (player.Target == null)

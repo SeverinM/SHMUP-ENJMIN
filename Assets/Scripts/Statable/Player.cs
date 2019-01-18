@@ -159,37 +159,14 @@ public class Player : Character
     private void OnCollisionEnter(Collision collision)
     {
         // Quand le joueur se fait toucher par un rigidBody
-        
-        //En suspens pour le moment
+       
         if (collision.gameObject.tag == "Bullet")
         {
-            Impact(collision.relativeVelocity * hitForce);
-            Destroy(collision.gameObject);
-
-            if (!base.protection.activeInHierarchy)
-            {
-                Life--;
-
-                if (Life <= 0)
-                {
-                    Destroy(gameObject);
-                    AkSoundEngine.PostEvent("S_Destroy", gameObject);
-                }
-                else
-                {
-                    StartRecovery(recoveryDuration);
-                    AkSoundEngine.PostEvent("S_Hurt", gameObject);
-                }
-            }
+            if (!Context.ValuesOrDefault<bool>("InRecovery", false))
+                Hit(collision.relativeVelocity * hitForce); 
+            
+            Destroy(collision.gameObject);                       
         }
-    }
-
-    // Le joueur se voit propulsé dans la direction opposée à un impact reçu
-    public void Impact(Vector3 force)
-    {
-        Vector3 dir = force.normalized;
-        dir.y = 0; // En hauteur
-        impact += dir.normalized * force.magnitude / mass;
     }
 
     public override float GetScale()
@@ -223,6 +200,21 @@ public class Player : Character
     public void AttachHook(Transform transform)
     {
         target = transform;
+    }
+
+    public override void Hit(Vector3 speed)
+    {
+        Impact(speed);
+        if (Life <= 1)
+        {
+            AkSoundEngine.PostEvent("S_Destroy", gameObject);
+        }
+        else
+        {
+            StartRecovery(recoveryDuration);
+            AkSoundEngine.PostEvent("S_Hurt", gameObject);
+        }
+        Life--;
     }
 
     public override void OnDestroy()

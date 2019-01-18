@@ -34,8 +34,12 @@ public class Barrier : MonoBehaviour {
 
         if (other.gameObject.tag == "Ennemy" && isWinching)
         {
-            other.GetComponent<Character>().Life -= lifeHit;
-            other.GetComponent<Character>().StartRecovery(barrierRecovery);
+            Character chara = other.GetComponent<Character>();
+            chara.StartRecovery(barrierRecovery);
+
+            Vector3 delta = other.transform.position - transform.position;
+            delta.y = 0;
+            other.GetComponent<Character>().Hit(delta.normalized * 100);
         }
     }
 }
