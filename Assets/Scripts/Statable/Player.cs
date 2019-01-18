@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine.SceneManagement;
 
+
 public class Player : Character
 {
     [Header("Debug")]
@@ -56,6 +57,28 @@ public class Player : Character
     [Tooltip("Vitesse du pull / winch")]
     [SerializeField]
     float speedPull = 10;
+
+    [Tooltip("ScreenShake force du pull / winch")]
+    [SerializeField]
+    float screenShakeForce = 1;
+    public float ScreenShakeForce
+    {
+        get
+        {
+            return screenShakeForce;
+        }
+    }
+
+    [Tooltip("Durée de ScreenShake du pull / winch")]
+    [SerializeField]
+    float screenShakeDuration = 0.011f;
+    public float ScreenShakeDuration
+    {
+        get
+        {
+            return screenShakeDuration;
+        }
+    }
 
     [Header("Mouvement durant le hook")]
     [Tooltip("A quel point la vitesse est reduite par rapport a la vitesse normale ? (exemple : 0.1 signifie 10 fois moins vite)")]
@@ -235,4 +258,5 @@ public class Player : Character
             Utils.StartFading(1, Color.black, () => { Constants.SetAllConstants(0); SceneManager.LoadScene(SceneManager.GetActiveScene().name); }, () => { Constants.SetAllConstants(1);});
         }
     }
+
 }
