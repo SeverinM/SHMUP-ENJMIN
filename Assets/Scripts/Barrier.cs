@@ -26,7 +26,7 @@ public class Barrier : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Bullet")
+        if (other.gameObject.tag == "Bullet" || (other.gameObject.tag == "Shield" && IsWinching))
         {
             Destroy(other.gameObject);
             AkSoundEngine.PostEvent("S_HitShield", gameObject);

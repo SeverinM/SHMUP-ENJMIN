@@ -86,6 +86,8 @@ public abstract class Character : MonoBehaviour {
     protected float hitForce = 25.5f;            
     protected Vector3 impact = Vector3.zero;
     //Combien de temps le joueur est invincible une fois touché ?
+
+    [SerializeField]
     protected float recoveryDuration = 2f;
     protected float freezeDuration = 1f;
     internal float scaleDuration = 1f;
