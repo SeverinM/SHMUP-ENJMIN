@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 4956823285539904}
   - component: {fileID: 33065803486428644}
   - component: {fileID: 65625517968105264}
+  - component: {fileID: 122251473985763326}
   m_Layer: 0
   m_Name: Pullable (1)
   m_TagString: Winchable
@@ -123,6 +124,7 @@ GameObject:
   - component: {fileID: 4605419326418482}
   - component: {fileID: 33900600240289792}
   - component: {fileID: 65457567505850566}
+  - component: {fileID: 122214680031642682}
   m_Layer: 0
   m_Name: Pullable
   m_TagString: Winchable
@@ -231,6 +233,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4673206472702518}
   - component: {fileID: 65444022930829048}
+  - component: {fileID: 122701625420514290}
   m_Layer: 0
   m_Name: Pullable
   m_TagString: Pullable
@@ -986,3 +989,36 @@ MonoBehaviour:
     type: 2}
   movementType: 1
   enemyType: 0
+--- !u!122 &122214680031642682
+Halo:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1561051792792620}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4283453649
+  m_Size: 1
+--- !u!122 &122251473985763326
+Halo:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1317394701880524}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4282400982
+  m_Size: 1
+--- !u!122 &122701625420514290
+Halo:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1813614117066258}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4282664157
+  m_Size: 1
