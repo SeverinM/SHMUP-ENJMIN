@@ -99,7 +99,6 @@ public class PlayerWinch : State
             if (player.Target.parent != null && player.Target.parent.GetComponent<Enemy>().enemyType != Enemy.EnemyType.BOB)
             {
                 Object.Destroy(player.Target.gameObject);
-                Manager.GetInstance().ShakeCamera(player.ScreenShakeForce, player.ScreenShakeDuration);
             }
             NextState();
         }

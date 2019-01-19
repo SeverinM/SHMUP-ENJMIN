@@ -37,7 +37,7 @@ public class Player : Character
         }
     }
     [SerializeField]
-    [Tooltip("Temps de régeneration des dash")]
+    [Tooltip("Temps de regeneration des dash")]
     internal float dashCooldown = 2f;
 
     [SerializeField]
@@ -58,9 +58,10 @@ public class Player : Character
     [SerializeField]
     float speedPull = 10;
 
-    [Tooltip("ScreenShake force du pull / winch")]
+    [Header("ScreenShake lors d'un impact")]
+    [Tooltip("Force lors d'un impact")]
     [SerializeField]
-    float screenShakeForce = 1;
+    float screenShakeForce = 0.8f;
     public float ScreenShakeForce
     {
         get
@@ -69,7 +70,7 @@ public class Player : Character
         }
     }
 
-    [Tooltip("Durée de ScreenShake du pull / winch")]
+    [Tooltip("Duree lors d'un impact")]
     [SerializeField]
     float screenShakeDuration = 0.011f;
     public float ScreenShakeDuration
@@ -231,6 +232,9 @@ public class Player : Character
     public override void Hit(Vector3 speed)
     {
         Impact(speed);
+
+        Manager.GetInstance().ShakeCamera(screenShakeForce, screenShakeDuration);
+
         if (Life <= 1)
         {
             AkSoundEngine.PostEvent("S_Destroy", gameObject);
@@ -240,6 +244,7 @@ public class Player : Character
             StartRecovery(recoveryDuration);
             AkSoundEngine.PostEvent("S_Hurt", gameObject);
         }
+
         Life--;
     }
 

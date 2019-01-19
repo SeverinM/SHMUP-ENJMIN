@@ -44,6 +44,7 @@ public class HookDetector : MonoBehaviour
         // Si le joueur touche un bouclier, le grab
         if (other.tag == "Shield")
         {
+            AkSoundEngine.PostEvent("E3_ShieldGrab", gameObject);
             player.Context.SetInDictionary("PositionLand", transform.position);
             player.Context.SetInDictionary("IsShield", true);
             player.AttachHook(other.transform);
