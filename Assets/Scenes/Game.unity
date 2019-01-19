@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2
@@ -344,6 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2
@@ -566,6 +568,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2
@@ -918,6 +921,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2
@@ -1078,6 +1082,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2
@@ -1441,6 +1446,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2
@@ -1591,6 +1597,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2
@@ -1773,6 +1780,61 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 346595309}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &386709602
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 386709603}
+  - component: {fileID: 386709604}
+  m_Layer: 0
+  m_Name: EndGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &386709603
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 386709602}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 410317351}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &386709604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 386709602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74ea6ec4297249d4cbad984f0434a79a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 6
+  coeffRotation: 1
+  model: {fileID: 0}
+  mass: 3
+  recoveryDuration: 2
+  recoveryMat: {fileID: 0}
+  life: 3
+  dash: 3
+  protectionPrefab: {fileID: 0}
+  impactDeceleration: 5
+  levelObject: {fileID: 410317349}
+  allWaves: []
+  Count: 0
+  WaveCount: 0
+  AllLocks: []
 --- !u!1 &392386831
 GameObject:
   m_ObjectHideFlags: 0
@@ -1928,6 +1990,77 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 392386831}
   m_CullTransparentMesh: 0
+--- !u!1 &410317349
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 410317351}
+  - component: {fileID: 410317350}
+  m_Layer: 0
+  m_Name: Level3
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &410317350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 410317349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9822e4a595d953744b78812f14775be3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFirst: 0
+  nextLevel: {fileID: 0}
+  player: {fileID: 252992807}
+  JimPrefab: {fileID: 1796657138515930, guid: 02c41df092ae0a142b8866396d0a138e, type: 2}
+  MikePrefab: {fileID: 1663835522049710, guid: ae66e2c413491d642bb19e18f4749421, type: 2}
+  BobPrefab: {fileID: 1561519513433908, guid: 46c9216ca856d3e4d836743c1d9c8564, type: 2}
+  MenuPrefab: {fileID: 745026293}
+  BackgroundToHide: {fileID: 0}
+  LifeUI: {fileID: 263192320}
+  LifePrefab: {fileID: 1724876813434170, guid: 0821c6fbd7cc8f8499ac28cd927d0448, type: 2}
+  CountEnemyUI: {fileID: 0}
+  CountEnemyPrefab: {fileID: 1724876813434170, guid: 2b555192181ff3145a45249581286db2,
+    type: 2}
+  DashUI: {fileID: 0}
+  DashPrefab: {fileID: 1724876813434170, guid: 346abfe4d3661884caeb2904b444838c, type: 2}
+  ScoreUI: {fileID: 89801101}
+  BonusUI: {fileID: 1143800744}
+  canvas: {fileID: 1628502475}
+  textAnimation:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  textDefault: {fileID: 1170232697}
+  textMeshProDefault: {fileID: 392386831}
+  menu: {fileID: 1087241302}
+  animator: {fileID: 0}
+  characters: []
+  enemiesOnBonus: []
+--- !u!4 &410317351
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 410317349}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -157.62, y: 80, z: 148.33}
+  m_LocalScale: {x: 4, y: 2, z: 2}
+  m_Children:
+  - {fileID: 386709603}
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &441725971
 GameObject:
   m_ObjectHideFlags: 0
@@ -1969,6 +2102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2
@@ -2070,6 +2204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2
@@ -2321,6 +2456,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2
@@ -2558,6 +2694,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2
@@ -2900,6 +3037,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2
@@ -3018,6 +3156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2
@@ -3079,6 +3218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2
@@ -3177,12 +3317,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFirst: 0
-  nextLevel: {fileID: 0}
+  nextLevel: {fileID: 410317350}
   player: {fileID: 252992807}
   JimPrefab: {fileID: 1796657138515930, guid: 02c41df092ae0a142b8866396d0a138e, type: 2}
   MikePrefab: {fileID: 1663835522049710, guid: ae66e2c413491d642bb19e18f4749421, type: 2}
   BobPrefab: {fileID: 1561519513433908, guid: 46c9216ca856d3e4d836743c1d9c8564, type: 2}
   MenuPrefab: {fileID: 745026293}
+  BackgroundToHide: {fileID: 201472636}
   LifeUI: {fileID: 263192320}
   LifePrefab: {fileID: 1724876813434170, guid: 0821c6fbd7cc8f8499ac28cd927d0448, type: 2}
   CountEnemyUI: {fileID: 0}
@@ -3275,6 +3416,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2
@@ -3932,6 +4074,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2
@@ -4080,6 +4223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2
@@ -4154,6 +4298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2
@@ -4228,6 +4373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2
@@ -4306,6 +4452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2
@@ -4635,6 +4782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2
@@ -4778,6 +4926,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2
@@ -4895,6 +5044,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2
@@ -4992,6 +5142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2
@@ -5132,6 +5283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2
@@ -5291,6 +5443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2
@@ -5516,6 +5669,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2
@@ -5692,6 +5846,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2
@@ -5912,6 +6067,7 @@ MonoBehaviour:
   MikePrefab: {fileID: 1663835522049710, guid: ae66e2c413491d642bb19e18f4749421, type: 2}
   BobPrefab: {fileID: 1561519513433908, guid: 46c9216ca856d3e4d836743c1d9c8564, type: 2}
   MenuPrefab: {fileID: 1389738857004872, guid: 78183828730a6a14998787f24e73e98c, type: 2}
+  BackgroundToHide: {fileID: 0}
   LifeUI: {fileID: 263192320}
   LifePrefab: {fileID: 1724876813434170, guid: 0821c6fbd7cc8f8499ac28cd927d0448, type: 2}
   CountEnemyUI: {fileID: 0}
@@ -6020,6 +6176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2
@@ -6208,6 +6365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2
