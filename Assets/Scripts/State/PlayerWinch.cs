@@ -103,8 +103,6 @@ public class PlayerWinch : State
             }
             NextState();
         }
-
-        Debug.Log(character.transform.forward);
         character.transform.forward = player.Hook.position - character.transform.position;
         character.transform.forward = new Vector3(character.transform.forward.x, 0, character.transform.forward.z);
         player.Hook.transform.position = new Vector3(player.Hook.transform.position.x, character.transform.position.y, player.Hook.transform.position.z);

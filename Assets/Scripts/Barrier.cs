@@ -41,7 +41,6 @@ public class Barrier : MonoBehaviour {
 
         if (other.gameObject.tag == "Ennemy" && isWinching)
         {
-            Debug.Log(screenShakeForce + "  " + screenShakeDuration);
             Manager.GetInstance().ShakeCamera(screenShakeBarrierForce, screenShakeDuration);
             Character chara = other.GetComponent<Character>();
             chara.StartRecovery(barrierRecovery);
