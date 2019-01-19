@@ -7,24 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class Player : Character
 {
-    [Header("Debug")]
-    [SerializeField]
-    MovementMode mode;
-    public MovementMode Mode
-    {
-        get
-        {
-            return mode;
-        }
-    }
-
-    public enum MovementMode
-    {
-        Dash,
-        Normal,
-        NormalDash,
-    }
-
     [Header("Mouvement")]
     [SerializeField]
     [Tooltip("Longueur d'un dash")]
@@ -135,7 +117,6 @@ public class Player : Character
 
     void Start()
     {
-        context.SetInDictionary("Mode", mode);
         context.SetInDictionary("Hook", hook);
         context.SetInDictionary("Barrier", barrier);
         context.SetInDictionary("SpeedWinch", speedPull);
