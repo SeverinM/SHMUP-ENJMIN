@@ -77,6 +77,9 @@ public class Level : Layers
     [SerializeField]
     private Animator animator;
 
+    [SerializeField]
+    GameObject backgroundToHide;
+
     Navigation nav;
 
     int countGenerator = 0;
@@ -222,6 +225,11 @@ public class Level : Layers
 
     public void Update()
     {
+
+        if(backgroundToHide != null)
+        {
+            Destroy(backgroundToHide);
+        }
 
         watchNbSpawn.WatchedValue = transform.GetComponentsInChildren<Generator>().Select(x => x.GetComponent<Generator>().EnnemiesLeftToSpawn).Sum();
 

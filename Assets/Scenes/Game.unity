@@ -1985,7 +1985,6 @@ MonoBehaviour:
   MikePrefab: {fileID: 1663835522049710, guid: ae66e2c413491d642bb19e18f4749421, type: 2}
   BobPrefab: {fileID: 1561519513433908, guid: 46c9216ca856d3e4d836743c1d9c8564, type: 2}
   MenuPrefab: {fileID: 745026293}
-  BackgroundToHide: {fileID: 0}
   LifeUI: {fileID: 263192320}
   LifePrefab: {fileID: 1724876813434170, guid: 0821c6fbd7cc8f8499ac28cd927d0448, type: 2}
   CountEnemyUI: {fileID: 0}
@@ -2006,6 +2005,7 @@ MonoBehaviour:
   textMeshProDefault: {fileID: 392386831}
   menu: {fileID: 1087241302}
   animator: {fileID: 0}
+  backgroundToHide: {fileID: 0}
   characters: []
   enemiesOnBonus: []
 --- !u!4 &410317351
@@ -3270,7 +3270,6 @@ MonoBehaviour:
   MikePrefab: {fileID: 1663835522049710, guid: ae66e2c413491d642bb19e18f4749421, type: 2}
   BobPrefab: {fileID: 1561519513433908, guid: 46c9216ca856d3e4d836743c1d9c8564, type: 2}
   MenuPrefab: {fileID: 745026293}
-  BackgroundToHide: {fileID: 201472636}
   LifeUI: {fileID: 263192320}
   LifePrefab: {fileID: 1724876813434170, guid: 0821c6fbd7cc8f8499ac28cd927d0448, type: 2}
   CountEnemyUI: {fileID: 0}
@@ -3291,6 +3290,7 @@ MonoBehaviour:
   textMeshProDefault: {fileID: 392386831}
   menu: {fileID: 1087241302}
   animator: {fileID: 0}
+  backgroundToHide: {fileID: 201472636}
   characters: []
   enemiesOnBonus: []
 --- !u!4 &938488903
@@ -5982,7 +5982,6 @@ MonoBehaviour:
   MikePrefab: {fileID: 1663835522049710, guid: ae66e2c413491d642bb19e18f4749421, type: 2}
   BobPrefab: {fileID: 1561519513433908, guid: 46c9216ca856d3e4d836743c1d9c8564, type: 2}
   MenuPrefab: {fileID: 1389738857004872, guid: 78183828730a6a14998787f24e73e98c, type: 2}
-  BackgroundToHide: {fileID: 0}
   LifeUI: {fileID: 263192320}
   LifePrefab: {fileID: 1724876813434170, guid: 0821c6fbd7cc8f8499ac28cd927d0448, type: 2}
   CountEnemyUI: {fileID: 0}
@@ -6021,6 +6020,7 @@ MonoBehaviour:
   textMeshProDefault: {fileID: 392386831}
   menu: {fileID: 1087241302}
   animator: {fileID: 216492866}
+  backgroundToHide: {fileID: 0}
   characters: []
   enemiesOnBonus: []
 --- !u!4 &2050674101
