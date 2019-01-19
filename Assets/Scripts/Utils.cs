@@ -80,4 +80,9 @@ public static class Utils {
 
         return Math.Atan2(sin, cos) * (180 / Math.PI);
     }
+
+    public static float CalculateAngle(Vector3 from, Vector3 to)
+    {
+        return Quaternion.FromToRotation(Vector3.up, to - from).eulerAngles.y;
+    }
 }

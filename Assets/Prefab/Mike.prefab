@@ -914,8 +914,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.7712097, y: 1.9020844, z: 1}
-  m_Center: {x: 0.48469543, y: -0.19998932, z: 0}
+  m_Size: {x: 4.7712097, y: 1.9020844, z: 0.51051015}
+  m_Center: {x: 0.4846954, y: -0.19998932, z: -0.09145412}
 --- !u!65 &65625517968105264
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -964,7 +964,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  coeffRotation: 1.5
+  coeffRotation: 1.2
   model: {fileID: 1663835522049710}
   mass: 3
   recoveryDuration: 2
