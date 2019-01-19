@@ -226,9 +226,9 @@ public class Level : Layers
     public void Update()
     {
 
-        if(backgroundToHide != null)
+        if(backgroundToHide != null && Manager.GetInstance().CountLayer == 2) // Fixme
         {
-            Destroy(backgroundToHide);
+            backgroundToHide.SetActive(false);
         }
 
         watchNbSpawn.WatchedValue = transform.GetComponentsInChildren<Generator>().Select(x => x.GetComponent<Generator>().EnnemiesLeftToSpawn).Sum();
