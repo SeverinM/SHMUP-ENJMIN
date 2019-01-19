@@ -128,7 +128,6 @@ public class PlayerMovement : State
 
         if (dashing > 0)
         {
-            Debug.Break();
             dashing -= Time.deltaTime;
             dashing = Mathf.Max(0, dashing);
             character.Move(forward * ((Player)character).dashSpeed);
