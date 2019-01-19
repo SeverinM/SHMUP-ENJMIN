@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 522f959164f6c2d4fa2f9c074a98f788
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Severin.unity
     guid: a3e4f82937ed9cf4b991dc84e22fee1d
