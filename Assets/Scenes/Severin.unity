@@ -468,7 +468,7 @@ MonoBehaviour:
   levelObject: {fileID: 2050674099}
   allWaves:
   - allEnnemies:
-    - enn: 1
+    - enn: 0
       enMov: 2
       spawnAfter: 0
       Waypoints:
@@ -488,9 +488,139 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 0
     spacingZ: 0
+  - allEnnemies:
+    - enn: 0
+      enMov: 2
+      spawnAfter: 0
+      Waypoints:
+        loop: 1
+        allWaypoints:
+        - targetPosition: {x: 241.28505, y: -242.78766, z: -135.68947}
+          speed: 2
+        - targetPosition: {x: -241.28508, y: -242.7877, z: 135.68944}
+          speed: 2
+      selected: 1
+      speed: 1
+      life: 2
+      spawned: 0
+      followPlayer: 0
+    healAtBegin: 1
+    delay: 0
+    firstIsLeader: 0
+    spacingX: 0
+    spacingZ: 0
   Count: 0
   WaveCount: 0
   AllLocks: []
+--- !u!1001 &801648242
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1628502479}
+    m_Modifications:
+    - target: {fileID: 224350319907255132, guid: c76712a3295322049a4889d26b85c6b1,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224350319907255132, guid: c76712a3295322049a4889d26b85c6b1,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224350319907255132, guid: c76712a3295322049a4889d26b85c6b1,
+        type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224350319907255132, guid: c76712a3295322049a4889d26b85c6b1,
+        type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224350319907255132, guid: c76712a3295322049a4889d26b85c6b1,
+        type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224350319907255132, guid: c76712a3295322049a4889d26b85c6b1,
+        type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224350319907255132, guid: c76712a3295322049a4889d26b85c6b1,
+        type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224350319907255132, guid: c76712a3295322049a4889d26b85c6b1,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 224350319907255132, guid: c76712a3295322049a4889d26b85c6b1,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224350319907255132, guid: c76712a3295322049a4889d26b85c6b1,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224350319907255132, guid: c76712a3295322049a4889d26b85c6b1,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224350319907255132, guid: c76712a3295322049a4889d26b85c6b1,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224350319907255132, guid: c76712a3295322049a4889d26b85c6b1,
+        type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224350319907255132, guid: c76712a3295322049a4889d26b85c6b1,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224350319907255132, guid: c76712a3295322049a4889d26b85c6b1,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224350319907255132, guid: c76712a3295322049a4889d26b85c6b1,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224350319907255132, guid: c76712a3295322049a4889d26b85c6b1,
+        type: 2}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224350319907255132, guid: c76712a3295322049a4889d26b85c6b1,
+        type: 2}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1528368727139836, guid: c76712a3295322049a4889d26b85c6b1, type: 2}
+      propertyPath: m_Name
+      value: Heal
+      objectReference: {fileID: 0}
+    - target: {fileID: 114793311371756162, guid: c76712a3295322049a4889d26b85c6b1,
+        type: 2}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c76712a3295322049a4889d26b85c6b1, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &884515727
 GameObject:
   m_ObjectHideFlags: 0
@@ -1109,6 +1239,16 @@ MonoBehaviour:
   Count: 0
   WaveCount: 0
   AllLocks: []
+--- !u!224 &1321349780 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224350319907255132, guid: c76712a3295322049a4889d26b85c6b1,
+    type: 2}
+  m_PrefabInternal: {fileID: 801648242}
+--- !u!95 &1321349781 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95542023765407170, guid: c76712a3295322049a4889d26b85c6b1,
+    type: 2}
+  m_PrefabInternal: {fileID: 801648242}
 --- !u!1 &1321803381
 GameObject:
   m_ObjectHideFlags: 0
@@ -2050,6 +2190,7 @@ RectTransform:
   m_Children:
   - {fileID: 1170232698}
   - {fileID: 9827110}
+  - {fileID: 1321349780}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2694,6 +2835,7 @@ MonoBehaviour:
   LifePrefab: {fileID: 0}
   CountEnemyUI: {fileID: 0}
   CountEnemyPrefab: {fileID: 0}
+  animationHeal: {fileID: 1321349781}
   DashUI: {fileID: 0}
   DashPrefab: {fileID: 0}
   ScoreUI: {fileID: 0}
@@ -2709,6 +2851,7 @@ MonoBehaviour:
   textMeshProDefault: {fileID: 0}
   menu: {fileID: 342067155}
   animator: {fileID: 0}
+  backgroundToHide: {fileID: 0}
   characters: []
   enemiesOnBonus: []
 --- !u!4 &2050674101
@@ -2827,6 +2970,7 @@ MonoBehaviour:
   LifePrefab: {fileID: 0}
   CountEnemyUI: {fileID: 0}
   CountEnemyPrefab: {fileID: 0}
+  animationHeal: {fileID: 0}
   DashUI: {fileID: 0}
   DashPrefab: {fileID: 0}
   ScoreUI: {fileID: 0}
@@ -2842,6 +2986,7 @@ MonoBehaviour:
   textMeshProDefault: {fileID: 0}
   menu: {fileID: 342067155}
   animator: {fileID: 0}
+  backgroundToHide: {fileID: 0}
   characters: []
   enemiesOnBonus: []
 --- !u!4 &2127061448
