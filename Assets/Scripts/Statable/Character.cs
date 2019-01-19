@@ -71,6 +71,17 @@ public abstract class Character : MonoBehaviour {
     }
 
     [SerializeField]
+    [Tooltip("Plus il est grand plus il prendra de temps a se tourner , est proportionnel avec la vitesse")]
+    protected float coeffRotation = 1;
+    public float CoeffRotation
+    {
+        get
+        {
+            return coeffRotation;
+        }
+    }
+
+    [SerializeField]
     [Tooltip("Qui doit on utiliser pour changer le material en cas de recovery ?")]
     GameObject model;
     public GameObject Model
