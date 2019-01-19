@@ -620,6 +620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 14
+  coeffRotation: 1
   model: {fileID: 1380677440080142}
   mass: 2
   recoveryDuration: 1
@@ -629,15 +630,14 @@ MonoBehaviour:
   protectionPrefab: {fileID: 1999096423012838, guid: 7ab713d6b58d82142a6ef567773e3e05,
     type: 2}
   impactDeceleration: 5
-  mode: 2
   distanceDash: 10
   dashCooldown: 2
   maxDashes: 3
   hookSpeed: 1
-  rangeHook: 17
-  speedPull: 300
-  screenShakeForce: 1
-  screenShakeDuration: 0.1
+  rangeHook: 20
+  speedPull: 100
+  screenShakeForce: 0.8
+  screenShakeDuration: 0.015
   coeffHook: 1.2
   dashSpeed: 5
   barrier: {fileID: 4181975481634658}
