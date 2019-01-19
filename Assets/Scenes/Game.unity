@@ -15588,7 +15588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Count: 0
-  firstLayer: {fileID: 938488902}
+  firstLayer: {fileID: 2050674100}
   cameraPositionRelative: {x: -4, y: 32, z: -2}
   baseLife: 5
 --- !u!4 &1908215389
