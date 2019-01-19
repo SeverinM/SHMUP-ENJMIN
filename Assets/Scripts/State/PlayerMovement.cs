@@ -48,7 +48,8 @@ public class PlayerMovement : State
             character.transform.eulerAngles = new Vector3(0, val.x, 0);
         }
 
-        if (typeAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Dash) && character.GetScale() * character.PersonalScale > 0 && dashDirection != Vector3.zero)
+        if (typeAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Dash) && character.GetScale() * character.PersonalScale > 0 && dashDirection != Vector3.zero && Utils.IsInCamera(character.transform.position + (dashDirection.normalized * 4),
+            Mathf.Abs(character.transform.position.y - Camera.main.transform.position.y)))
         {
             dashing = ((Player)character).DistanceDash / 100;
             AkSoundEngine.PostEvent("S_Dash", character.gameObject);

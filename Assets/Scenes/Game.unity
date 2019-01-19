@@ -13785,7 +13785,7 @@ Prefab:
     - target: {fileID: 224128445604971482, guid: 78183828730a6a14998787f24e73e98c,
         type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224128445604971482, guid: 78183828730a6a14998787f24e73e98c,
         type: 2}
@@ -14955,8 +14955,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 2124328983}
   - {fileID: 745026297}
+  - {fileID: 2124328983}
   - {fileID: 1170232698}
   - {fileID: 392386832}
   - {fileID: 89801100}
@@ -15668,7 +15668,7 @@ Prefab:
     - target: {fileID: 224350319907255132, guid: c76712a3295322049a4889d26b85c6b1,
         type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224350319907255132, guid: c76712a3295322049a4889d26b85c6b1,
         type: 2}
@@ -15727,6 +15727,11 @@ Prefab:
     - target: {fileID: 114793311371756162, guid: c76712a3295322049a4889d26b85c6b1,
         type: 2}
       propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114793311371756162, guid: c76712a3295322049a4889d26b85c6b1,
+        type: 2}
+      propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
