@@ -11,9 +11,10 @@ public class FollowPathMovement : State
     Queue<WaypointElement> positions;
     Vector3 targetPosition;
     WaypointElement currentWaypoint;
-
     private Vector3 deltaPosition;
     private bool loop;
+    Vector3 beginAngle;
+    float beginTime = 0;
 
     Action act;
 
@@ -59,10 +60,8 @@ public class FollowPathMovement : State
 
     public override void StartState()
     {
-        if (targetPosition - character.transform.position != Vector3.zero)
-            character.transform.forward = targetPosition - character.transform.position;
-
         character.OnTriggerEnterChar += TriggerEnter;
+        beginAngle = character.transform.forward;
     }
 
     public override void EndState()
@@ -92,7 +91,13 @@ public class FollowPathMovement : State
 
     public override void UpdateState()
     {
+        beginTime += (Time.deltaTime * character.GetScale() * character.PersonalScale * character.MoveSpeed * currentWaypoint.speed) / character.CoeffRotation;
         deltaPosition = targetPosition - character.transform.position;
+        if (deltaPosition != Vector3.zero)
+        {
+            character.transform.forward = Vector3.Lerp(beginAngle, deltaPosition, beginTime);
+        }
+
         float distanceToObjective = Vector3.Distance(targetPosition, character.transform.position);
 
         if (distanceToObjective < 0.3f)
@@ -130,9 +135,7 @@ public class FollowPathMovement : State
             }    
         }
         float distanceBetweenFrame = Time.deltaTime * character.GetScale() * currentWaypoint.speed * character.MoveSpeed * character.PersonalScale;
-        float finalValue = Mathf.Min(distanceToObjective, distanceBetweenFrame);
-        //character.transform.forward = character.Separate(deltaPosition, 1);        
-        character.transform.position +=  character.transform.forward * finalValue;
+        character.transform.position += deltaPosition.normalized * Mathf.Min(distanceToObjective, distanceBetweenFrame);
     }
 
     public override string GetName()

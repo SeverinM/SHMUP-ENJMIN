@@ -13,6 +13,8 @@ public class EnemyMovement : State
     Vector3 deltaPosition;
     Queue<WaypointElement> allElems;
     bool followLeader;
+    float timeBegin = 0;
+    Vector3 angle;
 
     public EnemyMovement(Character chara, Transform tar, bool followLeader = false) : base(chara)
     {
@@ -36,6 +38,7 @@ public class EnemyMovement : State
 
     public override void UpdateState()
     {
+        timeBegin += (Time.deltaTime * character.PersonalScale * character.GetScale() * character.MoveSpeed) / character.CoeffRotation;
         //L'ennemi est freeze / en pause , il n'est pas supposé agir
         if (character.PersonalScale == 0 || target == null)
         {
@@ -58,8 +61,6 @@ public class EnemyMovement : State
         deltaPosition = target.transform.position - character.transform.position;
         deltaPosition = new Vector3(deltaPosition.x, 0, deltaPosition.z);
 
-        character.transform.LookAt(target.transform);
-
         // L'ennemie est proche du joueur
         if (target.GetComponent<Player>() != null && Vector3.Distance(target.transform.position, character.transform.position) <= enemy.AttackRange)
         {
@@ -71,7 +72,7 @@ public class EnemyMovement : State
             character.PersonalScale = Mathf.Clamp((Vector3.Distance(target.transform.position, character.transform.position) / 3) / enemy.MoveSpeed, 0, 1);
 
         if (character.PersonalScale * character.GetScale() > 0)
-            character.transform.forward = deltaPosition;
+            character.transform.forward = Vector3.Lerp(angle, deltaPosition, timeBegin);
 
         character.Move(character.Separate(deltaPosition.normalized));
     }
@@ -79,6 +80,7 @@ public class EnemyMovement : State
     public override void StartState()
     {
         character.OnTriggerExitChar += TriggerExit;
+        angle = character.transform.forward;
     }
 
     public override void EndState()

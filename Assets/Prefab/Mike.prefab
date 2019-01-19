@@ -964,8 +964,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  coeffRotation: 1.5
   model: {fileID: 1663835522049710}
   mass: 3
+  recoveryDuration: 2
   recoveryMat: {fileID: 2100000, guid: 77286c23e931b4b4397bce28b6a22b95, type: 2}
   life: 5
   dash: 3

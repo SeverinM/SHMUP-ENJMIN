@@ -37,13 +37,18 @@ public class PlayerMovement : State
             }
         }
 
+        if (typeAct.Equals(BaseInput.TypeAction.Up) && acts.Equals(BaseInput.Actions.AllMovement))
+        {
+            dashDirection = Vector3.zero;
+        }
+
         //rotation stick droit
         if (typeAct.Equals(BaseInput.TypeAction.Mouse) && acts.Equals(BaseInput.Actions.RotateAbsolute) && character.GetScale() * character.PersonalScale > 0 && dashing == 0)
         {
             character.transform.eulerAngles = new Vector3(0, val.x, 0);
         }
 
-        if (typeAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Dash) && character.GetScale() * character.PersonalScale > 0)
+        if (typeAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Dash) && character.GetScale() * character.PersonalScale > 0 && dashDirection != Vector3.zero)
         {
             dashing = ((Player)character).DistanceDash / 100;
             AkSoundEngine.PostEvent("S_Dash", character.gameObject);
@@ -76,6 +81,10 @@ public class PlayerMovement : State
             dashing -= Time.deltaTime;
             dashing = Mathf.Max(0, dashing);
             character.Move(dashDirection * ((Player)character).dashSpeed);
+            if (dashing == 0)
+            {
+                dashDirection = Vector3.zero;
+            }
         }
     }
 
