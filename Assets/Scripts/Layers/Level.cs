@@ -112,6 +112,11 @@ public class Level : Layers
     //Appellé quand le layer est au dessus de la stack
     public override void OnFocusGet()
     {
+        if (backgroundToHide != null)
+        {
+            Destroy(backgroundToHide); //Hide backgrounds
+        }
+
         score = Constants.TotalScore;
 
         // Faire en sorte que tous les inputs notifient le joueur
@@ -235,11 +240,6 @@ public class Level : Layers
 
     public void Update()
     {
-
-        if(backgroundToHide != null && Manager.GetInstance().CountLayer == 2) // Fixme
-        {
-            backgroundToHide.SetActive(false);
-        }
 
         watchNbSpawn.WatchedValue = transform.GetComponentsInChildren<Generator>().Select(x => x.GetComponent<Generator>().EnnemiesLeftToSpawn).Sum();
 
@@ -432,6 +432,7 @@ public class Level : Layers
     {
         if (nextLevel != null)
         {
+
             player.NextLevel += () => { OnNextLevel(nextLevel); };
             if (animator != null && Manager.GetInstance().CountLayer == 2)
             {
