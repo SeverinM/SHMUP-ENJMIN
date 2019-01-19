@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.EventSystems;
 
 public class Menu : Layers
 {
@@ -66,7 +67,7 @@ public class Menu : Layers
             {
                 IndexSelection--;
             }
-            allButtonsMenu[IndexSelection].Select();
+            EventSystem.current.SetSelectedGameObject(allButtonsMenu[IndexSelection].gameObject);
         }
 
         if (tyAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Pause))
