@@ -48,6 +48,9 @@ public class Level : Layers
     GameObject CountEnemyPrefab;
 
     [SerializeField]
+    Animator animationHeal;
+
+    [SerializeField]
     GameObject DashUI;
 
     [SerializeField]
@@ -104,6 +107,8 @@ public class Level : Layers
     public delegate void LevelParam(Level nextLevel);
     public event LevelParam OnNextLevel;
 
+    int previousLife;
+
     //Appellé quand le layer est au dessus de la stack
     public override void OnFocusGet()
     {
@@ -142,6 +147,11 @@ public class Level : Layers
                 for (int i = 0; i < x; i++)
                 {
                     Instantiate(LifePrefab, LifeUI.transform);
+                }
+
+                if (x > previousLife)
+                {
+                    animationHeal.SetTrigger("Healed");
                 }
             }
         });
@@ -241,6 +251,8 @@ public class Level : Layers
             ComboScore();
             enemiesOnBonus.Clear();
         }
+
+        previousLife = player.Life;
     }
 
     /// <summary>
