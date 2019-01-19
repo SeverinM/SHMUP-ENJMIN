@@ -154,9 +154,9 @@ MonoBehaviour:
   - allEnnemies:
     - enn: 0
       enMov: 0
-      spawnAfter: 2
+      spawnAfter: 7
       Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -165,9 +165,9 @@ MonoBehaviour:
       followPlayer: 1
     - enn: 0
       enMov: 0
-      spawnAfter: 2
+      spawnAfter: 9
       Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -176,9 +176,9 @@ MonoBehaviour:
       followPlayer: 1
     - enn: 0
       enMov: 0
-      spawnAfter: 2
+      spawnAfter: 11
       Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -186,19 +186,11 @@ MonoBehaviour:
       spawned: 0
       followPlayer: 1
     - enn: 2
-      enMov: 2
-      spawnAfter: 6
+      enMov: 0
+      spawnAfter: 9
       Waypoints:
-        loop: 1
-        allWaypoints:
-        - targetPosition: {x: -92.97647, y: 79.49789, z: 178.55377}
-          speed: 0
-        - targetPosition: {x: -92.97647, y: 79.49789, z: 178.55377}
-          speed: 0
-        - targetPosition: {x: -92.97647, y: 79.49789, z: 178.55377}
-          speed: 0
-        - targetPosition: {x: -92.97647, y: 79.49789, z: 178.55377}
-          speed: 0
+        loop: 0
+        allWaypoints: []
       selected: 0
       speed: 1
       life: 3
@@ -206,12 +198,18 @@ MonoBehaviour:
       followPlayer: 1
     healAtBegin: 0
     delay: 0
-    firstIsLeader: 1
-    spacingX: 4
-    spacingZ: 4
+    firstIsLeader: 0
+    spacingX: 2
+    spacingZ: 2
   Count: 0
   WaveCount: 0
   AllLocks:
+  - forWave: 0
+    generator: {fileID: 105818622}
+    number: 0
+  - forWave: 0
+    generator: {fileID: 1400052963}
+    number: 0
   - forWave: 0
     generator: {fileID: 918723824}
     number: 0
@@ -577,68 +575,44 @@ MonoBehaviour:
   levelObject: {fileID: 938488901}
   allWaves:
   - allEnnemies:
-    - enn: 1
+    - enn: 0
       enMov: 0
       spawnAfter: 0
       Waypoints:
-        loop: 1
-        allWaypoints:
-        - targetPosition: {x: -92.97647, y: 79.49789, z: 178.55377}
-          speed: 0
-        - targetPosition: {x: -92.97647, y: 79.49789, z: 178.55377}
-          speed: 0
-        - targetPosition: {x: -92.97647, y: 79.49789, z: 178.55377}
-          speed: 0
-        - targetPosition: {x: -92.97647, y: 79.49789, z: 178.55377}
-          speed: 0
+        loop: 0
+        allWaypoints: []
       selected: 0
       speed: 4
       life: 1
       spawned: 0
       followPlayer: 1
-    - enn: 1
+    - enn: 0
       enMov: 0
-      spawnAfter: 0
+      spawnAfter: 1
       Waypoints:
-        loop: 1
-        allWaypoints:
-        - targetPosition: {x: -92.97647, y: 79.49789, z: 178.55377}
-          speed: 0
-        - targetPosition: {x: -92.97647, y: 79.49789, z: 178.55377}
-          speed: 0
-        - targetPosition: {x: -92.97647, y: 79.49789, z: 178.55377}
-          speed: 0
-        - targetPosition: {x: -92.97647, y: 79.49789, z: 178.55377}
-          speed: 0
+        loop: 0
+        allWaypoints: []
       selected: 0
       speed: 4
       life: 1
       spawned: 0
       followPlayer: 1
-    - enn: 1
+    - enn: 0
       enMov: 0
-      spawnAfter: 0
+      spawnAfter: 2
       Waypoints:
-        loop: 1
-        allWaypoints:
-        - targetPosition: {x: -92.97647, y: 79.49789, z: 178.55377}
-          speed: 0
-        - targetPosition: {x: -92.97647, y: 79.49789, z: 178.55377}
-          speed: 0
-        - targetPosition: {x: -92.97647, y: 79.49789, z: 178.55377}
-          speed: 0
-        - targetPosition: {x: -92.97647, y: 79.49789, z: 178.55377}
-          speed: 0
+        loop: 0
+        allWaypoints: []
       selected: 0
       speed: 4
       life: 1
       spawned: 0
       followPlayer: 1
-    healAtBegin: 0
+    healAtBegin: 1
     delay: 0
-    firstIsLeader: 1
-    spacingX: 4
-    spacingZ: 4
+    firstIsLeader: 0
+    spacingX: 2
+    spacingZ: 2
   Count: 0
   WaveCount: 0
   AllLocks: []
@@ -678,13 +652,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 134984528}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: -2.1, z: 0}
   m_LocalScale: {x: 10, y: 1, z: 5.5}
   m_Children: []
   m_Father: {fileID: 201472637}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!23 &134984530
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -931,9 +905,20 @@ MonoBehaviour:
   - allEnnemies:
     - enn: 0
       enMov: 0
-      spawnAfter: 2
+      spawnAfter: 10
       Waypoints:
-        loop: 1
+        loop: 0
+        allWaypoints: []
+      selected: 0
+      speed: 4
+      life: 1
+      spawned: 0
+      followPlayer: 1
+    - enn: 0
+      enMov: 0
+      spawnAfter: 12
+      Waypoints:
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -944,18 +929,7 @@ MonoBehaviour:
       enMov: 0
       spawnAfter: 2
       Waypoints:
-        loop: 1
-        allWaypoints: []
-      selected: 0
-      speed: 4
-      life: 1
-      spawned: 0
-      followPlayer: 1
-    - enn: 0
-      enMov: 0
-      spawnAfter: 2
-      Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -963,19 +937,11 @@ MonoBehaviour:
       spawned: 0
       followPlayer: 1
     - enn: 2
-      enMov: 2
+      enMov: 0
       spawnAfter: 8
       Waypoints:
-        loop: 1
-        allWaypoints:
-        - targetPosition: {x: -171.20067, y: 80, z: 139.27641}
-          speed: 0
-        - targetPosition: {x: -171.20067, y: 80, z: 157.38425}
-          speed: 0
-        - targetPosition: {x: -144.03911, y: 80, z: 157.38425}
-          speed: 0
-        - targetPosition: {x: -144.03911, y: 80, z: 139.27641}
-          speed: 0
+        loop: 0
+        allWaypoints: []
       selected: 0
       speed: 1
       life: 3
@@ -983,23 +949,23 @@ MonoBehaviour:
       followPlayer: 1
     healAtBegin: 0
     delay: 0
-    firstIsLeader: 1
-    spacingX: 4
-    spacingZ: 4
+    firstIsLeader: 0
+    spacingX: 2
+    spacingZ: 2
   Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
-    generator: {fileID: 105818622}
-    number: 0
-  - forWave: 0
-    generator: {fileID: 617180272}
-    number: 0
-  - forWave: 0
-    generator: {fileID: 307011543}
+    generator: {fileID: 0}
     number: 0
   - forWave: 0
     generator: {fileID: 1296580495}
+    number: 0
+  - forWave: 0
+    generator: {fileID: 1482472052}
+    number: 0
+  - forWave: 0
+    generator: {fileID: 1619340670}
     number: 0
 --- !u!1 &201472636
 GameObject:
@@ -1016,7 +982,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &201472637
 Transform:
   m_ObjectHideFlags: 0
@@ -1456,7 +1422,7 @@ MonoBehaviour:
       enMov: 0
       spawnAfter: 0
       Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -1465,9 +1431,9 @@ MonoBehaviour:
       followPlayer: 1
     - enn: 0
       enMov: 0
-      spawnAfter: 0
+      spawnAfter: 2
       Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -1476,9 +1442,9 @@ MonoBehaviour:
       followPlayer: 1
     - enn: 0
       enMov: 0
-      spawnAfter: 0
+      spawnAfter: 4
       Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -1486,18 +1452,18 @@ MonoBehaviour:
       spawned: 0
       followPlayer: 1
     - enn: 1
-      enMov: 1
-      spawnAfter: 6
+      enMov: 2
+      spawnAfter: 8
       Waypoints:
         loop: 1
         allWaypoints:
-        - targetPosition: {x: -171.20067, y: 80, z: 139.27641}
+        - targetPosition: {x: -177.93834, y: 79.632126, z: 155.50883}
           speed: 0
-        - targetPosition: {x: -171.20067, y: 80, z: 157.38425}
+        - targetPosition: {x: -145.30374, y: 79.632126, z: 155.50883}
           speed: 0
-        - targetPosition: {x: -144.03911, y: 80, z: 157.38425}
+        - targetPosition: {x: -145.30374, y: 79.63213, z: 137.147}
           speed: 0
-        - targetPosition: {x: -144.03911, y: 80, z: 139.27641}
+        - targetPosition: {x: -177.93834, y: 79.63213, z: 137.147}
           speed: 0
       selected: 1
       speed: 2
@@ -1505,34 +1471,37 @@ MonoBehaviour:
       spawned: 0
       followPlayer: 0
     - enn: 1
-      enMov: 1
-      spawnAfter: 6
+      enMov: 2
+      spawnAfter: 8
       Waypoints:
         loop: 1
         allWaypoints:
-        - targetPosition: {x: -171.20067, y: 80, z: 139.27641}
+        - targetPosition: {x: 0.20000006, y: 0, z: 0.8000001}
           speed: 0
-        - targetPosition: {x: -171.20067, y: 80, z: 157.38425}
+        - targetPosition: {x: 0.79999995, y: 0, z: 0.8000001}
           speed: 0
-        - targetPosition: {x: -144.03911, y: 80, z: 157.38425}
+        - targetPosition: {x: 0.79999995, y: 0, z: 0.1999999}
           speed: 0
-        - targetPosition: {x: -144.03911, y: 80, z: 139.27641}
+        - targetPosition: {x: 0.20000006, y: 0, z: 0.1999999}
           speed: 0
       selected: 1
       speed: 2
       life: 2
       spawned: 0
       followPlayer: 0
-    healAtBegin: 0
+    healAtBegin: 1
     delay: 0
-    firstIsLeader: 1
-    spacingX: 4
-    spacingZ: 4
+    firstIsLeader: 0
+    spacingX: 2
+    spacingZ: 2
   Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
-    generator: {fileID: 918723824}
+    generator: {fileID: 617180272}
+    number: 0
+  - forWave: 0
+    generator: {fileID: 441725973}
     number: 0
   - forWave: 0
     generator: {fileID: 2544307}
@@ -1606,7 +1575,7 @@ MonoBehaviour:
       enMov: 0
       spawnAfter: 0
       Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -1615,9 +1584,9 @@ MonoBehaviour:
       followPlayer: 1
     - enn: 0
       enMov: 0
-      spawnAfter: 0
+      spawnAfter: 4
       Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -1625,18 +1594,18 @@ MonoBehaviour:
       spawned: 0
       followPlayer: 1
     - enn: 1
-      enMov: 1
+      enMov: 2
       spawnAfter: 6
       Waypoints:
         loop: 1
         allWaypoints:
-        - targetPosition: {x: -171.20067, y: 80, z: 139.27641}
+        - targetPosition: {x: 0.32387477, y: 0, z: 0.26958153}
           speed: 0
-        - targetPosition: {x: -171.20067, y: 80, z: 157.38425}
+        - targetPosition: {x: 0.32387477, y: 0, z: 0.861282}
           speed: 0
-        - targetPosition: {x: -144.03911, y: 80, z: 157.38425}
+        - targetPosition: {x: 0.8232507, y: 0, z: 0.861282}
           speed: 0
-        - targetPosition: {x: -144.03911, y: 80, z: 139.27641}
+        - targetPosition: {x: 0.8232507, y: 0, z: 0.26958153}
           speed: 0
       selected: 1
       speed: 2
@@ -1644,7 +1613,7 @@ MonoBehaviour:
       spawned: 0
       followPlayer: 0
     - enn: 1
-      enMov: 1
+      enMov: 2
       spawnAfter: 6
       Waypoints:
         loop: 1
@@ -1663,40 +1632,32 @@ MonoBehaviour:
       spawned: 0
       followPlayer: 0
     - enn: 2
-      enMov: 2
+      enMov: 0
       spawnAfter: 8
       Waypoints:
-        loop: 1
-        allWaypoints:
-        - targetPosition: {x: -171.20067, y: 80, z: 139.27641}
-          speed: 0
-        - targetPosition: {x: -171.20067, y: 80, z: 157.38425}
-          speed: 0
-        - targetPosition: {x: -144.03911, y: 80, z: 157.38425}
-          speed: 0
-        - targetPosition: {x: -144.03911, y: 80, z: 139.27641}
-          speed: 0
+        loop: 0
+        allWaypoints: []
       selected: 0
       speed: 1
       life: 3
       spawned: 0
       followPlayer: 1
-    healAtBegin: 0
+    healAtBegin: 1
     delay: 0
-    firstIsLeader: 1
-    spacingX: 4
-    spacingZ: 4
+    firstIsLeader: 0
+    spacingX: 2
+    spacingZ: 2
   Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
-    generator: {fileID: 918723824}
+    generator: {fileID: 0}
     number: 0
   - forWave: 0
-    generator: {fileID: 2544307}
+    generator: {fileID: 1296580495}
     number: 0
   - forWave: 0
-    generator: {fileID: 537918100}
+    generator: {fileID: 1482472052}
     number: 0
   - forWave: 0
     generator: {fileID: 1619340670}
@@ -1724,13 +1685,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 346595309}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: -1.300003, z: 0}
   m_LocalScale: {x: 10, y: 1, z: 5.5}
   m_Children: []
   m_Father: {fileID: 201472637}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!23 &346595311
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1981,18 +1942,18 @@ MonoBehaviour:
   allWaves:
   - allEnnemies:
     - enn: 1
-      enMov: 1
-      spawnAfter: 4
+      enMov: 2
+      spawnAfter: 7
       Waypoints:
         loop: 1
         allWaypoints:
-        - targetPosition: {x: 0.21642374, y: 0, z: 0.29108462}
+        - targetPosition: {x: 0.20000006, y: 0, z: 0.8000001}
           speed: 0
-        - targetPosition: {x: 0.21642374, y: 0, z: 0.82970166}
+        - targetPosition: {x: 0.79999995, y: 0, z: 0.8000001}
           speed: 0
-        - targetPosition: {x: 0.75504196, y: 0, z: 0.82970166}
+        - targetPosition: {x: 0.79999995, y: 0, z: 0.1999999}
           speed: 0
-        - targetPosition: {x: 0.75504196, y: 0, z: 0.29108462}
+        - targetPosition: {x: 0.20000006, y: 0, z: 0.1999999}
           speed: 0
       selected: 1
       speed: 2
@@ -2000,18 +1961,18 @@ MonoBehaviour:
       spawned: 0
       followPlayer: 0
     - enn: 1
-      enMov: 1
-      spawnAfter: 4
+      enMov: 2
+      spawnAfter: 9
       Waypoints:
         loop: 1
         allWaypoints:
-        - targetPosition: {x: 0.21642374, y: 0, z: 0.29108462}
+        - targetPosition: {x: 0.20000006, y: 0, z: 0.8000001}
           speed: 0
-        - targetPosition: {x: 0.21642374, y: 0, z: 0.82970166}
+        - targetPosition: {x: 0.79999995, y: 0, z: 0.8000001}
           speed: 0
-        - targetPosition: {x: 0.75504196, y: 0, z: 0.82970166}
+        - targetPosition: {x: 0.79999995, y: 0, z: 0.1999999}
           speed: 0
-        - targetPosition: {x: 0.75504196, y: 0, z: 0.29108462}
+        - targetPosition: {x: 0.20000006, y: 0, z: 0.1999999}
           speed: 0
       selected: 1
       speed: 2
@@ -2021,11 +1982,17 @@ MonoBehaviour:
     healAtBegin: 0
     delay: 0
     firstIsLeader: 0
-    spacingX: 4
-    spacingZ: 4
+    spacingX: 2
+    spacingZ: 2
   Count: 0
   WaveCount: 0
   AllLocks:
+  - forWave: 0
+    generator: {fileID: 105818622}
+    number: 0
+  - forWave: 0
+    generator: {fileID: 1400052963}
+    number: 0
   - forWave: 0
     generator: {fileID: 918723824}
     number: 0
@@ -2333,18 +2300,18 @@ MonoBehaviour:
   allWaves:
   - allEnnemies:
     - enn: 1
-      enMov: 1
-      spawnAfter: 4
+      enMov: 2
+      spawnAfter: 10
       Waypoints:
         loop: 1
         allWaypoints:
-        - targetPosition: {x: 0.21642374, y: 0, z: 0.29108462}
+        - targetPosition: {x: -177.93834, y: 79.632126, z: 155.50883}
           speed: 0
-        - targetPosition: {x: 0.21642374, y: 0, z: 0.82970166}
+        - targetPosition: {x: -145.30374, y: 79.632126, z: 155.50883}
           speed: 0
-        - targetPosition: {x: 0.75504196, y: 0, z: 0.82970166}
+        - targetPosition: {x: -145.30374, y: 79.63213, z: 137.147}
           speed: 0
-        - targetPosition: {x: 0.75504196, y: 0, z: 0.29108462}
+        - targetPosition: {x: -177.93834, y: 79.63213, z: 137.147}
           speed: 0
       selected: 1
       speed: 2
@@ -2352,18 +2319,18 @@ MonoBehaviour:
       spawned: 0
       followPlayer: 0
     - enn: 1
-      enMov: 1
-      spawnAfter: 4
+      enMov: 2
+      spawnAfter: 10
       Waypoints:
         loop: 1
         allWaypoints:
-        - targetPosition: {x: -171.20067, y: 79.922775, z: 139.27641}
+        - targetPosition: {x: 0.20000006, y: 0, z: 0.8000001}
           speed: 0
-        - targetPosition: {x: -171.20067, y: 79.922775, z: 157.38425}
+        - targetPosition: {x: 0.79999995, y: 0, z: 0.8000001}
           speed: 0
-        - targetPosition: {x: -144.03911, y: 79.922775, z: 157.38425}
+        - targetPosition: {x: 0.79999995, y: 0, z: 0.1999999}
           speed: 0
-        - targetPosition: {x: -144.03911, y: 79.922775, z: 139.27641}
+        - targetPosition: {x: 0.20000006, y: 0, z: 0.1999999}
           speed: 0
       selected: 1
       speed: 2
@@ -2372,18 +2339,10 @@ MonoBehaviour:
       followPlayer: 0
     - enn: 0
       enMov: 0
-      spawnAfter: 6
+      spawnAfter: 14
       Waypoints:
-        loop: 1
-        allWaypoints:
-        - targetPosition: {x: -171.20067, y: 80, z: 139.27641}
-          speed: 0
-        - targetPosition: {x: -171.20067, y: 80, z: 157.38425}
-          speed: 0
-        - targetPosition: {x: -144.03911, y: 80, z: 157.38425}
-          speed: 0
-        - targetPosition: {x: -144.03911, y: 80, z: 139.27641}
-          speed: 0
+        loop: 0
+        allWaypoints: []
       selected: 0
       speed: 4
       life: 1
@@ -2391,18 +2350,10 @@ MonoBehaviour:
       followPlayer: 1
     - enn: 0
       enMov: 0
-      spawnAfter: 6
+      spawnAfter: 14
       Waypoints:
-        loop: 1
-        allWaypoints:
-        - targetPosition: {x: -171.20067, y: 80, z: 139.27641}
-          speed: 0
-        - targetPosition: {x: -171.20067, y: 80, z: 157.38425}
-          speed: 0
-        - targetPosition: {x: -144.03911, y: 80, z: 157.38425}
-          speed: 0
-        - targetPosition: {x: -144.03911, y: 80, z: 139.27641}
-          speed: 0
+        loop: 0
+        allWaypoints: []
       selected: 0
       speed: 4
       life: 1
@@ -2410,18 +2361,10 @@ MonoBehaviour:
       followPlayer: 1
     - enn: 0
       enMov: 0
-      spawnAfter: 6
+      spawnAfter: 14
       Waypoints:
-        loop: 1
-        allWaypoints:
-        - targetPosition: {x: -171.20067, y: 80, z: 139.27641}
-          speed: 0
-        - targetPosition: {x: -171.20067, y: 80, z: 157.38425}
-          speed: 0
-        - targetPosition: {x: -144.03911, y: 80, z: 157.38425}
-          speed: 0
-        - targetPosition: {x: -144.03911, y: 80, z: 139.27641}
-          speed: 0
+        loop: 0
+        allWaypoints: []
       selected: 0
       speed: 4
       life: 1
@@ -2429,17 +2372,20 @@ MonoBehaviour:
       followPlayer: 1
     healAtBegin: 0
     delay: 0
-    firstIsLeader: 1
-    spacingX: 4
-    spacingZ: 4
+    firstIsLeader: 0
+    spacingX: 2
+    spacingZ: 2
   Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
-    generator: {fileID: 105818622}
+    generator: {fileID: 617180272}
     number: 0
   - forWave: 0
-    generator: {fileID: 617180272}
+    generator: {fileID: 441725973}
+    number: 0
+  - forWave: 0
+    generator: {fileID: 2544307}
     number: 0
 --- !u!4 &537918101
 Transform:
@@ -2573,7 +2519,7 @@ MonoBehaviour:
       enMov: 0
       spawnAfter: 0
       Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -2582,9 +2528,9 @@ MonoBehaviour:
       followPlayer: 1
     - enn: 0
       enMov: 0
-      spawnAfter: 0
+      spawnAfter: 1
       Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -2593,9 +2539,31 @@ MonoBehaviour:
       followPlayer: 1
     - enn: 0
       enMov: 0
-      spawnAfter: 0
+      spawnAfter: 2
       Waypoints:
-        loop: 1
+        loop: 0
+        allWaypoints: []
+      selected: 0
+      speed: 4
+      life: 1
+      spawned: 0
+      followPlayer: 1
+    - enn: 0
+      enMov: 0
+      spawnAfter: 4
+      Waypoints:
+        loop: 0
+        allWaypoints: []
+      selected: 0
+      speed: 4
+      life: 1
+      spawned: 0
+      followPlayer: 1
+    - enn: 0
+      enMov: 0
+      spawnAfter: 5
+      Waypoints:
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -2606,43 +2574,27 @@ MonoBehaviour:
       enMov: 0
       spawnAfter: 6
       Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
       life: 1
       spawned: 0
       followPlayer: 1
-    - enn: 0
-      enMov: 0
-      spawnAfter: 6
-      Waypoints:
-        loop: 1
-        allWaypoints: []
-      selected: 0
-      speed: 4
-      life: 1
-      spawned: 0
-      followPlayer: 1
-    - enn: 0
-      enMov: 0
-      spawnAfter: 6
-      Waypoints:
-        loop: 1
-        allWaypoints: []
-      selected: 0
-      speed: 4
-      life: 1
-      spawned: 0
-      followPlayer: 1
-    healAtBegin: 0
+    healAtBegin: 1
     delay: 0
-    firstIsLeader: 1
-    spacingX: 4
-    spacingZ: 4
+    firstIsLeader: 0
+    spacingX: 2
+    spacingZ: 2
   Count: 0
   WaveCount: 0
   AllLocks:
+  - forWave: 0
+    generator: {fileID: 105818622}
+    number: 0
+  - forWave: 0
+    generator: {fileID: 1400052963}
+    number: 0
   - forWave: 0
     generator: {fileID: 918723824}
     number: 0
@@ -2913,9 +2865,9 @@ MonoBehaviour:
   - allEnnemies:
     - enn: 0
       enMov: 0
-      spawnAfter: 2
+      spawnAfter: 6
       Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -2924,9 +2876,9 @@ MonoBehaviour:
       followPlayer: 1
     - enn: 0
       enMov: 0
-      spawnAfter: 2
+      spawnAfter: 8
       Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -2935,9 +2887,9 @@ MonoBehaviour:
       followPlayer: 1
     - enn: 0
       enMov: 0
-      spawnAfter: 2
+      spawnAfter: 10
       Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -2945,19 +2897,11 @@ MonoBehaviour:
       spawned: 0
       followPlayer: 1
     - enn: 2
-      enMov: 2
-      spawnAfter: 8
+      enMov: 0
+      spawnAfter: 12
       Waypoints:
-        loop: 1
-        allWaypoints:
-        - targetPosition: {x: -171.20067, y: 80, z: 139.27641}
-          speed: 0
-        - targetPosition: {x: -171.20067, y: 80, z: 157.38425}
-          speed: 0
-        - targetPosition: {x: -144.03911, y: 80, z: 157.38425}
-          speed: 0
-        - targetPosition: {x: -144.03911, y: 80, z: 139.27641}
-          speed: 0
+        loop: 0
+        allWaypoints: []
       selected: 0
       speed: 1
       life: 3
@@ -2965,17 +2909,20 @@ MonoBehaviour:
       followPlayer: 1
     healAtBegin: 0
     delay: 0
-    firstIsLeader: 1
-    spacingX: 4
-    spacingZ: 4
+    firstIsLeader: 0
+    spacingX: 2
+    spacingZ: 2
   Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
-    generator: {fileID: 105818622}
+    generator: {fileID: 617180272}
     number: 0
   - forWave: 0
-    generator: {fileID: 617180272}
+    generator: {fileID: 441725973}
+    number: 0
+  - forWave: 0
+    generator: {fileID: 2544307}
     number: 0
 --- !u!1 &860242944
 GameObject:
@@ -3091,18 +3038,18 @@ MonoBehaviour:
   allWaves:
   - allEnnemies:
     - enn: 1
-      enMov: 1
-      spawnAfter: 4
+      enMov: 2
+      spawnAfter: 6
       Waypoints:
         loop: 1
         allWaypoints:
-        - targetPosition: {x: 0.21642374, y: 0, z: 0.29108462}
+        - targetPosition: {x: 0.79999995, y: 0, z: 0.1999999}
           speed: 0
-        - targetPosition: {x: 0.21642374, y: 0, z: 0.82970166}
+        - targetPosition: {x: 0.20000006, y: 0, z: 0.1999999}
           speed: 0
-        - targetPosition: {x: 0.75504196, y: 0, z: 0.82970166}
+        - targetPosition: {x: 0.20000006, y: 0, z: 0.8000001}
           speed: 0
-        - targetPosition: {x: 0.75504196, y: 0, z: 0.29108462}
+        - targetPosition: {x: 0.79999995, y: 0, z: 0.8000001}
           speed: 0
       selected: 1
       speed: 2
@@ -3110,18 +3057,18 @@ MonoBehaviour:
       spawned: 0
       followPlayer: 0
     - enn: 1
-      enMov: 1
-      spawnAfter: 4
+      enMov: 2
+      spawnAfter: 8
       Waypoints:
         loop: 1
         allWaypoints:
-        - targetPosition: {x: 0.21642374, y: 0, z: 0.29108462}
+        - targetPosition: {x: 0.79999995, y: 0, z: 0.1999999}
           speed: 0
-        - targetPosition: {x: 0.21642374, y: 0, z: 0.82970166}
+        - targetPosition: {x: 0.20000006, y: 0, z: 0.1999999}
           speed: 0
-        - targetPosition: {x: 0.75504196, y: 0, z: 0.82970166}
+        - targetPosition: {x: 0.20000006, y: 0, z: 0.8000001}
           speed: 0
-        - targetPosition: {x: 0.75504196, y: 0, z: 0.29108462}
+        - targetPosition: {x: 0.79999995, y: 0, z: 0.8000001}
           speed: 0
       selected: 1
       speed: 2
@@ -3131,8 +3078,8 @@ MonoBehaviour:
     healAtBegin: 0
     delay: 0
     firstIsLeader: 0
-    spacingX: 4
-    spacingZ: 4
+    spacingX: 2
+    spacingZ: 2
   Count: 0
   WaveCount: 0
   AllLocks: []
@@ -3514,7 +3461,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1047461087}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -161.62, y: 137, z: 146.33}
+  m_LocalPosition: {x: -161.62, y: 107, z: 146.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3565,8 +3512,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1078281716}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.032499313, y: -0.25, z: 0.10099983}
-  m_LocalScale: {x: 1.25, y: 0.12500003, z: 0.68750054}
+  m_LocalPosition: {x: -0.22, y: -0.25, z: 0.01}
+  m_LocalScale: {x: 0.97285, y: 0.097285025, z: 0.5350679}
   m_Children: []
   m_Father: {fileID: 216492865}
   m_RootOrder: 1
@@ -4321,7 +4268,7 @@ MonoBehaviour:
       enMov: 0
       spawnAfter: 0
       Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -4330,9 +4277,9 @@ MonoBehaviour:
       followPlayer: 1
     - enn: 0
       enMov: 0
-      spawnAfter: 0
+      spawnAfter: 2
       Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -4341,9 +4288,9 @@ MonoBehaviour:
       followPlayer: 1
     - enn: 0
       enMov: 0
-      spawnAfter: 0
+      spawnAfter: 4
       Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -4352,9 +4299,9 @@ MonoBehaviour:
       followPlayer: 1
     - enn: 0
       enMov: 0
-      spawnAfter: 0
+      spawnAfter: 6
       Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -4362,37 +4309,29 @@ MonoBehaviour:
       spawned: 0
       followPlayer: 1
     - enn: 2
-      enMov: 2
-      spawnAfter: 6
+      enMov: 0
+      spawnAfter: 8
       Waypoints:
-        loop: 1
-        allWaypoints:
-        - targetPosition: {x: 0.20000005, y: 0, z: 0.8}
-          speed: 0
-        - targetPosition: {x: 0.8, y: 0, z: 0.8}
-          speed: 0
-        - targetPosition: {x: 0.8, y: 0, z: 0.2}
-          speed: 0
-        - targetPosition: {x: 0.20000005, y: 0, z: 0.2}
-          speed: 0
+        loop: 0
+        allWaypoints: []
       selected: 0
       speed: 1
       life: 3
       spawned: 0
       followPlayer: 1
-    healAtBegin: 0
+    healAtBegin: 1
     delay: 0
-    firstIsLeader: 1
-    spacingX: 4
-    spacingZ: 4
+    firstIsLeader: 0
+    spacingX: 2
+    spacingZ: 2
   Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
-    generator: {fileID: 918723824}
+    generator: {fileID: 307011543}
     number: 0
   - forWave: 0
-    generator: {fileID: 2544307}
+    generator: {fileID: 854999031}
     number: 0
   - forWave: 0
     generator: {fileID: 537918100}
@@ -4648,9 +4587,9 @@ MonoBehaviour:
   - allEnnemies:
     - enn: 0
       enMov: 0
-      spawnAfter: 2
+      spawnAfter: 14
       Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -4659,9 +4598,9 @@ MonoBehaviour:
       followPlayer: 1
     - enn: 0
       enMov: 0
-      spawnAfter: 2
+      spawnAfter: 16
       Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -4670,9 +4609,9 @@ MonoBehaviour:
       followPlayer: 1
     - enn: 0
       enMov: 0
-      spawnAfter: 2
+      spawnAfter: 18
       Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -4680,18 +4619,18 @@ MonoBehaviour:
       spawned: 0
       followPlayer: 1
     - enn: 1
-      enMov: 1
-      spawnAfter: 4
+      enMov: 2
+      spawnAfter: 20
       Waypoints:
         loop: 1
         allWaypoints:
-        - targetPosition: {x: -171.20067, y: 80, z: 139.27641}
+        - targetPosition: {x: 0.32387477, y: 0, z: 0.26958153}
           speed: 0
-        - targetPosition: {x: -171.20067, y: 80, z: 157.38425}
+        - targetPosition: {x: 0.32387477, y: 0, z: 0.861282}
           speed: 0
-        - targetPosition: {x: -144.03911, y: 80, z: 157.38425}
+        - targetPosition: {x: 0.8232507, y: 0, z: 0.861282}
           speed: 0
-        - targetPosition: {x: -144.03911, y: 80, z: 139.27641}
+        - targetPosition: {x: 0.8232507, y: 0, z: 0.26958153}
           speed: 0
       selected: 1
       speed: 2
@@ -4699,8 +4638,8 @@ MonoBehaviour:
       spawned: 0
       followPlayer: 0
     - enn: 1
-      enMov: 1
-      spawnAfter: 4
+      enMov: 2
+      spawnAfter: 22
       Waypoints:
         loop: 1
         allWaypoints:
@@ -4719,23 +4658,23 @@ MonoBehaviour:
       followPlayer: 0
     healAtBegin: 0
     delay: 0
-    firstIsLeader: 1
-    spacingX: 4
-    spacingZ: 4
+    firstIsLeader: 0
+    spacingX: 2
+    spacingZ: 2
   Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
-    generator: {fileID: 105818622}
-    number: 0
-  - forWave: 0
-    generator: {fileID: 617180272}
-    number: 0
-  - forWave: 0
-    generator: {fileID: 307011543}
+    generator: {fileID: 0}
     number: 0
   - forWave: 0
     generator: {fileID: 1296580495}
+    number: 0
+  - forWave: 0
+    generator: {fileID: 1482472052}
+    number: 0
+  - forWave: 0
+    generator: {fileID: 1619340670}
     number: 0
 --- !u!1 &1400052961
 GameObject:
@@ -4791,18 +4730,10 @@ MonoBehaviour:
   - allEnnemies:
     - enn: 0
       enMov: 0
-      spawnAfter: 2
+      spawnAfter: 4
       Waypoints:
-        loop: 1
-        allWaypoints:
-        - targetPosition: {x: -92.97647, y: 79.49789, z: 178.55377}
-          speed: 0
-        - targetPosition: {x: -92.97647, y: 79.49789, z: 178.55377}
-          speed: 0
-        - targetPosition: {x: -92.97647, y: 79.49789, z: 178.55377}
-          speed: 0
-        - targetPosition: {x: -92.97647, y: 79.49789, z: 178.55377}
-          speed: 0
+        loop: 0
+        allWaypoints: []
       selected: 0
       speed: 4
       life: 1
@@ -4810,47 +4741,31 @@ MonoBehaviour:
       followPlayer: 1
     - enn: 0
       enMov: 0
-      spawnAfter: 2
+      spawnAfter: 5
       Waypoints:
-        loop: 1
-        allWaypoints:
-        - targetPosition: {x: -92.97647, y: 79.49789, z: 178.55377}
-          speed: 0
-        - targetPosition: {x: -92.97647, y: 79.49789, z: 178.55377}
-          speed: 0
-        - targetPosition: {x: -92.97647, y: 79.49789, z: 178.55377}
-          speed: 0
-        - targetPosition: {x: -92.97647, y: 79.49789, z: 178.55377}
-          speed: 0
+        loop: 0
+        allWaypoints: []
       selected: 0
       speed: 4
       life: 1
       spawned: 0
-      followPlayer: 0
+      followPlayer: 1
     - enn: 0
       enMov: 0
-      spawnAfter: 2
+      spawnAfter: 6
       Waypoints:
-        loop: 1
-        allWaypoints:
-        - targetPosition: {x: -92.97647, y: 79.49789, z: 178.55377}
-          speed: 0
-        - targetPosition: {x: -92.97647, y: 79.49789, z: 178.55377}
-          speed: 0
-        - targetPosition: {x: -92.97647, y: 79.49789, z: 178.55377}
-          speed: 0
-        - targetPosition: {x: -92.97647, y: 79.49789, z: 178.55377}
-          speed: 0
+        loop: 0
+        allWaypoints: []
       selected: 0
       speed: 4
       life: 1
       spawned: 0
-      followPlayer: 0
+      followPlayer: 1
     healAtBegin: 0
     delay: 0
-    firstIsLeader: 1
-    spacingX: 4
-    spacingZ: 4
+    firstIsLeader: 0
+    spacingX: 2
+    spacingZ: 2
   Count: 0
   WaveCount: 0
   AllLocks: []
@@ -5005,9 +4920,9 @@ MonoBehaviour:
   - allEnnemies:
     - enn: 0
       enMov: 0
-      spawnAfter: 2
+      spawnAfter: 8
       Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -5016,9 +4931,9 @@ MonoBehaviour:
       followPlayer: 1
     - enn: 0
       enMov: 0
-      spawnAfter: 2
+      spawnAfter: 10
       Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -5027,9 +4942,9 @@ MonoBehaviour:
       followPlayer: 1
     - enn: 0
       enMov: 0
-      spawnAfter: 2
+      spawnAfter: 12
       Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -5037,18 +4952,18 @@ MonoBehaviour:
       spawned: 0
       followPlayer: 1
     - enn: 1
-      enMov: 1
-      spawnAfter: 8
+      enMov: 2
+      spawnAfter: 14
       Waypoints:
         loop: 1
         allWaypoints:
-        - targetPosition: {x: -171.20067, y: 80, z: 139.27641}
+        - targetPosition: {x: 0.32387477, y: 0, z: 0.26958153}
           speed: 0
-        - targetPosition: {x: -171.20067, y: 80, z: 157.38425}
+        - targetPosition: {x: 0.32387477, y: 0, z: 0.861282}
           speed: 0
-        - targetPosition: {x: -144.03911, y: 80, z: 157.38425}
+        - targetPosition: {x: 0.8232507, y: 0, z: 0.861282}
           speed: 0
-        - targetPosition: {x: -144.03911, y: 80, z: 139.27641}
+        - targetPosition: {x: 0.8232507, y: 0, z: 0.26958153}
           speed: 0
       selected: 1
       speed: 2
@@ -5056,18 +4971,18 @@ MonoBehaviour:
       spawned: 0
       followPlayer: 0
     - enn: 1
-      enMov: 1
-      spawnAfter: 8
+      enMov: 2
+      spawnAfter: 14
       Waypoints:
         loop: 1
         allWaypoints:
-        - targetPosition: {x: -171.20067, y: 80, z: 139.27641}
+        - targetPosition: {x: 0.32387477, y: 0, z: 0.26958153}
           speed: 0
-        - targetPosition: {x: -171.20067, y: 80, z: 157.38425}
+        - targetPosition: {x: 0.32387477, y: 0, z: 0.861282}
           speed: 0
-        - targetPosition: {x: -144.03911, y: 80, z: 157.38425}
+        - targetPosition: {x: 0.8232507, y: 0, z: 0.861282}
           speed: 0
-        - targetPosition: {x: -144.03911, y: 80, z: 139.27641}
+        - targetPosition: {x: 0.8232507, y: 0, z: 0.26958153}
           speed: 0
       selected: 1
       speed: 2
@@ -5076,20 +4991,20 @@ MonoBehaviour:
       followPlayer: 0
     healAtBegin: 0
     delay: 0
-    firstIsLeader: 1
-    spacingX: 4
-    spacingZ: 4
+    firstIsLeader: 0
+    spacingX: 2
+    spacingZ: 2
   Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
-    generator: {fileID: 105818622}
-    number: 0
-  - forWave: 0
-    generator: {fileID: 617180272}
-    number: 0
-  - forWave: 0
     generator: {fileID: 307011543}
+    number: 0
+  - forWave: 0
+    generator: {fileID: 854999031}
+    number: 0
+  - forWave: 0
+    generator: {fileID: 537918100}
     number: 0
 --- !u!1 &1488603634
 GameObject:
@@ -5304,9 +5219,9 @@ MonoBehaviour:
   - allEnnemies:
     - enn: 0
       enMov: 0
-      spawnAfter: 2
+      spawnAfter: 12
       Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -5315,9 +5230,9 @@ MonoBehaviour:
       followPlayer: 1
     - enn: 0
       enMov: 0
-      spawnAfter: 2
+      spawnAfter: 14
       Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -5326,9 +5241,9 @@ MonoBehaviour:
       followPlayer: 1
     - enn: 0
       enMov: 0
-      spawnAfter: 2
+      spawnAfter: 16
       Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -5336,18 +5251,18 @@ MonoBehaviour:
       spawned: 0
       followPlayer: 1
     - enn: 1
-      enMov: 1
-      spawnAfter: 4
+      enMov: 2
+      spawnAfter: 16
       Waypoints:
         loop: 1
         allWaypoints:
-        - targetPosition: {x: -171.20067, y: 80, z: 139.27641}
+        - targetPosition: {x: 0.32387477, y: 0, z: 0.26958153}
           speed: 0
-        - targetPosition: {x: -171.20067, y: 80, z: 157.38425}
+        - targetPosition: {x: 0.32387477, y: 0, z: 0.861282}
           speed: 0
-        - targetPosition: {x: -144.03911, y: 80, z: 157.38425}
+        - targetPosition: {x: 0.8232507, y: 0, z: 0.861282}
           speed: 0
-        - targetPosition: {x: -144.03911, y: 80, z: 139.27641}
+        - targetPosition: {x: 0.8232507, y: 0, z: 0.26958153}
           speed: 0
       selected: 1
       speed: 2
@@ -5355,8 +5270,8 @@ MonoBehaviour:
       spawned: 0
       followPlayer: 0
     - enn: 1
-      enMov: 1
-      spawnAfter: 4
+      enMov: 2
+      spawnAfter: 16
       Waypoints:
         loop: 1
         allWaypoints:
@@ -5375,20 +5290,20 @@ MonoBehaviour:
       followPlayer: 0
     healAtBegin: 0
     delay: 0
-    firstIsLeader: 1
-    spacingX: 4
-    spacingZ: 4
+    firstIsLeader: 0
+    spacingX: 2
+    spacingZ: 2
   Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
-    generator: {fileID: 105818622}
-    number: 0
-  - forWave: 0
-    generator: {fileID: 617180272}
-    number: 0
-  - forWave: 0
     generator: {fileID: 307011543}
+    number: 0
+  - forWave: 0
+    generator: {fileID: 854999031}
+    number: 0
+  - forWave: 0
+    generator: {fileID: 537918100}
     number: 0
 --- !u!4 &1619340671
 Transform:
@@ -5426,13 +5341,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1623647677}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: -3.9, z: 0}
   m_LocalScale: {x: 10, y: 1, z: 5.5}
   m_Children: []
   m_Father: {fileID: 201472637}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!23 &1623647679
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5753,7 +5668,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Count: 0
-  firstLayer: {fileID: 2050674100}
+  firstLayer: {fileID: 938488902}
   cameraPositionRelative: {x: -4, y: 27, z: -2}
   baseLife: 10
 --- !u!4 &1908215389
@@ -6164,6 +6079,10 @@ Prefab:
       propertyPath: recoveryDuration
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1380677440080142, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
   m_IsPrefabAsset: 0
@@ -6221,9 +6140,9 @@ MonoBehaviour:
   - allEnnemies:
     - enn: 0
       enMov: 0
-      spawnAfter: 0
+      spawnAfter: 2
       Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -6232,9 +6151,9 @@ MonoBehaviour:
       followPlayer: 1
     - enn: 0
       enMov: 0
-      spawnAfter: 0
+      spawnAfter: 6
       Waypoints:
-        loop: 1
+        loop: 0
         allWaypoints: []
       selected: 0
       speed: 4
@@ -6243,17 +6162,17 @@ MonoBehaviour:
       followPlayer: 1
     - enn: 1
       enMov: 1
-      spawnAfter: 4
+      spawnAfter: 7
       Waypoints:
         loop: 1
         allWaypoints:
-        - targetPosition: {x: -171.20067, y: 80, z: 139.27641}
+        - targetPosition: {x: 0.32387477, y: 0, z: 0.26958153}
           speed: 0
-        - targetPosition: {x: -171.20067, y: 80, z: 157.38425}
+        - targetPosition: {x: 0.32387477, y: 0, z: 0.861282}
           speed: 0
-        - targetPosition: {x: -144.03911, y: 80, z: 157.38425}
+        - targetPosition: {x: 0.8232507, y: 0, z: 0.861282}
           speed: 0
-        - targetPosition: {x: -144.03911, y: 80, z: 139.27641}
+        - targetPosition: {x: 0.8232507, y: 0, z: 0.26958153}
           speed: 0
       selected: 1
       speed: 2
@@ -6262,7 +6181,7 @@ MonoBehaviour:
       followPlayer: 0
     - enn: 1
       enMov: 1
-      spawnAfter: 4
+      spawnAfter: 7
       Waypoints:
         loop: 1
         allWaypoints:
@@ -6281,21 +6200,21 @@ MonoBehaviour:
       followPlayer: 0
     healAtBegin: 0
     delay: 0
-    firstIsLeader: 1
-    spacingX: 4
-    spacingZ: 4
+    firstIsLeader: 0
+    spacingX: 2
+    spacingZ: 2
   Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
-    generator: {fileID: 105818622}
-    number: 0
-  - forWave: 0
-    generator: {fileID: 617180272}
-    number: 0
-  - forWave: 0
-    generator: {fileID: 307011543}
+    generator: {fileID: 0}
     number: 0
   - forWave: 0
     generator: {fileID: 1296580495}
+    number: 0
+  - forWave: 0
+    generator: {fileID: 1482472052}
+    number: 0
+  - forWave: 0
+    generator: {fileID: 1619340670}
     number: 0
