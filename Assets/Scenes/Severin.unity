@@ -468,7 +468,7 @@ MonoBehaviour:
   levelObject: {fileID: 2050674099}
   allWaves:
   - allEnnemies:
-    - enn: 2
+    - enn: 1
       enMov: 2
       spawnAfter: 0
       Waypoints:
