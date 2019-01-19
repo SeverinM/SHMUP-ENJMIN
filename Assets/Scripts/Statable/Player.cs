@@ -185,8 +185,6 @@ public class Player : Character
        
         if (collision.gameObject.tag == "Bullet")
         {
-            Debug.Log(!Context.ValuesOrDefault<bool>("InRecovery", false));
-            Debug.Log(!GetComponentInChildren<Barrier>().IsWinching);
             //On ne se subit rien si le joueur est en recovery ou en train de winch
             if (!Context.ValuesOrDefault<bool>("InRecovery", false) && !GetComponentInChildren<Barrier>().IsWinching)
                 Hit(collision.relativeVelocity * hitForce); 

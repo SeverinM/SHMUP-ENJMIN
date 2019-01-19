@@ -34,6 +34,7 @@ public class ControllerInput : BaseInput {
 
         xValue = Mathf.Clamp(xValue, -0.999f, 0.9999f);
         yValue = Mathf.Clamp(yValue, -0.999F, 0.9999f);
+        float lastValue = 0;
 
         if ((xValue != 0 || yValue != 0) && BaseInput.IsFree(Actions.AllMovement,this))
         {
@@ -86,19 +87,6 @@ public class ControllerInput : BaseInput {
             RaiseEvent(TypeAction.Down, Actions.Dash, Vector2.zero);
         }
 
-        if (Input.GetKey(KeyCode.Joystick1Button0))
-        {
-            RaiseEvent(TypeAction.Pressed, Actions.Dash, Vector2.zero);
-        }
-
-        if (Input.GetKeyUp(KeyCode.Joystick1Button0))
-        {
-            RaiseEvent(TypeAction.Up, Actions.Dash, Vector2.zero);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Joystick1Button7))
-        {
-            RaiseEvent(TypeAction.Down, Actions.Pause, Vector2.zero);
-        }
+        lastValue = trigger;
     }
 }
