@@ -38,7 +38,7 @@ public class HookDetector : MonoBehaviour
         if (other.tag == "Ennemy")
         {
             player.SetState(new PlayerMovement(player));
-            AkSoundEngine.PostEvent("H_Grab", gameObject);
+            //AkSoundEngine.PostEvent("H_Grab", gameObject);
         }
 
         // Si le joueur touche un bouclier, le grab
