@@ -4117,6 +4117,8 @@ MonoBehaviour:
   isFirst: 1
   nextLevel: {fileID: 0}
   FirstMenu: {fileID: 1702743310}
+  disableInput:
+  - {fileID: 853226374}
 --- !u!224 &1063279017
 RectTransform:
   m_ObjectHideFlags: 0

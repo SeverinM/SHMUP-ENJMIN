@@ -624,7 +624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  coeffRotation: 2
+  coeffRotation: 2.5
   model: {fileID: 1796657138515930}
   mass: 3
   recoveryDuration: 2
