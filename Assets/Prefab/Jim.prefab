@@ -240,7 +240,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1796657138515930}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -115.70682, y: 259.77072, z: 183.99086}
+  m_LocalPosition: {x: -158.32607, y: 118.50629, z: 148.81569}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4608639111972932}
@@ -566,8 +566,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 3, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.3604584, y: 3, z: 1}
+  m_Center: {x: 0.02217865, y: 0, z: 0}
 --- !u!65 &65565114438875198
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -578,8 +578,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 3, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.4647522, y: 2.999999, z: 1}
+  m_Center: {x: 0.019180298, y: 0, z: 0}
 --- !u!65 &65799177401987534
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -622,8 +622,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  coeffRotation: 2
   model: {fileID: 1796657138515930}
   mass: 3
+  recoveryDuration: 2
   recoveryMat: {fileID: 2100000, guid: 77286c23e931b4b4397bce28b6a22b95, type: 2}
   life: 3
   dash: 3
