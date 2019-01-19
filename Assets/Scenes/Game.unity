@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -317,7 +317,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &70097731
 Transform:
   m_ObjectHideFlags: 0
@@ -1110,16 +1110,13 @@ MonoBehaviour:
   WaveCount: 0
   AllLocks:
   - forWave: 0
-    generator: {fileID: 0}
+    generator: {fileID: 1619340670}
     number: 0
   - forWave: 0
     generator: {fileID: 1296580495}
     number: 0
   - forWave: 0
     generator: {fileID: 1482472052}
-    number: 0
-  - forWave: 0
-    generator: {fileID: 1619340670}
     number: 0
 --- !u!1 &194193605
 GameObject:
@@ -5792,7 +5789,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &206305718
 Transform:
   m_ObjectHideFlags: 0
@@ -6428,16 +6425,13 @@ MonoBehaviour:
   WaveCount: 0
   AllLocks:
   - forWave: 0
-    generator: {fileID: 0}
+    generator: {fileID: 1619340670}
     number: 0
   - forWave: 0
     generator: {fileID: 1296580495}
     number: 0
   - forWave: 0
     generator: {fileID: 1482472052}
-    number: 0
-  - forWave: 0
-    generator: {fileID: 1619340670}
     number: 0
 --- !u!1 &346595309
 GameObject:
@@ -6562,7 +6556,24 @@ MonoBehaviour:
   protectionPrefab: {fileID: 0}
   impactDeceleration: 5
   levelObject: {fileID: 410317349}
-  allWaves: []
+  allWaves:
+  - allEnnemies:
+    - enn: 0
+      enMov: 2
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints: []
+      selected: 0
+      speed: 0
+      life: 0
+      spawned: 0
+      followPlayer: 0
+    healAtBegin: 0
+    delay: 0
+    firstIsLeader: 0
+    spacingX: 0
+    spacingZ: 0
   Count: 0
   WaveCount: 0
   AllLocks: []
@@ -6916,7 +6927,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &455508748
 Transform:
   m_ObjectHideFlags: 0
@@ -12833,7 +12844,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &860242945
 Transform:
   m_ObjectHideFlags: 0
@@ -13094,7 +13105,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1019990234
 Transform:
   m_ObjectHideFlags: 0
@@ -13903,7 +13914,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1185143589
 Transform:
   m_ObjectHideFlags: 0
@@ -13978,7 +13989,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1196402216
 Transform:
   m_ObjectHideFlags: 0
@@ -14053,7 +14064,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1226668110
 Transform:
   m_ObjectHideFlags: 0
@@ -14572,16 +14583,13 @@ MonoBehaviour:
   WaveCount: 0
   AllLocks:
   - forWave: 0
-    generator: {fileID: 0}
+    generator: {fileID: 1619340670}
     number: 0
   - forWave: 0
     generator: {fileID: 1296580495}
     number: 0
   - forWave: 0
     generator: {fileID: 1482472052}
-    number: 0
-  - forWave: 0
-    generator: {fileID: 1619340670}
     number: 0
 --- !u!95 &1336028224 stripped
 Animator:
@@ -14697,7 +14705,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1480916616
 Transform:
   m_ObjectHideFlags: 0
@@ -14936,7 +14944,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1488603635
 Transform:
   m_ObjectHideFlags: 0
@@ -15322,7 +15330,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1625735587
 Transform:
   m_ObjectHideFlags: 0
@@ -15500,7 +15508,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1681686308
 Transform:
   m_ObjectHideFlags: 0
@@ -15786,7 +15794,7 @@ MonoBehaviour:
   textMeshProDefault: {fileID: 392386831}
   menu: {fileID: 1087241302}
   animator: {fileID: 0}
-  backgroundToHide: {fileID: 0}
+  backgroundToHide: {fileID: 201472636}
   characters: []
   enemiesOnBonus: []
 --- !u!4 &2050674101
@@ -15831,7 +15839,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2058238700
 Transform:
   m_ObjectHideFlags: 0
@@ -16002,6 +16010,11 @@ Prefab:
       propertyPath: rangeHook
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 114938182685806996, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: coeffHook
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
   m_IsPrefabAsset: 0
@@ -16127,16 +16140,13 @@ MonoBehaviour:
   WaveCount: 0
   AllLocks:
   - forWave: 0
-    generator: {fileID: 0}
+    generator: {fileID: 1619340670}
     number: 0
   - forWave: 0
     generator: {fileID: 1296580495}
     number: 0
   - forWave: 0
     generator: {fileID: 1482472052}
-    number: 0
-  - forWave: 0
-    generator: {fileID: 1619340670}
     number: 0
 --- !u!1001 &2124328982
 Prefab:

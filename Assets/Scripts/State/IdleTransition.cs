@@ -19,7 +19,7 @@ public class IdleTransition : State {
     {
         deltaPosition = Camera.main.transform.position - character.transform.position;
         character.GetComponent<Animator>().SetTrigger("Start");
-        Utils.StartFading(2f, Color.black, () => { }, () => { });
+        Utils.StartFading(2f, Color.black, () => { ((Player)character).RaiseBlackScreen(); }, () => { });
     }
 
     public override void EndState()
