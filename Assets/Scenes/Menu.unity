@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2769,10 +2769,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1937394707}
   m_HandleRect: {fileID: 1613826990}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: 0
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 50
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -3348,7 +3348,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 843f4225a3ab32c42ad4d3762b8a2760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 7131fd1d2e0800046b4601280987a0c3, type: 2}
   resolutionDropdown: {fileID: 1794574369}
 --- !u!114 &969804073
 MonoBehaviour:
