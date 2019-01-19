@@ -69,7 +69,6 @@ public class Enemy : Character
         }
     }
 
-
     [SerializeField]
     [Tooltip("Combien de temps avant la prochaine attaque")]
     protected float shootPeriod = 2.0f;
@@ -157,6 +156,53 @@ public class Enemy : Character
         get
         {
             return killScore;
+        }
+    }
+
+    public override int Life
+    {
+        get
+        {
+            return watchedLife.WatchedValue;
+        }
+
+        set
+        {
+            watchedLife.WatchedValue = value;
+            if (watchedLife.WatchedValue <= 0)
+            {
+                switch (enemyType)
+                {
+                    case EnemyType.BOB:
+                        AkSoundEngine.PostEvent("E1_Destroyed", gameObject);
+                        break;
+                    case EnemyType.JIM:
+                        AkSoundEngine.PostEvent("E2_Destroyed", gameObject);
+                        break;
+                    case EnemyType.MIKE:
+                        AkSoundEngine.PostEvent("E3_Destroyed", gameObject);
+                        break;
+                }
+                Destroy(gameObject);
+            }
+        }
+    }
+
+
+    public override void Hit(Vector3 speed)
+    {
+        Impact(speed);
+        Life--;
+        switch (enemyType)
+        {
+            case EnemyType.BOB:
+                break;
+            case EnemyType.JIM:
+                AkSoundEngine.PostEvent("E2_Damaged", gameObject);
+                break;
+            case EnemyType.MIKE:
+                AkSoundEngine.PostEvent("E3_Damaged", gameObject);
+                break;
         }
     }
 

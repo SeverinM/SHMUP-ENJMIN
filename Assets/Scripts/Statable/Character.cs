@@ -124,8 +124,8 @@ public abstract class Character : MonoBehaviour {
     [Tooltip("Nombre de point de vie du personnage , un nombre negatif equivaut a 1")]
     protected int life = 3;
 
-    Binding<int> watchedLife;
-    public int Life
+    protected Binding<int> watchedLife;
+    public virtual int Life
     {
         get
         {
