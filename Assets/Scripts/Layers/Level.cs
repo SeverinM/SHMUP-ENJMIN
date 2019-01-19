@@ -434,7 +434,7 @@ public class Level : Layers
         {
 
             player.NextLevel += () => { OnNextLevel(nextLevel); };
-            if (animator != null && Manager.GetInstance().CountLayer == 2)
+            if (animator != null)
             {
                 animator.SetTrigger("SpaceShip");
             }
