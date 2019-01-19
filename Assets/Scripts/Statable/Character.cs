@@ -147,20 +147,6 @@ public abstract class Character : MonoBehaviour {
     [Tooltip("Nombre de dash")]
     protected int dash = 3;
 
-    Binding<int> watchedDash;
-    public int Dash
-    {
-        get
-        {
-            return watchedDash.WatchedValue;
-        }
-
-        set
-        {
-            watchedDash.WatchedValue = value;
-        }
-    }
-
     internal GameObject protection;
 
     [SerializeField]
@@ -191,7 +177,6 @@ public abstract class Character : MonoBehaviour {
     void Awake()
     {
         watchedLife = new Binding<int>(0, null);
-        watchedDash = new Binding<int>(0, null);
     }
 
     //Appellé a chaque fois que la vie du joueur change
@@ -200,14 +185,6 @@ public abstract class Character : MonoBehaviour {
         watchedLife.ValueChanged = newAction;
         //Reactualise avec la valeur actuelle
         Life = life;
-    }
-
-    //Appelé a chaque fois que le nb de dash change
-    public void SetOnDashChanged(Action<int> newAction)
-    {
-        watchedDash.ValueChanged = newAction;
-        //Reactualise avec la valeur actuelle
-        Dash = dash;
     }
 
     internal void Rotate(GameObject player)

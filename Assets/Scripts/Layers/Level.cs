@@ -145,21 +145,6 @@ public class Level : Layers
 
         Manager.GetInstance().ResetLife();
 
-        player.SetOnDashChanged((x) =>
-        {
-            if (DashUI != null)
-            {
-                for (int i = 0; i < DashUI.transform.childCount; i++)
-                {
-                    Destroy(DashUI.transform.GetChild(i).gameObject);
-                }
-                for (int i = 0; i < x; i++)
-                {
-                    Instantiate(DashPrefab, DashUI.transform);
-                }
-            }
-        });
-
         watchNbSpawn.ValueChanged = (x) =>
         {
             if (CountEnemyUI != null)

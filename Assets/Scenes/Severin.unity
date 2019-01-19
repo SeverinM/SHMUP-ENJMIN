@@ -216,6 +216,7 @@ MonoBehaviour:
   moveSpeed: 6
   model: {fileID: 0}
   mass: 3
+  recoveryDuration: 2
   recoveryMat: {fileID: 0}
   life: 3
   dash: 3
@@ -451,6 +452,7 @@ MonoBehaviour:
   moveSpeed: 6
   model: {fileID: 0}
   mass: 3
+  recoveryDuration: 2
   recoveryMat: {fileID: 0}
   life: 3
   dash: 3
@@ -459,13 +461,17 @@ MonoBehaviour:
   levelObject: {fileID: 2050674099}
   allWaves:
   - allEnnemies:
-    - enn: 2
-      enMov: 2
+    - enn: 0
+      enMov: 1
       spawnAfter: 0
       Waypoints:
-        loop: 0
-        allWaypoints: []
-      selected: 0
+        loop: 1
+        allWaypoints:
+        - targetPosition: {x: 241.28505, y: -242.78766, z: -135.68947}
+          speed: 2
+        - targetPosition: {x: -241.28508, y: -242.7877, z: 135.68944}
+          speed: 2
+      selected: 1
       speed: 1
       life: 2
       spawned: 0
@@ -629,7 +635,7 @@ Transform:
   m_GameObject: {fileID: 1047461087}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -670,7 +676,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1088336895
 Transform:
   m_ObjectHideFlags: 0
@@ -698,6 +704,7 @@ MonoBehaviour:
   moveSpeed: 6
   model: {fileID: 0}
   mass: 3
+  recoveryDuration: 2
   recoveryMat: {fileID: 0}
   life: 3
   dash: 3
@@ -1022,6 +1029,77 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1256325130
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1256325131}
+  - component: {fileID: 1256325132}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1256325131
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1256325130}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2127061448}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1256325132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1256325130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74ea6ec4297249d4cbad984f0434a79a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 6
+  model: {fileID: 0}
+  mass: 3
+  recoveryDuration: 2
+  recoveryMat: {fileID: 0}
+  life: 3
+  dash: 3
+  protectionPrefab: {fileID: 0}
+  impactDeceleration: 5
+  levelObject: {fileID: 2127061446}
+  allWaves:
+  - allEnnemies:
+    - enn: 0
+      enMov: 0
+      spawnAfter: 0
+      Waypoints:
+        loop: 0
+        allWaypoints: []
+      selected: 0
+      speed: 0
+      life: 0
+      spawned: 0
+      followPlayer: 0
+    healAtBegin: 0
+    delay: 0
+    firstIsLeader: 0
+    spacingX: 0
+    spacingZ: 0
+  Count: 0
+  WaveCount: 0
+  AllLocks: []
 --- !u!1 &1321803381
 GameObject:
   m_ObjectHideFlags: 0
@@ -1081,7 +1159,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1404607686
 Transform:
   m_ObjectHideFlags: 0
@@ -1109,6 +1187,7 @@ MonoBehaviour:
   moveSpeed: 6
   model: {fileID: 0}
   mass: 3
+  recoveryDuration: 2
   recoveryMat: {fileID: 0}
   life: 3
   dash: 3
@@ -1266,7 +1345,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1476565985
 Transform:
   m_ObjectHideFlags: 0
@@ -1294,6 +1373,7 @@ MonoBehaviour:
   moveSpeed: 6
   model: {fileID: 0}
   mass: 3
+  recoveryDuration: 2
   recoveryMat: {fileID: 0}
   life: 3
   dash: 3
@@ -1674,7 +1754,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1620762117
 Transform:
   m_ObjectHideFlags: 0
@@ -1702,6 +1782,7 @@ MonoBehaviour:
   moveSpeed: 6
   model: {fileID: 0}
   mass: 3
+  recoveryDuration: 2
   recoveryMat: {fileID: 0}
   life: 3
   dash: 3
@@ -1995,6 +2076,7 @@ MonoBehaviour:
   moveSpeed: 6
   model: {fileID: 0}
   mass: 3
+  recoveryDuration: 2
   recoveryMat: {fileID: 0}
   life: 3
   dash: 3
@@ -2763,6 +2845,7 @@ Transform:
   - {fileID: 1404607686}
   - {fileID: 1088336895}
   - {fileID: 1476565985}
+  - {fileID: 1256325131}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

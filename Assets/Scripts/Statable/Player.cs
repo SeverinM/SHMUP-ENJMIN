@@ -7,24 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class Player : Character
 {
-    [Header("Debug")]
-    [SerializeField]
-    MovementMode mode;
-    public MovementMode Mode
-    {
-        get
-        {
-            return mode;
-        }
-    }
-
-    public enum MovementMode
-    {
-        Dash,
-        Normal,
-        NormalDash,
-    }
-
     [Header("Mouvement")]
     [SerializeField]
     [Tooltip("Longueur d'un dash")]
@@ -136,7 +118,6 @@ public class Player : Character
 
     void Start()
     {
-        context.SetInDictionary("Mode", mode);
         context.SetInDictionary("Hook", hook);
         context.SetInDictionary("Barrier", barrier);
         context.SetInDictionary("SpeedWinch", speedPull);
@@ -186,8 +167,6 @@ public class Player : Character
        
         if (collision.gameObject.tag == "Bullet")
         {
-            Debug.Log(!Context.ValuesOrDefault<bool>("InRecovery", false));
-            Debug.Log(!GetComponentInChildren<Barrier>().IsWinching);
             //On ne se subit rien si le joueur est en recovery ou en train de winch
             if (!Context.ValuesOrDefault<bool>("InRecovery", false) && !GetComponentInChildren<Barrier>().IsWinching)
                 Hit(collision.relativeVelocity * hitForce); 
