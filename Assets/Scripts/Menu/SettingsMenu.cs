@@ -1,13 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Audio;
+using UnityEngine;  
 using UnityEngine.UI;
 
 
 public class SettingsMenu : MonoBehaviour { 
-
-    public AudioMixer audioMixer;
 
     public Dropdown resolutionDropdown;
 
@@ -47,9 +44,9 @@ public class SettingsMenu : MonoBehaviour {
     }
 
     public void SetVolume (float volume)
-{
-        audioMixer.SetFloat("MasterVolume", volume);
-}
+    {
+        AkSoundEngine.SetRTPCValue("Var_Master_Audio", (int) volume);
+    }
     public void SetFullscreen (bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;

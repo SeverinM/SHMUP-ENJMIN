@@ -18,6 +18,7 @@ public class MainMenu : Layers {
         ActualGameObject = FirstMenu;
         parentUI = FirstMenu;
         parentUI.SetActive(true);
+        AkSoundEngine.PostEvent("Menu_Start", gameObject);
     }
 
     public void Play()
