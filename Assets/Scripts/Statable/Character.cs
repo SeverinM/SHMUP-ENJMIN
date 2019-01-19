@@ -71,6 +71,17 @@ public abstract class Character : MonoBehaviour {
     }
 
     [SerializeField]
+    [Tooltip("Plus il est grand plus il prendra de temps a se tourner , est proportionnel avec la vitesse")]
+    protected float coeffRotation = 1;
+    public float CoeffRotation
+    {
+        get
+        {
+            return coeffRotation;
+        }
+    }
+
+    [SerializeField]
     [Tooltip("Qui doit on utiliser pour changer le material en cas de recovery ?")]
     GameObject model;
     public GameObject Model
@@ -124,8 +135,8 @@ public abstract class Character : MonoBehaviour {
     [Tooltip("Nombre de point de vie du personnage , un nombre negatif equivaut a 1")]
     protected int life = 3;
 
-    Binding<int> watchedLife;
-    public int Life
+    protected Binding<int> watchedLife;
+    public virtual int Life
     {
         get
         {
@@ -263,7 +274,6 @@ public abstract class Character : MonoBehaviour {
     public void Impact(Vector3 force)
     {
         Vector3 dir = force.normalized;
-        dir.y = 0; // En hauteur
         impact += dir.normalized * force.magnitude / mass;
     }
 

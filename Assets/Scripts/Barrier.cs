@@ -10,11 +10,14 @@ public class Barrier : MonoBehaviour {
     [SerializeField]
     private int lifeHit = 1;
 
-    private float screenShakeDuration = 0.011f;
+    [SerializeField]
+    private float screenShakeDuration;
 
-    private float screenShakeForce = 0.5f;
+    [SerializeField]
+    private float screenShakeForce;
 
-    private float screenShakeBarrierForce = 1f;
+    [SerializeField]
+    private float screenShakeBarrierForce;
 
 
     bool isWinching = false;
@@ -34,14 +37,13 @@ public class Barrier : MonoBehaviour {
     {
         if (other.gameObject.tag == "Bullet" || (other.gameObject.tag == "Shield" && IsWinching))
         {
-            Manager.GetInstance().ShakeCamera(screenShakeForce/2, screenShakeDuration);
+            Manager.GetInstance().ShakeCamera(screenShakeBarrierForce, screenShakeDuration);
             Destroy(other.gameObject);
             AkSoundEngine.PostEvent("S_HitShield", gameObject);
         }
 
         if (other.gameObject.tag == "Ennemy" && isWinching)
         {
-            Debug.Log(screenShakeForce + "  " + screenShakeDuration);
             Manager.GetInstance().ShakeCamera(screenShakeBarrierForce, screenShakeDuration);
             Character chara = other.GetComponent<Character>();
             chara.StartRecovery(barrierRecovery);
