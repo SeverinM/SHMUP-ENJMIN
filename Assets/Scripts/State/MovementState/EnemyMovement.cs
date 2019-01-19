@@ -38,7 +38,6 @@ public class EnemyMovement : State
 
     public override void UpdateState()
     {
-        timeBegin += (Time.deltaTime * character.PersonalScale * character.GetScale() * character.MoveSpeed) / character.CoeffRotation;
         //L'ennemi est freeze / en pause , il n'est pas supposé agir
         if (character.PersonalScale == 0 || target == null)
         {
@@ -71,9 +70,8 @@ public class EnemyMovement : State
         if (target.GetComponent<Player>() == null && character.PersonalScale > 0)
             character.PersonalScale = Mathf.Clamp((Vector3.Distance(target.transform.position, character.transform.position) / 3) / enemy.MoveSpeed, 0, 1);
 
-        if (character.PersonalScale * character.GetScale() > 0)
-            character.transform.forward = Vector3.Lerp(angle, deltaPosition, timeBegin);
-
+        character.transform.forward = Vector3.RotateTowards(character.transform.forward, deltaPosition, (1 / character.CoeffRotation) * Mathf.Deg2Rad, 0.0f);
+            
         character.Move(character.Separate(deltaPosition.normalized));
     }
 
