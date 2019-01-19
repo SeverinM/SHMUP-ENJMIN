@@ -70,12 +70,8 @@ public class PlayerMovement : State
 
             if (typeAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Dash) && character.GetScale() * character.PersonalScale > 0)
             {
-                if (((Player)character).Dash > 0) // StartDashing
-                {
-                    ((Player)character).Dash--;
-                    dashing = ((Player)character).DistanceDash/100;
-                    AkSoundEngine.PostEvent("S_Dash", character.gameObject);
-                }
+                dashing = ((Player)character).DistanceDash/100;
+                AkSoundEngine.PostEvent("S_Dash", character.gameObject);
             }
         }
 
@@ -128,20 +124,14 @@ public class PlayerMovement : State
     {
         ((Player)character).UpdateHook();
         Vector3 forward = character.transform.TransformDirection(Vector3.forward);
+        character.GetComponent<BoxCollider>().enabled = (dashing == 0);
 
         if (dashing > 0)
         {
+            Debug.Break();
             dashing -= Time.deltaTime;
-
+            dashing = Mathf.Max(0, dashing);
             character.Move(forward * ((Player)character).dashSpeed);
-        } else
-        {
-            dashCooldownTime += Time.deltaTime;
-            if(dashCooldownTime > ((Player)character).dashCooldown && ((Player)character).Dash < ((Player)character).maxDashes)
-            {
-                ((Player)character).Dash++;
-                dashCooldownTime = 0;
-            }
         }
     }
 

@@ -77,8 +77,7 @@ public class Tools : EditorWindow {
         GUILayout.BeginHorizontal();
         if (staticLvl != null && GUILayout.Button("Placer camera"))
         {
-            Vector3 deltaPosition = Camera.main.transform.position - GameObject.FindObjectOfType<Player>().transform.position;
-            Camera.main.transform.position = staticLvl.transform.position + deltaPosition;
+            Camera.main.transform.position = staticLvl.transform.position + GameObject.FindObjectOfType<Manager>().CameraPositionRelative;
         }
         if (originPosition != Camera.main.transform.position && GUILayout.Button("Reset Camera"))
         {
@@ -267,7 +266,6 @@ public class Tools : EditorWindow {
     private void OnDestroy()
     {
         instance = null;
-        Camera.main.transform.position = originPosition;
         PlayerPrefs.SetString("ToolsGenerator", currentGen == null ? "" : currentGen.name);
         PlayerPrefs.SetString("ToolsLevel", staticLvl == null ? "" : staticLvl.name);
     }
