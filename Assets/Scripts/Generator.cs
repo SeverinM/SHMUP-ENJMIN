@@ -30,7 +30,6 @@ public class Generator : Character {
     public static int Number = 0;
     public GameObject levelObject;        // Level
     public List<Wave> allWaves = new List<Wave>();
-    public int Count = 0;
     public int WaveCount = 0;
 
     public List<LockWaveElement> AllLocks;
@@ -43,7 +42,7 @@ public class Generator : Character {
     {
         get
         {
-            return allWaves.Select(x => x.allEnnemies).Count() + Count;
+            return allWaves.Select(x => x.allEnnemies).Count();
         }
     }
 

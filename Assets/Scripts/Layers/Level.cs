@@ -106,7 +106,7 @@ public class Level : Layers
     public List<GameObject> characters = new List<GameObject>();
 
     [HideInInspector]
-    public Binding<int> watchNbSpawn = new Binding<int>(0, null);
+    public Binding<int> watchNbSpawn = new Binding<int>(-1, null);
     public Binding<int> watchScore = new Binding<int>(0, null);
 
     public List<Enemy> enemiesOnBonus = new List<Enemy>();
@@ -204,7 +204,8 @@ public class Level : Layers
             }
             generator.WaveCleaned += Generator_WaveCleaned;
         }
-        watchNbSpawn.WatchedValue = transform.GetComponentsInChildren<Generator>().Select(x => x.GetComponent<Generator>().EnnemiesLeftToSpawn).Sum();
+
+        watchNbSpawn.WatchedValue = -1;
         countFocus++;
     }
 
@@ -452,10 +453,17 @@ public class Level : Layers
             State st = new FollowPathMovement(player, queue, () => player.SetState(new IdleTransition(player)));
             player.StartDelayedState(1, st);
         }
+
         else
         {
-            Utils.StartFading(1, Color.black, () => { End(); }, () => { });
+            StartCoroutine(DelayedEnd());
         }
+    }
+
+    IEnumerator DelayedEnd()
+    {
+        yield return new WaitForSeconds(3f);
+        Utils.StartFading(1, Color.black, () => { End(); }, () => { });
     }
 
     public void End()

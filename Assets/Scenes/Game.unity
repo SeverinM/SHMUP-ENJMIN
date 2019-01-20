@@ -202,7 +202,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
@@ -377,7 +376,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
@@ -691,7 +689,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks: []
 --- !u!4 &105818623
@@ -1106,7 +1103,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
@@ -5753,7 +5749,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &201472637
 Transform:
   m_ObjectHideFlags: 0
@@ -5854,7 +5850,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
@@ -6269,7 +6264,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
@@ -6423,7 +6417,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
@@ -6558,25 +6551,7 @@ MonoBehaviour:
   protectionPrefab: {fileID: 0}
   impactDeceleration: 5
   levelObject: {fileID: 410317349}
-  allWaves:
-  - allEnnemies:
-    - enn: 0
-      enMov: 2
-      spawnAfter: 0
-      Waypoints:
-        loop: 0
-        allWaypoints: []
-      selected: 0
-      speed: 1
-      life: 1
-      spawned: 0
-      followPlayer: 0
-    healAtBegin: 0
-    delay: 0
-    firstIsLeader: 0
-    spacingX: 0
-    spacingZ: 0
-  Count: 0
+  allWaves: []
   WaveCount: 0
   AllLocks: []
 --- !u!1 &392386831
@@ -6902,7 +6877,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
@@ -6989,7 +6963,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
@@ -7295,7 +7268,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
@@ -7650,7 +7622,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
@@ -12806,7 +12777,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
@@ -12887,7 +12857,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
@@ -13125,7 +13094,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks: []
 --- !u!4 &918723825
@@ -13325,7 +13293,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
@@ -14167,7 +14134,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks: []
 --- !u!1 &1170232697
@@ -14316,7 +14282,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
@@ -14391,7 +14356,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
@@ -14607,7 +14571,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
@@ -14719,7 +14682,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
@@ -14873,7 +14835,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
@@ -14981,7 +14942,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks: []
 --- !u!1 &1480916615
@@ -15076,7 +15036,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
@@ -15211,7 +15170,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
@@ -15315,7 +15273,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
@@ -15587,7 +15544,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
@@ -15753,7 +15709,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
@@ -15931,7 +15886,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
@@ -16115,7 +16069,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Count: 0
-  firstLayer: {fileID: 938488902}
+  firstLayer: {fileID: 2050674100}
   cameraPositionRelative: {x: -4, y: 32, z: -2}
   baseLife: 5
 --- !u!4 &1908215389
@@ -16617,7 +16571,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
@@ -16875,7 +16828,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0

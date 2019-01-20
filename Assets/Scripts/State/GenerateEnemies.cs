@@ -23,7 +23,6 @@ public class GenerateEnemies : State
         generator = character.GetComponent<Generator>();
         level = generator.levelObject.GetComponent<Level>();
         currentWave = remainingWaves[remainingWaves.Count - 1];
-        remainingWaves.Remove(currentWave);
         wavesLeft = remainingWaves;
         timeSinceBegin -= currentWave.delay;
         count = currentWave.allEnnemies.Count;
@@ -57,8 +56,6 @@ public class GenerateEnemies : State
         }
     }
 
-
-
     public override void UpdateState()
     {
         timeSinceBegin += Time.deltaTime * character.GetScale() * character.PersonalScale;
@@ -88,8 +85,6 @@ public class GenerateEnemies : State
             // Si l'enemi courrant doit spawn et n'a pas encore spawné
             if (x.spawnAfter < timeSinceBegin && !x.spawned)
             {
-                generator.Count++;
-
                 GameObject instanciated = level.AddEnemy(x.enn, leaderPos);
                 Enemy enn = instanciated.GetComponent<Enemy>();
                 enn.enemyType = x.enn;
@@ -120,11 +115,11 @@ public class GenerateEnemies : State
     void EnnemyDestroyed(Character chara)
     {
         count--;
-        generator.Count--;
         level.AddCharacterForScore(chara);
         // Si tous les énnemis on été détruits, on tente de passer a l'etat suivant
         if (count == 0)
         {
+            wavesLeft.Remove(currentWave);
             generator.RaiseWaveFinished();
             generator.TryPassWave();
         }

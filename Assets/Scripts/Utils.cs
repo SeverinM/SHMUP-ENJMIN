@@ -34,6 +34,7 @@ public static class Utils {
             return;
         }
 
+        isFading = true;
         fading = FindOrDefault<Fade>();
         fading.Init(duration, lambdaAt1, lambdaAt0, col);
     }
