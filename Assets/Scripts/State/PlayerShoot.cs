@@ -47,7 +47,7 @@ public class PlayerShoot : State
     public override void UpdateState()
     {
         // Déplacement du grappin 
-        player.Hook.transform.Translate(player.Hook.forward * speedTravel * character.GetScale(), Space.World);
+        player.Hook.transform.Translate(player.Hook.forward * speedTravel * character.GetScale() * Time.deltaTime, Space.World);
        
 
         // Si le grapin dépasse la distance maximale, le joueur revient à l'état PlayerMovement, et le grappin est retracté
