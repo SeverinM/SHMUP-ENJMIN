@@ -454,7 +454,6 @@ public class Level : Layers
         }
         else
         {
-            Constants.SetAllConstants(0.5f);
             Utils.StartFading(1, Color.black, () => { End(); }, () => { });
         }
     }
