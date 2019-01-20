@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using UnityEngine.UI;
 
 /// <summary>
 /// Classe singleton et indestructibles ayant pour but de tenir des references d'autres objets et de gerer les layers
@@ -104,6 +105,14 @@ public class Manager : MonoBehaviour {
         DontDestroyOnLoad(instance);
     }
 
+    public void SetName(TMPro.TMP_InputField field)
+    {
+        if (field.text != "")
+        {
+            Constants.PlayerName = field.text;
+        }
+    }
+
     public void ResetLife()
     {
         if (Player != null)
@@ -155,9 +164,16 @@ public class Manager : MonoBehaviour {
     private void Lvl_OnNextLevel(Level nextLevel)
     {
         AddToStack(nextLevel);
-        StartCoroutine(connection.PostScores(Constants.PlayerName, Constants.TotalScore));
+        PostScore();
         nextLevel.OnNextLevel += Lvl_OnNextLevel;
         countLayer++;
+    }
+
+    public void PostScore()
+    {
+        Debug.Log(Constants.TotalScore);
+        Debug.Log(Constants.PlayerName);
+        StartCoroutine(connection.PostScores(Constants.PlayerName, Constants.TotalScore));
     }
 
     // Update is called once per frame

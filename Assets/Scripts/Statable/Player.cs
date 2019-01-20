@@ -239,6 +239,7 @@ public class Player : Character
         if (!Constants.ApplicationQuit)
         {
             base.OnDestroy();
+            Manager.GetInstance().PostScore();
             Constants.ApplicationQuit = true;
             Manager.GetInstance().PopAll();
             Utils.StartFading(1, Color.black, () => { Constants.SetAllConstants(0); SceneManager.LoadScene(SceneManager.GetActiveScene().name); }, () => { Constants.SetAllConstants(1);});
