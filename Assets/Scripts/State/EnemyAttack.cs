@@ -66,7 +66,7 @@ public class EnemyAttack : State
             enemy.FollowRandomPath();
             return;
         }
-        character.transform.forward = Vector3.RotateTowards(character.transform.forward,(playerTarget.position - character.transform.position).normalized, (1 / character.CoeffRotation) * Mathf.Deg2Rad, 0.0f);
+        character.transform.forward = Vector3.RotateTowards(character.transform.forward,(playerTarget.position - character.transform.position).normalized, (0.1f / character.CoeffRotation) * Mathf.Deg2Rad, 0.0f);
         character.transform.forward = new Vector3(character.transform.forward.x, 0, character.transform.forward.z);
         // Lance une attaque selon la periode
         totalTime += Time.deltaTime * character.PersonalScale * character.GetScale();

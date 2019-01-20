@@ -116,4 +116,9 @@ public class MainMenu : Layers {
         }       
         allButtonsMenu = null;
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }
