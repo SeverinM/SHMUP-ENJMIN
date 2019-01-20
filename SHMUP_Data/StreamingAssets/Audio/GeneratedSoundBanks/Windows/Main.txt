@@ -1,21 +1,39 @@
 Event	ID	Name			Wwise Object Path	Notes
 	387627068	H_Winch_Stop			\Default Work Unit\Hook_events\H_Winch_Stop	
+	593888184	E2_Damaged			\Default Work Unit\Enemies_Events\E2_Damaged	
+	915359679	M_Cancel			\Default Work Unit\Menu\M_Cancel	
 	1189220547	S_Dash			\Default Work Unit\Spaceship_events\S_Dash	
 	1645722108	H_Grab			\Default Work Unit\Hook_events\H_Grab	
+	1678293537	E3_ShieldGrab			\Default Work Unit\Enemies_Events\E3_ShieldGrab	
+	1745182863	M_Confirm			\Default Work Unit\Menu\M_Confirm	
 	1864059347	S_Destroy			\Default Work Unit\Spaceship_events\S_Destroy	
+	2898220307	E1_Destroyed			\Default Work Unit\Enemies_Events\E1_Destroyed	
 	2907828633	S_HitShield			\Default Work Unit\Spaceship_events\S_HitShield	
 	3193013155	H_Launch			\Default Work Unit\Hook_events\H_Launch	
-	3475275800	Level_01_Start			\Default Work Unit\Level_01_Start	
+	3407968013	E3_Damaged			\Default Work Unit\Enemies_Events\E3_Damaged	
+	3475275800	Level_01_Start			\Default Work Unit\Menu\Level_01_Start	
+	3586573616	E2_Destroyed			\Default Work Unit\Enemies_Events\E2_Destroyed	
+	3743416305	E3_Destroyed			\Default Work Unit\Enemies_Events\E3_Destroyed	
 	3847287689	H_Winch			\Default Work Unit\Hook_events\H_Winch	
+	3908297853	Menu_Start			\Default Work Unit\Menu\Menu_Start	
 	4199377676	S_Hurt			\Default Work Unit\Spaceship_events\S_Hurt	
+	4265507177	M_Select			\Default Work Unit\Menu\M_Select	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	37155982	H_Grab-2_-_V0_1_1	C:\Users\abdoul-jabar.mayaki\Documents\MASTER 1\_PROJETS\2018-12-06_[SHMUP]\_Session_Unity\SHMUP-ENJMIN_Wwise\12-2018_SHMUP-ENJMIN_Wwise\.cache\Windows\SFX\SFX_-_H_Grab-2_-_V0.1.1_-_19-01-11_1F72EA25.wem		\Actor-Mixer Hierarchy\Default Work Unit\Hook\Hook_Grab\H_Grab-2_-_V0_1_1		9363
+	195838260	E1_Destroy_-_V0_1	C:\Users\abdoul-jabar.mayaki\Documents\MASTER 1\_PROJETS\2018-12-06_[SHMUP]\_Session_Unity\SHMUP-ENJMIN_Wwise\12-2018_SHMUP-ENJMIN_Wwise\.cache\Windows\SFX\SFX_-_E1_Destroy_-_V0.1_-_19-01-18_C7C4B0A1.wem		\Actor-Mixer Hierarchy\Default Work Unit\Enemies\E1_Destroy_-_V0_1		192092
 	221440909	H_Grab-3_-_V0_1_1	C:\Users\abdoul-jabar.mayaki\Documents\MASTER 1\_PROJETS\2018-12-06_[SHMUP]\_Session_Unity\SHMUP-ENJMIN_Wwise\12-2018_SHMUP-ENJMIN_Wwise\.cache\Windows\SFX\SFX_-_H_Grab-3_-_V0.1.1_-_19-01-11_1F72EA25.wem		\Actor-Mixer Hierarchy\Default Work Unit\Hook\Hook_Grab\H_Grab-3_-_V0_1_1		14103
+	289811282	M_Select_-_V0_1	C:\Users\abdoul-jabar.mayaki\Documents\MASTER 1\_PROJETS\2018-12-06_[SHMUP]\_Session_Unity\SHMUP-ENJMIN_Wwise\12-2018_SHMUP-ENJMIN_Wwise\.cache\Windows\SFX\SFX_-_M_Select_-_V0.1_-_19-01-19_AB311D7F.wem		\Actor-Mixer Hierarchy\Default Work Unit\Menu\M_Select_-_V0_1		134176
 	308640106	S_Destroy_-_V0_1	C:\Users\abdoul-jabar.mayaki\Documents\MASTER 1\_PROJETS\2018-12-06_[SHMUP]\_Session_Unity\SHMUP-ENJMIN_Wwise\12-2018_SHMUP-ENJMIN_Wwise\.cache\Windows\SFX\SFX_-_S_Destroy_-_V0.1_-_19-01-12_FF107FF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Spaceship\S_Destroy_-_V0_1		559168
 	378128112	H_Pull-2_-_V0_1	C:\Users\abdoul-jabar.mayaki\Documents\MASTER 1\_PROJETS\2018-12-06_[SHMUP]\_Session_Unity\SHMUP-ENJMIN_Wwise\12-2018_SHMUP-ENJMIN_Wwise\.cache\Windows\SFX\Hook_Pull\SFX_-_H_Pull-1_-_V0.1_-_19-01-08-002_FF107FF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Hook\Hook_Pull-Winch\H_Pull-2_-_V0_1		249664
+	452405396	E3_ShieldGrab_-_V0_1	C:\Users\abdoul-jabar.mayaki\Documents\MASTER 1\_PROJETS\2018-12-06_[SHMUP]\_Session_Unity\SHMUP-ENJMIN_Wwise\12-2018_SHMUP-ENJMIN_Wwise\.cache\Windows\SFX\SFX_-_E3_ShieldGrab_-_V0.1_-_19-01-19_80785BBA.wem		\Actor-Mixer Hierarchy\Default Work Unit\Enemies\E3 Big Mike\E3_ShieldGrab_-_V0_1		137376
+	458525143	E3_Destroy_-_V0_1	C:\Users\abdoul-jabar.mayaki\Documents\MASTER 1\_PROJETS\2018-12-06_[SHMUP]\_Session_Unity\SHMUP-ENJMIN_Wwise\12-2018_SHMUP-ENJMIN_Wwise\.cache\Windows\SFX\SFX_-_E3_Destroy_-_V0.1_-_19-01-19_450650FF.wem		\Actor-Mixer Hierarchy\Default Work Unit\Enemies\E3 Big Mike\E3_Destroy_-_V0_1		231512
 	544212774	S_HitShield_-_V0_1	C:\Users\abdoul-jabar.mayaki\Documents\MASTER 1\_PROJETS\2018-12-06_[SHMUP]\_Session_Unity\SHMUP-ENJMIN_Wwise\12-2018_SHMUP-ENJMIN_Wwise\.cache\Windows\SFX\SFX_-_S_HitShield_-_V0.1_-_19-01-11_73B8738A.wem		\Actor-Mixer Hierarchy\Default Work Unit\Spaceship\S_HitShield_-_V0_1		23352
+	555834197	E2_Destroy_-_V0_1	C:\Users\abdoul-jabar.mayaki\Documents\MASTER 1\_PROJETS\2018-12-06_[SHMUP]\_Session_Unity\SHMUP-ENJMIN_Wwise\12-2018_SHMUP-ENJMIN_Wwise\.cache\Windows\SFX\SFX_-_E2_Destroy_-_V0.1_-_19-01-19_C3288254.wem		\Actor-Mixer Hierarchy\Default Work Unit\Enemies\E2_Destroy_-_V0_1		189808
+	633527820	MUSIC_-_Menu_Music_V0_1_-_19-01-19_-_100BPM_-_9bars	C:\Users\abdoul-jabar.mayaki\Documents\MASTER 1\_PROJETS\2018-12-06_[SHMUP]\_Session_Unity\SHMUP-ENJMIN_Wwise\12-2018_SHMUP-ENJMIN_Wwise\.cache\Windows\SFX\MUSIC_-_Menu_Music_V0.1_-_19-01-19_-_100BPM_-_9bars_0CBEF50C.wem		\Interactive Music Hierarchy\Default Work Unit\SHMUP_Music\MainMenu\Menu_loop_V0_1_-_100BPM_-_9bars\MUSIC_-_Menu_Music_V0_1_-_19-01-19_-_100BPM_-_9bars		681982
 	668240043	S_Dash_-_V0_2	C:\Users\abdoul-jabar.mayaki\Documents\MASTER 1\_PROJETS\2018-12-06_[SHMUP]\_Session_Unity\SHMUP-ENJMIN_Wwise\12-2018_SHMUP-ENJMIN_Wwise\.cache\Windows\SFX\SFX_-_S_Dash_-_V0.2_-_19-01-16_FF107FF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Spaceship\Dash\S_Dash_-_V0_2		305216
+	668586021	M_Confirm_-_V0_1	C:\Users\abdoul-jabar.mayaki\Documents\MASTER 1\_PROJETS\2018-12-06_[SHMUP]\_Session_Unity\SHMUP-ENJMIN_Wwise\12-2018_SHMUP-ENJMIN_Wwise\.cache\Windows\SFX\SFX_-_M_Confirm_-_V0.1_-_19-01-19_C18BBE28.wem		\Actor-Mixer Hierarchy\Default Work Unit\Menu\M_Confirm_-_V0_1		131324
+	681518112	E2-3_Damaged_-_V0_1	C:\Users\abdoul-jabar.mayaki\Documents\MASTER 1\_PROJETS\2018-12-06_[SHMUP]\_Session_Unity\SHMUP-ENJMIN_Wwise\12-2018_SHMUP-ENJMIN_Wwise\.cache\Windows\SFX\SFX_-_E23_Damaged_-_V0.1_-_19-01-19_CCCD6CEE.wem		\Actor-Mixer Hierarchy\Default Work Unit\Enemies\E2-3_Damaged_-_V0_1		113604
 	811857669	S_Hurt_-_V0_1	C:\Users\abdoul-jabar.mayaki\Documents\MASTER 1\_PROJETS\2018-12-06_[SHMUP]\_Session_Unity\SHMUP-ENJMIN_Wwise\12-2018_SHMUP-ENJMIN_Wwise\.cache\Windows\SFX\SFX_-_S_Hurt_-_V0.1_-_19-01-11_6DFE16C9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Spaceship\S_Hurt_-_V0_1		189168
 	813485406	H_Grab-1_-_V0_1_1	C:\Users\abdoul-jabar.mayaki\Documents\MASTER 1\_PROJETS\2018-12-06_[SHMUP]\_Session_Unity\SHMUP-ENJMIN_Wwise\12-2018_SHMUP-ENJMIN_Wwise\.cache\Windows\SFX\SFX_-_H_Grab-1_-_V0.1.1_-_19-01-11_1F72EA25.wem		\Actor-Mixer Hierarchy\Default Work Unit\Hook\Hook_Grab\H_Grab-1_-_V0_1_1		12303
 	868740909	Hook_Launch-1_-_V0_2	C:\Users\abdoul-jabar.mayaki\Documents\MASTER 1\_PROJETS\2018-12-06_[SHMUP]\_Session_Unity\SHMUP-ENJMIN_Wwise\12-2018_SHMUP-ENJMIN_Wwise\.cache\Windows\SFX\SFX_-_H_Launch-1_-_V0.2_-_19-01-16_FF107FF4.wem		\Actor-Mixer Hierarchy\Default Work Unit\Hook\Hook_Launch\Hook_Launch-1_-_V0_2		231488

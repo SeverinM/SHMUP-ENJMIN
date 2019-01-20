@@ -112,11 +112,6 @@ public class Level : Layers
     //Appellé quand le layer est au dessus de la stack
     public override void OnFocusGet()
     {
-        if (backgroundToHide != null)
-        {
-            Destroy(backgroundToHide); //Hide backgrounds
-        }
-
         score = Constants.TotalScore;
 
         // Faire en sorte que tous les inputs notifient le joueur
@@ -434,6 +429,10 @@ public class Level : Layers
         {
 
             player.NextLevel += () => { OnNextLevel(nextLevel); };
+            player.BlackScreen += () => {
+                if (backgroundToHide != null)
+                    Destroy(backgroundToHide);
+            };
             if (animator != null)
             {
                 animator.SetTrigger("SpaceShip");
@@ -446,6 +445,17 @@ public class Level : Layers
             State st = new FollowPathMovement(player, queue, () => player.SetState(new IdleTransition(player)));
             player.StartDelayedState(1, st);
         }
+        else
+        {
+            Constants.SetAllConstants(0.5f);
+            Utils.StartFading(1, Color.black, () => { StartCoroutine(DelayedEnd()); }, () => { });
+        }
+    }
+
+    IEnumerator DelayedEnd()
+    {
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene("End");
     }
 
     public void PlayerDied(Character chara)

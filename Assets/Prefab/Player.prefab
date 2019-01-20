@@ -633,12 +633,12 @@ MonoBehaviour:
   distanceDash: 10
   dashCooldown: 2
   maxDashes: 3
-  hookSpeed: 1
+  hookSpeed: 0.5
   rangeHook: 20
   speedPull: 100
   screenShakeForce: 0.8
   screenShakeDuration: 0.015
-  coeffHook: 1.2
+  coeffHook: 1.5
   dashSpeed: 5
   barrier: {fileID: 4181975481634658}
   hook: {fileID: 4840222661834636}

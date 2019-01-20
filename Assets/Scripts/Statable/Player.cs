@@ -109,11 +109,18 @@ public class Player : Character
 
     public delegate void voidParam();
     public event voidParam NextLevel;
+    public event voidParam BlackScreen;
 
     public void RaiseNextLevel()
     { 
         if (NextLevel != null)
             NextLevel();
+    }
+
+    public void RaiseBlackScreen()
+    {
+        if (BlackScreen != null)
+            BlackScreen();
     }
 
     void Start()
