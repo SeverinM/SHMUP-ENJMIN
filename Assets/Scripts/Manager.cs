@@ -164,15 +164,12 @@ public class Manager : MonoBehaviour {
     private void Lvl_OnNextLevel(Level nextLevel)
     {
         AddToStack(nextLevel);
-        PostScore();
         nextLevel.OnNextLevel += Lvl_OnNextLevel;
         countLayer++;
     }
 
     public void PostScore()
     {
-        Debug.Log(Constants.TotalScore);
-        Debug.Log(Constants.PlayerName);
         StartCoroutine(connection.PostScores(Constants.PlayerName, Constants.TotalScore));
     }
 

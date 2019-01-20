@@ -455,13 +455,13 @@ public class Level : Layers
         else
         {
             Constants.SetAllConstants(0.5f);
-            Utils.StartFading(1, Color.black, () => { StartCoroutine(DelayedEnd()); }, () => { });
+            Utils.StartFading(1, Color.black, () => { End(); }, () => { });
         }
     }
 
-    IEnumerator DelayedEnd()
+    public void End()
     {
-        yield return new WaitForSeconds(1);
+        Manager.GetInstance().PostScore();
         SceneManager.LoadScene("End");
     }
 
