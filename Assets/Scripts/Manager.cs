@@ -128,9 +128,12 @@ public class Manager : MonoBehaviour {
     //Lorsqu'une scene est chargé chercher le IsFirst
     private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
-        Layers lay = GameObject.FindObjectsOfType<Layers>().Where(x => x.IsFirst).First();
-        lay = FindSubsequentLayer(countLayer, lay);
-        AddToStack(lay);
+        if (GameObject.FindObjectsOfType<Layers>().Where(x => x.IsFirst).Count() > 0)
+        {
+            Layers lay = GameObject.FindObjectsOfType<Layers>().Where(x => x.IsFirst).First();
+            lay = FindSubsequentLayer(countLayer, lay);
+            AddToStack(lay);
+        }
     }
 
     public void PopAll()

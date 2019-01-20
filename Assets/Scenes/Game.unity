@@ -7420,8 +7420,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 572152454}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -162.34, y: 32.573, z: 149.53}
-  m_LocalScale: {x: 11.16614, y: 11.16614, z: 11.16614}
+  m_LocalPosition: {x: -162.34, y: 70.9, z: 146.8}
+  m_LocalScale: {x: 6.031827, y: 11.16614, z: 5.7973833}
   m_Children:
   - {fileID: 569179321}
   - {fileID: 1757988712}
@@ -7462,7 +7462,7 @@ Transform:
   m_GameObject: {fileID: 586502145}
   m_LocalRotation: {x: 0.000000030908623, y: 0.7071068, z: 0.7071067, w: 0.000000030908616}
   m_LocalPosition: {x: -0.02, y: -0.62999964, z: 0}
-  m_LocalScale: {x: 800, y: 800, z: 13.335897}
+  m_LocalScale: {x: 894.96, y: 800, z: 13.335897}
   m_Children: []
   m_Father: {fileID: 216492865}
   m_RootOrder: 0
@@ -13164,7 +13164,7 @@ MonoBehaviour:
   textMeshProDefault: {fileID: 392386831}
   menu: {fileID: 1087241302}
   animator: {fileID: 216492866}
-  backgroundToHide: {fileID: 201472636}
+  backgroundToHide: {fileID: 572152454}
   characters: []
   enemiesOnBonus: []
 --- !u!4 &938488903
@@ -16690,7 +16690,7 @@ Prefab:
     - target: {fileID: 114938182685806996, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
         type: 2}
       propertyPath: hookSpeed
-      value: 180
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 114938182685806996, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
         type: 2}
