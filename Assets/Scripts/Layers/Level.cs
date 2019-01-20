@@ -93,7 +93,6 @@ public class Level : Layers
     Navigation nav;
 
     int countGenerator = 0;
-    int score = 0;
     int bonus = 0;
     float textDuration = 1.0f;
     float bonusDuration = 2.0f;
@@ -119,7 +118,7 @@ public class Level : Layers
     //Appellé quand le layer est au dessus de la stack
     public override void OnFocusGet()
     {
-        score = Constants.TotalScore;
+        watchScore.WatchedValue = Constants.TotalScore;
 
         // Faire en sorte que tous les inputs notifient le joueur
         foreach (BaseInput inp in refInput)
@@ -256,6 +255,7 @@ public class Level : Layers
         }
 
         previousLife = player.Life;
+        watchScore.WatchedValue = Constants.TotalScore;
     }
 
     /// <summary>
@@ -264,14 +264,13 @@ public class Level : Layers
     /// <param name="chara"></param>
     internal void AddCharacterForScore(Character chara)
     {
-        score += chara.GetComponent<Enemy>().KillScore; // Score on destruction
+        watchScore.WatchedValue += chara.GetComponent<Enemy>().KillScore; // Score on destruction
 
         enemiesOnBonus.Add(chara.GetComponent<Enemy>());
 
         PopScore(chara, chara.GetComponent<Enemy>().KillScore); // Draw score over ennemy head
 
         timeBonus = 0f; // Combo
-        watchScore.WatchedValue = score; // Update Value
     }
 
     /// <summary>
@@ -315,8 +314,7 @@ public class Level : Layers
             total *= 2;
         }
 
-        score += total;
-        watchScore.WatchedValue = score; // Update Value
+        watchScore.WatchedValue += total; // Update Value
     }
 
     /// <summary>

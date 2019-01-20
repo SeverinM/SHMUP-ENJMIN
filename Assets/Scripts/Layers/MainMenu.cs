@@ -29,6 +29,7 @@ public class MainMenu : Layers {
     public void Play()
     {
         Manager.GetInstance().PopToStack();
+        Constants.TotalScore = 0;
         Utils.StartFading(2f, Color.black, () => { SceneManager.LoadScene("Game"); Constants.SetAllConstants(0); },
             () => { Constants.SetAllConstants(1); });
     }

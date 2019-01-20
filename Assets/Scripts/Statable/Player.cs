@@ -240,9 +240,10 @@ public class Player : Character
         {
             base.OnDestroy();
             Manager.GetInstance().PostScore();
+            //A sa mort reset le score du joueur
             Constants.ApplicationQuit = true;
             Manager.GetInstance().PopAll();
-            Utils.StartFading(1, Color.black, () => { Constants.SetAllConstants(0); SceneManager.LoadScene(SceneManager.GetActiveScene().name); }, () => { Constants.SetAllConstants(1);});
+            Utils.StartFading(1, Color.black, () => { Constants.SetAllConstants(0); SceneManager.LoadScene(SceneManager.GetActiveScene().name); }, () => { Constants.SetAllConstants(1); Constants.TotalScore = 0;});
         }
     }
 
