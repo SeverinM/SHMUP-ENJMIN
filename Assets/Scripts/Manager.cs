@@ -227,6 +227,10 @@ public class Manager : MonoBehaviour {
         {
             if (output.NextLevel != null)
             {
+                if (((Level)output) != null)
+                {
+                    Destroy(((Level)output).BackgroundToHide);
+                }
                 output = output.NextLevel;
             }
             count++;

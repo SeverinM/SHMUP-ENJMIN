@@ -82,6 +82,13 @@ public class Level : Layers
 
     [SerializeField]
     GameObject backgroundToHide;
+    public GameObject BackgroundToHide
+    {
+        get
+        {
+            return backgroundToHide;
+        }
+    }
 
     Navigation nav;
 
