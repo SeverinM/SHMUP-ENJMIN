@@ -447,7 +447,7 @@ public class Level : Layers
         }
         else
         {
-            Constants.TimeScalePlayer = 0.5f;
+            Constants.SetAllConstants(0.5f);
             Utils.StartFading(1, Color.black, () => { StartCoroutine(DelayedEnd()); }, () => { });
         }
     }
