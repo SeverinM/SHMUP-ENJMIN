@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 122701625420514290}
   m_Layer: 0
   m_Name: Pullable
-  m_TagString: Pullable
+  m_TagString: Winchable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -881,7 +881,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.7080078, y: 1.2906799, z: 1.4779663}
+  m_Size: {x: 1.7080078, y: 2, z: 1.4779663}
   m_Center: {x: 0.5015259, y: 0.5099335, z: -0.14732361}
 --- !u!65 &65457567505850566
 BoxCollider:
@@ -999,7 +999,7 @@ Halo:
   m_Color:
     serializedVersion: 2
     rgba: 4283453649
-  m_Size: 1
+  m_Size: 1.5
 --- !u!122 &122251473985763326
 Halo:
   m_ObjectHideFlags: 1
@@ -1010,7 +1010,7 @@ Halo:
   m_Color:
     serializedVersion: 2
     rgba: 4282400982
-  m_Size: 1
+  m_Size: 1.5
 --- !u!122 &122701625420514290
 Halo:
   m_ObjectHideFlags: 1
@@ -1021,4 +1021,4 @@ Halo:
   m_Color:
     serializedVersion: 2
     rgba: 4282664157
-  m_Size: 1
+  m_Size: 3
