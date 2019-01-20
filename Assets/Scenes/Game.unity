@@ -5753,7 +5753,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &201472637
 Transform:
   m_ObjectHideFlags: 0
@@ -6567,8 +6567,8 @@ MonoBehaviour:
         loop: 0
         allWaypoints: []
       selected: 0
-      speed: 0
-      life: 0
+      speed: 1
+      life: 1
       spawned: 0
       followPlayer: 0
     healAtBegin: 0
@@ -6799,7 +6799,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 410317349}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -157.62, y: 80, z: 148.33}
+  m_LocalPosition: {x: -157.62, y: 50, z: 148.33}
   m_LocalScale: {x: 4, y: 2, z: 2}
   m_Children:
   - {fileID: 386709603}
