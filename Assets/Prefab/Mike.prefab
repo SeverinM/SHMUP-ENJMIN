@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 122701625420514290}
   m_Layer: 0
   m_Name: Pullable
-  m_TagString: Pullable
+  m_TagString: Winchable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1021,4 +1021,4 @@ Halo:
   m_Color:
     serializedVersion: 2
     rgba: 4282664157
-  m_Size: 1
+  m_Size: 3
