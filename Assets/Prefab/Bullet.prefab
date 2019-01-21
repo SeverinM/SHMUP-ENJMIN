@@ -264,6 +264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  coeffRotation: 1
   model: {fileID: 0}
   mass: 3
   recoveryDuration: 2

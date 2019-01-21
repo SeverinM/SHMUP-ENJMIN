@@ -10,9 +10,6 @@ public class PlayerMovement : State
 {
     protected Vector2 direction;
     Vector3 dashDirection = Vector3.zero;
-
-    private float dashMultiplicator = 1.2f;
-    private float dashCooldownTime;
     private float dashing;
 
     public PlayerMovement(Character character) : base(character)
@@ -48,8 +45,7 @@ public class PlayerMovement : State
             character.transform.eulerAngles = new Vector3(0, val.x, 0);
         }
 
-        if (typeAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Dash) && character.GetScale() * character.PersonalScale > 0 && dashDirection != Vector3.zero && Utils.IsInCamera(character.transform.position + (dashDirection.normalized * 4),
-            Mathf.Abs(character.transform.position.y - Camera.main.transform.position.y)))
+        if (typeAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Dash) && character.GetScale() * character.PersonalScale > 0 && dashDirection != Vector3.zero)
         {
             dashing = ((Player)character).DistanceDash / 100;
             AkSoundEngine.PostEvent("S_Dash", character.gameObject);
@@ -81,7 +77,11 @@ public class PlayerMovement : State
         {
             dashing -= Time.deltaTime;
             dashing = Mathf.Max(0, dashing);
-            character.Move(dashDirection * ((Player)character).dashSpeed);
+            if (Utils.IsInCamera(character.transform.position + (dashDirection * ((Player)character).dashSpeed * character.PersonalScale * character.GetScale() * Time.deltaTime), Mathf.Abs(character.transform.position.y - Camera.main.transform.position.y)))
+            {
+                character.Move(dashDirection * ((Player)character).dashSpeed);
+            }
+            
             if (dashing == 0)
             {
                 dashDirection = Vector3.zero;

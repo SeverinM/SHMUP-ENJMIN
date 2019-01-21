@@ -151,7 +151,7 @@ public class Player : Character
         }
 
         // Déplacer le personnage lors d'un impact de rigidBody
-        if (impact.magnitude > 0.2)
+        if (impact.magnitude > 0.2 && Utils.IsInCamera(transform.position + impact, Mathf.Abs(transform.position.y - Camera.main.transform.position.y)))
         {
             Move(impact * Time.deltaTime);
         }
