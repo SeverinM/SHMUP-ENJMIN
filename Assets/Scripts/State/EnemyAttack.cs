@@ -66,14 +66,14 @@ public class EnemyAttack : State
             enemy.FollowRandomPath();
             return;
         }
-        character.transform.forward = Vector3.RotateTowards(character.transform.forward,(playerTarget.position - character.transform.position).normalized, ((5f  * Time.deltaTime) / character.CoeffRotation) * Mathf.Deg2Rad, 0.0f);
+
+        character.transform.forward = Vector3.RotateTowards(character.transform.forward,(playerTarget.position - character.transform.position).normalized, ((180f  * Time.deltaTime) / character.CoeffRotation) * Mathf.Deg2Rad, 0.0f);
         character.transform.forward = new Vector3(character.transform.forward.x, 0, character.transform.forward.z);
         // Lance une attaque selon la periode
         totalTime += Time.deltaTime * character.PersonalScale * character.GetScale();
         if (totalTime > lastTime)
         {
             lastTime += enemy.ShootPeriod;
-            character.transform.LookAt(playerTarget);
 
             if (!character.Context.ValuesOrDefault<bool>("InRecovery",false))
                 enemy.Shoot();
