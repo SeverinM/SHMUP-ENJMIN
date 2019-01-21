@@ -242,7 +242,6 @@ MonoBehaviour:
     firstIsLeader: 1
     spacingX: 0
     spacingZ: 0
-  Count: 0
   WaveCount: 0
   AllLocks: []
 --- !u!4 &294062317
@@ -341,6 +340,11 @@ Prefab:
         type: 2}
       propertyPath: moveSpeed
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 114938182685806996, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: hookSpeed
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
@@ -468,7 +472,7 @@ MonoBehaviour:
   levelObject: {fileID: 2050674099}
   allWaves:
   - allEnnemies:
-    - enn: 0
+    - enn: 1
       enMov: 2
       spawnAfter: 0
       Waypoints:
@@ -488,28 +492,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 0
     spacingZ: 0
-  - allEnnemies:
-    - enn: 0
-      enMov: 2
-      spawnAfter: 0
-      Waypoints:
-        loop: 1
-        allWaypoints:
-        - targetPosition: {x: 241.28505, y: -242.78766, z: -135.68947}
-          speed: 2
-        - targetPosition: {x: -241.28508, y: -242.7877, z: 135.68944}
-          speed: 2
-      selected: 1
-      speed: 1
-      life: 2
-      spawned: 0
-      followPlayer: 0
-    healAtBegin: 1
-    delay: 0
-    firstIsLeader: 0
-    spacingX: 0
-    spacingZ: 0
-  Count: 0
   WaveCount: 0
   AllLocks: []
 --- !u!1001 &801648242
@@ -992,7 +974,6 @@ MonoBehaviour:
     firstIsLeader: 1
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
@@ -1230,7 +1211,6 @@ MonoBehaviour:
     firstIsLeader: 0
     spacingX: 0
     spacingZ: 0
-  Count: 0
   WaveCount: 0
   AllLocks: []
 --- !u!224 &1321349780 stripped
@@ -1468,7 +1448,6 @@ MonoBehaviour:
     firstIsLeader: 1
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
@@ -1688,7 +1667,6 @@ MonoBehaviour:
     firstIsLeader: 1
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks:
   - forWave: 0
@@ -1817,6 +1795,10 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 342067155}
+    - target: {fileID: 1389738857004872, guid: 78183828730a6a14998787f24e73e98c, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78183828730a6a14998787f24e73e98c, type: 2}
   m_IsPrefabAsset: 0
@@ -2030,7 +2012,6 @@ MonoBehaviour:
     firstIsLeader: 1
     spacingX: 4
     spacingZ: 4
-  Count: 0
   WaveCount: 0
   AllLocks: []
 --- !u!1 &1628502475
@@ -2711,7 +2692,6 @@ MonoBehaviour:
     firstIsLeader: 1
     spacingX: 2
     spacingZ: 2
-  Count: 0
   WaveCount: 0
   AllLocks: []
 --- !u!4 &1935535043

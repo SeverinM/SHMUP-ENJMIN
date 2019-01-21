@@ -299,13 +299,18 @@ public abstract class Character : MonoBehaviour {
     public void StartRecovery(float duration)
     {
         if (!Context.ValuesOrDefault<bool>("InRecovery",false))
+        {
             StartCoroutine(StartRecoveryCoroutine(duration));
+        }
+            
     }
 
     public IEnumerator StartRecoveryCoroutine(float duration)
     {
-        float timeBegin = 0;
+        Debug.Log(duration);
+        Debug.Log("debut : " + name);
         Context.SetInDictionary("InRecovery", true);
+        float timeBegin = 0;
         Dictionary<Transform, Material> allMats = new Dictionary<Transform, Material>();
         allMats[model.transform] = model.GetComponent<MeshRenderer>().material;
         foreach(Transform trsf in model.GetComponentsInChildren<Transform>())
@@ -335,6 +340,7 @@ public abstract class Character : MonoBehaviour {
         }
         GetComponent<Collider>().enabled = true;
         Context.Remove("InRecovery");
+        Debug.Log("fin : " + name);
     }
 
 

@@ -96,10 +96,6 @@ public class PlayerWinch : State
         //Si la distance hook / vaisseau est inferieur au radius de hook, retourner vers mouvement
         if (distanceToHook <= hookRadius)
         {
-            if (player.Target.parent != null && player.Target.parent.GetComponent<Enemy>().enemyType != Enemy.EnemyType.BOB)
-            {
-                Object.Destroy(player.Target.gameObject);
-            }
             NextState();
         }
 

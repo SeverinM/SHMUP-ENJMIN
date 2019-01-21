@@ -42,15 +42,18 @@ public class Barrier : MonoBehaviour {
             AkSoundEngine.PostEvent("S_HitShield", gameObject);
         }
 
-        if (other.gameObject.tag == "Ennemy" && isWinching)
+        if ((other.gameObject.tag == "Pullable" || other.gameObject.tag == "Winchable") && IsWinching)
         {
             Manager.GetInstance().ShakeCamera(screenShakeBarrierForce, screenShakeDuration);
-            Character chara = other.GetComponent<Character>();
-            chara.StartRecovery(barrierRecovery);
-
-            Vector3 delta = other.transform.position - transform.position;
-            delta.y = 0;
-            other.GetComponent<Character>().Hit(delta.normalized * 100);
+            Character chara = other.transform.parent.GetComponent<Character>();
+            if (!chara.Context.ValuesOrDefault<bool>("InRecovery",false))
+            {
+                chara.StartRecovery(barrierRecovery);
+                Vector3 delta = other.transform.position - transform.position;
+                delta.y = 0;
+                chara.Hit(delta.normalized * 100);
+                Destroy(other.gameObject);
+            }
         }
     }
 }
