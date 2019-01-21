@@ -307,8 +307,6 @@ public abstract class Character : MonoBehaviour {
 
     public IEnumerator StartRecoveryCoroutine(float duration)
     {
-        Debug.Log(duration);
-        Debug.Log("debut : " + name);
         Context.SetInDictionary("InRecovery", true);
         float timeBegin = 0;
         Dictionary<Transform, Material> allMats = new Dictionary<Transform, Material>();
@@ -340,7 +338,6 @@ public abstract class Character : MonoBehaviour {
         }
         GetComponent<Collider>().enabled = true;
         Context.Remove("InRecovery");
-        Debug.Log("fin : " + name);
     }
 
 

@@ -36,10 +36,6 @@ public class PlayerWinch : State
     public override void EndState()
     {
         barrier.GetComponent<Barrier>().IsWinching = false;
-        if (player.Target != null && player.Target.parent != null)
-        {
-            player.Target.parent.GetComponent<Character>().PersonalScale = 1;
-        }
         AkSoundEngine.PostEvent("H_Winch_Stop", character.gameObject);
         character.Context.Remove("IsShield");
         player.Hook.parent = player.transform;
@@ -58,7 +54,7 @@ public class PlayerWinch : State
         {
             currentMode = HookMode.Pull;
             player.Target.parent.GetComponent<Character>().PersonalScale = 1;
-            //player.Target.transform.parent = null;
+            player.Target.transform.parent = null;
         }
         barrier.GetComponent<Barrier>().IsWinching = true;
         AkSoundEngine.PostEvent("H_Winch", character.gameObject);

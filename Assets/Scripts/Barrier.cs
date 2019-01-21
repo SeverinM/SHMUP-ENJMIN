@@ -19,7 +19,7 @@ public class Barrier : MonoBehaviour {
     [SerializeField]
     private float screenShakeBarrierForce;
 
-
+    bool alreadyHit = false;
     bool isWinching = false;
     public bool IsWinching
     {
@@ -35,20 +35,25 @@ public class Barrier : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
+        alreadyHit = false;
         if (other.gameObject.tag == "Bullet" || (other.gameObject.tag == "Shield" && IsWinching))
         {
             Manager.GetInstance().ShakeCamera(screenShakeBarrierForce, screenShakeDuration);
             Destroy(other.gameObject);
             AkSoundEngine.PostEvent("S_HitShield", gameObject);
+            if (other.gameObject.tag == "Shield")
+                alreadyHit = true;
         }
 
-        if ((other.gameObject.tag == "Pullable" || other.gameObject.tag == "Winchable") && IsWinching)
+        bool isBob = (other.transform.parent != null && other.transform.parent.GetComponent<Enemy>() != null && other.transform.parent.GetComponent<Enemy>().enemyType == Enemy.EnemyType.BOB);
+        if ((isBob || other.gameObject.tag == "Pullable" || other.gameObject.tag == "Winchable") && IsWinching && !alreadyHit)
         {
             Manager.GetInstance().ShakeCamera(screenShakeBarrierForce, screenShakeDuration);
             Character chara = other.transform.parent.GetComponent<Character>();
             if (!chara.Context.ValuesOrDefault<bool>("InRecovery",false))
             {
                 chara.StartRecovery(barrierRecovery);
+                chara.PersonalScale = 1;
                 Vector3 delta = other.transform.position - transform.position;
                 delta.y = 0;
                 chara.Hit(delta.normalized * 100);

@@ -429,7 +429,7 @@ GameObject:
   - component: {fileID: 797503237}
   - component: {fileID: 797503238}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Generator1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -473,6 +473,21 @@ MonoBehaviour:
   allWaves:
   - allEnnemies:
     - enn: 1
+      enMov: 2
+      spawnAfter: 0
+      Waypoints:
+        loop: 1
+        allWaypoints:
+        - targetPosition: {x: 241.28505, y: -242.78766, z: -135.68947}
+          speed: 2
+        - targetPosition: {x: -241.28508, y: -242.7877, z: 135.68944}
+          speed: 2
+      selected: 1
+      speed: 1
+      life: 2
+      spawned: 0
+      followPlayer: 0
+    - enn: 2
       enMov: 2
       spawnAfter: 0
       Waypoints:
