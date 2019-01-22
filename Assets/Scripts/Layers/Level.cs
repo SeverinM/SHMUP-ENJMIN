@@ -339,6 +339,7 @@ public class Level : Layers
         RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.GetComponent<RectTransform>(), screenPoint, null, out canvasPos);
 
         toAddText.text = ComboScore(chara.GetComponent<Enemy>()).ToString();
+        toAddText.color = Color.Lerp(Color.white, Color.red, enemiesOnBonus.Count / 9);
         toAddText.transform.localPosition = canvasPos;
 
         canvasEndPos = canvasPos;
