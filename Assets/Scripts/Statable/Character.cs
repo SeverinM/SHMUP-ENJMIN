@@ -364,18 +364,27 @@ public abstract class Character : MonoBehaviour {
             if (hit.collider.tag == "Ennemy" && hit.collider.transform != transform)
             {
                 //Plus la cible est loin et moins on s'ecarte
-                Vector3 deltaPosition = (transform.position - hit.transform.position).normalized;
+                Vector3 deltaPosition = (transform.position - hit.transform.position);
                 //S'il se trouve exactement sur la meme position , en trouve une aleatoire
+                deltaPosition.Normalize();
                 if (deltaPosition == Vector3.zero)
                 {
                     Vector2 temp = UnityEngine.Random.insideUnitCircle;
                     temp.Normalize();
                     deltaPosition = new Vector3(temp.x, 0, temp.y);
                 }
-                output += deltaPosition * (Vector3.Distance(hit.transform.position, transform.position) / desiredseparation);
-                output.Normalize();
+
+                //Si on sort de la camera en faisant ca , annule le mouvement
+                if (!Utils.IsInCamera(transform.position + deltaPosition, Mathf.Abs(transform.position.y - Camera.main.transform.position.y)))
+                {
+                    deltaPosition = Vector3.zero;
+                }
+
+                float coeff = Mathf.Max(1, Vector3.Distance(hit.transform.position, transform.position));
+                output += deltaPosition * (coeff / desiredseparation);
             }
         }
+        output.Normalize();
         return output;
     }
 
