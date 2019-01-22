@@ -245,12 +245,11 @@ public class Level : Layers
 
         watchNbSpawn.WatchedValue = transform.GetComponentsInChildren<Generator>().Select(x => x.GetComponent<Generator>().EnnemiesLeftToSpawn).Sum();
 
-        // Bonus
+        // Fin du combo
         timeBonus += Time.deltaTime;
         if (timeBonus > bonusDuration)
         {
             timeBonus = 0f;
-            ComboScore();
             enemiesOnBonus.Clear();
         }
 
@@ -266,9 +265,9 @@ public class Level : Layers
     {
         watchScore.WatchedValue += chara.GetComponent<Enemy>().KillScore; // Score on destruction
 
-        enemiesOnBonus.Add(chara.GetComponent<Enemy>());
-
         PopScore(chara, chara.GetComponent<Enemy>().KillScore); // Draw score over ennemy head
+
+        enemiesOnBonus.Add(chara.GetComponent<Enemy>());
 
         timeBonus = 0f; // Combo
     }
@@ -282,23 +281,25 @@ public class Level : Layers
     /// 6 ennemis = bonus triplé
     /// 9 ennemis = bonus quadruplé
     /// </summary>
-    private void ComboScore()
+    private int ComboScore(Enemy enn)
     {
-        int total = 0;
-        foreach (Enemy e in enemiesOnBonus)
+        if (enemiesOnBonus.Count == 0)
         {
-            switch (e.enemyType)
-            {
-                case Enemy.EnemyType.BOB:
-                    total += 10;
-                    break;
-                case Enemy.EnemyType.JIM:
-                    total += 20;
-                    break;
-                case Enemy.EnemyType.MIKE:
-                    total += 40;
-                    break;
-            }
+            return enn.KillScore;
+        }
+
+        int total = 0;
+        switch (enn.enemyType)
+        {
+            case Enemy.EnemyType.BOB:
+                total += 10;
+                break;
+            case Enemy.EnemyType.JIM:
+                total += 20;
+                break;
+            case Enemy.EnemyType.MIKE:
+                total += 40;
+                break;
         }
 
         if (enemiesOnBonus.Count >= 9)
@@ -314,7 +315,7 @@ public class Level : Layers
             total *= 2;
         }
 
-        watchScore.WatchedValue += total; // Update Value
+        return total + enn.KillScore;
     }
 
     /// <summary>
@@ -337,7 +338,7 @@ public class Level : Layers
         //// Convertir la position à l'écran vers l'espace du canvas 
         RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.GetComponent<RectTransform>(), screenPoint, null, out canvasPos);
 
-        toAddText.text = killScore.ToString();
+        toAddText.text = ComboScore(chara.GetComponent<Enemy>()).ToString();
         toAddText.transform.localPosition = canvasPos;
 
         canvasEndPos = canvasPos;
