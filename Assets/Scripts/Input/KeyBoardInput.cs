@@ -12,19 +12,19 @@ public class KeyBoardInput : BaseInput {
     public override void UpdateInput()
     {
         movements = Vector2.zero;
-        if ((Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.D)) && BaseInput.IsFree(Actions.AllMovement,this))
+        if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.Q)) && BaseInput.IsFree(Actions.AllMovement,this))
         {
             if (Input.GetKey(KeyCode.S))
             {
                 movements += Vector2.down;
             }
 
-            if (Input.GetKey(KeyCode.Z))
+            if (Input.GetKey(KeyCode.W) || (Input.GetKey(KeyCode.Z)))
             {
                 movements += Vector2.up;
             }
 
-            if (Input.GetKey(KeyCode.Q))
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Q))
             {
                 movements += Vector2.left;
             }

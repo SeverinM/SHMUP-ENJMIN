@@ -386,6 +386,7 @@ public class Enemy : Character
                     
                     clone = Instantiate(bulletPrefab, new Vector3(x, transform.position.y, z), Quaternion.AngleAxis(angle, new Vector3(0, 1, 0))).GetComponent<Rigidbody>();
                     Vector3 direction = Quaternion.Euler(0, angle, 0) * clone.transform.forward;
+                    direction.y = 0;
                     clone.velocity = transform.TransformDirection(direction * shootSpeed);
                     clone.GetComponent<Bullet>().Duration = bulletLastingDuration;
                 }
