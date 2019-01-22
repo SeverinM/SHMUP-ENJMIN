@@ -11,6 +11,8 @@ public class PlayerMovement : State
     protected Vector2 direction;
     Vector3 dashDirection = Vector3.zero;
     private float dashing;
+    Vector3 lastMovement = Vector3.zero;
+    bool didRotation = false;
 
     public PlayerMovement(Character character) : base(character)
     {
@@ -19,6 +21,7 @@ public class PlayerMovement : State
 
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)
     {
+        didRotation = false;
 
         //Un mouvement quelconque (manette / souris) est detecté
         if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.AllMovement) && character.GetScale() * character.PersonalScale > 0 && dashing == 0)
@@ -43,6 +46,8 @@ public class PlayerMovement : State
         if (typeAct.Equals(BaseInput.TypeAction.Mouse) && acts.Equals(BaseInput.Actions.RotateAbsolute) && character.GetScale() * character.PersonalScale > 0 && dashing == 0)
         {
             character.transform.eulerAngles = new Vector3(0, val.x, 0);
+            lastMovement = character.transform.position + character.transform.forward;
+            didRotation = true;
         }
 
         if (typeAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Dash) && character.GetScale() * character.PersonalScale > 0 && dashDirection != Vector3.zero)
@@ -56,8 +61,11 @@ public class PlayerMovement : State
             NextState();
         }
 
+        //Mouvement de la souris
         if (typeAct.Equals(BaseInput.TypeAction.Mouse) && acts.Equals(BaseInput.Actions.Rotate) && character.GetScale() * character.PersonalScale > 0 && dashing == 0f)
         {
+            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(val.x, val.y, Mathf.Abs(character.transform.position.y - Camera.main.transform.position.y)));
+            lastMovement = worldPosition;
             Vector3 objectPos = Camera.main.WorldToScreenPoint(character.transform.position);
             Vector2 mousePos = new Vector2();
             mousePos.x = val.x - objectPos.x;
@@ -65,7 +73,15 @@ public class PlayerMovement : State
 
             float angle = Mathf.Atan2(mousePos.x, mousePos.y) * Mathf.Rad2Deg;
             character.transform.localEulerAngles = new Vector3(0, angle, 0);
+            didRotation = true;
         }
+
+        //SI aucune rotation n'a été faite , regarder la derniere position connu
+        if (!didRotation && lastMovement != Vector3.zero)
+        {
+            character.transform.LookAt(lastMovement);
+        }
+        
     }
 
     public override void UpdateState()
