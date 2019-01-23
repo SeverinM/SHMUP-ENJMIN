@@ -294,8 +294,8 @@ MonoBehaviour:
     type: 2}
   impactDeceleration: 5
   attackRange: 5
-  shootPeriod: 0.25
-  shootAmount: 5
+  shootPeriod: 0.5
+  shootAmount: 3
   shootSpeed: 8
   maxBullets: 5
   shootRadius: 1

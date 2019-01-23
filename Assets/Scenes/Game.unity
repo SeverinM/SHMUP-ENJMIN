@@ -16702,6 +16702,26 @@ Prefab:
       propertyPath: distanceDash
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 65437895645053864, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 1.7750397
+      objectReference: {fileID: 0}
+    - target: {fileID: 65437895645053864, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: m_Center.x
+      value: 0.051322937
+      objectReference: {fileID: 0}
+    - target: {fileID: 65437895645053864, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: m_Size.z
+      value: 0.86172485
+      objectReference: {fileID: 0}
+    - target: {fileID: 65437895645053864, guid: 12ab0941fa2dfd0489ae16bc5ad05170,
+        type: 2}
+      propertyPath: m_Center.z
+      value: -0.45150757
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12ab0941fa2dfd0489ae16bc5ad05170, type: 2}
   m_IsPrefabAsset: 0

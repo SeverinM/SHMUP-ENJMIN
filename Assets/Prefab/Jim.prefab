@@ -636,9 +636,9 @@ MonoBehaviour:
   impactDeceleration: 5
   attackRange: 10
   shootPeriod: 2
-  shootAmount: 3
+  shootAmount: 2
   shootSpeed: 8
-  maxBullets: 5
+  maxBullets: 4
   shootRadius: 2
   bulletLastingDuration: 10
   killScore: 100
