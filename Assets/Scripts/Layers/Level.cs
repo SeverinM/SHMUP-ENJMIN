@@ -251,6 +251,7 @@ public class Level : Layers
         {
             timeBonus = 0f;
             enemiesOnBonus.Clear();
+            AkSoundEngine.SetRTPCValue("Var_Combo_Count", enemiesOnBonus.Count);
         }
 
         previousLife = player.Life;
@@ -266,8 +267,8 @@ public class Level : Layers
         watchScore.WatchedValue += chara.GetComponent<Enemy>().KillScore; // Score on destruction
 
         PopScore(chara, chara.GetComponent<Enemy>().KillScore); // Draw score over ennemy head
-
         enemiesOnBonus.Add(chara.GetComponent<Enemy>());
+        AkSoundEngine.SetRTPCValue("Var_Combo_Count", enemiesOnBonus.Count);
 
         timeBonus = 0f; // Combo
     }

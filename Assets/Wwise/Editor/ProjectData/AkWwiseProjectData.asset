@@ -21,13 +21,13 @@ MonoBehaviour:
   - PhysicalPath: Master-Mixer Hierarchy\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 3725e48e2a6c8b49a4f8a40a1bf618dd
-    m_lastTime: -8586537123220266734
+    m_lastTime: -8586537029076902826
     List: []
   BankWwu:
   - PhysicalPath: SoundBanks\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: b2e6e7c65c8e5c409c7701e9a2affc21
-    m_lastTime: -8586537123220166671
+    m_lastTime: -8586537029076813066
     List:
     - name: Main
       guid: e816e78e958942429f80cbae7143f242
@@ -314,7 +314,7 @@ MonoBehaviour:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: b00bc7afdad63f41ba3f9bdcc0379297
-    m_lastTime: -8586537124234351521
+    m_lastTime: -8586537029076982619
     List:
     - name: Var_Master_Audio
       guid: bd494e982bc2ef4880549184e6975151
@@ -335,7 +335,7 @@ MonoBehaviour:
   - PhysicalPath: Switches\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 85698c4f9413284985851764048f83eb
-    m_lastTime: -8586540139392474383
+    m_lastTime: -8586539650901136517
     List:
     - name: Levels
       guid: 1b60e59f0d4fa14ea0890c7737b51a73
@@ -365,7 +365,6 @@ MonoBehaviour:
   - /12-2018_SHMUP-ENJMIN_Wwise
   - /12-2018_SHMUP-ENJMIN_Wwise/Events
   - /12-2018_SHMUP-ENJMIN_Wwise/Events/Default Work Unit
-  - /12-2018_SHMUP-ENJMIN_Wwise/Events/Default Work Unit/Menu
   - /12-2018_SHMUP-ENJMIN_Wwise/SoundBanks
   - /12-2018_SHMUP-ENJMIN_Wwise/SoundBanks/Default Work Unit
   autoPopulateEnabled: 1

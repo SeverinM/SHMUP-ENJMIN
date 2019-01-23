@@ -8,6 +8,15 @@ public class SettingsMenu : MonoBehaviour {
 
     public Dropdown resolutionDropdown;
 
+    public enum TypeSound
+    {
+        General,
+        FX,
+        Music
+    }
+
+    TypeSound actualTypeSound;
+
     Resolution[] resolutions;
 
     void Start()
@@ -43,9 +52,41 @@ public class SettingsMenu : MonoBehaviour {
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
+    public void SetTypeSound(string str)
+    {
+        switch(str)
+        {
+            case "General":
+                actualTypeSound = TypeSound.General;
+                break;
+            case "FX":
+                actualTypeSound = TypeSound.FX;
+                break;
+            case "Music":
+                actualTypeSound = TypeSound.Music;
+                break;
+            default:
+                actualTypeSound = TypeSound.General;
+                break;
+        }
+    }
+
     public void SetVolume (float volume)
     {
-        AkSoundEngine.SetRTPCValue("Var_Master_Audio", (int) volume);
+        switch (actualTypeSound)
+        {
+            case (TypeSound.General):
+                AkSoundEngine.SetRTPCValue("Var_Master_Audio", (int)volume);
+                break;
+            case (TypeSound.FX):
+                AkSoundEngine.SetRTPCValue("Var_SFX_Volume", (int)volume);
+                break;
+            case (TypeSound.Music):
+                AkSoundEngine.SetRTPCValue("Var_Music_Volume", (int)volume);
+                break;
+            default:
+                break;
+        }
     }
     public void SetFullscreen (bool isFullscreen)
     {
