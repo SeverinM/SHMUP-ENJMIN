@@ -10,7 +10,6 @@ using UnityEngine.SceneManagement;
 
 public class Level : Layers
 {
-
     [SerializeField]
     protected Player player;
 
@@ -28,15 +27,11 @@ public class Level : Layers
 
     int countFocus = 0;
 
-    public GameObject Player
+    public Player Player
     {
         get
         {
-            if (player == null)
-            {
-                player = GameObject.FindObjectOfType<Player>();
-            }
-            return player.gameObject;
+            return player;
         }
     }
 
@@ -51,6 +46,9 @@ public class Level : Layers
 
     [SerializeField]
     GameObject CountEnemyPrefab;
+
+    [SerializeField]
+    Animator animationHeal;
 
     [SerializeField]
     GameObject DashUI;
@@ -82,10 +80,19 @@ public class Level : Layers
     [SerializeField]
     private Animator animator;
 
+    [SerializeField]
+    GameObject backgroundToHide;
+    public GameObject BackgroundToHide
+    {
+        get
+        {
+            return backgroundToHide;
+        }
+    }
+
     Navigation nav;
 
     int countGenerator = 0;
-    int score = 0;
     int bonus = 0;
     float textDuration = 1.0f;
     float bonusDuration = 2.0f;
@@ -98,7 +105,7 @@ public class Level : Layers
     public List<GameObject> characters = new List<GameObject>();
 
     [HideInInspector]
-    public Binding<int> watchNbSpawn = new Binding<int>(0, null);
+    public Binding<int> watchNbSpawn = new Binding<int>(-1, null);
     public Binding<int> watchScore = new Binding<int>(0, null);
 
     public List<Enemy> enemiesOnBonus = new List<Enemy>();
@@ -106,10 +113,12 @@ public class Level : Layers
     public delegate void LevelParam(Level nextLevel);
     public event LevelParam OnNextLevel;
 
+    int previousLife;
+
     //Appellé quand le layer est au dessus de la stack
     public override void OnFocusGet()
     {
-        score = Constants.TotalScore;
+        watchScore.WatchedValue = Constants.TotalScore;
 
         // Faire en sorte que tous les inputs notifient le joueur
         foreach (BaseInput inp in refInput)
@@ -123,6 +132,9 @@ public class Level : Layers
         {
             return;
         }
+
+        if (IsFirst)
+            AkSoundEngine.PostEvent("Level_01_Start", gameObject);
 
         TryPlace();
 
@@ -142,25 +154,15 @@ public class Level : Layers
                 {
                     Instantiate(LifePrefab, LifeUI.transform);
                 }
-            }
-        });
 
-        player.Life = Manager.GetInstance().BaseLife;
-
-        player.SetOnDashChanged((x) =>
-        {
-            if (DashUI != null)
-            {
-                for (int i = 0; i < DashUI.transform.childCount; i++)
+                if (x > previousLife)
                 {
-                    Destroy(DashUI.transform.GetChild(i).gameObject);
-                }
-                for (int i = 0; i < x; i++)
-                {
-                    Instantiate(DashPrefab, DashUI.transform);
+                    animationHeal.SetTrigger("Healed");
                 }
             }
         });
+
+        Manager.GetInstance().ResetLife();
 
         watchNbSpawn.ValueChanged = (x) =>
         {
@@ -201,7 +203,8 @@ public class Level : Layers
             }
             generator.WaveCleaned += Generator_WaveCleaned;
         }
-        watchNbSpawn.WatchedValue = transform.GetComponentsInChildren<Generator>().Select(x => x.GetComponent<Generator>().EnnemiesLeftToSpawn).Sum();
+
+        watchNbSpawn.WatchedValue = -1;
         countFocus++;
     }
 
@@ -242,14 +245,16 @@ public class Level : Layers
 
         watchNbSpawn.WatchedValue = transform.GetComponentsInChildren<Generator>().Select(x => x.GetComponent<Generator>().EnnemiesLeftToSpawn).Sum();
 
-        // Bonus
+        // Fin du combo
         timeBonus += Time.deltaTime;
         if (timeBonus > bonusDuration)
         {
             timeBonus = 0f;
-            ComboScore();
             enemiesOnBonus.Clear();
         }
+
+        previousLife = player.Life;
+        watchScore.WatchedValue = Constants.TotalScore;
     }
 
     /// <summary>
@@ -258,14 +263,13 @@ public class Level : Layers
     /// <param name="chara"></param>
     internal void AddCharacterForScore(Character chara)
     {
-        score += chara.GetComponent<Enemy>().KillScore; // Score on destruction
-
-        enemiesOnBonus.Add(chara.GetComponent<Enemy>());
+        watchScore.WatchedValue += chara.GetComponent<Enemy>().KillScore; // Score on destruction
 
         PopScore(chara, chara.GetComponent<Enemy>().KillScore); // Draw score over ennemy head
 
+        enemiesOnBonus.Add(chara.GetComponent<Enemy>());
+
         timeBonus = 0f; // Combo
-        watchScore.WatchedValue = score; // Update Value
     }
 
     /// <summary>
@@ -277,23 +281,25 @@ public class Level : Layers
     /// 6 ennemis = bonus triplé
     /// 9 ennemis = bonus quadruplé
     /// </summary>
-    private void ComboScore()
+    private int ComboScore(Enemy enn)
     {
-        int total = 0;
-        foreach (Enemy e in enemiesOnBonus)
+        if (enemiesOnBonus.Count == 0)
         {
-            switch (e.enemyType)
-            {
-                case Enemy.EnemyType.BOB:
-                    total += 10;
-                    break;
-                case Enemy.EnemyType.JIM:
-                    total += 20;
-                    break;
-                case Enemy.EnemyType.MIKE:
-                    total += 40;
-                    break;
-            }
+            return enn.KillScore;
+        }
+
+        int total = 0;
+        switch (enn.enemyType)
+        {
+            case Enemy.EnemyType.BOB:
+                total += 10;
+                break;
+            case Enemy.EnemyType.JIM:
+                total += 20;
+                break;
+            case Enemy.EnemyType.MIKE:
+                total += 40;
+                break;
         }
 
         if (enemiesOnBonus.Count >= 9)
@@ -309,8 +315,7 @@ public class Level : Layers
             total *= 2;
         }
 
-        score += total;
-        watchScore.WatchedValue = score; // Update Value
+        return total + enn.KillScore;
     }
 
     /// <summary>
@@ -320,26 +325,27 @@ public class Level : Layers
     /// <param name="killScore"></param>
     internal void PopScore(Character chara, int killScore)
     {
-        //TextMeshProUGUI toAddText = Instantiate(textMeshProDefault, canvas.transform).GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI toAddText = Instantiate(textMeshProDefault, canvas.transform).GetComponent<TextMeshProUGUI>();
 
         //// Position du texte au dessus d'un gameObject
-        //Vector3 offsetPos = new Vector3(chara.transform.position.x, chara.transform.position.y, chara.transform.position.z + 0.5f);
+        Vector3 offsetPos = new Vector3(chara.transform.position.x, chara.transform.position.y, chara.transform.position.z + 0.5f);
 
         //// Calcul de la position à l'écran 
-        //Vector2 canvasPos;
-        //Vector2 canvasEndPos;
-        //Vector2 screenPoint = Camera.main.WorldToScreenPoint(offsetPos);
+        Vector2 canvasPos;
+        Vector2 canvasEndPos;
+        Vector2 screenPoint = Camera.main.WorldToScreenPoint(offsetPos);
 
         //// Convertir la position à l'écran vers l'espace du canvas 
-        //RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.GetComponent<RectTransform>(), screenPoint, null, out canvasPos);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.GetComponent<RectTransform>(), screenPoint, null, out canvasPos);
 
-        //toAddText.text = killScore.ToString();
-        //toAddText.transform.localPosition = canvasPos;
+        toAddText.text = ComboScore(chara.GetComponent<Enemy>()).ToString();
+        toAddText.color = Color.Lerp(Color.white, Color.red, enemiesOnBonus.Count / 9);
+        toAddText.transform.localPosition = canvasPos;
 
-        //canvasEndPos = canvasPos;
-        //canvasEndPos.y += 10f;
+        canvasEndPos = canvasPos;
+        canvasEndPos.y += 10f;
 
-        //StartCoroutine(PopScoreCoroutine(toAddText, canvasPos, canvasEndPos));
+        StartCoroutine(PopScoreCoroutine(toAddText, canvasPos, canvasEndPos));
     }
 
     /// <summary>
@@ -429,7 +435,12 @@ public class Level : Layers
     {
         if (nextLevel != null)
         {
+
             player.NextLevel += () => { OnNextLevel(nextLevel); };
+            player.BlackScreen += () => {
+                if (backgroundToHide != null)
+                    Destroy(backgroundToHide);
+            };
             if (animator != null)
             {
                 animator.SetTrigger("SpaceShip");
@@ -442,6 +453,23 @@ public class Level : Layers
             State st = new FollowPathMovement(player, queue, () => player.SetState(new IdleTransition(player)));
             player.StartDelayedState(1, st);
         }
+
+        else
+        {
+            StartCoroutine(DelayedEnd());
+        }
+    }
+
+    IEnumerator DelayedEnd()
+    {
+        yield return new WaitForSeconds(3f);
+        Utils.StartFading(1, Color.black, () => { End(); }, () => { });
+    }
+
+    public void End()
+    {
+        Manager.GetInstance().PostScore();
+        SceneManager.LoadScene("End");
     }
 
     public void PlayerDied(Character chara)

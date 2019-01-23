@@ -17,12 +17,11 @@ public class PlayerMovementDuringHook : PlayerMovement {
 
     public PlayerMovementDuringHook(Character chara) : base(chara)
     {
-        coeff = character.Context.ValuesOrDefault<float>("CoeffHook", 0.1f);
-        range = character.Context.ValuesOrDefault<float>("RangeHook", 10);
-        pos = character.Context.ValuesOrDefault<Vector3>("PositionLand", Vector3.zero);
+        coeff = character.Context.ValuesOrDefault<float>(Constants.COEFF_HOOK, 0.1f);
+        range = character.Context.ValuesOrDefault<float>(Constants.RANGE_HOOK, 10);
+        pos = character.Context.ValuesOrDefault<Vector3>(Constants.POSITION_LAND, Vector3.zero);
         player = (Player)chara;
     }
-
 
     public override void StartState()
     {
@@ -43,7 +42,7 @@ public class PlayerMovementDuringHook : PlayerMovement {
 
     public override void EndState()
     {
-        character.Context.Remove("PostionLand");
+        character.Context.Remove(Constants.POSITION_LAND);
     }
 
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)

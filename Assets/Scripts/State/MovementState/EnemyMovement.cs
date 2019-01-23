@@ -13,6 +13,8 @@ public class EnemyMovement : State
     Vector3 deltaPosition;
     Queue<WaypointElement> allElems;
     bool followLeader;
+    float timeBegin = 0;
+    Vector3 angle;
 
     public EnemyMovement(Character chara, Transform tar, bool followLeader = false) : base(chara)
     {
@@ -42,6 +44,7 @@ public class EnemyMovement : State
             return;
         }
 
+        //S'il tire sur quelqu'un
         if (followLeader && target.GetComponent<Character>().Context.ValuesOrDefault<Transform>("Target",null) != null)
         {
             character.SetState(new EnemyAttack(character, allElems, target.GetComponent<Character>().Context.ValuesOrDefault<Transform>("Target", null)));
@@ -57,9 +60,6 @@ public class EnemyMovement : State
         deltaPosition = target.transform.position - character.transform.position;
         deltaPosition = new Vector3(deltaPosition.x, 0, deltaPosition.z);
 
-        //character.Separate();
-        character.transform.LookAt(target.transform);
-
         // L'ennemie est proche du joueur
         if (target.GetComponent<Player>() != null && Vector3.Distance(target.transform.position, character.transform.position) <= enemy.AttackRange)
         {
@@ -70,13 +70,16 @@ public class EnemyMovement : State
         if (target.GetComponent<Player>() == null && character.PersonalScale > 0)
             character.PersonalScale = Mathf.Clamp((Vector3.Distance(target.transform.position, character.transform.position) / 3) / enemy.MoveSpeed, 0, 1);
 
-        character.transform.forward = deltaPosition;
+        character.transform.forward = Vector3.RotateTowards(character.transform.forward, deltaPosition, character.CoeffRotation * Mathf.Deg2Rad, 0.0f);
+
         character.Move(character.Separate(deltaPosition.normalized));
+        //character.Move(deltaPosition.normalized);
     }
 
     public override void StartState()
     {
         character.OnTriggerExitChar += TriggerExit;
+        angle = character.transform.forward;
     }
 
     public override void EndState()

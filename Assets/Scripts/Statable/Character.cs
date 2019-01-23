@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public class Wave
 {
     public List<WaveElement> allEnnemies;
+    public bool healAtBegin;
     public float delay;
     public bool firstIsLeader;
     public float spacingX;
@@ -55,6 +56,7 @@ public abstract class Character : MonoBehaviour {
     [Tooltip("A quel vitesse le personnage peut se deplacer ?")]
     [SerializeField]
     protected float moveSpeed = 6.0f;
+
     public float MoveSpeed
     {
         get
@@ -69,6 +71,17 @@ public abstract class Character : MonoBehaviour {
     }
 
     [SerializeField]
+    [Tooltip("Plus il est grand plus il prendra de temps a se tourner , est proportionnel avec la vitesse")]
+    protected float coeffRotation = 1;
+    public float CoeffRotation
+    {
+        get
+        {
+            return coeffRotation;
+        }
+    }
+
+    [SerializeField]
     [Tooltip("Qui doit on utiliser pour changer le material en cas de recovery ?")]
     GameObject model;
     public GameObject Model
@@ -79,20 +92,13 @@ public abstract class Character : MonoBehaviour {
         }
     }
 
-    IEnumerator coroutine;
-    public bool IsInRecovery
-    {
-        get
-        {
-            return coroutine != null;
-        }
-    }
-
     [SerializeField]
     protected float mass = 3.0f;                
     protected float hitForce = 25.5f;            
     protected Vector3 impact = Vector3.zero;
     //Combien de temps le joueur est invincible une fois touché ?
+
+    [SerializeField]
     protected float recoveryDuration = 2f;
     protected float freezeDuration = 1f;
     internal float scaleDuration = 1f;
@@ -129,8 +135,8 @@ public abstract class Character : MonoBehaviour {
     [Tooltip("Nombre de point de vie du personnage , un nombre negatif equivaut a 1")]
     protected int life = 3;
 
-    Binding<int> watchedLife;
-    public int Life
+    protected Binding<int> watchedLife;
+    public virtual int Life
     {
         get
         {
@@ -151,20 +157,6 @@ public abstract class Character : MonoBehaviour {
     [SerializeField]
     [Tooltip("Nombre de dash")]
     protected int dash = 3;
-
-    Binding<int> watchedDash;
-    public int Dash
-    {
-        get
-        {
-            return watchedDash.WatchedValue;
-        }
-
-        set
-        {
-            watchedDash.WatchedValue = value;
-        }
-    }
 
     internal GameObject protection;
 
@@ -196,7 +188,6 @@ public abstract class Character : MonoBehaviour {
     void Awake()
     {
         watchedLife = new Binding<int>(0, null);
-        watchedDash = new Binding<int>(0, null);
     }
 
     //Appellé a chaque fois que la vie du joueur change
@@ -205,14 +196,6 @@ public abstract class Character : MonoBehaviour {
         watchedLife.ValueChanged = newAction;
         //Reactualise avec la valeur actuelle
         Life = life;
-    }
-
-    //Appelé a chaque fois que le nb de dash change
-    public void SetOnDashChanged(Action<int> newAction)
-    {
-        watchedDash.ValueChanged = newAction;
-        //Reactualise avec la valeur actuelle
-        Dash = dash;
     }
 
     internal void Rotate(GameObject player)
@@ -281,6 +264,20 @@ public abstract class Character : MonoBehaviour {
         impact = Vector3.Lerp(impact, Vector3.zero, impactDeceleration * Time.deltaTime);
     }
 
+    public virtual void Hit(Vector3 speed)
+    {
+        Impact(speed);
+        Life--;
+    }
+
+    // Le joueur se voit propulsé dans la direction opposée à un impact reçu
+    public void Impact(Vector3 force)
+    {
+        Vector3 dir = force.normalized;
+        dir.y = 0;
+        impact += dir.normalized * force.magnitude / mass;
+    }
+
     public void InterpretInput(BaseInput.TypeAction typAct, BaseInput.Actions baseInput, Vector2 value)
     {
         if (actualState != null)
@@ -301,17 +298,17 @@ public abstract class Character : MonoBehaviour {
 
     public void StartRecovery(float duration)
     {
-        if (!IsInRecovery)
+        if (!Context.ValuesOrDefault<bool>(Constants.IN_RECOVERY,false))
         {
-            coroutine = StartRecoveryCoroutine(duration);
-            StartCoroutine(coroutine);
+            StartCoroutine(StartRecoveryCoroutine(duration));
         }
+            
     }
 
     public IEnumerator StartRecoveryCoroutine(float duration)
     {
+        Context.SetInDictionary(Constants.IN_RECOVERY, true);
         float timeBegin = 0;
-        Context.SetInDictionary("InRecovery", true);
         Dictionary<Transform, Material> allMats = new Dictionary<Transform, Material>();
         allMats[model.transform] = model.GetComponent<MeshRenderer>().material;
         foreach(Transform trsf in model.GetComponentsInChildren<Transform>())
@@ -336,10 +333,11 @@ public abstract class Character : MonoBehaviour {
 
         foreach(Transform key in allMats.Keys)
         {
-            key.GetComponent<MeshRenderer>().material = allMats[key];
+            if (key != null)
+                key.GetComponent<MeshRenderer>().material = allMats[key];
         }
         GetComponent<Collider>().enabled = true;
-        Context.Remove("InRecovery");
+        Context.Remove(Constants.IN_RECOVERY);
     }
 
 
@@ -363,13 +361,30 @@ public abstract class Character : MonoBehaviour {
         Vector3 output = initialDirection.normalized;
         foreach (RaycastHit hit in Physics.SphereCastAll(transform.position, desiredseparation, Vector3.forward))
         {
-            if (hit.collider.tag == "Ennemy")
+            if (hit.collider.tag == Constants.ENEMY_TAG && hit.collider.transform != transform)
             {
                 //Plus la cible est loin et moins on s'ecarte
-                output += (transform.position - hit.transform.position).normalized * (Vector3.Distance(hit.transform.position, transform.position) / desiredseparation);
-                output.Normalize();
+                Vector3 deltaPosition = (transform.position - hit.transform.position);
+                //S'il se trouve exactement sur la meme position , en trouve une aleatoire
+                deltaPosition.Normalize();
+                if (deltaPosition == Vector3.zero)
+                {
+                    Vector2 temp = UnityEngine.Random.insideUnitCircle;
+                    temp.Normalize();
+                    deltaPosition = new Vector3(temp.x, 0, temp.y);
+                }
+
+                //Si on sort de la camera en faisant ca , annule le mouvement
+                if (!Utils.IsInCamera(transform.position + deltaPosition, Mathf.Abs(transform.position.y - Camera.main.transform.position.y)))
+                {
+                    deltaPosition = Vector3.zero;
+                }
+
+                float coeff = Mathf.Max(1, Vector3.Distance(hit.transform.position, transform.position));
+                output += deltaPosition * (coeff / desiredseparation);
             }
         }
+        output.Normalize();
         return output;
     }
 

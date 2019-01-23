@@ -69,7 +69,6 @@ public class Enemy : Character
         }
     }
 
-
     [SerializeField]
     [Tooltip("Combien de temps avant la prochaine attaque")]
     protected float shootPeriod = 2.0f;
@@ -157,6 +156,53 @@ public class Enemy : Character
         get
         {
             return killScore;
+        }
+    }
+
+    public override int Life
+    {
+        get
+        {
+            return watchedLife.WatchedValue;
+        }
+
+        set
+        {
+            watchedLife.WatchedValue = value;
+            if (watchedLife.WatchedValue <= 0)
+            {
+                switch (enemyType)
+                {
+                    case EnemyType.BOB:
+                        AkSoundEngine.PostEvent("E1_Destroyed", gameObject);
+                        break;
+                    case EnemyType.JIM:
+                        AkSoundEngine.PostEvent("E2_Destroyed", gameObject);
+                        break;
+                    case EnemyType.MIKE:
+                        AkSoundEngine.PostEvent("E3_Destroyed", gameObject);
+                        break;
+                }
+                Destroy(gameObject);
+            }
+        }
+    }
+
+
+    public override void Hit(Vector3 speed)
+    {
+        Impact(speed);
+        Life--;
+        switch (enemyType)
+        {
+            case EnemyType.BOB:
+                break;
+            case EnemyType.JIM:
+                AkSoundEngine.PostEvent("E2_Damaged", gameObject);
+                break;
+            case EnemyType.MIKE:
+                AkSoundEngine.PostEvent("E3_Damaged", gameObject);
+                break;
         }
     }
 
@@ -251,7 +297,7 @@ public class Enemy : Character
         {
             CurrentAngle = Random.Range(0, Mathf.PI * 2);
 
-            if (context.ValuesOrDefault<Transform>("FollowButAvoid",null) == null)
+            if (context.ValuesOrDefault<Transform>(Constants.FOLLOW_AVOID,null) == null)
             {
                 //Si l'angle ressemble trop a l'angle precedent , creuse l'ecart
                 IncreaseGapAngle(ref CurrentAngle, PreviousAngle, tolerateInterval);
@@ -266,7 +312,7 @@ public class Enemy : Character
             //S'il cherche a eviter quelque chose tout en le suivant
             else
             {
-                Vector3 targetPosition = context.ValuesOrDefault<Transform>("FollowButAvoid", null).position;
+                Vector3 targetPosition = context.ValuesOrDefault<Transform>(Constants.FOLLOW_AVOID, null).position;
                 float angle = (Vector3.Angle(Vector3.right, targetPosition - transform.position)) * Mathf.Deg2Rad;
                 IncreaseGapAngle(ref CurrentAngle, angle, Mathf.PI / 4);
             }
@@ -302,7 +348,7 @@ public class Enemy : Character
     {
         if (enemyType == EnemyType.BOB && Leader == null)
         {
-            Context.SetInDictionary("FollowButAvoid", GameObject.FindObjectOfType<Player>().transform);
+            Context.SetInDictionary(Constants.FOLLOW_AVOID, GameObject.FindObjectOfType<Player>().transform);
             FollowRandomPath();
         }
         else
@@ -340,6 +386,7 @@ public class Enemy : Character
                     
                     clone = Instantiate(bulletPrefab, new Vector3(x, transform.position.y, z), Quaternion.AngleAxis(angle, new Vector3(0, 1, 0))).GetComponent<Rigidbody>();
                     Vector3 direction = Quaternion.Euler(0, angle, 0) * clone.transform.forward;
+                    direction.y = 0;
                     clone.velocity = transform.TransformDirection(direction * shootSpeed);
                     clone.GetComponent<Bullet>().Duration = bulletLastingDuration;
                 }

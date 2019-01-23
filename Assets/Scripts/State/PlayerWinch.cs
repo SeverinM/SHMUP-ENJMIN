@@ -13,35 +13,32 @@ public class PlayerWinch : State
     
     //Vitesse de traversé du hook
     float speedTravel;
-
-    float hookRadius = 0.3f;
-
+    float hookRadius = 0.1f;
     public enum HookMode
     {
         Pull,
         Winch
     }
     HookMode currentMode;
-
     Vector3 copy;
+
+    float distanceToHook;
+    float minimalDistance;
 
     public PlayerWinch(Character character) : base(character)
     {
         player = character.GetComponent<Player>();
-        barrier = character.Context.ValuesOrDefault<Transform>("Barrier", character.transform);
-        speedTravel = character.Context.ValuesOrDefault<float>("SpeedWinch", 10);
-        currentMode = character.Context.ValuesOrDefault<HookMode>("HookMode", HookMode.Winch);
+        barrier = character.Context.ValuesOrDefault<Transform>(Constants.BARRIER, character.transform);
+        speedTravel = character.Context.ValuesOrDefault<float>(Constants.SPEED_WINCH, 10);
+        currentMode = character.Context.ValuesOrDefault<HookMode>(Constants.HOOK_MODE, HookMode.Winch);
     }
 
     public override void EndState()
     {
         barrier.GetComponent<Barrier>().IsWinching = false;
-        if (player.Target != null && player.Target.parent != null)
-        {
-            player.Target.parent.GetComponent<Character>().PersonalScale = 1;
-        }
         AkSoundEngine.PostEvent("H_Winch_Stop", character.gameObject);
-        character.Context.Remove("IsShield");
+        character.Context.Remove(Constants.IS_SHIELD);
+        player.Hook.parent = player.transform;
     }
 
     public override void NextState()
@@ -52,7 +49,7 @@ public class PlayerWinch : State
 
     public override void StartState()
     {
-        isShield = character.Context.ValuesOrDefault<bool>("IsShield", false);
+        isShield = character.Context.ValuesOrDefault<bool>(Constants.IS_SHIELD, false);
         if (isShield)
         {
             currentMode = HookMode.Pull;
@@ -61,41 +58,46 @@ public class PlayerWinch : State
         }
         barrier.GetComponent<Barrier>().IsWinching = true;
         AkSoundEngine.PostEvent("H_Winch", character.gameObject);
+        player.Hook.parent = null;
     }
 
     public override void UpdateState()
     {
-        float distanceToHook = Vector3.Distance(character.transform.position, player.Hook.transform.position);
+        if (player.Target == null)
+        {
+            NextState();
+            return;
+        }
+        //La distance se fait entre le joueur et son hook
+        distanceToHook = Vector3.Distance(character.transform.position, player.Hook.transform.position);
+        minimalDistance = Mathf.Min(distanceToHook - 0.02f, Time.deltaTime * character.GetScale() * speedTravel * character.PersonalScale);
 
         if (currentMode == HookMode.Winch)
         {
             // Le joueur se propulse en avant, ce qui fait avancer tous les enfants
             // On utilise copy afin de maintenir le hook à la même position
             copy = player.Hook.transform.position;
-            character.transform.position += character.transform.forward * Mathf.Min(distanceToHook, Time.deltaTime * character.GetScale() * speedTravel);
-            player.Hook.transform.position = copy;
+
+            character.transform.position += character.transform.forward * minimalDistance;
         }
 
         if (currentMode == HookMode.Pull)
         {
             // Puisque l'on est en collision avec l'enfant, on va tirer tout l'ensemble, donc le parent
-            if (player.Target != null)
-            {
-                Transform who = isShield ? player.Target : player.Target.parent;
-                who.position -= character.transform.forward * Time.deltaTime * character.GetScale() * character.PersonalScale * speedTravel;
-            }
-            player.Hook.transform.position -= character.transform.forward * Mathf.Min(distanceToHook, Time.deltaTime * character.GetScale() * speedTravel);
+            Transform who = isShield ? player.Target : player.Target.parent;
+            who.position -= character.transform.forward * minimalDistance;
+            player.Hook.transform.position -= character.transform.forward * minimalDistance;
         }
 
         //Si la distance hook / vaisseau est inferieur au radius de hook, retourner vers mouvement
         if (distanceToHook <= hookRadius)
         {
-            if (isShield)
-            {
-                Object.Destroy(player.Target.gameObject);
-            }
             NextState();
         }
+
+        character.transform.forward = player.Hook.position - character.transform.position;
+        character.transform.forward = new Vector3(character.transform.forward.x, 0, character.transform.forward.z);
+        player.Hook.transform.position = new Vector3(player.Hook.transform.position.x, character.transform.position.y, player.Hook.transform.position.z);
     }
 
     public override string GetName()

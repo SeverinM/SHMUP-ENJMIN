@@ -4,26 +4,9 @@ using System.Collections.Generic;
 using System;
 using UnityEngine.SceneManagement;
 
+
 public class Player : Character
 {
-    [Header("Debug")]
-    [SerializeField]
-    MovementMode mode;
-    public MovementMode Mode
-    {
-        get
-        {
-            return mode;
-        }
-    }
-
-    public enum MovementMode
-    {
-        Dash,
-        Normal,
-        NormalDash,
-    }
-
     [Header("Mouvement")]
     [SerializeField]
     [Tooltip("Longueur d'un dash")]
@@ -36,7 +19,7 @@ public class Player : Character
         }
     }
     [SerializeField]
-    [Tooltip("Temps de régeneration des dash")]
+    [Tooltip("Temps de regeneration des dash")]
     internal float dashCooldown = 2f;
 
     [SerializeField]
@@ -56,6 +39,29 @@ public class Player : Character
     [Tooltip("Vitesse du pull / winch")]
     [SerializeField]
     float speedPull = 10;
+
+    [Header("ScreenShake lors d'un impact")]
+    [Tooltip("Force lors d'un impact")]
+    [SerializeField]
+    float screenShakeForce = 0.8f;
+    public float ScreenShakeForce
+    {
+        get
+        {
+            return screenShakeForce;
+        }
+    }
+
+    [Tooltip("Duree lors d'un impact")]
+    [SerializeField]
+    float screenShakeDuration = 0.011f;
+    public float ScreenShakeDuration
+    {
+        get
+        {
+            return screenShakeDuration;
+        }
+    }
 
     [Header("Mouvement durant le hook")]
     [Tooltip("A quel point la vitesse est reduite par rapport a la vitesse normale ? (exemple : 0.1 signifie 10 fois moins vite)")]
@@ -103,6 +109,7 @@ public class Player : Character
 
     public delegate void voidParam();
     public event voidParam NextLevel;
+    public event voidParam BlackScreen;
 
     public void RaiseNextLevel()
     { 
@@ -110,16 +117,21 @@ public class Player : Character
             NextLevel();
     }
 
+    public void RaiseBlackScreen()
+    {
+        if (BlackScreen != null)
+            BlackScreen();
+    }
+
     void Start()
     {
-        context.SetInDictionary("Mode", mode);
-        context.SetInDictionary("Hook", hook);
-        context.SetInDictionary("Barrier", barrier);
-        context.SetInDictionary("SpeedWinch", speedPull);
-        context.SetInDictionary("SpeedHook", hookSpeed);
-        context.SetInDictionary("RangeDash", distanceDash);
-        context.SetInDictionary("CoeffHook", coeffHook);
-        context.SetInDictionary("RangeHook", rangeHook);
+        context.SetInDictionary(Constants.HOOK, hook);
+        context.SetInDictionary(Constants.BARRIER, barrier);
+        context.SetInDictionary(Constants.SPEED_WINCH, speedPull);
+        context.SetInDictionary(Constants.SPEED_HOOK, hookSpeed);
+        context.SetInDictionary(Constants.RANGE_DASH, distanceDash);
+        context.SetInDictionary(Constants.COEFF_HOOK, coeffHook);
+        context.SetInDictionary(Constants.RANGE_HOOK, rangeHook);
 
         line = hook.GetComponent<LineRenderer>();
         origin = hook.transform.localPosition;
@@ -139,7 +151,7 @@ public class Player : Character
         }
 
         // Déplacer le personnage lors d'un impact de rigidBody
-        if (impact.magnitude > 0.2)
+        if (impact.magnitude > 0.2 && Utils.IsInCamera(transform.position + impact, Mathf.Abs(transform.position.y - Camera.main.transform.position.y)))
         {
             Move(impact * Time.deltaTime);
         }
@@ -159,37 +171,15 @@ public class Player : Character
     private void OnCollisionEnter(Collision collision)
     {
         // Quand le joueur se fait toucher par un rigidBody
-        
-        //En suspens pour le moment
-        if (collision.gameObject.tag == "Bullet")
+       
+        if (collision.gameObject.tag == Constants.BULLET_TAG)
         {
-            Impact(collision.relativeVelocity * hitForce);
-            Destroy(collision.gameObject);
-
-            if (!base.protection.activeInHierarchy)
-            {
-                Life--;
-
-                if (Life <= 0)
-                {
-                    Destroy(gameObject);
-                    AkSoundEngine.PostEvent("S_Destroy", gameObject);
-                }
-                else
-                {
-                    StartRecovery(recoveryDuration);
-                    AkSoundEngine.PostEvent("S_Hurt", gameObject);
-                }
-            }
+            //On ne se subit rien si le joueur est en recovery ou en train de winch
+            if (!Context.ValuesOrDefault<bool>(Constants.IN_RECOVERY, false) && !GetComponentInChildren<Barrier>().IsWinching)
+                Hit(collision.relativeVelocity * hitForce); 
+            
+            Destroy(collision.gameObject);                       
         }
-    }
-
-    // Le joueur se voit propulsé dans la direction opposée à un impact reçu
-    public void Impact(Vector3 force)
-    {
-        Vector3 dir = force.normalized;
-        dir.y = 0; // En hauteur
-        impact += dir.normalized * force.magnitude / mass;
     }
 
     public override float GetScale()
@@ -225,14 +215,36 @@ public class Player : Character
         target = transform;
     }
 
+    public override void Hit(Vector3 speed)
+    {
+        Impact(speed);
+
+        Manager.GetInstance().ShakeCamera(screenShakeForce, screenShakeDuration);
+
+        if (Life <= 1)
+        {
+            AkSoundEngine.PostEvent("S_Destroy", gameObject);
+        }
+        else
+        {
+            StartRecovery(recoveryDuration);
+            AkSoundEngine.PostEvent("S_Hurt", gameObject);
+        }
+
+        Life--;
+    }
+
     public override void OnDestroy()
     {
         if (!Constants.ApplicationQuit)
         {
             base.OnDestroy();
+            Manager.GetInstance().PostScore();
+            //A sa mort reset le score du joueur
             Constants.ApplicationQuit = true;
             Manager.GetInstance().PopAll();
-            Utils.StartFading(1, Color.black, () => { Constants.SetAllConstants(0); SceneManager.LoadScene(SceneManager.GetActiveScene().name); }, () => Constants.SetAllConstants(1));
+            Utils.StartFading(1, Color.black, () => { Constants.SetAllConstants(0); SceneManager.LoadScene(SceneManager.GetActiveScene().name); }, () => { Constants.SetAllConstants(1); Constants.TotalScore = 0;});
         }
     }
+
 }

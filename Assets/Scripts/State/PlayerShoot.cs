@@ -14,8 +14,8 @@ public class PlayerShoot : State
     public PlayerShoot(Character character) : base(character)
     {
         player = character.GetComponent<Player>();
-        speedTravel = character.Context.ValuesOrDefault<float>("SpeedHook", 0.7f);
-        maxDistance = character.Context.ValuesOrDefault<float>("RangeHook", 10);
+        speedTravel = character.Context.ValuesOrDefault<float>(Constants.SPEED_HOOK, 0.7f);
+        maxDistance = character.Context.ValuesOrDefault<float>(Constants.RANGE_HOOK, 10);
     }
 
     public override void EndState()
@@ -47,7 +47,7 @@ public class PlayerShoot : State
     public override void UpdateState()
     {
         // Déplacement du grappin 
-        player.Hook.transform.Translate(player.Hook.forward * speedTravel * character.GetScale(), Space.World);
+        player.Hook.transform.Translate(player.Hook.forward * speedTravel * character.GetScale() * Time.deltaTime, Space.World);
        
 
         // Si le grapin dépasse la distance maximale, le joueur revient à l'état PlayerMovement, et le grappin est retracté

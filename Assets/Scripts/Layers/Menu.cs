@@ -32,7 +32,7 @@ public class Menu : Layers
         parentUI.SetActive(true);
 
         //On freeze tous les bullets
-        foreach (GameObject gob in GameObject.FindGameObjectsWithTag("Bullet"))
+        foreach (GameObject gob in GameObject.FindGameObjectsWithTag(Constants.BULLET_TAG))
         {
             StoredValue[gob] = gob.GetComponent<Rigidbody>().velocity;
             gob.GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -86,7 +86,8 @@ public class Menu : Layers
 
         foreach (GameObject gob in StoredValue.Keys)
         {
-            gob.GetComponent<Rigidbody>().velocity = StoredValue[gob];
+            if (gob != null)
+                gob.GetComponent<Rigidbody>().velocity = StoredValue[gob];
         }
     }
 
@@ -103,12 +104,18 @@ public class Menu : Layers
         Utils.StartFading(1f, Color.black, () => SceneManager.LoadScene("Menu"), () => { Constants.SetAllConstants(1); Constants.ApplicationQuit = false; });
     }
 
+    public void UpdateNickName(string nickname)
+    {
+        Constants.PlayerName = nickname;
+    }
+
     public void Restart()
     {
         Manager.GetInstance().ResetCount();
         Constants.ApplicationQuit = true;
         Manager.GetInstance().PopAll();
-        Utils.StartFading(1, Color.black, () => { Constants.SetAllConstants(0); SceneManager.LoadScene(SceneManager.GetActiveScene().name); }, () => Constants.SetAllConstants(1));
+        Constants.SetAllConstants(0);
+        Utils.StartFading(1, Color.black, () => {SceneManager.LoadScene(SceneManager.GetActiveScene().name); }, () => { Constants.SetAllConstants(1); });
     }
 
     public void Quit()

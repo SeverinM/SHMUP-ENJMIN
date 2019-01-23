@@ -29,9 +29,7 @@ public class Generator : Character {
 
     public static int Number = 0;
     public GameObject levelObject;        // Level
-    [HideInInspector]
     public List<Wave> allWaves = new List<Wave>();
-    public int Count = 0;
     public int WaveCount = 0;
 
     public List<LockWaveElement> AllLocks;
@@ -44,7 +42,7 @@ public class Generator : Character {
     {
         get
         {
-            return allWaves.Select(x => x.allEnnemies).Count() + Count;
+            return allWaves.Select(x => x.allEnnemies).Count();
         }
     }
 
@@ -82,6 +80,9 @@ public class Generator : Character {
     /// </summary>
     public void TryPassWave()
     {
+        if (ActualState != null)
+            return;
+
         if (AllLocks == null)
         {
             SetState(new GenerateEnemies(this, AllWaves));
@@ -101,7 +102,6 @@ public class Generator : Character {
         }
         else
         {
-            Debug.Log("Acces refusé");
             SetState(null);
         }
     }

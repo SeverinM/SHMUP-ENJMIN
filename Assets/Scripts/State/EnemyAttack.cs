@@ -36,7 +36,7 @@ public class EnemyAttack : State
     public override void NextState()
     {
         //Apres avoir attaqué , revient en mode aleatoire
-        if (character.Context.ValuesOrDefault<Transform>("FollowButAvoid",null) != null)
+        if (character.Context.ValuesOrDefault<Transform>(Constants.FOLLOW_AVOID,null) != null)
         {
             enemy.FollowRandomPath();
             return;
@@ -61,15 +61,22 @@ public class EnemyAttack : State
 
     public override void UpdateState()
     {
-        character.transform.LookAt(playerTarget);
+        if (playerTarget == null)
+        {
+            enemy.FollowRandomPath();
+            return;
+        }
+
+        float number = Random.Range(-10, 10);
+        character.transform.forward = Vector3.RotateTowards(character.transform.forward,(playerTarget.position - character.transform.position).normalized, (((180f + number) * Time.deltaTime) / character.CoeffRotation) * Mathf.Deg2Rad, 0.0f);
+        character.transform.forward = new Vector3(character.transform.forward.x, 0, character.transform.forward.z);
         // Lance une attaque selon la periode
         totalTime += Time.deltaTime * character.PersonalScale * character.GetScale();
         if (totalTime > lastTime)
         {
             lastTime += enemy.ShootPeriod;
-            character.transform.LookAt(playerTarget);
 
-            if (!character.Context.ValuesOrDefault<bool>("InRecovery",false))
+            if (!character.Context.ValuesOrDefault<bool>(Constants.IN_RECOVERY,false))
                 enemy.Shoot();
 
             shoots++;

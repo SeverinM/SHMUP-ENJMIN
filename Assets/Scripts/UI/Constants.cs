@@ -115,9 +115,6 @@ public static class Constants{
         }
     }
 
-    public static System.Action Act { get; set; }
-    public static System.Action Act2 { get; set; }
-
     //Raccourci
     public static void SetAllConstants(float newValue)
     {
@@ -126,4 +123,25 @@ public static class Constants{
         TimeScalePlayer = newValue;
         TimeScaleBullet = newValue;
     }
+
+    //Contexte
+    public static readonly string IN_RECOVERY = "IsInRecovery";
+    public static readonly string FOLLOW_AVOID = "FollowButAvoid";
+    public static readonly string HOOK_MODE = "HookMode";
+    public static readonly string POSITION_LAND = "PositionLand";
+    public static readonly string IS_SHIELD = "IsShield";
+    public static readonly string HOOK = "Hook";
+    public static readonly string BARRIER = "Barrier";
+    public static readonly string SPEED_WINCH = "SpeedWinch";
+    public static readonly string SPEED_HOOK = "SpeedHook";
+    public static readonly string RANGE_DASH = "RangeDash";
+    public static readonly string COEFF_HOOK = "CoeffHook";
+    public static readonly string RANGE_HOOK = "RangeHook";
+
+    //Tags
+    public static readonly string BULLET_TAG = "Bullet";
+    public static readonly string SHIELD_TAG = "Shield";
+    public static readonly string ENEMY_TAG = "Ennemy";
+    public static readonly string WINCHABLE_TAG = "Winchable";
+    public static readonly string PULLABLE_TAG = "Pullable";
 }

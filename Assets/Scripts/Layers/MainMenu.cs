@@ -8,9 +8,14 @@ public class MainMenu : Layers {
 
     [SerializeField]
     GameObject FirstMenu;
+
+    [SerializeField]
+    List<GameObject> disableInput;
+
     protected GameObject parentUI;
     protected List<Button> allButtonsMenu = new List<Button>();
     GameObject ActualGameObject;
+    bool inputEnabled = true;
 
     // Use this for initialization
     void Awake()
@@ -18,18 +23,40 @@ public class MainMenu : Layers {
         ActualGameObject = FirstMenu;
         parentUI = FirstMenu;
         parentUI.SetActive(true);
+        AkSoundEngine.PostEvent("Menu_Start", gameObject);
     }
 
     public void Play()
     {
         Manager.GetInstance().PopToStack();
+        Constants.TotalScore = 0;
         Utils.StartFading(2f, Color.black, () => { SceneManager.LoadScene("Game"); Constants.SetAllConstants(0); },
-            () => { Constants.SetAllConstants(1);});
+            () => { Constants.SetAllConstants(1); });
     }
 
     public void StartTransition(GameObject target)
     {
-        Utils.StartFading(0.3f, Color.black, () => { ActualGameObject.SetActive(false); target.SetActive(true); ActualGameObject = target;}, () => { });
+        Utils.StartFading(0.3f, Color.black, () => {
+            ActualGameObject.SetActive(false);
+            target.SetActive(true);
+            ActualGameObject = target;
+            if (inputEnabled && disableInput.Contains(ActualGameObject))
+            {
+                foreach (BaseInput bI in refInput)
+                {
+                    bI.OnInputExecuted -= BI_OnInputExecuted;
+                }
+                inputEnabled = false;
+            }
+            if (!inputEnabled && !disableInput.Contains(ActualGameObject))
+            {
+                foreach (BaseInput bI in refInput)
+                {
+                    bI.OnInputExecuted -= BI_OnInputExecuted;
+                }
+                inputEnabled = true;
+            }
+        }, () => { });
     }
 
     protected int indexSelection;
@@ -81,10 +108,18 @@ public class MainMenu : Layers {
 
     public override void OnFocusLost()
     {
-        foreach (BaseInput bI in refInput)
+        if (inputEnabled)
         {
-            bI.Reset();
-        }
+            foreach (BaseInput bI in refInput)
+            {
+                bI.Reset();
+            }
+        }       
         allButtonsMenu = null;
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }

@@ -77,8 +77,7 @@ public class Tools : EditorWindow {
         GUILayout.BeginHorizontal();
         if (staticLvl != null && GUILayout.Button("Placer camera"))
         {
-            Vector3 deltaPosition = Camera.main.transform.position - GameObject.FindObjectOfType<Player>().transform.position;
-            Camera.main.transform.position = staticLvl.transform.position + deltaPosition;
+            Camera.main.transform.position = staticLvl.transform.position + GameObject.FindObjectOfType<Manager>().CameraPositionRelative;
         }
         if (originPosition != Camera.main.transform.position && GUILayout.Button("Reset Camera"))
         {
@@ -179,6 +178,7 @@ public class Tools : EditorWindow {
             EditorGUILayout.BeginHorizontal();
             GUILayout.Label("Vague numero " + i);
             EditorGUILayout.PropertyField(serWaves.GetArrayElementAtIndex(i).FindPropertyRelative("firstIsLeader"), new GUIContent("Premier est Leader"));
+            EditorGUILayout.PropertyField(serWaves.GetArrayElementAtIndex(i).FindPropertyRelative("healAtBegin"), new GUIContent("Soigne au debut"));
             EditorGUILayout.PropertyField(serWaves.GetArrayElementAtIndex(i).FindPropertyRelative("spacingX"), new GUIContent("Espace X"));
             EditorGUILayout.PropertyField(serWaves.GetArrayElementAtIndex(i).FindPropertyRelative("spacingZ"), new GUIContent("Espace Z"));
             EditorGUILayout.PropertyField(serWaves.GetArrayElementAtIndex(i).FindPropertyRelative("delay"), new GUIContent("Commence apres (s)"));
@@ -225,6 +225,7 @@ public class Tools : EditorWindow {
                 }
 
                 EditorGUILayout.EndHorizontal();
+
             }
 
             //Fin de l'indentation
@@ -265,7 +266,6 @@ public class Tools : EditorWindow {
     private void OnDestroy()
     {
         instance = null;
-        Camera.main.transform.position = originPosition;
         PlayerPrefs.SetString("ToolsGenerator", currentGen == null ? "" : currentGen.name);
         PlayerPrefs.SetString("ToolsLevel", staticLvl == null ? "" : staticLvl.name);
     }

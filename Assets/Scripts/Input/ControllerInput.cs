@@ -6,8 +6,6 @@ using UnityEngine;
 /// Input gérés par la manette
 /// </summary>
 public class ControllerInput : BaseInput {
-
-    bool wasDown = false;
     //Le joystick gauche n'est pas touché ?
     bool neutral = true;
 
@@ -20,7 +18,11 @@ public class ControllerInput : BaseInput {
     float cosValue;
 
     //Valeur d'appui des deux gachettes , uniquement gauche enfoncé = -1 , uniquement droite enfoncé = 1 , aucune enfoncé ou les deux enfoncés = 0
-    float trigger;
+    float triggerLeft;
+    float triggerRight;
+
+    float previousLeft = 0;
+    float previousRight = 0;
 
     public override void UpdateInput()
     {
@@ -30,7 +32,8 @@ public class ControllerInput : BaseInput {
         sinValue = Input.GetAxis("VerticalControllerRight");
         cosValue = Input.GetAxis("HorizontalControllerRight");
 
-        trigger = Input.GetAxis("Triggers");
+        triggerLeft = Input.GetAxis("TriggerLeft");
+        triggerRight = Input.GetAxis("TriggerRight");
 
         xValue = Mathf.Clamp(xValue, -0.999f, 0.9999f);
         yValue = Mathf.Clamp(yValue, -0.999F, 0.9999f);
@@ -57,17 +60,23 @@ public class ControllerInput : BaseInput {
             }
         }
 
-        if (trigger != 0 && !wasDown)
+        if (triggerRight > 0)
         {
-            RaiseEvent(TypeAction.Down, Actions.Shoot, Vector2.zero);
-            wasDown = true;
+            if (previousRight == 0)
+                RaiseEvent(TypeAction.Down, Actions.Shoot, Vector2.zero);
+            RaiseEvent(TypeAction.Pressed, Actions.Shoot, Vector2.zero);
         }
-
-        if (trigger == 0 && wasDown)
-        {
+        if (triggerRight == 0 && previousRight > 0)
             RaiseEvent(TypeAction.Up, Actions.Shoot, Vector2.zero);
-            wasDown = false;
+
+        if (triggerLeft > 0)
+        {
+            if (previousLeft == 0)
+                RaiseEvent(TypeAction.Down, Actions.Dash, Vector2.zero);
+            RaiseEvent(TypeAction.Pressed, Actions.Dash, Vector2.zero);
         }
+        if (triggerLeft == 0 && previousLeft > 0)
+            RaiseEvent(TypeAction.Up, Actions.Dash, Vector2.zero);
 
         if (sinValue * cosValue != 0)
         {
@@ -100,5 +109,8 @@ public class ControllerInput : BaseInput {
         {
             RaiseEvent(TypeAction.Down, Actions.Pause, Vector2.zero);
         }
+
+        previousLeft = triggerLeft;
+        previousRight = triggerRight;
     }
 }

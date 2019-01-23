@@ -34,6 +34,7 @@ public static class Utils {
             return;
         }
 
+        isFading = true;
         fading = FindOrDefault<Fade>();
         fading.Init(duration, lambdaAt1, lambdaAt0, col);
     }
@@ -79,5 +80,10 @@ public static class Utils {
         double cos = vector1.x * vector2.x + vector1.y * vector2.y;
 
         return Math.Atan2(sin, cos) * (180 / Math.PI);
+    }
+
+    public static float CalculateAngle(Vector3 from, Vector3 to)
+    {
+        return Quaternion.FromToRotation(Vector3.up, to - from).eulerAngles.y;
     }
 }

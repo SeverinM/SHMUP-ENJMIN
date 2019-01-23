@@ -21,13 +21,13 @@ MonoBehaviour:
   - PhysicalPath: Master-Mixer Hierarchy\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 3725e48e2a6c8b49a4f8a40a1bf618dd
-    m_lastTime: -8586562072133661101
+    m_lastTime: -8586537123220266734
     List: []
   BankWwu:
   - PhysicalPath: SoundBanks\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: b2e6e7c65c8e5c409c7701e9a2affc21
-    m_lastTime: -8586562072133441699
+    m_lastTime: -8586537123220166671
     List:
     - name: Main
       guid: e816e78e958942429f80cbae7143f242
@@ -42,17 +42,271 @@ MonoBehaviour:
   - PhysicalPath: Events\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: a773778de7cf1b4c8479de1ea2a6b5bf
-    m_lastTime: -8586562072133780773
+    m_lastTime: -8586536829924425735
     List:
-    - name: test
-      guid: 05f5b33ac5106c449bc48ef864ede799
-      id: 3157003241
+    - name: E1_Destroyed
+      guid: e6f16be116817246890cc6c31fe7dc45
+      id: 2898220307
       PathAndIcons:
       - ElementName: Default Work Unit
         ObjectType: 12
-      - ElementName: test
+      - ElementName: Enemies_Events
+        ObjectType: 4
+      - ElementName: E1_Destroyed
         ObjectType: 3
-      Path: Default Work Unit\test
+      Path: Default Work Unit\Enemies_Events\E1_Destroyed
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: E2_Damaged
+      guid: b3873d7ac3706046a91635e0622a9aaa
+      id: 593888184
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Enemies_Events
+        ObjectType: 4
+      - ElementName: E2_Damaged
+        ObjectType: 3
+      Path: Default Work Unit\Enemies_Events\E2_Damaged
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: E2_Destroyed
+      guid: 8e1eeed512e8e04e8223ac29e668f36e
+      id: 3586573616
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Enemies_Events
+        ObjectType: 4
+      - ElementName: E2_Destroyed
+        ObjectType: 3
+      Path: Default Work Unit\Enemies_Events\E2_Destroyed
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: E3_Damaged
+      guid: 61e7371953255147a2479d2251aa81a0
+      id: 3407968013
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Enemies_Events
+        ObjectType: 4
+      - ElementName: E3_Damaged
+        ObjectType: 3
+      Path: Default Work Unit\Enemies_Events\E3_Damaged
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: E3_Destroyed
+      guid: 9e7bfb9bc364b141b38443a47dceff43
+      id: 3743416305
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Enemies_Events
+        ObjectType: 4
+      - ElementName: E3_Destroyed
+        ObjectType: 3
+      Path: Default Work Unit\Enemies_Events\E3_Destroyed
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: E3_ShieldGrab
+      guid: 12c63d77ff8c7d458fbd62b36e9a92b6
+      id: 1678293537
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Enemies_Events
+        ObjectType: 4
+      - ElementName: E3_ShieldGrab
+        ObjectType: 3
+      Path: Default Work Unit\Enemies_Events\E3_ShieldGrab
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: H_Grab
+      guid: e015f942dd2c784db9ee6b9313581731
+      id: 1645722108
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Hook_events
+        ObjectType: 4
+      - ElementName: H_Grab
+        ObjectType: 3
+      Path: Default Work Unit\Hook_events\H_Grab
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: H_Launch
+      guid: e0d5534a0e735144941d29510c2e32be
+      id: 3193013155
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Hook_events
+        ObjectType: 4
+      - ElementName: H_Launch
+        ObjectType: 3
+      Path: Default Work Unit\Hook_events\H_Launch
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: H_Winch
+      guid: ec6d86b2037d6648ab98a43d34c1ec3a
+      id: 3847287689
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Hook_events
+        ObjectType: 4
+      - ElementName: H_Winch
+        ObjectType: 3
+      Path: Default Work Unit\Hook_events\H_Winch
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: H_Winch_Stop
+      guid: 882eb766a3de6e40bad978b26f840311
+      id: 387627068
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Hook_events
+        ObjectType: 4
+      - ElementName: H_Winch_Stop
+        ObjectType: 3
+      Path: Default Work Unit\Hook_events\H_Winch_Stop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Level_01_Start
+      guid: f0fbabdc1beaa7409d9880c6984c784a
+      id: 3475275800
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Menu
+        ObjectType: 4
+      - ElementName: Level_01_Start
+        ObjectType: 3
+      Path: Default Work Unit\Menu\Level_01_Start
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: M_Cancel
+      guid: a5c548e187d76c499f9188c6cc6a39c7
+      id: 915359679
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Menu
+        ObjectType: 4
+      - ElementName: M_Cancel
+        ObjectType: 3
+      Path: Default Work Unit\Menu\M_Cancel
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: M_Confirm
+      guid: 170cbb4691376f419497e2414a71f3f6
+      id: 1745182863
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Menu
+        ObjectType: 4
+      - ElementName: M_Confirm
+        ObjectType: 3
+      Path: Default Work Unit\Menu\M_Confirm
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: M_Select
+      guid: 52391da1a8fc6540bc46779f7259fcfa
+      id: 4265507177
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Menu
+        ObjectType: 4
+      - ElementName: M_Select
+        ObjectType: 3
+      Path: Default Work Unit\Menu\M_Select
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Menu_Start
+      guid: baba90b1f5278d458c15df280f6a9824
+      id: 3908297853
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Menu
+        ObjectType: 4
+      - ElementName: Menu_Start
+        ObjectType: 3
+      Path: Default Work Unit\Menu\Menu_Start
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: S_Dash
+      guid: 3ca98a291e23c84a8eab8ea7dd2fa85c
+      id: 1189220547
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Spaceship_events
+        ObjectType: 4
+      - ElementName: S_Dash
+        ObjectType: 3
+      Path: Default Work Unit\Spaceship_events\S_Dash
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: S_Destroy
+      guid: 3d008e43c3d65a46a52ef074ffe6dda1
+      id: 1864059347
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Spaceship_events
+        ObjectType: 4
+      - ElementName: S_Destroy
+        ObjectType: 3
+      Path: Default Work Unit\Spaceship_events\S_Destroy
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: S_HitShield
+      guid: 5057f5e98f9f7843a10420bc1662b546
+      id: 2907828633
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Spaceship_events
+        ObjectType: 4
+      - ElementName: S_HitShield
+        ObjectType: 3
+      Path: Default Work Unit\Spaceship_events\S_HitShield
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: S_Hurt
+      guid: 310fd99524d6ef4f84070c007fa44d80
+      id: 4199377676
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Spaceship_events
+        ObjectType: 4
+      - ElementName: S_Hurt
+        ObjectType: 3
+      Path: Default Work Unit\Spaceship_events\S_Hurt
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
@@ -60,8 +314,17 @@ MonoBehaviour:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: b00bc7afdad63f41ba3f9bdcc0379297
-    m_lastTime: -8586562072133770804
-    List: []
+    m_lastTime: -8586537124234351521
+    List:
+    - name: Var_Master_Audio
+      guid: bd494e982bc2ef4880549184e6975151
+      id: 3897966950
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Var_Master_Audio
+        ObjectType: 13
+      Path: Default Work Unit\Var_Master_Audio
   StateWwu:
   - PhysicalPath: States\Default Work Unit.wwu
     ParentPhysicalPath: 
@@ -72,8 +335,26 @@ MonoBehaviour:
   - PhysicalPath: Switches\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 85698c4f9413284985851764048f83eb
-    m_lastTime: -8586562072133411636
-    List: []
+    m_lastTime: -8586540139392474383
+    List:
+    - name: Levels
+      guid: 1b60e59f0d4fa14ea0890c7737b51a73
+      id: 2678230316
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Level_selector
+        ObjectType: 4
+      - ElementName: Levels
+        ObjectType: 11
+      Path: Default Work Unit\Level_selector\Levels
+      values:
+      - name: Level1
+        guid: b924b701caaef149995f1e4302b08bde
+        id: 2678230382
+        PathAndIcons:
+        - ElementName: Level1
+          ObjectType: 10
   TriggerWwu:
   - PhysicalPath: Triggers\Default Work Unit.wwu
     ParentPhysicalPath: 
@@ -84,6 +365,7 @@ MonoBehaviour:
   - /12-2018_SHMUP-ENJMIN_Wwise
   - /12-2018_SHMUP-ENJMIN_Wwise/Events
   - /12-2018_SHMUP-ENJMIN_Wwise/Events/Default Work Unit
+  - /12-2018_SHMUP-ENJMIN_Wwise/Events/Default Work Unit/Menu
   - /12-2018_SHMUP-ENJMIN_Wwise/SoundBanks
   - /12-2018_SHMUP-ENJMIN_Wwise/SoundBanks/Default Work Unit
   autoPopulateEnabled: 1

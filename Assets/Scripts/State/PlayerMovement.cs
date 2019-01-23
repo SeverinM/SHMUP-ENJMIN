@@ -9,111 +9,63 @@ using System.Collections;
 public class PlayerMovement : State
 {
     protected Vector2 direction;
-    Player.MovementMode mode;
-
-    private float dashMultiplicator = 1.2f;
-
-    private float dashCooldownTime;
-
+    Vector3 dashDirection = Vector3.zero;
     private float dashing;
+    Vector3 lastMovement = Vector3.zero;
+    bool didRotation = false;
 
     public PlayerMovement(Character character) : base(character)
     {
         direction = new Vector2();
-        mode = character.Context.ValuesOrDefault<Player.MovementMode>("Mode", Player.MovementMode.Normal);
     }
 
     public override void InterpretInput(BaseInput.TypeAction typeAct, BaseInput.Actions acts, Vector2 val)
     {
-        //Mode normal
-        if (mode.Equals(Player.MovementMode.Normal))
+        didRotation = false;
+
+        //Un mouvement quelconque (manette / souris) est detecté
+        if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.AllMovement) && character.GetScale() * character.PersonalScale > 0 && dashing == 0)
         {
-            //Un mouvement quelconque (manette / souris) est detecté
-            if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.AllMovement) && character.GetScale() * character.PersonalScale > 0)
+            float size = character.GetComponent<BoxCollider>().size.magnitude;
+            float dist = Mathf.Abs(character.transform.position.y - Camera.main.transform.position.y);
+            direction.Set(val.x, val.y);
+            direction *= character.GetScale();
+            dashDirection = new Vector3(direction.x, 0, direction.y).normalized;
+            if (Utils.IsInCamera(character.transform.position + (new Vector3(direction.x, 0, direction.y) * size * 0.5f), Mathf.Abs(character.transform.position.y - Camera.main.transform.position.y)))
             {
-                float size = character.GetComponent<BoxCollider>().size.magnitude;
-                direction.Set(val.x, val.y);
-                if (Utils.IsInCamera(character.transform.position + (new Vector3(direction.x,0,direction.y) * size * 0.5f), Mathf.Abs(character.transform.position.y - Camera.main.transform.position.y)))
-                {
-                    character.Move(direction);
-                }
-            }
-
-            //rotation stick droit
-            if (typeAct.Equals(BaseInput.TypeAction.Mouse) && acts.Equals(BaseInput.Actions.RotateAbsolute) && character.GetScale() * character.PersonalScale > 0)
-            {
-                character.transform.eulerAngles = new Vector3(0, val.x, 0);
+                character.Move(direction);
             }
         }
 
-        if (mode.Equals(Player.MovementMode.NormalDash))
-        {  
-            //Un mouvement quelconque (manette / souris) est detecté
-            if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.AllMovement) && character.GetScale() * character.PersonalScale > 0)
-            {
-                float size = character.GetComponent<BoxCollider>().size.magnitude;
-                float dist = Mathf.Abs(character.transform.position.y - Camera.main.transform.position.y);
-                direction.Set(val.x, val.y);
-                direction *= character.GetScale();
-                if (Utils.IsInCamera(character.transform.position + (new Vector3(direction.x, 0, direction.y) * size * 0.5f), Mathf.Abs(character.transform.position.y - Camera.main.transform.position.y)))
-                {
-                    character.Move(direction);
-                }
-            }
-
-            //rotation stick droit
-            if (typeAct.Equals(BaseInput.TypeAction.Mouse) && acts.Equals(BaseInput.Actions.RotateAbsolute) && character.GetScale() * character.PersonalScale > 0)
-            {
-                character.transform.eulerAngles = new Vector3(0, val.x, 0);
-                dashing = 0; // Stop dashing
-            }
-
-            if (typeAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Dash) && character.GetScale() * character.PersonalScale > 0)
-            {
-                if (((Player)character).Dash > 0) // StartDashing
-                {
-                    ((Player)character).Dash--;
-                    dashing = ((Player)character).DistanceDash/100;
-                    AkSoundEngine.PostEvent("S_Dash", character.gameObject);
-                }
-            }
-        }
-
-
-        //Mode dash
-        if (mode.Equals(Player.MovementMode.Dash))
+        if (typeAct.Equals(BaseInput.TypeAction.Up) && acts.Equals(BaseInput.Actions.AllMovement))
         {
-            // start dash
-            if (typeAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Dash) && character.GetScale() * character.PersonalScale > 0)
-            {
-                character.transform.position += character.transform.forward * ((Player)character).DistanceDash;
-                AkSoundEngine.PostEvent("S_Dash", character.gameObject);
-            }
-
-            //rotation stick gauche
-            if (typeAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.AllMovement) && character.GetScale() * character.PersonalScale > 0)
-            {
-                val.Normalize();
-                float value = Mathf.Acos(val.x) * Mathf.Rad2Deg;
-                if (val.y > 0)
-                {
-                    value *= -1;
-                }
-                value += 90;
-
-                //Rotation ET dash
-                character.transform.eulerAngles = new Vector3(0, value, 0);
-                character.transform.position += character.transform.forward * ((Player)character).DistanceDash;
-            }
+            dashDirection = Vector3.zero;
         }
 
-        if(typeAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Shoot))
+        //rotation stick droit
+        if (typeAct.Equals(BaseInput.TypeAction.Mouse) && acts.Equals(BaseInput.Actions.RotateAbsolute) && character.GetScale() * character.PersonalScale > 0 && dashing == 0)
+        {
+            character.transform.eulerAngles = new Vector3(0, val.x, 0);
+            lastMovement = character.transform.position + character.transform.forward;
+            didRotation = true;
+        }
+
+        if (typeAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Dash) && character.GetScale() * character.PersonalScale > 0 && dashDirection != Vector3.zero)
+        {
+            dashing = ((Player)character).DistanceDash / 100;
+            AkSoundEngine.PostEvent("S_Dash", character.gameObject);
+        }
+
+        if(typeAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Shoot) && character.GetScale() * character.PersonalScale > 0)
         {
             NextState();
         }
 
-        if (typeAct.Equals(BaseInput.TypeAction.Mouse) && acts.Equals(BaseInput.Actions.Rotate) && character.GetScale() * character.PersonalScale > 0 && !(dashing > 0f))
+        //Mouvement de la souris
+        if (typeAct.Equals(BaseInput.TypeAction.Mouse) && acts.Equals(BaseInput.Actions.Rotate) && character.GetScale() * character.PersonalScale > 0 && dashing == 0f)
         {
+            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(val.x, val.y, Mathf.Abs(character.transform.position.y - Camera.main.transform.position.y)));
+            lastMovement = worldPosition;
             Vector3 objectPos = Camera.main.WorldToScreenPoint(character.transform.position);
             Vector2 mousePos = new Vector2();
             mousePos.x = val.x - objectPos.x;
@@ -121,26 +73,34 @@ public class PlayerMovement : State
 
             float angle = Mathf.Atan2(mousePos.x, mousePos.y) * Mathf.Rad2Deg;
             character.transform.localEulerAngles = new Vector3(0, angle, 0);
+            didRotation = true;
         }
+
+        //SI aucune rotation n'a été faite , regarder la derniere position connu
+        if (!didRotation && lastMovement != Vector3.zero)
+        {
+            character.transform.LookAt(lastMovement);
+        }
+        
     }
 
     public override void UpdateState()
     {
         ((Player)character).UpdateHook();
-        Vector3 forward = character.transform.TransformDirection(Vector3.forward);
-
+        //On passe a travers les projectils tant que l'on est en dash
+        character.GetComponent<BoxCollider>().enabled = (dashing <= 0);
         if (dashing > 0)
         {
             dashing -= Time.deltaTime;
-
-            character.Move(forward * ((Player)character).dashSpeed);
-        } else
-        {
-            dashCooldownTime += Time.deltaTime;
-            if(dashCooldownTime > ((Player)character).dashCooldown && ((Player)character).Dash < ((Player)character).maxDashes)
+            dashing = Mathf.Max(0, dashing);
+            if (Utils.IsInCamera(character.transform.position + (dashDirection * ((Player)character).dashSpeed * character.PersonalScale * character.GetScale() * Time.deltaTime), Mathf.Abs(character.transform.position.y - Camera.main.transform.position.y)))
             {
-                ((Player)character).Dash++;
-                dashCooldownTime = 0;
+                character.Move(dashDirection * ((Player)character).dashSpeed);
+            }
+            
+            if (dashing == 0)
+            {
+                dashDirection = Vector3.zero;
             }
         }
     }
