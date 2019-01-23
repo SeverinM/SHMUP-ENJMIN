@@ -297,7 +297,7 @@ public class Enemy : Character
         {
             CurrentAngle = Random.Range(0, Mathf.PI * 2);
 
-            if (context.ValuesOrDefault<Transform>("FollowButAvoid",null) == null)
+            if (context.ValuesOrDefault<Transform>(Constants.FOLLOW_AVOID,null) == null)
             {
                 //Si l'angle ressemble trop a l'angle precedent , creuse l'ecart
                 IncreaseGapAngle(ref CurrentAngle, PreviousAngle, tolerateInterval);
@@ -312,7 +312,7 @@ public class Enemy : Character
             //S'il cherche a eviter quelque chose tout en le suivant
             else
             {
-                Vector3 targetPosition = context.ValuesOrDefault<Transform>("FollowButAvoid", null).position;
+                Vector3 targetPosition = context.ValuesOrDefault<Transform>(Constants.FOLLOW_AVOID, null).position;
                 float angle = (Vector3.Angle(Vector3.right, targetPosition - transform.position)) * Mathf.Deg2Rad;
                 IncreaseGapAngle(ref CurrentAngle, angle, Mathf.PI / 4);
             }
@@ -348,7 +348,7 @@ public class Enemy : Character
     {
         if (enemyType == EnemyType.BOB && Leader == null)
         {
-            Context.SetInDictionary("FollowButAvoid", GameObject.FindObjectOfType<Player>().transform);
+            Context.SetInDictionary(Constants.FOLLOW_AVOID, GameObject.FindObjectOfType<Player>().transform);
             FollowRandomPath();
         }
         else

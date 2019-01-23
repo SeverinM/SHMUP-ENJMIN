@@ -298,7 +298,7 @@ public abstract class Character : MonoBehaviour {
 
     public void StartRecovery(float duration)
     {
-        if (!Context.ValuesOrDefault<bool>("InRecovery",false))
+        if (!Context.ValuesOrDefault<bool>(Constants.IN_RECOVERY,false))
         {
             StartCoroutine(StartRecoveryCoroutine(duration));
         }
@@ -307,7 +307,7 @@ public abstract class Character : MonoBehaviour {
 
     public IEnumerator StartRecoveryCoroutine(float duration)
     {
-        Context.SetInDictionary("InRecovery", true);
+        Context.SetInDictionary(Constants.IN_RECOVERY, true);
         float timeBegin = 0;
         Dictionary<Transform, Material> allMats = new Dictionary<Transform, Material>();
         allMats[model.transform] = model.GetComponent<MeshRenderer>().material;
@@ -337,7 +337,7 @@ public abstract class Character : MonoBehaviour {
                 key.GetComponent<MeshRenderer>().material = allMats[key];
         }
         GetComponent<Collider>().enabled = true;
-        Context.Remove("InRecovery");
+        Context.Remove(Constants.IN_RECOVERY);
     }
 
 
@@ -361,7 +361,7 @@ public abstract class Character : MonoBehaviour {
         Vector3 output = initialDirection.normalized;
         foreach (RaycastHit hit in Physics.SphereCastAll(transform.position, desiredseparation, Vector3.forward))
         {
-            if (hit.collider.tag == "Ennemy" && hit.collider.transform != transform)
+            if (hit.collider.tag == Constants.ENEMY_TAG && hit.collider.transform != transform)
             {
                 //Plus la cible est loin et moins on s'ecarte
                 Vector3 deltaPosition = (transform.position - hit.transform.position);

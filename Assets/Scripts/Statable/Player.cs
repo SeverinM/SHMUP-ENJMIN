@@ -125,13 +125,13 @@ public class Player : Character
 
     void Start()
     {
-        context.SetInDictionary("Hook", hook);
-        context.SetInDictionary("Barrier", barrier);
-        context.SetInDictionary("SpeedWinch", speedPull);
-        context.SetInDictionary("SpeedHook", hookSpeed);
-        context.SetInDictionary("RangeDash", distanceDash);
-        context.SetInDictionary("CoeffHook", coeffHook);
-        context.SetInDictionary("RangeHook", rangeHook);
+        context.SetInDictionary(Constants.HOOK, hook);
+        context.SetInDictionary(Constants.BARRIER, barrier);
+        context.SetInDictionary(Constants.SPEED_WINCH, speedPull);
+        context.SetInDictionary(Constants.SPEED_HOOK, hookSpeed);
+        context.SetInDictionary(Constants.RANGE_DASH, distanceDash);
+        context.SetInDictionary(Constants.COEFF_HOOK, coeffHook);
+        context.SetInDictionary(Constants.RANGE_HOOK, rangeHook);
 
         line = hook.GetComponent<LineRenderer>();
         origin = hook.transform.localPosition;
@@ -172,10 +172,10 @@ public class Player : Character
     {
         // Quand le joueur se fait toucher par un rigidBody
        
-        if (collision.gameObject.tag == "Bullet")
+        if (collision.gameObject.tag == Constants.BULLET_TAG)
         {
             //On ne se subit rien si le joueur est en recovery ou en train de winch
-            if (!Context.ValuesOrDefault<bool>("InRecovery", false) && !GetComponentInChildren<Barrier>().IsWinching)
+            if (!Context.ValuesOrDefault<bool>(Constants.IN_RECOVERY, false) && !GetComponentInChildren<Barrier>().IsWinching)
                 Hit(collision.relativeVelocity * hitForce); 
             
             Destroy(collision.gameObject);                       

@@ -72,7 +72,7 @@ public class FollowPathMovement : State
     public void TriggerEnter(Collider coll)
     {
         //L'ennemi est rentré dans la zone proche du joueur (seul les leader / ennemies seuls sont censés rentrer la dedans)
-        if (coll.tag == "FollowParent" && character.Context.ValuesOrDefault<Transform>("FollowButAvoid", null) == null)
+        if (coll.tag == "FollowParent" && character.Context.ValuesOrDefault<Transform>(Constants.FOLLOW_AVOID, null) == null)
         {
             character.SetState(new EnemyMovement(character, coll.transform.parent, positions, false));
         }
@@ -105,7 +105,7 @@ public class FollowPathMovement : State
             positions.Dequeue();
 
             //Suit...mais pas trop
-            Transform followButAvoid = character.Context.ValuesOrDefault<Transform>("FollowButAvoid", null);
+            Transform followButAvoid = character.Context.ValuesOrDefault<Transform>(Constants.FOLLOW_AVOID, null);
             if (followButAvoid != null && character.GetScale() * character.PersonalScale > 0)
             {
                 character.SetState(new EnemyAttack(character, positions, followButAvoid));

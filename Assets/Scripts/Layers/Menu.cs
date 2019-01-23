@@ -32,7 +32,7 @@ public class Menu : Layers
         parentUI.SetActive(true);
 
         //On freeze tous les bullets
-        foreach (GameObject gob in GameObject.FindGameObjectsWithTag("Bullet"))
+        foreach (GameObject gob in GameObject.FindGameObjectsWithTag(Constants.BULLET_TAG))
         {
             StoredValue[gob] = gob.GetComponent<Rigidbody>().velocity;
             gob.GetComponent<Rigidbody>().velocity = Vector3.zero;

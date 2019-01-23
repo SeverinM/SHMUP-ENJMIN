@@ -28,16 +28,16 @@ public class PlayerWinch : State
     public PlayerWinch(Character character) : base(character)
     {
         player = character.GetComponent<Player>();
-        barrier = character.Context.ValuesOrDefault<Transform>("Barrier", character.transform);
-        speedTravel = character.Context.ValuesOrDefault<float>("SpeedWinch", 10);
-        currentMode = character.Context.ValuesOrDefault<HookMode>("HookMode", HookMode.Winch);
+        barrier = character.Context.ValuesOrDefault<Transform>(Constants.BARRIER, character.transform);
+        speedTravel = character.Context.ValuesOrDefault<float>(Constants.SPEED_WINCH, 10);
+        currentMode = character.Context.ValuesOrDefault<HookMode>(Constants.HOOK_MODE, HookMode.Winch);
     }
 
     public override void EndState()
     {
         barrier.GetComponent<Barrier>().IsWinching = false;
         AkSoundEngine.PostEvent("H_Winch_Stop", character.gameObject);
-        character.Context.Remove("IsShield");
+        character.Context.Remove(Constants.IS_SHIELD);
         player.Hook.parent = player.transform;
     }
 
@@ -49,7 +49,7 @@ public class PlayerWinch : State
 
     public override void StartState()
     {
-        isShield = character.Context.ValuesOrDefault<bool>("IsShield", false);
+        isShield = character.Context.ValuesOrDefault<bool>(Constants.IS_SHIELD, false);
         if (isShield)
         {
             currentMode = HookMode.Pull;

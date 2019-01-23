@@ -36,7 +36,7 @@ public class EnemyAttack : State
     public override void NextState()
     {
         //Apres avoir attaqué , revient en mode aleatoire
-        if (character.Context.ValuesOrDefault<Transform>("FollowButAvoid",null) != null)
+        if (character.Context.ValuesOrDefault<Transform>(Constants.FOLLOW_AVOID,null) != null)
         {
             enemy.FollowRandomPath();
             return;
@@ -76,7 +76,7 @@ public class EnemyAttack : State
         {
             lastTime += enemy.ShootPeriod;
 
-            if (!character.Context.ValuesOrDefault<bool>("InRecovery",false))
+            if (!character.Context.ValuesOrDefault<bool>(Constants.IN_RECOVERY,false))
                 enemy.Shoot();
 
             shoots++;
