@@ -78,7 +78,7 @@ public class Level : Layers
     Menu menu;
 
     [SerializeField]
-    private Animator animator;
+    private Animator levelStartAnimator;
 
     [SerializeField]
     GameObject backgroundToHide;
@@ -202,6 +202,13 @@ public class Level : Layers
                 generator.TryPassWave();
             }
             generator.WaveCleaned += Generator_WaveCleaned;
+        }
+
+        // Lancer les animations
+        if (levelStartAnimator != null)
+        {
+            Debug.Log("start");
+            levelStartAnimator.SetTrigger("Start");
         }
 
         watchNbSpawn.WatchedValue = -1;
@@ -439,10 +446,6 @@ public class Level : Layers
                 if (backgroundToHide != null)
                     Destroy(backgroundToHide);
             };
-            if (animator != null)
-            {
-                animator.SetTrigger("SpaceShip");
-            }
             WaypointElement we = new WaypointElement();
             we.speed = 1;
             we.targetPosition = Utils.GetPositionAbsolute(new Vector3(0.5f, 0, 0.5f), Mathf.Abs(Camera.main.transform.position.y - player.transform.position.y));
