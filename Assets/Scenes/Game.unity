@@ -6743,29 +6743,41 @@ MonoBehaviour:
   JimPrefab: {fileID: 1796657138515930, guid: 02c41df092ae0a142b8866396d0a138e, type: 2}
   MikePrefab: {fileID: 1663835522049710, guid: ae66e2c413491d642bb19e18f4749421, type: 2}
   BobPrefab: {fileID: 1561519513433908, guid: 46c9216ca856d3e4d836743c1d9c8564, type: 2}
-  MenuPrefab: {fileID: 0}
+  canvas: {fileID: 1628502475}
+  pauseMenu: {fileID: 1087241302}
   LifeUI: {fileID: 263192320}
   LifePrefab: {fileID: 1724876813434170, guid: 0821c6fbd7cc8f8499ac28cd927d0448, type: 2}
-  CountEnemyUI: {fileID: 0}
-  CountEnemyPrefab: {fileID: 1724876813434170, guid: 2b555192181ff3145a45249581286db2,
-    type: 2}
-  animationHeal: {fileID: 1336028224}
-  DashUI: {fileID: 0}
-  DashPrefab: {fileID: 1724876813434170, guid: 346abfe4d3661884caeb2904b444838c, type: 2}
   ScoreUI: {fileID: 89801101}
   BonusUI: {fileID: 1143800744}
-  canvas: {fileID: 1628502475}
+  textDefault: {fileID: 1170232697}
+  textMeshProDefault: {fileID: 392386831}
+  levelStartAnimator: {fileID: 216492866}
+  backgroundToHide: {fileID: 216492864}
+  animationHeal: {fileID: 1336028224}
   textAnimation:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  textDefault: {fileID: 1170232697}
-  textMeshProDefault: {fileID: 392386831}
-  menu: {fileID: 1087241302}
-  levelStartAnimator: {fileID: 216492866}
-  backgroundToHide: {fileID: 216492864}
   characters: []
   enemiesOnBonus: []
 --- !u!4 &410317351
@@ -13124,29 +13136,41 @@ MonoBehaviour:
   JimPrefab: {fileID: 1796657138515930, guid: 02c41df092ae0a142b8866396d0a138e, type: 2}
   MikePrefab: {fileID: 1663835522049710, guid: ae66e2c413491d642bb19e18f4749421, type: 2}
   BobPrefab: {fileID: 1561519513433908, guid: 46c9216ca856d3e4d836743c1d9c8564, type: 2}
-  MenuPrefab: {fileID: 0}
+  canvas: {fileID: 1628502475}
+  pauseMenu: {fileID: 1087241302}
   LifeUI: {fileID: 263192320}
   LifePrefab: {fileID: 1724876813434170, guid: 0821c6fbd7cc8f8499ac28cd927d0448, type: 2}
-  CountEnemyUI: {fileID: 0}
-  CountEnemyPrefab: {fileID: 1724876813434170, guid: 2b555192181ff3145a45249581286db2,
-    type: 2}
-  animationHeal: {fileID: 1336028224}
-  DashUI: {fileID: 0}
-  DashPrefab: {fileID: 1724876813434170, guid: 346abfe4d3661884caeb2904b444838c, type: 2}
   ScoreUI: {fileID: 89801101}
   BonusUI: {fileID: 1143800744}
-  canvas: {fileID: 1628502475}
+  textDefault: {fileID: 1170232697}
+  textMeshProDefault: {fileID: 392386831}
+  levelStartAnimator: {fileID: 0}
+  backgroundToHide: {fileID: 572152454}
+  animationHeal: {fileID: 1336028224}
   textAnimation:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  textDefault: {fileID: 1170232697}
-  textMeshProDefault: {fileID: 392386831}
-  menu: {fileID: 1087241302}
-  levelStartAnimator: {fileID: 0}
-  backgroundToHide: {fileID: 572152454}
   characters: []
   enemiesOnBonus: []
 --- !u!4 &938488903
@@ -16369,18 +16393,17 @@ MonoBehaviour:
   JimPrefab: {fileID: 1796657138515930, guid: 02c41df092ae0a142b8866396d0a138e, type: 2}
   MikePrefab: {fileID: 1663835522049710, guid: ae66e2c413491d642bb19e18f4749421, type: 2}
   BobPrefab: {fileID: 1561519513433908, guid: 46c9216ca856d3e4d836743c1d9c8564, type: 2}
-  MenuPrefab: {fileID: 1389738857004872, guid: 78183828730a6a14998787f24e73e98c, type: 2}
+  canvas: {fileID: 1628502475}
+  pauseMenu: {fileID: 1087241302}
   LifeUI: {fileID: 263192320}
   LifePrefab: {fileID: 1724876813434170, guid: 0821c6fbd7cc8f8499ac28cd927d0448, type: 2}
-  CountEnemyUI: {fileID: 0}
-  CountEnemyPrefab: {fileID: 1724876813434170, guid: 2b555192181ff3145a45249581286db2,
-    type: 2}
-  animationHeal: {fileID: 1336028224}
-  DashUI: {fileID: 0}
-  DashPrefab: {fileID: 1724876813434170, guid: 346abfe4d3661884caeb2904b444838c, type: 2}
   ScoreUI: {fileID: 89801101}
   BonusUI: {fileID: 1143800744}
-  canvas: {fileID: 1628502475}
+  textDefault: {fileID: 1170232697}
+  textMeshProDefault: {fileID: 392386831}
+  levelStartAnimator: {fileID: 0}
+  backgroundToHide: {fileID: 201472636}
+  animationHeal: {fileID: 1336028224}
   textAnimation:
     serializedVersion: 2
     m_Curve:
@@ -16405,11 +16428,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  textDefault: {fileID: 1170232697}
-  textMeshProDefault: {fileID: 392386831}
-  menu: {fileID: 1087241302}
-  levelStartAnimator: {fileID: 0}
-  backgroundToHide: {fileID: 201472636}
   characters: []
   enemiesOnBonus: []
 --- !u!4 &2050674101

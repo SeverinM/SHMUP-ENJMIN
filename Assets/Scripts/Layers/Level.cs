@@ -10,6 +10,8 @@ using UnityEngine.SceneManagement;
 
 public class Level : Layers
 {
+
+    [Header("Objets du niveau")]
     [SerializeField]
     protected Player player;
 
@@ -22,9 +24,6 @@ public class Level : Layers
     [SerializeField]
     protected GameObject BobPrefab;
 
-    [SerializeField]
-    protected GameObject MenuPrefab;
-
     int countFocus = 0;
 
     public Player Player
@@ -36,51 +35,7 @@ public class Level : Layers
     }
 
     [SerializeField]
-    GameObject LifeUI;
-
-    [SerializeField]
-    GameObject LifePrefab;
-
-    [SerializeField]
-    GameObject CountEnemyUI;
-
-    [SerializeField]
-    GameObject CountEnemyPrefab;
-
-    [SerializeField]
-    Animator animationHeal;
-
-    [SerializeField]
-    GameObject DashUI;
-
-    [SerializeField]
-    GameObject DashPrefab;
-
-    [SerializeField]
-    TextMeshProUGUI ScoreUI;
-
-    [SerializeField]
-    TextMeshProUGUI BonusUI;
-
-    [SerializeField]
-    GameObject canvas;
-
-    [SerializeField]
-    AnimationCurve textAnimation;
-
-    [SerializeField]
-    GameObject textDefault;
-
-    [SerializeField]
-    GameObject textMeshProDefault;
-
-    [SerializeField]
-    Menu menu;
-
-    [SerializeField]
-    private Animator levelStartAnimator;
-
-    [SerializeField]
+    [Tooltip("Arriere-plan du niveau precedent a cacher")]
     GameObject backgroundToHide;
     public GameObject BackgroundToHide
     {
@@ -90,7 +45,48 @@ public class Level : Layers
         }
     }
 
-    Navigation nav;
+    [Header("Objets de l'interface")]
+    [SerializeField]
+    GameObject canvas;
+
+    [SerializeField]
+    [Tooltip("Layer pause")]
+    Menu pauseMenu;
+
+    [SerializeField]
+    [Tooltip("Canvas pour l'affichage de la vie du joueur")]
+    GameObject LifeUI;
+
+    [SerializeField]
+    [Tooltip("Prefab du sprite de vie du joueur")]
+    GameObject LifePrefab;
+
+    [SerializeField]
+    [Tooltip("Texte personalise d'affichage du score")]
+    TextMeshProUGUI ScoreUI;
+
+    [SerializeField]
+    [Tooltip("Texte personalise d'affichage des bonus")]
+    TextMeshProUGUI BonusUI;
+
+    [SerializeField]
+    [Tooltip("Texte personalise pour affichage du score d'un ennemi lors de sa mort")]
+    GameObject textMeshProDefault;
+
+    [Header("Animations")]
+    [SerializeField]
+    [Tooltip("Animation a lancer au debut d'un niveau")]
+    private Animator levelStartAnimator;
+
+    [SerializeField]
+    [Tooltip("Animation de soin de vie interface")]
+    private Animator animationHeal;
+
+    [SerializeField]
+    [Tooltip("Animation d'appation de texte de score a la mort d'un ennemi")]
+    private AnimationCurve textAnimation;
+
+    private Navigation nav;
 
     int countGenerator = 0;
     int bonus = 0;
@@ -108,7 +104,7 @@ public class Level : Layers
     public Binding<int> watchNbSpawn = new Binding<int>(-1, null);
     public Binding<int> watchScore = new Binding<int>(0, null);
 
-    public List<Enemy> enemiesOnBonus = new List<Enemy>();
+    private List<Enemy> enemiesOnBonus = new List<Enemy>();
 
     public delegate void LevelParam(Level nextLevel);
     public event LevelParam OnNextLevel;
@@ -141,20 +137,24 @@ public class Level : Layers
         Constants.ApplicationQuit = false;
         player.Destroyed += PlayerDied;
 
-        //Mise en place des data bindings;
+        //Mise en place des data bindings
         player.SetOnLifeChanged((x) =>
         {
             if (LifeUI != null)
             {
+                // On nettoye tous les prefabs de vie de l'UI
                 for (int i = 0; i < LifeUI.transform.childCount; i++)
                 {
                     Destroy(LifeUI.transform.GetChild(i).gameObject);
                 }
+
+                // On instancie selon la vie du joeur (x)
                 for (int i = 0; i < x; i++)
                 {
                     Instantiate(LifePrefab, LifeUI.transform);
                 }
 
+                // Animation de heal
                 if (x > previousLife)
                 {
                     animationHeal.SetTrigger("Healed");
@@ -164,26 +164,7 @@ public class Level : Layers
 
         Manager.GetInstance().ResetLife();
 
-        watchNbSpawn.ValueChanged = (x) =>
-        {
-            if (CountEnemyUI != null)
-            {
-                for (int i = 0; i < CountEnemyUI.transform.childCount; i++)
-                {
-                    Destroy(CountEnemyUI.transform.GetChild(i).gameObject);
-                }
-                for (int i = 0; i < x; i++)
-                {
-                    Instantiate(CountEnemyPrefab, CountEnemyUI.transform);
-                }
-            }
-
-            if (x == 0)
-            {
-                EndLevel();
-            }
-        };
-
+        // Mettre à jour l'affichage du score
         watchScore.ValueChanged = (x) =>
         {
             if (ScoreUI != null)
@@ -204,10 +185,9 @@ public class Level : Layers
             generator.WaveCleaned += Generator_WaveCleaned;
         }
 
-        // Lancer les animations
+        // Lancer les animations de début de niveau
         if (levelStartAnimator != null)
         {
-            Debug.Log("start");
             levelStartAnimator.SetTrigger("Start");
         }
 
@@ -217,6 +197,7 @@ public class Level : Layers
 
     void TryPlace()
     {
+        // On place le joueur au centre de la postion absolue de la camera
         Camera.main.transform.position = transform.position + Manager.GetInstance().CameraPositionRelative;
         Player plyr = GameObject.FindObjectOfType<Player>();
         float deltaY = Mathf.Abs(plyr.transform.position.y - transform.position.y);
@@ -232,7 +213,7 @@ public class Level : Layers
         //On alterne le resultat de l'inputs
         if (tyAct.Equals(BaseInput.TypeAction.Down) && acts.Equals(BaseInput.Actions.Pause))
         {
-            Manager.GetInstance().EnableMenu(menu);
+            Manager.GetInstance().EnableMenu(pauseMenu);
         }
     }
 
@@ -418,10 +399,6 @@ public class Level : Layers
         // Instantier un ennemi
         GameObject toAdd = Instantiate(character, position, Quaternion.identity);
         characters.Add(toAdd);
-        if (textDefault != null)
-        {
-            GameObject toAddText = Instantiate(textDefault, canvas.transform);
-        }
         return toAdd;
     }
 
@@ -440,7 +417,6 @@ public class Level : Layers
     {
         if (nextLevel != null)
         {
-
             player.NextLevel += () => { OnNextLevel(nextLevel); };
             player.BlackScreen += () => {
                 if (backgroundToHide != null)
@@ -462,7 +438,7 @@ public class Level : Layers
     }
 
     IEnumerator DelayedEnd()
-    {
+    { 
         yield return new WaitForSeconds(3f);
         Utils.StartFading(1, Color.black, () => { End(); }, () => { });
     }

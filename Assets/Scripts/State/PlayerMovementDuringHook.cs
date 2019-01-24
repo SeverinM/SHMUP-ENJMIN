@@ -52,14 +52,15 @@ public class PlayerMovementDuringHook : PlayerMovement {
         if (typeAct.Equals(BaseInput.TypeAction.Pressed) && acts.Equals(BaseInput.Actions.AllMovement))
         {
             direction.Set(val.x, val.y);
-            Vector3 projectedPosition = (new Vector3(direction.x, 0, direction.y) * character.MoveSpeed * Time.deltaTime) + character.transform.position;
+            
+            Vector3 projectedPosition = (new Vector3(val.x, 0, val.y) * character.MoveSpeed * Time.deltaTime) + character.transform.position;
             if (Vector3.Distance(projectedPosition , pos) <= range && Utils.IsInCamera(projectedPosition,Mathf.Abs(projectedPosition.y - Camera.main.transform.position.y)))
             {
                 character.Move(direction);
             }
 
             //On detache de force
-            if(Vector3.Distance(projectedPosition, pos) > range + 1)
+            if (Vector3.Distance(projectedPosition, pos) > range + 1)
             {
                 player.Target.parent.GetComponent<Character>().PersonalScale = 1;   
                 character.SetState(new PlayerMovement(character));
