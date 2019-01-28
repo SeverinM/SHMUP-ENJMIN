@@ -173,6 +173,14 @@ public class Level : Layers
             Constants.TotalScore = x;
         };
 
+        watchNbSpawn.ValueChanged = (x) =>
+        {
+            if (x == 0)
+            {
+                EndLevel();
+            }
+        };
+
         // Mettre en route tous les générateurs en leur attribuant un état
         foreach (Generator generator in transform.GetComponentsInChildren<Generator>())
         {

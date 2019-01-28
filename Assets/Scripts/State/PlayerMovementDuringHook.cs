@@ -25,7 +25,8 @@ public class PlayerMovementDuringHook : PlayerMovement {
 
     public override void StartState()
     {
-        player.Target.parent.GetComponent<Character>().PersonalScale = 0;
+        if (player.Target.parent.GetComponent<Character>() != null)
+            player.Target.parent.GetComponent<Character>().PersonalScale = 0;
     }
 
     public override void NextState()
